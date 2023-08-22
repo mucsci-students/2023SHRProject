@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary>
 /// Stores bloonPath for a bloon and handles logic related to the bloon following the path. Will self delete and subtract
@@ -11,18 +10,18 @@ using UnityEngine.Serialization;
 public class PathFollowingScript : MonoBehaviour
 {
     /// <summary>
-    /// BloonPath is implemented using a stack of transform where the next target along the path is at the top/peek
-    /// of the stack and the last target position/(where you lose lives) is at the bottom of the stack.
+    /// BloonPath is implemented using a List of transforms where the next target along the path is at the lowest index
+    /// of the List and the last target position/(where you lose lives) is at the bottom of the stack.
     /// </summary>
     [SerializeField] private List<Transform> bloonPath;
 
-    public uint CurrentTargetIndex = 0;
+    private uint _currentTargetIndex = 0;
     private uint _speed;
     
     // Start is called before the first frame update
     private void Start()
     {
-        if (bloonPath == null || bloonPath.Count <= 0)
+        if (bloonPath is not { Count: > 0 })
         {
             Debug.LogWarning("Path is null or empty on " + gameObject.name);
         }
@@ -38,13 +37,13 @@ public class PathFollowingScript : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        var targetPosition = bloonPath[(int)CurrentTargetIndex].position;
+        var targetPosition = bloonPath[(int)_currentTargetIndex].position;
         
         if (ReachedTarget(targetPosition))
         {
             // Update target
-            ++CurrentTargetIndex;
-            if (CurrentTargetIndex == bloonPath.Count)
+            ++_currentTargetIndex;
+            if (_currentTargetIndex == bloonPath.Count)
             {
                 SubtractLives();
                 Destroy(gameObject);
@@ -61,8 +60,10 @@ public class PathFollowingScript : MonoBehaviour
     /// <returns>True if this position and the target position are equal based on x and y components, otherwise false</returns>
     private bool ReachedTarget(Vector3 targetPosition)
     {
-        return (transform.position.x == targetPosition.x &&
-                transform.position.y == targetPosition.y);
+        const double tolerance = 0.01;
+        var currentPosition = transform.position;
+        return Math.Abs(currentPosition.x - targetPosition.x) < tolerance &&
+               Math.Abs(currentPosition.y - targetPosition.y) < tolerance;
     }
 
     private void SubtractLives()
@@ -70,6 +71,10 @@ public class PathFollowingScript : MonoBehaviour
         //throw new NotImplementedException();
     }
     
+    /// <summary>
+    /// Moves the attached gameObject to targetPosition at a max speed of the _speed field.
+    /// </summary>
+    /// <param name="targetPosition">The position of where the attached gameObject should move to</param>
     private void MoveToCurrentTarget(Vector3 targetPosition)
     {
         //throw new NotImplementedException();
