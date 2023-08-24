@@ -6,4 +6,4 @@
 ## Authors
 - [Justin Stevens]()
 - [Mitchell Harrison]()
-- [Jonathan Rivera]()
+- [Jonathan Riverra]()
