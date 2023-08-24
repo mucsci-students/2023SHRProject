@@ -5,5 +5,5 @@
 
 ## Authors
 - [Justin Stevens]()
-- [Mitchell Harrison]()
+- [Mitchell Harris0n]()
 - [Jonathan Riverra]()
