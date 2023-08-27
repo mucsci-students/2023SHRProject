@@ -1,36 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    [SerializeField] 
-    [Tooltip("Speed of the projectile")]
-    private float Speed = 1f;
-    
-    [SerializeField] 
-    [Tooltip("Max distance that the projectile can move before despawning")]
-    private float MaxDistance = 10f;
-    
-    [SerializeField] 
-    [Tooltip("Amount of layers popped per hit. a.k.a damage but must be whole number")]
-    private uint LayersPerHit = 1;
-    
-    [SerializeField]
-    [Tooltip("Number of bloons that this projectile can hit.")]
-    private uint PierceAmount = 1;
+    private float _speed = 1f;
+    private float _maxDistance = 10f;
+    private uint _layersPerHit = 1;
+    private uint _pierceAmount = 1;
 
-    private Vector2 _direction;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private GameObject _target;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (_target != null)
+        {
+            transform.position = MoveTowards(_target.transform.position, _speed * Time.deltaTime);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void SetAllAttributes(float speed, float maxDistance, uint layersPerHit, uint pierceAmount, GameObject target)
+    {
+        _speed = speed;
+        _maxDistance = maxDistance;
+        _layersPerHit = layersPerHit;
+        _pierceAmount = pierceAmount;
+        _target = target;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Destroy(other.gameObject);
+        Destroy(gameObject);
+    }
+
+    private Vector3 MoveTowards(Vector3 targetPosition, float speed)
+    {
+        return Vector3.MoveTowards(transform.position, targetPosition, speed);
     }
 }
