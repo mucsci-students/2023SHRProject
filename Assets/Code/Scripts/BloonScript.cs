@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,15 +12,23 @@ public class BloonScript : MonoBehaviour
     /// </summary>
     [SerializeField] private uint speed;
 
+    [SerializeField] private int health;
+
+    [SerializeField] private BloonLookUpScript bloonLookUpScript;
+
     // Start is called before the first frame update
     private void Start()
     {
         if (Rigidbody2D == null)
         {
-            Debug.LogWarning("Missing direct link on " + gameObject.name);
+            Debug.LogWarning("Missing direct link on " + name);
             Rigidbody2D = GetComponent<Rigidbody2D>();
         }
-        //Rigidbody2D.velocity = new Vector2(speed, 0);
+
+        if (bloonLookUpScript == null)
+        {
+            Debug.LogError("Missing direct link on " + name);
+        }
     }
 
     // Update is called once per frame
@@ -28,8 +37,45 @@ public class BloonScript : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Updates the bloons health based on damage param. Destroys itself if it loses all its health
+    /// </summary>
+    /// <param name="damage">The amount of damage the bloon should take</param>
+    /// <returns>The amount of damage the bloon actually took, to be able to update pop counts</returns>
+    public int ReceiveDamage(int damage)
+    {
+        var originalHealth = health;
+        health -= damage;
+        
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            var newBloon = Instantiate(bloonLookUpScript.GetNewBloon(health), gameObject.transform.position, Quaternion.identity);
+
+            var newBloonScript = newBloon.GetComponent<BloonScript>();
+            newBloonScript.SetBloonLookUpScript(bloonLookUpScript);
+            
+            var newBloonFollowingScript = newBloon.AddComponent<PathFollowingScript>();
+            var currentBloonFollowingScript = GetComponent<PathFollowingScript>();
+            newBloonFollowingScript.SetBloonPath(currentBloonFollowingScript.GetBloonPath());
+            newBloonFollowingScript.SetCurrentTargetIndex(currentBloonFollowingScript.GetCurrentTargetIndex());
+            
+            Destroy(gameObject);
+        }
+        
+        return originalHealth - Math.Max(0, health);
+    }
+
     public uint GetSpeed()
     {
         return speed;
+    }
+
+    public void SetBloonLookUpScript(BloonLookUpScript lookUpScript)
+    {
+        bloonLookUpScript = lookUpScript;
     }
 }
