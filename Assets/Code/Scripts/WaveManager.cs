@@ -9,11 +9,13 @@ public class WaveManager : MonoBehaviour
     private float timer = 0f;
     [SerializeField] private List<Transform> path;
 
+    [SerializeField] private BloonLookUpScript BLUS;
+
     public List<WaveEvent> events = new();
 
-    public static int WaveNumber = 0;
-    public static int enemies = 0;
-    public static float TimerRef;
+    public  int WaveNumber = 0;
+    public int enemies = 0;
+    public float TimerRef;
 
     private bool isPlaying = false;
     private bool betweenRounds = false;
@@ -27,7 +29,7 @@ public class WaveManager : MonoBehaviour
         ++WaveNumber;
         if (events.Count != 0)
         {
-            enemies = events[0].StartEvent();
+            enemies = events[0].StartEvent(WaveNumber);
         }
         else
         {
@@ -45,7 +47,7 @@ public class WaveManager : MonoBehaviour
         if (!isPlaying)
             return;
 
-        if (!betweenRounds && !events[0].RunEvent(path, spawn, null) && enemies == 0)
+        if (!betweenRounds && !events[0].RunEvent(path, spawn, null, BLUS) && enemies == 0)
         {
             Debug.Log("Wave Ended");
             events.RemoveAt(0);
@@ -56,7 +58,6 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
-               
                 betweenRounds = true;
             }
         }
@@ -69,7 +70,7 @@ public class WaveManager : MonoBehaviour
             if (timer > WaveTimer || Input.GetKeyDown(KeyCode.Space))
             {
                 ++WaveNumber;
-                enemies = events[0].StartEvent();
+                enemies = events[0].StartEvent(WaveNumber);
                 timer = 0;
                 betweenRounds = false;
             }
@@ -82,9 +83,9 @@ public class WaveManager : MonoBehaviour
 
         public List<SpawnInfo> spawnInfos = new();
 
-        public int StartEvent()
+        public int StartEvent(int waveNumber)
         {
-            Debug.Log("Wave " + WaveManager.WaveNumber + " started");
+            Debug.Log("Wave " + waveNumber + " started");
             int enemies = 0;
             foreach (var spawnInfo in spawnInfos)
             {
@@ -94,14 +95,14 @@ public class WaveManager : MonoBehaviour
             return enemies;
         }
 
-        public bool RunEvent(List<Transform> path, Transform spawn, AudioSource Death)
+        public bool RunEvent(List<Transform> path, Transform spawn, AudioSource Death, BloonLookUpScript BLUS)
         {
             if (spawnInfos.Count == 0)
                 return false;
 
             for (int i = 0; i < spawnInfos.Count; i++)
             {
-                spawnInfos[i].ReadyToSpawn(path, spawn, Death);
+                spawnInfos[i].ReadyToSpawn(path, spawn, Death, BLUS);
 
                 if (spawnInfos[i].amount == 0)
                 {
@@ -116,7 +117,7 @@ public class WaveManager : MonoBehaviour
         public class SpawnInfo
         {
 
-            public GameObject RedBloon;
+            public GameObject Bloon;
             public int amount;
             public float interval;
             public float timeToStart;
@@ -133,20 +134,20 @@ public class WaveManager : MonoBehaviour
                     spawnInstant = false;
             }
 
-            public void ReadyToSpawn(List<Transform> path, Transform spawn, AudioSource Death)
+            public void ReadyToSpawn(List<Transform> path, Transform spawn, AudioSource Death, BloonLookUpScript BLUS)
             {
                 if (Time.time - startTime < timeToStart)
                     return;
 
                 if (spawnInstant || Time.time - lastTime >= interval)
                 {
-                    GameObject redBloon = Instantiate(RedBloon);
-                    redBloon.transform.position = spawn.position;
-                    redBloon.transform.rotation = spawn.rotation;
+                    GameObject bloon = Instantiate(Bloon);
+                    bloon.transform.position = spawn.position;
+                    bloon.transform.rotation = spawn.rotation;
 
 
-
-                    redBloon.GetComponent<PathFollowingScript>().SetBloonPath(path);
+                    bloon.GetComponent<BloonScript>().SetBloonLookUpScript(BLUS);
+                    bloon.GetComponent<PathFollowingScript>().SetBloonPath(path);
                     
 
                     --amount;

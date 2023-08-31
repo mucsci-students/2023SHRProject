@@ -44,7 +44,10 @@ public class ProjectileScript : MonoBehaviour
             var layersPopped = bloonScript.ReceiveDamage((int)_layersPerHit);
             _parentMonkeyScript.IncrementLayersPopped(layersPopped);
             
+            // fix bug
             Destroy(gameObject);
+            Destroy(this);
+            _layersPerHit = 0;
         }
     }
 

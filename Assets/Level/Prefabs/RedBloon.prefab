@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8023372576191469904}
   - component: {fileID: 4728617233035397439}
   - component: {fileID: 8252373885296925118}
+  - component: {fileID: 4650824212956930161}
   m_Layer: 0
   m_Name: RedBloon
   m_TagString: Bloon
@@ -149,3 +150,17 @@ MonoBehaviour:
   Rigidbody2D: {fileID: 8023372576191469904}
   speed: 2
   health: 1
+  bloonLookUpScript: {fileID: 0}
+--- !u!114 &4650824212956930161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8023372576191469905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4777822ef9829489cc09d0bc267039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloonPath: []
