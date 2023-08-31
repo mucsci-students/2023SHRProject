@@ -17,7 +17,7 @@ public class PathFollowingScript : MonoBehaviour
 
     private uint _currentTargetIndex = 0;
     private uint _speed;
-    
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -38,7 +38,7 @@ public class PathFollowingScript : MonoBehaviour
     private void Update()
     {
         var targetPosition = bloonPath[(int)_currentTargetIndex].position;
-        
+
         if (ReachedTarget(targetPosition))
         {
             // Update target
@@ -51,6 +51,26 @@ public class PathFollowingScript : MonoBehaviour
         }
 
         MoveToCurrentTarget(targetPosition);
+    }
+
+    public List<Transform> GetBloonPath()
+    {
+        return bloonPath;
+    }
+
+    public void SetBloonPath(List<Transform> newBloonPath)
+    {
+        bloonPath = newBloonPath;
+    }
+
+    public uint GetCurrentTargetIndex()
+    {
+        return _currentTargetIndex;
+    }
+
+    public void SetCurrentTargetIndex(uint targetIndex)
+    {
+        _currentTargetIndex = targetIndex;
     }
 
     /// <summary>
@@ -70,7 +90,7 @@ public class PathFollowingScript : MonoBehaviour
     {
         //throw new NotImplementedException();
     }
-    
+
     /// <summary>
     /// Moves the attached gameObject to targetPosition at a max speed of the _speed field.
     /// </summary>

@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = System.Random;
 
 public class GenerateMapScript : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera currentSceneCamera;
     public float leftCameraPosition = 0f;
     public float rightCameraPosition = 0f;
     public float topCameraPosition = 0f;
@@ -31,14 +32,14 @@ public class GenerateMapScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        if (camera == null)
+        if (currentSceneCamera == null)
         {
             Debug.LogError("Camera is null on GenerateMapScript on object " + name);
             Destroy(gameObject);
         }
-        leftCameraPosition = camera.ViewportToWorldPoint(new Vector3(0f, 0f)).x;
+        leftCameraPosition = currentSceneCamera.ViewportToWorldPoint(new Vector3(0f, 0f)).x;
         rightCameraPosition = -leftCameraPosition;
-        topCameraPosition = camera.ViewportToWorldPoint(new Vector3(0f, 0f)).y;
+        topCameraPosition = currentSceneCamera.ViewportToWorldPoint(new Vector3(0f, 0f)).y;
         bottomCameraPosition = -topCameraPosition;
 
         blockSize = Math.Abs(topCameraPosition - bottomCameraPosition) / 10;

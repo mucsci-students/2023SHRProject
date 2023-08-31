@@ -11,6 +11,7 @@ public class ProjectileScript : MonoBehaviour
     private uint _pierceAmount = 1;
 
     private GameObject _target;
+    private MonkeyScript _parentMonkeyScript;
 
     // Update is called once per frame
     private void Update()
@@ -25,19 +26,29 @@ public class ProjectileScript : MonoBehaviour
         }
     }
 
-    public void SetAllAttributes(float speed, float maxDistance, uint layersPerHit, uint pierceAmount, GameObject target)
+    public void SetAllAttributes(float speed, float maxDistance, uint layersPerHit, uint pierceAmount, GameObject target, MonkeyScript parent)
     {
         _speed = speed;
         _maxDistance = maxDistance;
         _layersPerHit = layersPerHit;
         _pierceAmount = pierceAmount;
         _target = target;
+        _parentMonkeyScript = parent;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(other.gameObject);
-        Destroy(gameObject);
+        if (other.gameObject.CompareTag("Bloon"))
+        {
+            var bloonScript = other.gameObject.GetComponent<BloonScript>();
+            var layersPopped = bloonScript.ReceiveDamage((int)_layersPerHit);
+            _parentMonkeyScript.IncrementLayersPopped(layersPopped);
+            
+            // fix bug
+            Destroy(gameObject);
+            Destroy(this);
+            _layersPerHit = 0;
+        }
     }
 
     private Vector3 MoveTowards(Vector3 targetPosition, float speed)

@@ -7,7 +7,7 @@ using UnityEngine;
 public class MonkeyScript : MonoBehaviour
 {
 
-    private readonly List<GameObject> _enemiesInRange = new List<GameObject>();
+    private readonly List<GameObject> _enemiesInRange = new();
 
     [Header("Tower Settings")]
     
@@ -29,6 +29,11 @@ public class MonkeyScript : MonoBehaviour
     
     [SerializeField]
     private GameObject projectilePrefab;
+
+    [Header("Stats")] 
+    
+    [SerializeField]
+    private int layersPopped = 0;
 
     private float _timer = 0f;
 
@@ -53,6 +58,11 @@ public class MonkeyScript : MonoBehaviour
         }
     }
 
+    public void IncrementLayersPopped(int LayersPopped)
+    {
+        layersPopped += LayersPopped;
+    }
+
     private void LookAt(Vector3 targetPosition)
     {
         Vector3 myLocation = transform.position;
@@ -72,7 +82,7 @@ public class MonkeyScript : MonoBehaviour
     { 
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         var projectileScript = projectile.GetComponent<ProjectileScript>();
-        projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target);
+        projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
