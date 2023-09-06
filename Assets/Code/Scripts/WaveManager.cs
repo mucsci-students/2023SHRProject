@@ -13,8 +13,8 @@ public class WaveManager : MonoBehaviour
 
     public List<WaveEvent> events = new();
 
-    public  int WaveNumber = 0;
-    public int enemies = 0;
+    public int WaveNumber = 0;
+    public static int enemiesRemaining = 0;
     public float TimerRef;
 
     private bool isPlaying = false;
@@ -29,7 +29,7 @@ public class WaveManager : MonoBehaviour
         ++WaveNumber;
         if (events.Count != 0)
         {
-            enemies = events[0].StartEvent(WaveNumber);
+            enemiesRemaining = events[0].StartEvent(WaveNumber);
         }
         else
         {
@@ -47,7 +47,7 @@ public class WaveManager : MonoBehaviour
         if (!isPlaying)
             return;
 
-        if (!betweenRounds && !events[0].RunEvent(path, spawn, null, BLUS) && enemies == 0)
+        if (!betweenRounds && !events[0].RunEvent(path, spawn, null, BLUS) && enemiesRemaining == 0)
         {
             Debug.Log("Wave Ended");
             events.RemoveAt(0);
@@ -61,16 +61,16 @@ public class WaveManager : MonoBehaviour
                 betweenRounds = true;
             }
         }
-        if (enemies <= 0)
+        if (enemiesRemaining <= 0)
         {
             // Hide bug
-            enemies = 0;
+            enemiesRemaining = 0;
             timer += Time.unscaledDeltaTime;
             TimerRef = timer; // used for ui
             if (timer > WaveTimer || Input.GetKeyDown(KeyCode.Space))
             {
                 ++WaveNumber;
-                enemies = events[0].StartEvent(WaveNumber);
+                enemiesRemaining = events[0].StartEvent(WaveNumber);
                 timer = 0;
                 betweenRounds = false;
             }

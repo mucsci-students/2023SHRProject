@@ -50,6 +50,7 @@ public class BloonScript : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            WaveManager.enemiesRemaining -= 1;
         }
         else
         {

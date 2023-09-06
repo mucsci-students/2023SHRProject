@@ -483,7 +483,7 @@ MonoBehaviour:
   events:
   - spawnInfos:
     - Bloon: {fileID: 8023372576191469905, guid: c50f47062489128408d98b7d6d46b916, type: 3}
-      amount: 10
+      amount: 100
       interval: 1
       timeToStart: 0
     - Bloon: {fileID: 7949021357494400205, guid: cdf11f5f39cfeb14ead68231200f7bab, type: 3}
@@ -496,7 +496,6 @@ MonoBehaviour:
       interval: 1
       timeToStart: 2
   WaveNumber: 0
-  enemies: 0
   TimerRef: 0
 --- !u!4 &505923673
 Transform:

@@ -21,11 +21,7 @@ public class PathFollowingScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        if (bloonPath is not { Count: > 0 })
-        {
-            Debug.LogWarning("Path is null or empty on " + gameObject.name);
-        }
-
+        
         if (!gameObject.TryGetComponent(out BloonScript bloonScript))
         {
             Debug.LogWarning("Bloon is missing BloonScript on " + gameObject.name);
@@ -37,7 +33,12 @@ public class PathFollowingScript : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // Takes a frame for bloon path to be set when spawning child(this) bloon.
+        if (bloonPath.Count == 0)
+            return;
+
         var targetPosition = bloonPath[(int)_currentTargetIndex].position;
+        
 
         if (ReachedTarget(targetPosition))
         {
