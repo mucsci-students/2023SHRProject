@@ -17,6 +17,7 @@ public class PathFollowingScript : MonoBehaviour
 
     private uint _currentTargetIndex = 0;
     private uint _speed;
+    public float _distanceTraveled = 0;
 
     // Start is called before the first frame update
     private void Start()
@@ -52,26 +53,6 @@ public class PathFollowingScript : MonoBehaviour
         }
 
         MoveToCurrentTarget(targetPosition);
-    }
-
-    public List<Transform> GetBloonPath()
-    {
-        return bloonPath;
-    }
-
-    public void SetBloonPath(List<Transform> newBloonPath)
-    {
-        bloonPath = newBloonPath;
-    }
-
-    public uint GetCurrentTargetIndex()
-    {
-        return _currentTargetIndex;
-    }
-
-    public void SetCurrentTargetIndex(uint targetIndex)
-    {
-        _currentTargetIndex = targetIndex;
     }
 
     /// <summary>
@@ -117,7 +98,40 @@ public class PathFollowingScript : MonoBehaviour
         {
             translateVector.y = -Math.Min(Math.Abs(transform.position.y - targetPosition.y), movementDistance);
         }
-        
+
+        _distanceTraveled += Vector3.Distance(Vector3.zero, translateVector);
         transform.Translate(translateVector);
     }
+    
+    // Setters and Getters
+    public List<Transform> GetBloonPath()
+    {
+        return bloonPath;
+    }
+
+    public void SetBloonPath(List<Transform> newBloonPath)
+    {
+        bloonPath = newBloonPath;
+    }
+
+    public uint GetCurrentTargetIndex()
+    {
+        return _currentTargetIndex;
+    }
+
+    public void SetCurrentTargetIndex(uint targetIndex)
+    {
+        _currentTargetIndex = targetIndex;
+    }
+
+    public void SetDistanceTravelled(float distanceTraveled)
+    {
+        _distanceTraveled = distanceTraveled;
+    }
+
+    public float GetDistanceTravelled()
+    {
+        return _distanceTraveled;
+    }
+    
 }

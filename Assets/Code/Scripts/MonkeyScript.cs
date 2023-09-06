@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MonkeyScript : MonoBehaviour
 {
@@ -13,6 +13,9 @@ public class MonkeyScript : MonoBehaviour
     
     [SerializeField] 
     private float firingRate = 1f;
+
+    [SerializeField] 
+    private Enums.TargetingMode targetingMode = Enums.TargetingMode.First; 
     
     [Header("Projectile Settings")]
     
@@ -29,19 +32,19 @@ public class MonkeyScript : MonoBehaviour
     
     [SerializeField]
     private GameObject projectilePrefab;
-
+    
     [Header("Stats")] 
     
     [SerializeField]
-    private int layersPopped = 0;
+    private int totalLayersPopped = 0;
+
+    [Header("Object Links")] 
+    
+    [SerializeField]
+    private GameObject radius;
 
     private float _timer = 0f;
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     private void Update()
@@ -49,18 +52,19 @@ public class MonkeyScript : MonoBehaviour
         _timer += Time.deltaTime;
         if (_enemiesInRange.Count > 0)
         {
-            LookAt(_enemiesInRange[0].transform.position);
+            var target = GetTarget(targetingMode);
+            LookAt(target.transform.position);
             if (_timer >= firingRate)
             {
-                Fire(_enemiesInRange[0]);
+                Fire(target);
                 _timer = 0;
             }
         }
     }
 
-    public void IncrementLayersPopped(int LayersPopped)
+    public void IncrementLayersPopped(int layersPopped)
     {
-        layersPopped += LayersPopped;
+        totalLayersPopped += layersPopped;
     }
 
     private void LookAt(Vector3 targetPosition)
@@ -83,6 +87,59 @@ public class MonkeyScript : MonoBehaviour
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         var projectileScript = projectile.GetComponent<ProjectileScript>();
         projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
+    }
+
+    private GameObject GetTarget(Enums.TargetingMode targetingMode)
+    {
+        switch (targetingMode)
+        {
+            case Enums.TargetingMode.First:
+                return GetFirstTarget();
+            case Enums.TargetingMode.Last:
+                return GetLastTarget();
+            case Enums.TargetingMode.Strongest:
+                return GetStrongestTarget();
+            default:
+                return GetFirstTarget();
+        }
+    }
+
+    private GameObject GetFirstTarget()
+    {
+        GameObject target = null;
+        var maxDistanceTravelled = -1f;
+
+        foreach (var enemy in _enemiesInRange)
+        {
+            var distanceTravelled = enemy.GetComponent<PathFollowingScript>().GetDistanceTravelled();
+            if (distanceTravelled > maxDistanceTravelled)
+            {
+                maxDistanceTravelled = distanceTravelled;
+                target = enemy;
+            }
+        }
+        
+        return target;
+    }
+
+    private GameObject GetLastTarget()
+    {
+        return null;
+    }
+
+    private GameObject GetStrongestTarget()
+    {
+        return null;
+    }
+
+    public void ToggleIsShowingRadius()
+    {
+        SetIsShowingRadius(!radius.activeInHierarchy);
+    }
+
+    public void SetIsShowingRadius(bool state)
+    {
+        radius.SetActive(state);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
