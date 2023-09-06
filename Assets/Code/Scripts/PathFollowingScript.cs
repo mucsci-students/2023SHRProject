@@ -48,6 +48,7 @@ public class PathFollowingScript : MonoBehaviour
             if (_currentTargetIndex == bloonPath.Count)
             {
                 SubtractLives();
+                WaveManager.enemiesRemaining -= 1;
                 Destroy(gameObject);
             }
         }

@@ -76,6 +76,11 @@ public class BloonScript : MonoBehaviour
         return speed;
     }
 
+    public int GetHealth()
+    {
+        return health;
+    }
+
     public void SetBloonLookUpScript(BloonLookUpScript lookUpScript)
     {
         bloonLookUpScript = lookUpScript;

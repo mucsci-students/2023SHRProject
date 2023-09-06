@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingRate: 1
   targetingMode: 0
-  projectileSpeed: 10
+  projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
@@ -879,6 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1fcf099aab3c146b8d3e126b6d780e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpedUp: 0
 --- !u!4 &1539625938
 Transform:
   m_ObjectHideFlags: 0
@@ -1227,7 +1228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingRate: 1
   targetingMode: 0
-  projectileSpeed: 10
+  projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
