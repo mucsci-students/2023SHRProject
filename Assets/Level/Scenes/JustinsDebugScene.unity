@@ -239,12 +239,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingRate: 1
-  projectileSpeed: 10
+  targetingMode: 0
+  projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
   projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
-  layersPopped: 0
+  totalLayersPopped: 0
+  radius: {fileID: 814401385}
 --- !u!1 &297922509
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,13 +485,22 @@ MonoBehaviour:
   events:
   - spawnInfos:
     - Bloon: {fileID: 8023372576191469905, guid: c50f47062489128408d98b7d6d46b916, type: 3}
-      amount: 100
+      amount: 25
       interval: 1
       timeToStart: 0
     - Bloon: {fileID: 7949021357494400205, guid: cdf11f5f39cfeb14ead68231200f7bab, type: 3}
       amount: 4
       interval: 5
       timeToStart: 2
+    - Bloon: {fileID: 8023372576191469905, guid: cc27799a742de304e9c80b5ebc6856b1, type: 3}
+      amount: 2
+      interval: 6
+      timeToStart: 3
+  - spawnInfos:
+    - Bloon: {fileID: 8023372576191469905, guid: cc27799a742de304e9c80b5ebc6856b1, type: 3}
+      amount: 5
+      interval: 2
+      timeToStart: 0
   - spawnInfos:
     - Bloon: {fileID: 8023372576191469905, guid: c50f47062489128408d98b7d6d46b916, type: 3}
       amount: 100
@@ -536,7 +547,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787934500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.39, y: 3, z: 3}
+  m_LocalPosition: {x: -13.39, y: 3, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -567,7 +578,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799747436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.48, y: 0, z: 3}
+  m_LocalPosition: {x: 10.48, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -584,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 814401386}
   - component: {fileID: 814401387}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,7 +812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383105802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 3, z: 3}
+  m_LocalPosition: {x: -4, y: 3, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -832,12 +843,57 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453509394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 3}
+  m_LocalPosition: {x: -4, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1249881346}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1539625936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539625938}
+  - component: {fileID: 1539625937}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1539625937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539625936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1fcf099aab3c146b8d3e126b6d780e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSpedUp: 0
+--- !u!4 &1539625938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539625936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.558671, y: 2.1820297, z: 1.8572488}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1550889232
 GameObject:
@@ -849,7 +905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550889233}
   - component: {fileID: 1550889234}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1171,12 +1227,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingRate: 1
-  projectileSpeed: 10
+  targetingMode: 0
+  projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
   projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
-  layersPopped: 0
+  totalLayersPopped: 0
+  radius: {fileID: 1550889232}
 --- !u!58 &2107852786
 CircleCollider2D:
   m_ObjectHideFlags: 0

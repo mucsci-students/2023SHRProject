@@ -59,10 +59,11 @@ public class BloonScript : MonoBehaviour
             var newBloonScript = newBloon.GetComponent<BloonScript>();
             newBloonScript.SetBloonLookUpScript(bloonLookUpScript);
             
-            var newBloonFollowingScript = newBloon.AddComponent<PathFollowingScript>();
+            var newBloonFollowingScript = newBloon.GetComponent<PathFollowingScript>();
             var currentBloonFollowingScript = GetComponent<PathFollowingScript>();
             newBloonFollowingScript.SetBloonPath(currentBloonFollowingScript.GetBloonPath());
             newBloonFollowingScript.SetCurrentTargetIndex(currentBloonFollowingScript.GetCurrentTargetIndex());
+            newBloonFollowingScript.SetDistanceTravelled(currentBloonFollowingScript.GetDistanceTravelled());
             
             Destroy(gameObject);
         }
@@ -73,6 +74,11 @@ public class BloonScript : MonoBehaviour
     public uint GetSpeed()
     {
         return speed;
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 
     public void SetBloonLookUpScript(BloonLookUpScript lookUpScript)
