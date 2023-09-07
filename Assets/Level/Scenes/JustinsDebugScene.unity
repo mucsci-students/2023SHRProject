@@ -880,6 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpedUp: 0
+  speedUpFactor: 2.5
 --- !u!4 &1539625938
 Transform:
   m_ObjectHideFlags: 0
