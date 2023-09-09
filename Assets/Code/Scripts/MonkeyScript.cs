@@ -12,10 +12,17 @@ public class MonkeyScript : MonoBehaviour
     [Header("Tower Settings")]
     
     [SerializeField] 
+    [Tooltip("Measured as seconds between firing.")]
+    [Min(0.01f)]
     private float firingRate = 1f;
 
     [SerializeField] 
     private Enums.TargetingMode targetingMode = Enums.TargetingMode.First; 
+    
+    [SerializeField]
+    [Range(0, 720)]
+    [Tooltip("Rotation speed in angular degrees per second")]
+    private float rotateSpeed = 270f;
     
     [Header("Projectile Settings")]
     
@@ -24,6 +31,7 @@ public class MonkeyScript : MonoBehaviour
     [SerializeField]
     private float maxProjectileDistance = 10f;
     [SerializeField]
+    [Min(0)]
     private uint layersPoppedPerHit = 1;
     [SerializeField]
     private uint pierceAmount = 1;
@@ -78,7 +86,7 @@ public class MonkeyScript : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
 
         // Angular speed in degrees per sec.
-        var maxRotateSpeed = 270f * Time.deltaTime;
+        var maxRotateSpeed = rotateSpeed * Time.deltaTime;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotateSpeed);
     }
 
@@ -89,25 +97,21 @@ public class MonkeyScript : MonoBehaviour
         projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
     }
 
-    private GameObject GetTarget(Enums.TargetingMode targetingMode)
+    private GameObject GetTarget(Enums.TargetingMode currentTargetingMode)
     {
-        switch (targetingMode)
+        return currentTargetingMode switch
         {
-            case Enums.TargetingMode.First:
-                return GetFirstTarget();
-            case Enums.TargetingMode.Last:
-                return GetLastTarget();
-            case Enums.TargetingMode.Strongest:
-                return GetStrongestTarget();
-            default:
-                return GetFirstTarget();
-        }
+            Enums.TargetingMode.First => GetFirstTarget(),
+            Enums.TargetingMode.Last => GetLastTarget(),
+            Enums.TargetingMode.Strongest => GetStrongestTarget(),
+            _ => GetFirstTarget()
+        };
     }
 
     private GameObject GetFirstTarget()
     {
         GameObject target = null;
-        var maxDistanceTravelled = -1f;
+        var maxDistanceTravelled = Mathf.NegativeInfinity;
 
         foreach (var enemy in _enemiesInRange)
         {
@@ -124,12 +128,47 @@ public class MonkeyScript : MonoBehaviour
 
     private GameObject GetLastTarget()
     {
-        return null;
+        GameObject target = null;
+        var leastDistanceTravelled = Mathf.Infinity;
+
+        foreach (var enemy in _enemiesInRange)
+        {
+            var distanceTravelled = enemy.GetComponent<PathFollowingScript>().GetDistanceTravelled();
+            if (distanceTravelled < leastDistanceTravelled)
+            {
+                leastDistanceTravelled = distanceTravelled;
+                target = enemy;
+            }
+        }
+        
+        return target;
     }
 
     private GameObject GetStrongestTarget()
     {
-        return null;
+        GameObject target = null;
+        var strongestHealth = Mathf.NegativeInfinity;
+        var maxDistanceTravelled = Mathf.NegativeInfinity;
+        const float tolerance = 0.1f;
+
+        foreach (var enemy in _enemiesInRange)
+        {
+            var distanceTravelled = enemy.GetComponent<PathFollowingScript>().GetDistanceTravelled();
+            var enemyHealth = enemy.GetComponent<BloonScript>().GetHealth();
+            if (enemyHealth > strongestHealth)
+            {
+                strongestHealth = enemyHealth;
+                maxDistanceTravelled = distanceTravelled;
+                target = enemy;
+            } else if (Math.Abs(strongestHealth - enemyHealth) < tolerance && distanceTravelled > maxDistanceTravelled)
+            {
+                strongestHealth = enemyHealth;
+                maxDistanceTravelled = distanceTravelled;
+                target = enemy;
+            }
+        }
+        
+        return target;
     }
 
     public void ToggleIsShowingRadius()
