@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MonkeyScript : MonoBehaviour
 {
@@ -61,6 +59,11 @@ public class MonkeyScript : MonoBehaviour
         if (_enemiesInRange.Count > 0)
         {
             var target = GetTarget(targetingMode);
+            if (target == null || _enemiesInRange.Count == 0)
+            {
+                return;
+            }
+            
             LookAt(target.transform.position);
             if (_timer >= firingRate)
             {
@@ -115,6 +118,12 @@ public class MonkeyScript : MonoBehaviour
 
         foreach (var enemy in _enemiesInRange)
         {
+            if (enemy == null)
+            {
+                _enemiesInRange.Remove(enemy);
+                continue;
+            }
+            
             var distanceTravelled = enemy.GetComponent<PathFollowingScript>().GetDistanceTravelled();
             if (distanceTravelled > maxDistanceTravelled)
             {
@@ -133,6 +142,12 @@ public class MonkeyScript : MonoBehaviour
 
         foreach (var enemy in _enemiesInRange)
         {
+            if (enemy == null)
+            {
+                _enemiesInRange.Remove(enemy);
+                continue;
+            }
+            
             var distanceTravelled = enemy.GetComponent<PathFollowingScript>().GetDistanceTravelled();
             if (distanceTravelled < leastDistanceTravelled)
             {
@@ -153,6 +168,12 @@ public class MonkeyScript : MonoBehaviour
 
         foreach (var enemy in _enemiesInRange)
         {
+            if (enemy == null)
+            {
+                _enemiesInRange.Remove(enemy);
+                continue;
+            }
+            
             var distanceTravelled = enemy.GetComponent<PathFollowingScript>().GetDistanceTravelled();
             var enemyHealth = enemy.GetComponent<BloonScript>().GetHealth();
             if (enemyHealth > strongestHealth)
