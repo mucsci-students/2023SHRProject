@@ -1,20 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BloonLookUpScript : MonoBehaviour
 {
 
     [SerializeField] 
-    private GameObject RedBloonPrefab;
+    private GameObject redBloonPrefab;
 
     [SerializeField] 
-    private GameObject BlueBloonPrefab;
+    private GameObject blueBloonPrefab;
+
+    [SerializeField] 
+    private GameObject greenBloonPrefab;
+
+    [SerializeField] 
+    private GameObject yellowBloonPrefab;
+
+    [SerializeField] 
+    private GameObject pinkBloonPrefab;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if (RedBloonPrefab == null || BlueBloonPrefab == null)
+        if (redBloonPrefab == null || blueBloonPrefab == null || greenBloonPrefab == null || yellowBloonPrefab == null || pinkBloonPrefab == null)
         {
             Debug.LogError(name + " is missing prefab links!");
         }
@@ -22,14 +29,14 @@ public class BloonLookUpScript : MonoBehaviour
 
     public GameObject GetNewBloon(int health)
     {
-        if (health == 2)
+        return health switch
         {
-            return BlueBloonPrefab;
-        } else if (health == 1)
-        {
-            return RedBloonPrefab;
-        }
-
-        return null;
+            5 => pinkBloonPrefab,
+            4 => yellowBloonPrefab,
+            3 => greenBloonPrefab,
+            2 => blueBloonPrefab,
+            1 => redBloonPrefab,
+            _ => null
+        };
     }
 }
