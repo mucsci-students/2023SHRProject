@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Stores all the bloons and has helper function to get a new bloon based on health. Use this class attached to an
+/// empty game object to store bloons. Prevents each bloon from needing its' own links to all the possible bloons
+/// that it can become when it takes damage.
+/// </summary>
 public class BloonLookUpScript : MonoBehaviour
 {
 
@@ -27,6 +32,11 @@ public class BloonLookUpScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Allows a bloon to retrieve a new bloon prefab to instantiate based on the bloons new health after taking damage.
+    /// </summary>
+    /// <param name="health">The amountToSpawn of health that the bloon it should spawn should have. i.e. 4 = yellow bloon etc.</param>
+    /// <returns>A prefab of the new bloon to create</returns>
     public GameObject GetNewBloon(int health)
     {
         return health switch

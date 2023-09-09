@@ -40,8 +40,8 @@ public class BloonScript : MonoBehaviour
     /// <summary>
     /// Updates the bloons health based on damage param. Destroys itself if it loses all its health
     /// </summary>
-    /// <param name="damage">The amount of damage the bloon should take</param>
-    /// <returns>The amount of damage the bloon actually took, to be able to update pop counts</returns>
+    /// <param name="damage">The amountToSpawn of damage the bloon should take</param>
+    /// <returns>The amountToSpawn of damage the bloon actually took, to be able to update pop counts</returns>
     public int ReceiveDamage(int damage)
     {
         var originalHealth = health;

@@ -17,7 +17,7 @@ public class PathFollowingScript : MonoBehaviour
 
     private uint _currentTargetIndex = 0;
     private uint _speed;
-    public float _distanceTraveled = 0;
+    private float _distanceTraveled = 0;
 
     // Start is called before the first frame update
     private void Start()
@@ -105,6 +105,7 @@ public class PathFollowingScript : MonoBehaviour
     }
     
     // Setters and Getters
+    
     public List<Transform> GetBloonPath()
     {
         return bloonPath;

@@ -8,6 +8,8 @@ public class ProjectileScript : MonoBehaviour
     private float _speed = 1f;
     private float _maxDistance = 10f;
     private uint _layersPerHit = 1;
+    
+    // TODO - Implement this 
     private uint _pierceAmount = 1;
 
     private float _distanceTraveled;
@@ -58,7 +60,6 @@ public class ProjectileScript : MonoBehaviour
             var layersPopped = bloonScript.ReceiveDamage((int)_layersPerHit);
             _parentMonkeyScript.IncrementLayersPopped(layersPopped);
             
-            // fix bug
             Destroy(gameObject);
             Destroy(this);
             _layersPerHit = 0;
