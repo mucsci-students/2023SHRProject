@@ -4,6 +4,7 @@ public static class Enums
     {
         First,
         Last,
-        Strongest
+        Strongest,
+        None
     }
 }

@@ -15,7 +15,7 @@ public class MonkeyScript : MonoBehaviour
     private float firingRate = 1f;
 
     [SerializeField] 
-    private Enums.TargetingMode targetingMode = Enums.TargetingMode.First; 
+    protected Enums.TargetingMode targetingMode = Enums.TargetingMode.First; 
     
     [SerializeField]
     [Range(0, 720)]
@@ -25,19 +25,19 @@ public class MonkeyScript : MonoBehaviour
     [Header("Projectile Settings")]
     
     [SerializeField]
-    private float projectileSpeed = 1f;
+    protected float projectileSpeed = 1f;
     [SerializeField]
-    private float maxProjectileDistance = 10f;
+    protected float maxProjectileDistance = 10f;
     [SerializeField]
     [Min(0)]
-    private uint layersPoppedPerHit = 1;
+    protected uint layersPoppedPerHit = 1;
     [SerializeField]
-    private uint pierceAmount = 1;
+    protected uint pierceAmount = 1;
 
     [Header("Projectile")] 
     
     [SerializeField]
-    private GameObject projectilePrefab;
+    protected GameObject projectilePrefab;
     
     [Header("Stats")] 
     
@@ -51,7 +51,7 @@ public class MonkeyScript : MonoBehaviour
 
     private float _timer = 0f;
 
-    private void Start()
+    protected virtual void Start()
     {
         SetIsShowingRadius(false);
     }
@@ -97,7 +97,7 @@ public class MonkeyScript : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotateSpeed);
     }
 
-    private void Fire(GameObject target)
+    protected virtual void Fire(GameObject target)
     { 
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         var projectileScript = projectile.GetComponent<ProjectileScript>();
@@ -111,6 +111,7 @@ public class MonkeyScript : MonoBehaviour
             Enums.TargetingMode.First => GetFirstTarget(),
             Enums.TargetingMode.Last => GetLastTarget(),
             Enums.TargetingMode.Strongest => GetStrongestTarget(),
+            Enums.TargetingMode.None => GetFirstTarget(),
             _ => GetFirstTarget()
         };
     }

@@ -44,6 +44,16 @@ public class ProjectileScript : MonoBehaviour
         _target = target;
         _parentMonkeyScript = parent;
     }
+    
+    public void SetAllAttributes(float speed, float maxDistance, uint layersPerHit, uint pierceAmount, Vector3 direction, MonkeyScript parent)
+    {
+        _speed = speed;
+        _maxDistance = maxDistance;
+        _layersPerHit = layersPerHit;
+        _pierceAmount = pierceAmount;
+        _lastTargetDirection = direction;
+        _parentMonkeyScript = parent;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -80,7 +90,7 @@ public class ProjectileScript : MonoBehaviour
 
     private void MoveInDirection(Vector3 direction)
     {
-        Vector3 newPosition = direction + transform.position;
+        Vector3 newPosition = GetNewPosition(transform.position + direction, _speed * Time.deltaTime);
         SetPosition(newPosition);
     }
 
