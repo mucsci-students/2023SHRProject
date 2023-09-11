@@ -47,10 +47,14 @@ public class MonkeyScript : MonoBehaviour
     [Header("Object Links")] 
     
     [SerializeField]
-    private GameObject radius;
+    private SpriteRenderer radiusSpriteRenderer;
 
     private float _timer = 0f;
 
+    private void Start()
+    {
+        SetIsShowingRadius(false);
+    }
 
     // Update is called once per frame
     private void Update()
@@ -192,14 +196,29 @@ public class MonkeyScript : MonoBehaviour
         return target;
     }
 
+    private void OnMouseDown()
+    {
+        ToggleIsShowingRadius();
+    }
+    
+    public void AddBloonToRange(GameObject bloon)
+    {
+        _enemiesInRange.Add(bloon);
+    }
+    
+    public void RemoveBloonFromRange(GameObject bloon)
+    {
+        _enemiesInRange.Remove(bloon);
+    }
+
     public void ToggleIsShowingRadius()
     {
-        SetIsShowingRadius(!radius.activeInHierarchy);
+        SetIsShowingRadius(!radiusSpriteRenderer.enabled);
     }
 
     public void SetIsShowingRadius(bool state)
     {
-        radius.SetActive(state);
+        radiusSpriteRenderer.enabled = state;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
