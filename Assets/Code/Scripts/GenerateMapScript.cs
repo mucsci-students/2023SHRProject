@@ -1,10 +1,14 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = System.Random;
 
 public class GenerateMapScript : MonoBehaviour
 {
     [SerializeField] private Camera currentSceneCamera;
+    [SerializeField] private Tile tilePrefab;
+    [SerializeField] private GameObject roadPrefab;
+    
     public float leftCameraPosition = 0f;
     public float rightCameraPosition = 0f;
     public float topCameraPosition = 0f;
@@ -42,18 +46,21 @@ public class GenerateMapScript : MonoBehaviour
         blockSize = Math.Abs(topCameraPosition - bottomCameraPosition) / 10;
 
         yBlocks = Math.Abs(topCameraPosition - bottomCameraPosition) / blockSize;
-        xBlocks = Math.Abs(leftCameraPosition - rightCameraPosition) / blockSize;
+        xBlocks = Math.Abs(leftCameraPosition - rightCameraPosition) / blockSize - 2;
         
         _map = new int[(int)Math.Ceiling(yBlocks), (int)Math.Ceiling(xBlocks)];
         
         FillMapArray();
         Print2DArray(_map);
+        GenerateGrid(_map);
     }
 
     private void GenerateMapAndDisplay()
     {
         
     }
+    
+    
 
     private void FillMapArray()
     {
@@ -66,62 +73,61 @@ public class GenerateMapScript : MonoBehaviour
         SetMapValue(currPos, 1);
         var lastMove = MoveDirection.Right;
 
-        while (currPos.x < _map.GetLength(1) - 1)
+        while (currPos.x < _map.GetLength(1) - 2)
         {
             var nextMove = GetRandomMove(lastMove);
 
-            if (nextMove == MoveDirection.Right)
+            lastMove = nextMove switch
             {
-                MoveRightOnMap(ref currPos, 2);
-            } else if (nextMove == MoveDirection.Up)
-            {
-                MoveUpOnMap(ref currPos, 2);
-            } else if (nextMove == MoveDirection.Down)
-            {
-                MoveDownOnMap(ref currPos, 2);
-            }
-
-            lastMove = nextMove;
-            
+                MoveDirection.Right => MoveRightOnMap(ref currPos, 2),
+                MoveDirection.Up => MoveUpOnMap(ref currPos, 2),
+                MoveDirection.Down => MoveDownOnMap(ref currPos, 2),
+                _ => lastMove
+            };
         }
     }
 
-    private void MoveRightOnMap(ref Vector2 currentPosition, uint distance)
+    private MoveDirection MoveRightOnMap(ref Vector2 currentPosition, uint distance)
     {
         for (var i = 0; i < distance; i++)
         {
-            if ((int)currentPosition.x == _map.GetLength(1) - 1) return;
+            if ((int)currentPosition.x == _map.GetLength(1) - 1);
             currentPosition.x += 1;
             SetMapValue(currentPosition, 1);
         }
+        return MoveDirection.Right;
     }
     
-    private void MoveUpOnMap(ref Vector2 currentPosition, uint distance)
+    private MoveDirection MoveUpOnMap(ref Vector2 currentPosition, uint distance)
     {
         for (var i = 0; i < distance; i++)
         {
             if ((int)currentPosition.y <= 1)
             {
                 MoveRightOnMap(ref currentPosition, distance);
-                return;
+                MoveDownOnMap(ref currentPosition, distance);
+                return MoveDirection.Down;
             }
             currentPosition.y -= 1;
             SetMapValue(currentPosition, 1);
         }
+        return MoveDirection.Up;
     }
-    
-    private void MoveDownOnMap(ref Vector2 currentPosition, uint distance)
+
+    private MoveDirection MoveDownOnMap(ref Vector2 currentPosition, uint distance)
     {
         for (var i = 0; i < distance; i++)
         {
             if ((int)currentPosition.y >= _map.GetLength(0) - 2)
             {
                 MoveRightOnMap(ref currentPosition, distance);
-                return;
+                MoveUpOnMap(ref currentPosition, distance);
+                return MoveDirection.Up;
             }
             currentPosition.y += 1;
             SetMapValue(currentPosition, 1);
         }
+        return MoveDirection.Down;
     }
 
     private void SetMapValue(Vector2 pos, int value)
@@ -160,6 +166,31 @@ public class GenerateMapScript : MonoBehaviour
             }
             Debug.Log(message);
         }
+    }
+    
+    private void GenerateGrid(int[,] array)
+    {
+        for (int y = 0; y < array.GetLength(0); y++)
+        {
+            for (int x = 0; x < array.GetLength(1); x++)
+            {
+                if (array[y, x] == 0)
+                {
+                    var spawnedTile = Instantiate(tilePrefab, new Vector3(x + leftCameraPosition + blockSize / 2, y + topCameraPosition + blockSize / 2), quaternion.identity);
+                    spawnedTile.name = $"Tile {y} {x}";
+
+                    var isOffsetColor = (y % 2 == 0 && x % 2 != 0) || (y % 2 != 0 && x % 2 == 0);
+                    spawnedTile.Init(isOffsetColor);
+                }
+                else if (array[y, x] == 1)
+                {
+                    var spawnedRoad = Instantiate(roadPrefab, new Vector3(x + leftCameraPosition + blockSize / 2, y + topCameraPosition + blockSize / 2), quaternion.identity);
+                    spawnedRoad.name = $"Road {y} {x}";
+                }
+            }
+        }
+
+        //camera.transform.position = new Vector3((float)width/2-0.5f,(float)height/2-0.5f,-10);
     }
     
     

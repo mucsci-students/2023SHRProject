@@ -7,9 +7,9 @@ public class Tile : MonoBehaviour
     [SerializeField] private Color baseColor, offSetColor;
     [SerializeField] private SpriteRenderer renderer;
     [SerializeField] private GameObject highlight;
-    public void Init(bool isOffset)
+    public void Init(bool isOffsetColor)
     {
-        renderer.color = isOffset ? offSetColor : baseColor;
+        renderer.color = isOffsetColor ? offSetColor : baseColor;
     }
 
     void OnMouseEnter()

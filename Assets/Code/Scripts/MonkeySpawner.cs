@@ -6,12 +6,6 @@ public class MonkeySpawner : MonoBehaviour
     public GameObject monkeyPrefab;
     private bool isPlacingMonkey = false;
 
-    private void Start()
-    {
-        Button button = GetComponent<Button>();
-        button.onClick.AddListener(StartPlacingMonkey);
-    }
-
     private void Update()
     {
         if (isPlacingMonkey)
@@ -26,7 +20,7 @@ public class MonkeySpawner : MonoBehaviour
         }
     }
     
-    private void StartPlacingMonkey() //you can start placin some monkey -- replace with money mechanic!!
+    public void StartPlacingMonkey() //you can start placin some monkey -- replace with money mechanic!!
     {
         isPlacingMonkey = true;
     }
