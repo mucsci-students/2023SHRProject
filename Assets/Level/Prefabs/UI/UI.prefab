@@ -1862,13 +1862,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 79611a8b211ab46648ab4facef6a6b17, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 6050963794489226773}
+        m_TargetAssemblyTypeName: MonkeySpawner, Assembly-CSharp
+        m_MethodName: StartPlacingMonkey
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1886,4 +1886,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79611a8b211ab46648ab4facef6a6b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monkeyPrefab: {fileID: 0}
+  monkeyPrefab: {fileID: 6425238001161290767, guid: cc38799dddd7040488e0b25a7a465fff, type: 3}
