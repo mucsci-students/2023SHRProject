@@ -5,17 +5,16 @@ using UnityEngine.Serialization;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] 
+    
     [Tooltip("The spawn point for the bloons")]
-    private Transform spawn;
+    public Transform spawn;
 
     [SerializeField]
     [Tooltip("The time between waves in seconds")]
     private float timeBetweenWaves = 15f;
-
-    [SerializeField] 
+    
     [Tooltip("The path the bloons will follow. First point is the first point after spawn, last point is the end point.")]
-    private List<Transform> path;
+    public List<Transform> path = new();
 
     [SerializeField] 
     private BloonLookUpScript BLUS;
