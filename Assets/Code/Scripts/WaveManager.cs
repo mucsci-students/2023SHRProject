@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     [Tooltip("The spawn point for the bloons")]
     private Transform spawn;
 
@@ -13,11 +13,11 @@ public class WaveManager : MonoBehaviour
     [Tooltip("The time between waves in seconds")]
     private float timeBetweenWaves = 15f;
 
-    [SerializeField] 
+    [SerializeField]
     [Tooltip("The path the bloons will follow. First point is the first point after spawn, last point is the end point.")]
     private List<Transform> path;
 
-    [SerializeField] 
+    [SerializeField]
     private BloonLookUpScript BLUS;
 
     [SerializeField]
@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour
     public float TimerRef;
 
     // Private variables
-    
+
     /// <summary>
     /// Stores whether the game is currently playing. Is true if any wave has ever started. False if all waves are over.
     /// </summary>
@@ -38,9 +38,9 @@ public class WaveManager : MonoBehaviour
     /// Stores whether the game is currently between rounds. Is true if isPlaying is true and bloon count < 0.
     /// </summary>
     private bool betweenRounds = false;
-    
+
     private bool autoPlay = false;
-    
+
     private float timer = 0f;
 
 
@@ -113,6 +113,9 @@ public class WaveManager : MonoBehaviour
             int enemies = 0;
             foreach (var spawnInfo in spawnInfos)
             {
+                int randomAmountToSpawn = Random.Range(5, 10); // Example range: 5 to 10 bloons per SpawnInfo
+                spawnInfo.amountToSpawn = randomAmountToSpawn;
+
                 spawnInfo.Start();
                 enemies += spawnInfo.GetTotalBloonCount();
             }
@@ -148,17 +151,17 @@ public class WaveManager : MonoBehaviour
         [System.Serializable]
         public class SpawnInfo
         {
-            
+
             public GameObject Bloon;
-            
-            [SerializeField] 
+
+            [SerializeField]
             [Tooltip("The number of bloons to spawn")]
-            private int amountToSpawn;
-            
+            public int amountToSpawn;
+
             [SerializeField]
             [Tooltip("Number of seconds between bloon spawns")]
             private float interval;
-            
+
             [SerializeField]
             [Tooltip("The time before the first bloon spawns. If set to 0, the first bloon will spawn instantly.")]
             [Min(0.0f)]
@@ -190,21 +193,21 @@ public class WaveManager : MonoBehaviour
 
                     bloon.GetComponent<BloonScript>().SetBloonLookUpScript(BLUS);
                     bloon.GetComponent<PathFollowingScript>().SetBloonPath(path);
-                    
+
 
                     --amountToSpawn;
                     lastTime = Time.time;
                     spawnInstant = false;
                 }
             }
-            
+
             // Setters and getters
-            
+
             public int GetTotalBloonCount()
             {
                 return amountToSpawn;
             }
-            
+
             /// <summary>
             /// Checks if the spawnInfo is finished spawning bloons.
             /// </summary>
@@ -219,3 +222,4 @@ public class WaveManager : MonoBehaviour
     }
 
 }
+
