@@ -1,0 +1,124 @@
+\doxysection{Generate\+Map\+Script Class Reference}
+\hypertarget{class_generate_map_script}{}\label{class_generate_map_script}\index{GenerateMapScript@{GenerateMapScript}}
+Inheritance diagram for Generate\+Map\+Script\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_generate_map_script}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_generate_map_script_a6e706f5073fd678437b5404ee62a6d05}\label{class_generate_map_script_a6e706f5073fd678437b5404ee62a6d05} 
+enum {\bfseries Move\+Direction} \{ {\bfseries Up}
+, {\bfseries Down}
+, {\bfseries Right}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_generate_map_script_a60a6eb73cfbebc322cd132bca840bbba}\label{class_generate_map_script_a60a6eb73cfbebc322cd132bca840bbba} 
+void {\bfseries Start} ()
+\item 
+\Hypertarget{class_generate_map_script_a04ed80b22cb4d1fa8fa3034e3a8b0681}\label{class_generate_map_script_a04ed80b22cb4d1fa8fa3034e3a8b0681} 
+void {\bfseries Calculate\+Map\+Size} ()
+\item 
+\Hypertarget{class_generate_map_script_af08cfd9f6ba42ad781b4254f7ec4fedc}\label{class_generate_map_script_af08cfd9f6ba42ad781b4254f7ec4fedc} 
+void {\bfseries Regenerate\+Map} ()
+\item 
+\Hypertarget{class_generate_map_script_ab11f05196eb8fbdd37170a2145001af6}\label{class_generate_map_script_ab11f05196eb8fbdd37170a2145001af6} 
+void {\bfseries Delete\+Map} ()
+\item 
+\Hypertarget{class_generate_map_script_a4709404b65f70f6d8e5f41d206ba5ed0}\label{class_generate_map_script_a4709404b65f70f6d8e5f41d206ba5ed0} 
+void {\bfseries Generate\+Random\+Map} ()
+\item 
+\Hypertarget{class_generate_map_script_a8a4a2233d5391bbf43b8a060ab340473}\label{class_generate_map_script_a8a4a2233d5391bbf43b8a060ab340473} 
+Move\+Direction {\bfseries Move\+Right\+On\+Map} (ref Vector2 current\+Position, uint distance)
+\item 
+\Hypertarget{class_generate_map_script_a0a6acd87a1d117a021b84ceb25f65c98}\label{class_generate_map_script_a0a6acd87a1d117a021b84ceb25f65c98} 
+Move\+Direction {\bfseries Move\+Up\+On\+Map} (ref Vector2 current\+Position, uint distance)
+\item 
+\Hypertarget{class_generate_map_script_a17e934c1ef77b742bf42fa23bcc282f1}\label{class_generate_map_script_a17e934c1ef77b742bf42fa23bcc282f1} 
+Move\+Direction {\bfseries Move\+Down\+On\+Map} (ref Vector2 current\+Position, uint distance)
+\item 
+\Hypertarget{class_generate_map_script_a07ea3b7585d6e300ec165be7561bce0d}\label{class_generate_map_script_a07ea3b7585d6e300ec165be7561bce0d} 
+void {\bfseries Set\+Map\+Value} (Vector2 pos, int value)
+\item 
+\Hypertarget{class_generate_map_script_a82bbed29924fb26d05b8c812f713ea3d}\label{class_generate_map_script_a82bbed29924fb26d05b8c812f713ea3d} 
+Move\+Direction {\bfseries Get\+Random\+Move} (Move\+Direction last\+Move)
+\item 
+\Hypertarget{class_generate_map_script_a7e1830280fc32fdc8abeae464a62faae}\label{class_generate_map_script_a7e1830280fc32fdc8abeae464a62faae} 
+void {\bfseries Display\+Map} (int\mbox{[},\mbox{]} array)
+\item 
+\Hypertarget{class_generate_map_script_a8bfea443e9ae023572725e06832079c7}\label{class_generate_map_script_a8bfea443e9ae023572725e06832079c7} 
+void {\bfseries Detect\+Corners} ()
+\item 
+\Hypertarget{class_generate_map_script_a31f81fc872eb587ada06a9b8a7e9bb1e}\label{class_generate_map_script_a31f81fc872eb587ada06a9b8a7e9bb1e} 
+void {\bfseries Find\+Corners} (int x, int y, int prev\+Dir)
+\item 
+\Hypertarget{class_generate_map_script_a23bb7dd5d9be843770214bb925a2c830}\label{class_generate_map_script_a23bb7dd5d9be843770214bb925a2c830} 
+void {\bfseries Corner\+Function} (int x, int y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_generate_map_script_af0c5b8697711240d3d880272567ec482}\label{class_generate_map_script_af0c5b8697711240d3d880272567ec482} 
+static void {\bfseries Print2\+DArray} (int\mbox{[},\mbox{]} array)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_generate_map_script_aecbc6721b126c72f357db888e8da3fe8}\label{class_generate_map_script_aecbc6721b126c72f357db888e8da3fe8} 
+Camera {\bfseries current\+Scene\+Camera}
+\item 
+\Hypertarget{class_generate_map_script_a357caf54368b7d2785e1ada67c9a515c}\label{class_generate_map_script_a357caf54368b7d2785e1ada67c9a515c} 
+\mbox{\hyperlink{class_tile}{Tile}} {\bfseries tile\+Prefab}
+\item 
+\Hypertarget{class_generate_map_script_ab78b3bac35f2db3a3e37caece4e6209e}\label{class_generate_map_script_ab78b3bac35f2db3a3e37caece4e6209e} 
+Game\+Object {\bfseries road\+Prefab}
+\item 
+\Hypertarget{class_generate_map_script_afd82e6c8fba131ddec4a8fb280480297}\label{class_generate_map_script_afd82e6c8fba131ddec4a8fb280480297} 
+\mbox{\hyperlink{class_wave_manager}{Wave\+Manager}} {\bfseries wave\+Manager}
+\item 
+\Hypertarget{class_generate_map_script_ad8f4f328839e0ee28fa056308a010dde}\label{class_generate_map_script_ad8f4f328839e0ee28fa056308a010dde} 
+float {\bfseries move\+Right\+Probability} = 0.\+5f
+\item 
+\Hypertarget{class_generate_map_script_aa0ec7048f45be30fa452df33b8e3349b}\label{class_generate_map_script_aa0ec7048f45be30fa452df33b8e3349b} 
+float {\bfseries left\+Camera\+Position} = 0f
+\item 
+\Hypertarget{class_generate_map_script_a6688b3395ef33375d3768cedf1c1b482}\label{class_generate_map_script_a6688b3395ef33375d3768cedf1c1b482} 
+float {\bfseries right\+Camera\+Position} = 0f
+\item 
+\Hypertarget{class_generate_map_script_a9024eeeec4e8c2fa0084ca6698d538ca}\label{class_generate_map_script_a9024eeeec4e8c2fa0084ca6698d538ca} 
+float {\bfseries top\+Camera\+Position} = 0f
+\item 
+\Hypertarget{class_generate_map_script_a1702c27d3e9e80fd98d14c042bae9ca8}\label{class_generate_map_script_a1702c27d3e9e80fd98d14c042bae9ca8} 
+float {\bfseries bottom\+Camera\+Position} = 0f
+\item 
+\Hypertarget{class_generate_map_script_a7cdeea00a92bc2315dfe1c99d26885a5}\label{class_generate_map_script_a7cdeea00a92bc2315dfe1c99d26885a5} 
+float {\bfseries block\+Size} = 0f
+\item 
+\Hypertarget{class_generate_map_script_af22721380b5ca09fdaec60216c4a6bac}\label{class_generate_map_script_af22721380b5ca09fdaec60216c4a6bac} 
+float {\bfseries y\+Blocks} = 0f
+\item 
+\Hypertarget{class_generate_map_script_ae3c11db76e2b95dd47b321cb5205d0c2}\label{class_generate_map_script_ae3c11db76e2b95dd47b321cb5205d0c2} 
+float {\bfseries x\+Blocks} = 0f
+\item 
+\Hypertarget{class_generate_map_script_aa07c29261d25c9e18cce33260ab7a186}\label{class_generate_map_script_aa07c29261d25c9e18cce33260ab7a186} 
+int\mbox{[},\mbox{]} {\bfseries \+\_\+map}
+\item 
+\Hypertarget{class_generate_map_script_abeac63ea65b87e69e55e39f7ae11ae8f}\label{class_generate_map_script_abeac63ea65b87e69e55e39f7ae11ae8f} 
+bool\mbox{[},\mbox{]} {\bfseries \+\_\+visited}
+\item 
+\Hypertarget{class_generate_map_script_a6922881a7cfafb792898cbaf88ee91fe}\label{class_generate_map_script_a6922881a7cfafb792898cbaf88ee91fe} 
+int {\bfseries corner\+Count} = 0
+\item 
+\Hypertarget{class_generate_map_script_a3e6245024d4f633dcb6746b44cc54fc4}\label{class_generate_map_script_a3e6245024d4f633dcb6746b44cc54fc4} 
+readonly Random {\bfseries \+\_\+random\+Number\+Generator} = new Random()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Generate\+Map\+Script.\+cs\end{DoxyCompactItemize}

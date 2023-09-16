@@ -1,0 +1,124 @@
+\doxysection{Monkey\+Script Class Reference}
+\hypertarget{class_monkey_script}{}\label{class_monkey_script}\index{MonkeyScript@{MonkeyScript}}
+Inheritance diagram for Monkey\+Script\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_monkey_script}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_monkey_script_ae147e2d3678ba7f8e45fb0108d0afb4d}\label{class_monkey_script_ae147e2d3678ba7f8e45fb0108d0afb4d} 
+void {\bfseries Increment\+Layers\+Popped} (int layers\+Popped)
+\item 
+\Hypertarget{class_monkey_script_a76893a5e04d652ee52f8ffa28a058915}\label{class_monkey_script_a76893a5e04d652ee52f8ffa28a058915} 
+void {\bfseries Add\+Bloon\+To\+Range} (Game\+Object bloon)
+\item 
+\Hypertarget{class_monkey_script_a6d2909fc8373a723e758105b61803606}\label{class_monkey_script_a6d2909fc8373a723e758105b61803606} 
+void {\bfseries Remove\+Bloon\+From\+Range} (Game\+Object bloon)
+\item 
+\Hypertarget{class_monkey_script_adc31303f83adf256181ff3fea9abc2a5}\label{class_monkey_script_adc31303f83adf256181ff3fea9abc2a5} 
+void {\bfseries Toggle\+Is\+Showing\+Radius} ()
+\item 
+\Hypertarget{class_monkey_script_aa58b15981dc150547955ce68061375db}\label{class_monkey_script_aa58b15981dc150547955ce68061375db} 
+void {\bfseries Set\+Is\+Showing\+Radius} (bool state)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_monkey_script_a06a2a6d73a3796117a8e84fc6e9fd715}\label{class_monkey_script_a06a2a6d73a3796117a8e84fc6e9fd715} 
+virtual void {\bfseries Start} ()
+\item 
+virtual void \mbox{\hyperlink{class_monkey_script_aa653db9ef11c20520f3867565314ee08}{Fire}} (Game\+Object target)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_monkey_script_a63512a15b4c138f0fe18ba042ead7b72}\label{class_monkey_script_a63512a15b4c138f0fe18ba042ead7b72} 
+Enums.\+Targeting\+Mode {\bfseries targeting\+Mode} = Enums.\+Targeting\+Mode.\+First
+\item 
+\Hypertarget{class_monkey_script_a71cbe07a1f87cf404286256706d086ee}\label{class_monkey_script_a71cbe07a1f87cf404286256706d086ee} 
+float {\bfseries projectile\+Speed} = 1f
+\item 
+\Hypertarget{class_monkey_script_ae4db9ac3363a546ecd2e0274776806c5}\label{class_monkey_script_ae4db9ac3363a546ecd2e0274776806c5} 
+float {\bfseries max\+Projectile\+Distance} = 10f
+\item 
+\Hypertarget{class_monkey_script_a80428768a85490e36cf10288ac35d31a}\label{class_monkey_script_a80428768a85490e36cf10288ac35d31a} 
+uint {\bfseries layers\+Popped\+Per\+Hit} = 1
+\item 
+\Hypertarget{class_monkey_script_a070845a97c1f45284de816aff571e2d8}\label{class_monkey_script_a070845a97c1f45284de816aff571e2d8} 
+uint {\bfseries pierce\+Amount} = 1
+\item 
+\Hypertarget{class_monkey_script_a6302a2d12ec23f57ec3f2205fea04014}\label{class_monkey_script_a6302a2d12ec23f57ec3f2205fea04014} 
+Game\+Object {\bfseries projectile\+Prefab}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_monkey_script_affe90bcbb6773a5f63da2627db914a91}\label{class_monkey_script_affe90bcbb6773a5f63da2627db914a91} 
+void {\bfseries Update} ()
+\item 
+\Hypertarget{class_monkey_script_a4e9074e77988b9f1926b94c1a32754af}\label{class_monkey_script_a4e9074e77988b9f1926b94c1a32754af} 
+void {\bfseries Look\+At} (Vector3 target\+Position)
+\item 
+\Hypertarget{class_monkey_script_af952183ab31858c5ff61750cc323971d}\label{class_monkey_script_af952183ab31858c5ff61750cc323971d} 
+Game\+Object {\bfseries Get\+Target} (Enums.\+Targeting\+Mode current\+Targeting\+Mode)
+\item 
+\Hypertarget{class_monkey_script_a994382f5c7c3f0c88801402f7ab93064}\label{class_monkey_script_a994382f5c7c3f0c88801402f7ab93064} 
+Game\+Object {\bfseries Get\+First\+Target} ()
+\item 
+\Hypertarget{class_monkey_script_aea3174e3b26aec4313e45634785e34ad}\label{class_monkey_script_aea3174e3b26aec4313e45634785e34ad} 
+Game\+Object {\bfseries Get\+Last\+Target} ()
+\item 
+\Hypertarget{class_monkey_script_a15ced8624ac552253c4709e1712af778}\label{class_monkey_script_a15ced8624ac552253c4709e1712af778} 
+Game\+Object {\bfseries Get\+Strongest\+Target} ()
+\item 
+\Hypertarget{class_monkey_script_a88304e7f7e9ac01b362c9b1c9dd3bc0b}\label{class_monkey_script_a88304e7f7e9ac01b362c9b1c9dd3bc0b} 
+void {\bfseries On\+Mouse\+Down} ()
+\item 
+\Hypertarget{class_monkey_script_a90e47c9563d4296b8cfee6e216c9025d}\label{class_monkey_script_a90e47c9563d4296b8cfee6e216c9025d} 
+void {\bfseries On\+Trigger\+Enter2D} (Collider2D other)
+\item 
+\Hypertarget{class_monkey_script_a38384a7257fcb117c6aaed4b224c6e32}\label{class_monkey_script_a38384a7257fcb117c6aaed4b224c6e32} 
+void {\bfseries On\+Trigger\+Exit2D} (Collider2D other)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_monkey_script_a1271ed706c6cbcf4c235ed0327782e2a}\label{class_monkey_script_a1271ed706c6cbcf4c235ed0327782e2a} 
+readonly List$<$ Game\+Object $>$ {\bfseries \+\_\+enemies\+In\+Range} = new()
+\item 
+\Hypertarget{class_monkey_script_aa51d116367741724de274348fe4f20dd}\label{class_monkey_script_aa51d116367741724de274348fe4f20dd} 
+float {\bfseries firing\+Rate} = 1f
+\item 
+\Hypertarget{class_monkey_script_a36555fb186dec48f58d2a23a99c30581}\label{class_monkey_script_a36555fb186dec48f58d2a23a99c30581} 
+float {\bfseries rotate\+Speed} = 270f
+\item 
+\Hypertarget{class_monkey_script_aa80229c6f462add1c26935871bc2f40a}\label{class_monkey_script_aa80229c6f462add1c26935871bc2f40a} 
+int {\bfseries total\+Layers\+Popped} = 0
+\item 
+\Hypertarget{class_monkey_script_a9c73fcce3517203ab6e9f2ea6eb62df9}\label{class_monkey_script_a9c73fcce3517203ab6e9f2ea6eb62df9} 
+Sprite\+Renderer {\bfseries radius\+Sprite\+Renderer}
+\item 
+\Hypertarget{class_monkey_script_a604e0a96560907a32c55010ab8cbd481}\label{class_monkey_script_a604e0a96560907a32c55010ab8cbd481} 
+float {\bfseries \+\_\+timer} = 0f
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_monkey_script_aa653db9ef11c20520f3867565314ee08}\label{class_monkey_script_aa653db9ef11c20520f3867565314ee08} 
+\index{MonkeyScript@{MonkeyScript}!Fire@{Fire}}
+\index{Fire@{Fire}!MonkeyScript@{MonkeyScript}}
+\doxysubsubsection{\texorpdfstring{Fire()}{Fire()}}
+{\footnotesize\ttfamily virtual void Monkey\+Script.\+Fire (\begin{DoxyParamCaption}\item[{Game\+Object}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_tack_tower_script_aa7ac39d1b9b01b27550f607cb108a7d4}{Tack\+Tower\+Script}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Tower\+Scripts/Monkey\+Script.\+cs\end{DoxyCompactItemize}

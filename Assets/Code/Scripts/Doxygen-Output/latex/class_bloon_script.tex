@@ -1,0 +1,72 @@
+\doxysection{Bloon\+Script Class Reference}
+\hypertarget{class_bloon_script}{}\label{class_bloon_script}\index{BloonScript@{BloonScript}}
+Inheritance diagram for Bloon\+Script\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bloon_script}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_bloon_script_a8b2e85a9943d0c3eb2c8f5b3941ff0a1}{Receive\+Damage}} (int damage)
+\begin{DoxyCompactList}\small\item\em Updates the bloons health based on damage param. Destroys itself if it loses all its health. \end{DoxyCompactList}\item 
+\Hypertarget{class_bloon_script_adbded3002ba601f56aa40e7b41f05190}\label{class_bloon_script_adbded3002ba601f56aa40e7b41f05190} 
+uint {\bfseries Get\+Speed} ()
+\item 
+\Hypertarget{class_bloon_script_a41e340ff0ba444745872302a5f3df173}\label{class_bloon_script_a41e340ff0ba444745872302a5f3df173} 
+int {\bfseries Get\+Health} ()
+\item 
+\Hypertarget{class_bloon_script_a834233969dc4f08274e71acfca10fd14}\label{class_bloon_script_a834233969dc4f08274e71acfca10fd14} 
+void {\bfseries Set\+Bloon\+Look\+Up\+Script} (\mbox{\hyperlink{class_bloon_look_up_script}{Bloon\+Look\+Up\+Script}} look\+Up\+Script)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_bloon_script_a9d4a40eaaaba32d7bd3d99d645daca33}\label{class_bloon_script_a9d4a40eaaaba32d7bd3d99d645daca33} 
+void {\bfseries Start} ()
+\item 
+\Hypertarget{class_bloon_script_ae144d42d402b703162147eeb05dbe8ea}\label{class_bloon_script_ae144d42d402b703162147eeb05dbe8ea} 
+void {\bfseries Update} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_bloon_script_a184b4b634fde3a89b5155e22d869e4a4}\label{class_bloon_script_a184b4b634fde3a89b5155e22d869e4a4} 
+Rigidbody2D {\bfseries Rigidbody2D}
+\item 
+\Hypertarget{class_bloon_script_a8ef5f4a8f4dc8a716035c74a7e911d1b}\label{class_bloon_script_a8ef5f4a8f4dc8a716035c74a7e911d1b} 
+uint {\bfseries speed}
+\begin{DoxyCompactList}\small\item\em Speed of the bloon. It will be consistent in X/Y direction and always greater than 0, which removes the need for a Vector2 type. \end{DoxyCompactList}\item 
+\Hypertarget{class_bloon_script_a2c69d1c318e949c987ce7ce6758dfbcc}\label{class_bloon_script_a2c69d1c318e949c987ce7ce6758dfbcc} 
+int {\bfseries health}
+\item 
+\Hypertarget{class_bloon_script_a6b083c7ac894c4fc0a80cea87fbc8d54}\label{class_bloon_script_a6b083c7ac894c4fc0a80cea87fbc8d54} 
+\mbox{\hyperlink{class_bloon_look_up_script}{Bloon\+Look\+Up\+Script}} {\bfseries bloon\+Look\+Up\+Script}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bloon_script_a8b2e85a9943d0c3eb2c8f5b3941ff0a1}\label{class_bloon_script_a8b2e85a9943d0c3eb2c8f5b3941ff0a1} 
+\index{BloonScript@{BloonScript}!ReceiveDamage@{ReceiveDamage}}
+\index{ReceiveDamage@{ReceiveDamage}!BloonScript@{BloonScript}}
+\doxysubsubsection{\texorpdfstring{ReceiveDamage()}{ReceiveDamage()}}
+{\footnotesize\ttfamily int Bloon\+Script.\+Receive\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates the bloons health based on damage param. Destroys itself if it loses all its health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & The amount\+To\+Spawn of damage the bloon should take\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The amount\+To\+Spawn of damage the bloon actually took, to be able to update pop counts
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Bloon\+Script.\+cs\end{DoxyCompactItemize}

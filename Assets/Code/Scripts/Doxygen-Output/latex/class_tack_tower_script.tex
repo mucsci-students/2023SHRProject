@@ -1,0 +1,110 @@
+\doxysection{Tack\+Tower\+Script Class Reference}
+\hypertarget{class_tack_tower_script}{}\label{class_tack_tower_script}\index{TackTowerScript@{TackTowerScript}}
+Inheritance diagram for Tack\+Tower\+Script\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_tack_tower_script}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_tack_tower_script_a4e3eb16298ba0a672f5b57fc68abca13}{Start}} ()
+\item 
+override void \mbox{\hyperlink{class_tack_tower_script_aa7ac39d1b9b01b27550f607cb108a7d4}{Fire}} (Game\+Object target)
+\begin{DoxyCompactList}\small\item\em Fires 8 projectiles in all directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly Vector3\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_tack_tower_script_a5d428fb84840ab5c3fa1f474b237c8fa}{directions}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_monkey_script}{Monkey\+Script}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Increment\+Layers\+Popped} (int layers\+Popped)
+\item 
+void {\bfseries Add\+Bloon\+To\+Range} (Game\+Object bloon)
+\item 
+void {\bfseries Remove\+Bloon\+From\+Range} (Game\+Object bloon)
+\item 
+void {\bfseries Toggle\+Is\+Showing\+Radius} ()
+\item 
+void {\bfseries Set\+Is\+Showing\+Radius} (bool state)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_monkey_script}{Monkey\+Script}}}
+\begin{DoxyCompactItemize}
+\item 
+Enums.\+Targeting\+Mode {\bfseries targeting\+Mode} = Enums.\+Targeting\+Mode.\+First
+\item 
+float {\bfseries projectile\+Speed} = 1f
+\item 
+float {\bfseries max\+Projectile\+Distance} = 10f
+\item 
+uint {\bfseries layers\+Popped\+Per\+Hit} = 1
+\item 
+uint {\bfseries pierce\+Amount} = 1
+\item 
+Game\+Object {\bfseries projectile\+Prefab}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tack_tower_script_aa7ac39d1b9b01b27550f607cb108a7d4}\label{class_tack_tower_script_aa7ac39d1b9b01b27550f607cb108a7d4} 
+\index{TackTowerScript@{TackTowerScript}!Fire@{Fire}}
+\index{Fire@{Fire}!TackTowerScript@{TackTowerScript}}
+\doxysubsubsection{\texorpdfstring{Fire()}{Fire()}}
+{\footnotesize\ttfamily override void Tack\+Tower\+Script.\+Fire (\begin{DoxyParamCaption}\item[{Game\+Object}]{target }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Fires 8 projectiles in all directions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Unused\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_monkey_script}{Monkey\+Script}}.
+
+\Hypertarget{class_tack_tower_script_a4e3eb16298ba0a672f5b57fc68abca13}\label{class_tack_tower_script_a4e3eb16298ba0a672f5b57fc68abca13} 
+\index{TackTowerScript@{TackTowerScript}!Start@{Start}}
+\index{Start@{Start}!TackTowerScript@{TackTowerScript}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily override void Tack\+Tower\+Script.\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_monkey_script}{Monkey\+Script}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_tack_tower_script_a5d428fb84840ab5c3fa1f474b237c8fa}\label{class_tack_tower_script_a5d428fb84840ab5c3fa1f474b237c8fa} 
+\index{TackTowerScript@{TackTowerScript}!directions@{directions}}
+\index{directions@{directions}!TackTowerScript@{TackTowerScript}}
+\doxysubsubsection{\texorpdfstring{directions}{directions}}
+{\footnotesize\ttfamily readonly Vector3 \mbox{[}$\,$\mbox{]} Tack\+Tower\+Script.\+directions\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ }
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(0f,\ 1f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(1f,\ 0f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(0f,\ -\/1f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(-\/1f,\ 0f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(1f,\ 1f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(1f,\ -\/1f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(-\/1f,\ -\/1f),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ Vector3(-\/1f,\ 1f),}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Tower\+Scripts/Tack\+Tower\+Script.\+cs\end{DoxyCompactItemize}

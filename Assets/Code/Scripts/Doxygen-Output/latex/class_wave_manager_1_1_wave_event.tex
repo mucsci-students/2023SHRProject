@@ -1,0 +1,65 @@
+\doxysection{Wave\+Manager.\+Wave\+Event Class Reference}
+\hypertarget{class_wave_manager_1_1_wave_event}{}\label{class_wave_manager_1_1_wave_event}\index{WaveManager.WaveEvent@{WaveManager.WaveEvent}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_wave_manager_1_1_wave_event_1_1_spawn_info}{Spawn\+Info}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_wave_manager_1_1_wave_event_a146c7894d20d904d21f05632904f5fa4}{Start\+Wave}} ()
+\begin{DoxyCompactList}\small\item\em Called once at the start of a wave to initialize spawning of bloons. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_wave_manager_1_1_wave_event_a9fff823766dee38659f943d479370713}{Run\+Current\+Wave}} (List$<$ Transform $>$ path, Transform spawn, Audio\+Source Death, \mbox{\hyperlink{class_bloon_look_up_script}{Bloon\+Look\+Up\+Script}} BLUS)
+\begin{DoxyCompactList}\small\item\em Called each frame while a wave is active to spawn bloons. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_wave_manager_1_1_wave_event_ac8bf3bf104e17675da6710c0208109a4}\label{class_wave_manager_1_1_wave_event_ac8bf3bf104e17675da6710c0208109a4} 
+List$<$ \mbox{\hyperlink{class_wave_manager_1_1_wave_event_1_1_spawn_info}{Spawn\+Info}} $>$ {\bfseries spawn\+Infos} = new()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_wave_manager_1_1_wave_event_a9fff823766dee38659f943d479370713}\label{class_wave_manager_1_1_wave_event_a9fff823766dee38659f943d479370713} 
+\index{WaveManager.WaveEvent@{WaveManager.WaveEvent}!RunCurrentWave@{RunCurrentWave}}
+\index{RunCurrentWave@{RunCurrentWave}!WaveManager.WaveEvent@{WaveManager.WaveEvent}}
+\doxysubsubsection{\texorpdfstring{RunCurrentWave()}{RunCurrentWave()}}
+{\footnotesize\ttfamily bool Wave\+Manager.\+Wave\+Event.\+Run\+Current\+Wave (\begin{DoxyParamCaption}\item[{List$<$ Transform $>$}]{path,  }\item[{Transform}]{spawn,  }\item[{Audio\+Source}]{Death,  }\item[{\mbox{\hyperlink{class_bloon_look_up_script}{Bloon\+Look\+Up\+Script}}}]{BLUS }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Called each frame while a wave is active to spawn bloons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path for the newly created bloons to follow\\
+\hline
+{\em spawn} & Where the bloons should spawn\\
+\hline
+{\em Death} & \\
+\hline
+{\em BLUS} & The bloon lookup script, so bloons can spawn new bloons when they take damage\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the wave is still running and false if the wave is over
+\end{DoxyReturn}
+\Hypertarget{class_wave_manager_1_1_wave_event_a146c7894d20d904d21f05632904f5fa4}\label{class_wave_manager_1_1_wave_event_a146c7894d20d904d21f05632904f5fa4} 
+\index{WaveManager.WaveEvent@{WaveManager.WaveEvent}!StartWave@{StartWave}}
+\index{StartWave@{StartWave}!WaveManager.WaveEvent@{WaveManager.WaveEvent}}
+\doxysubsubsection{\texorpdfstring{StartWave()}{StartWave()}}
+{\footnotesize\ttfamily int Wave\+Manager.\+Wave\+Event.\+Start\+Wave (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Called once at the start of a wave to initialize spawning of bloons. 
+
+\begin{DoxyReturn}{Returns}
+The total number of bloons in the wave
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Wave\+Manager.\+cs\end{DoxyCompactItemize}
