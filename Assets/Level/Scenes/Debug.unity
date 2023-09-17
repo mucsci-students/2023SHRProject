@@ -290,6 +290,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49b92d0e1c61f049ad44f7987886b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingRate: 1
+  targetingMode: 0
+  rotateSpeed: 270
+  projectileSpeed: 15
+  maxProjectileDistance: 10
+  layersPoppedPerHit: 1
+  pierceAmount: 1
+  projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
+  totalLayersPopped: 0
+  radiusSpriteRenderer: {fileID: 814401387}
 --- !u!1001 &293796042
 PrefabInstance:
   m_ObjectHideFlags: 0

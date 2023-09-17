@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    private float _speed = 1f;
+    public float _speed = 1f;
     private float _maxDistance = 10f;
     private uint _layersPerHit = 1;
     
@@ -15,7 +16,7 @@ public class ProjectileScript : MonoBehaviour
     private float _distanceTraveled;
     private Vector3 _lastTargetDirection = Vector3.zero;
 
-    private GameObject _target;
+    public GameObject _target;
     private MonkeyScript _parentMonkeyScript;
 
     // Update is called once per frame
@@ -113,6 +114,8 @@ public class ProjectileScript : MonoBehaviour
     /// <returns>The new position of this projectile</returns>
     private Vector3 GetNewPosition(Vector3 targetPosition, float speed)
     {
+        // Force projectile to move in 2D space
+        targetPosition.z = transform.position.z;
         return Vector3.MoveTowards(transform.position, targetPosition, speed);
     }
 }

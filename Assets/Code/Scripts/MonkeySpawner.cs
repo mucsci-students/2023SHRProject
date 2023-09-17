@@ -3,14 +3,8 @@ using UnityEngine.UI;
 
 public class MonkeySpawner : MonoBehaviour
 {
-    public GameObject monkeyPrefab;
+    private GameObject monkeyPrefab;
     private bool isPlacingMonkey = false;
-
-    private void Start()
-    {
-        Button button = GetComponent<Button>();
-        button.onClick.AddListener(StartPlacingMonkey);
-    }
 
     private void Update()
     {
@@ -19,14 +13,33 @@ public class MonkeySpawner : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mousePosition.z = 0f; //mouse down/click
-                Instantiate(monkeyPrefab, mousePosition, Quaternion.identity);
-                isPlacingMonkey = false; //no more monkey for you!
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+ 
+                if (hit.collider != null && hit.collider.gameObject.TryGetComponent<Tile>(out Tile tile))
+                {
+                    if (tile.ContainsTowers())
+                    {
+                        return;
+                    }
+                    
+                    Vector3 tilePosition = tile.transform.position;
+                    tilePosition.z = 0;
+                    
+                    Instantiate(monkeyPrefab, tilePosition, Quaternion.identity);
+                    isPlacingMonkey = false; //no more monkey for you!
+                    
+                    tile.SetContainsTower(true);
+                }
             }
         }
     }
     
-    private void StartPlacingMonkey() //you can start placin some monkey -- replace with money mechanic!!
+    public void SetMonkeyPrefab(GameObject newMonkeyPrefab)
+    {
+        monkeyPrefab = newMonkeyPrefab;
+    }
+    
+    public void StartPlacingMonkey() //you can start placin some monkey -- replace with money mechanic!!
     {
         isPlacingMonkey = true;
     }

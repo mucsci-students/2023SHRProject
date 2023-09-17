@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class WaveManager : MonoBehaviour
+public class NonRandomWaveManager : MonoBehaviour
 {
- 
+    //Not all waves are filled in: We need to get the rest of the bloons first to add more waves
+    /*
+     *
+     * 
+     * 
+     */
+    [SerializeField]
     [Tooltip("The spawn point for the bloons")]
-    public Transform spawn;
+    private Transform spawn;
 
     [SerializeField]
     [Tooltip("The time between waves in seconds")]
     private float timeBetweenWaves = 15f;
 
+    [SerializeField]
     [Tooltip("The path the bloons will follow. First point is the first point after spawn, last point is the end point.")]
-    public List<Transform> path = new();
+    private List<Transform> path;
 
     [SerializeField]
     private BloonLookUpScript BLUS;
@@ -26,7 +32,6 @@ public class WaveManager : MonoBehaviour
     public static int enemiesRemaining = 0;
     public float TimerRef;
 
-    
     // Private variables
 
     /// <summary>
@@ -42,6 +47,7 @@ public class WaveManager : MonoBehaviour
     private bool autoPlay = false;
 
     private float timer = 0f;
+
 
     private void StartWave()
     {
@@ -102,11 +108,7 @@ public class WaveManager : MonoBehaviour
     {
 
         public List<SpawnInfo> spawnInfos = new();
-        public GameObject RedBloonPrefab;
-        public GameObject BlueBloonPrefab;
-        public GameObject GreenBloonPrefab;
-        public GameObject YellowBloonPrefab;
-        public GameObject PinkBloonPrefab;
+
         /// <summary>
         /// Called once at the start of a wave to initialize spawning of bloons. 
         /// </summary>
@@ -116,34 +118,10 @@ public class WaveManager : MonoBehaviour
             int enemies = 0;
             foreach (var spawnInfo in spawnInfos)
             {
-                int randomAmountToSpawn = Random.Range(5, 10); // Example range: 5 to 10 bloons per SpawnInfo
-                spawnInfo.amountToSpawn = randomAmountToSpawn;
-
                 spawnInfo.Start();
-                enemies += spawnInfo.GetTotalBloonCount() * GetBloonRBE(spawnInfo.Bloon); // This was added to Calculate RBE for this spawnInfo;
+                enemies += spawnInfo.GetTotalBloonCount();
             }
             return enemies;
-        }
-
-        private int GetBloonRBE(GameObject bloon)
-        {
-            // Create a dictionary to map prefab references to RBE values
-            Dictionary<GameObject, int> bloonRBE = new Dictionary<GameObject, int>
-            {
-                { RedBloonPrefab, 1 },
-                { BlueBloonPrefab, 2 },
-                { GreenBloonPrefab, 3 },
-                { YellowBloonPrefab, 4 },
-                { PinkBloonPrefab, 5 },
-        // Add more bloon types and prefab references as needed
-                };
-
-            if (bloonRBE.ContainsKey(bloon))
-            {
-                return bloonRBE[bloon];
-            }
-
-            return 0; // Default RBE value if the bloon type is not found
         }
 
         /// <summary>
@@ -180,7 +158,7 @@ public class WaveManager : MonoBehaviour
 
             [SerializeField]
             [Tooltip("The number of bloons to spawn")]
-            public int amountToSpawn;
+            private int amountToSpawn;
 
             [SerializeField]
             [Tooltip("Number of seconds between bloon spawns")]
@@ -244,6 +222,4 @@ public class WaveManager : MonoBehaviour
         }
 
     }
-
 }
-
