@@ -46,4 +46,13 @@ public class GameManager : MonoBehaviour
         EnemiesRemaining = 0;
         LayersPopped = 0;
     }
+
+    /// <summary>
+    /// Decrements the users lives by the count param.
+    /// </summary>
+    /// <param name="count"> The amount of lives to subtract from the users lives </param>
+    public static void SubtractLives(int count)
+    {
+        Lives -= count;
+    }
 }
