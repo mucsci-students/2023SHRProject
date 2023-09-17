@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['pathfollowingscript_0',['PathFollowingScript',['../class_path_following_script.html',1,'']]],
-  ['projectilescript_1',['ProjectileScript',['../class_projectile_script.html',1,'']]]
+  ['monkeyrangescript_0',['MonkeyRangeScript',['../class_monkey_range_script.html',1,'']]],
+  ['monkeyscript_1',['MonkeyScript',['../class_monkey_script.html',1,'']]],
+  ['monkeyspawner_2',['MonkeySpawner',['../class_monkey_spawner.html',1,'']]]
 ];
