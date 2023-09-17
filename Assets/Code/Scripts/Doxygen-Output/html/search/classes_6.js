@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['monkeyrangescript_0',['MonkeyRangeScript',['../class_monkey_range_script.html',1,'']]],
-  ['monkeyscript_1',['MonkeyScript',['../class_monkey_script.html',1,'']]],
-  ['monkeyspawner_2',['MonkeySpawner',['../class_monkey_spawner.html',1,'']]]
+  ['livesuimanager_0',['LivesUIManager',['../class_lives_u_i_manager.html',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['pathfollowingscript_0',['PathFollowingScript',['../class_path_following_script.html',1,'']]],
-  ['projectilescript_1',['ProjectileScript',['../class_projectile_script.html',1,'']]]
+  ['nonrandomwavemanager_0',['NonRandomWaveManager',['../class_non_random_wave_manager.html',1,'']]]
 ];
