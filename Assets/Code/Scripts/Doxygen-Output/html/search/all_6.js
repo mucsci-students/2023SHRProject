@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['monkeyrangescript_0',['MonkeyRangeScript',['../class_monkey_range_script.html',1,'']]],
-  ['monkeyscript_1',['MonkeyScript',['../class_monkey_script.html',1,'']]],
-  ['monkeyspawner_2',['MonkeySpawner',['../class_monkey_spawner.html',1,'']]],
-  ['movetocurrenttarget_3',['MoveToCurrentTarget',['../class_path_following_script.html#a33481ba1b927beb79ec5564706092ba3',1,'PathFollowingScript']]],
-  ['movetowardstarget_4',['MoveTowardsTarget',['../class_projectile_script.html#aba5454947e8070dce24f5ca9e2d42dec',1,'ProjectileScript']]]
+  ['layerspopped_0',['LayersPopped',['../class_game_manager.html#ad46f8a2c1b9702b07a55e6ffd1952308',1,'GameManager']]],
+  ['lives_1',['Lives',['../class_game_manager.html#adb122f3ad835e7e9d0d48ef0420635f5',1,'GameManager']]],
+  ['livestext_2',['livesText',['../class_lives_u_i_manager.html#a9936e7726efb1b3716939ad02ebe6d1f',1,'LivesUIManager']]],
+  ['livesuimanager_3',['LivesUIManager',['../class_lives_u_i_manager.html',1,'']]]
 ];

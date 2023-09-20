@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['pathfollowingscript_0',['PathFollowingScript',['../class_path_following_script.html',1,'']]],
-  ['projectilescript_1',['ProjectileScript',['../class_projectile_script.html',1,'']]]
+  ['livesuimanager_0',['LivesUIManager',['../class_lives_u_i_manager.html',1,'']]]
 ];

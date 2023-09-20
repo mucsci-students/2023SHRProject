@@ -18,6 +18,8 @@ public class PathFollowingScript : MonoBehaviour
     private uint _currentTargetIndex = 0;
     private uint _speed;
     private float _distanceTraveled = 0;
+    
+    private BloonScript _bloonScript;
 
     // Start is called before the first frame update
     private void Start()
@@ -28,7 +30,8 @@ public class PathFollowingScript : MonoBehaviour
             Debug.LogWarning("Bloon is missing BloonScript on " + gameObject.name);
         }
 
-        _speed = bloonScript.GetSpeed();
+        _bloonScript = bloonScript;
+        _speed = _bloonScript.GetSpeed();
     }
 
     // Update is called once per frame
@@ -71,7 +74,7 @@ public class PathFollowingScript : MonoBehaviour
 
     private void SubtractLives()
     {
-        //throw new NotImplementedException();
+        GameManager.SubtractLives(_bloonScript.GetHealth());
     }
 
     /// <summary>

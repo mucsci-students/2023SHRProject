@@ -9,6 +9,7 @@ public class InputManagerScript : MonoBehaviour
 
     [SerializeField] private bool isSpedUp = false;
     [SerializeField] private float speedUpFactor = 2.0f;
+    private float previousSpeedUpFactor;
     
     // Update is called once per frame
     private void Update()
@@ -25,10 +26,25 @@ public class InputManagerScript : MonoBehaviour
         }
     }
 
-    private void ToggleSpeedUp()
+    public void ToggleSpeedUp()
     {
         Time.timeScale = isSpedUp ? 1.0f : speedUpFactor;
 
         isSpedUp = !isSpedUp;
     }
+
+    public void TogglePause()
+    {
+        if (Time.timeScale == 0f)
+        {
+            Time.timeScale = previousSpeedUpFactor;
+        }
+        else
+        {
+            previousSpeedUpFactor = Time.timeScale;
+            Time.timeScale = 0f;
+        }
+    }
+    
+    
 }
