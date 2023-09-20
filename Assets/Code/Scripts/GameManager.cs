@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// Stores and initializes widely used variables. Resets static variables on game start or restart.
@@ -33,6 +34,35 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ResetValues();
+    }
+
+    /// <summary>
+    /// Unity method called once per frame.
+    /// </summary>
+    private void Update()
+    {
+        ExitGameOnZeroLives();
+    }
+
+    /// <summary>
+    /// Checks if the users lives are 0 or less and exits the game if they are.
+    /// Works in the unity editor and in the built game.
+    /// </summary>
+    private void ExitGameOnZeroLives()
+    {
+        if (Lives <= 0)
+        {
+            Debug.Log("Game Over");
+            
+            // TODO: Add game over screen
+            
+            //Exit unity editor
+            #if UNITY_EDITOR
+                EditorApplication.isPlaying = false;
+            #endif
+            //Exit game
+            Application.Quit();
+        }
     }
 
     /// <summary>
