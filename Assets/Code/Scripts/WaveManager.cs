@@ -27,6 +27,8 @@ public class WaveManager : MonoBehaviour
     public float TimerRef;
 
     
+    
+
     // Private variables
 
     /// <summary>
@@ -107,21 +109,28 @@ public class WaveManager : MonoBehaviour
         public GameObject GreenBloonPrefab;
         public GameObject YellowBloonPrefab;
         public GameObject PinkBloonPrefab;
+        public int WaveRBE;
         /// <summary>
         /// Called once at the start of a wave to initialize spawning of bloons. 
         /// </summary>
         /// <returns>The total number of bloons in the wave</returns>
         public int StartWave()
         {
+ 
+
+
             int enemies = 0;
             foreach (var spawnInfo in spawnInfos)
             {
                 int randomAmountToSpawn = Random.Range(5, 10); // Example range: 5 to 10 bloons per SpawnInfo
                 spawnInfo.amountToSpawn = randomAmountToSpawn;
 
+                spawnInfo.Initialize(this); // Pass the reference to the parent WaveEvent
+
                 spawnInfo.Start();
                 enemies += spawnInfo.GetTotalBloonCount() * GetBloonRBE(spawnInfo.Bloon); // This was added to Calculate RBE for this spawnInfo;
             }
+
             return enemies;
         }
 
@@ -195,6 +204,13 @@ public class WaveManager : MonoBehaviour
             private float startTime;
             private bool spawnInstant = true;
 
+            private WaveEvent waveEvent; // Add this field
+
+            public void Initialize(WaveEvent waveEvent)
+            {
+                this.waveEvent = waveEvent;
+            }
+
             public void Start()
             {
                 lastTime = Time.time;
@@ -213,6 +229,13 @@ public class WaveManager : MonoBehaviour
                     GameObject bloon = Instantiate(Bloon);
                     bloon.transform.position = spawn.position;
                     bloon.transform.rotation = spawn.rotation;
+
+                    // Calculate the RBE value of the spawned bloon and subtract it from the wave's RBE
+                    
+                 
+                    waveEvent.WaveRBE -= bloon.GetComponent<BloonScript>().GetHealth();
+                    Debug.Log(waveEvent.WaveRBE);
+
 
 
                     bloon.GetComponent<BloonScript>().SetBloonLookUpScript(BLUS);
