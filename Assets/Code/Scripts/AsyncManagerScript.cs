@@ -36,4 +36,9 @@ public class AsyncManagerScript : MonoBehaviour
             yield return null;
         }
     }
+
+    public void quitGame()
+    {
+        Application.Quit();
+    }
 }
