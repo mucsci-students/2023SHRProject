@@ -63,6 +63,9 @@ sysinfo.txt
 *.unitypackage
 *.app
 
+# Python
+/venv/*
+
 # Crashlytics generated file
 crashlytics-build.properties
 
