@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     [Tooltip("Stores the starting lives for the game")]
     private int StartingLives = 200;
 
+    [SerializeField] private GameObject AI;
+
+    [SerializeField] private GenerateMapScript generateMapScript;
+
     /// <summary>
     /// Unity method called on object creation.
     /// Sets the initial values for the class variables.
@@ -84,5 +88,11 @@ public class GameManager : MonoBehaviour
     public static void SubtractLives(int count)
     {
         Lives -= count;
+    }
+    
+    public void EnableAI()
+    {
+        //AI.SetActive(true);
+        //AI.GetComponent<AgentScript>().SetMap(generateMapScript.GetMap());
     }
 }

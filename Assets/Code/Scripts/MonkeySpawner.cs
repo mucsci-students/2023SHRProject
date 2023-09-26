@@ -17,18 +17,7 @@ public class MonkeySpawner : MonoBehaviour
  
                 if (hit.collider != null && hit.collider.gameObject.TryGetComponent<Tile>(out Tile tile))
                 {
-                    if (tile.ContainsTowers())
-                    {
-                        return;
-                    }
-                    
-                    Vector3 tilePosition = tile.transform.position;
-                    tilePosition.z = 0;
-                    
-                    Instantiate(monkeyPrefab, tilePosition, Quaternion.identity);
-                    isPlacingMonkey = false; //no more monkey for you!
-                    
-                    tile.SetContainsTower(true);
+                    PlaceMonkeyOnTile(tile);
                 }
             }
         }
@@ -42,6 +31,22 @@ public class MonkeySpawner : MonoBehaviour
     public void StartPlacingMonkey() //you can start placin some monkey -- replace with money mechanic!!
     {
         isPlacingMonkey = true;
+    }
+
+    public bool PlaceMonkeyOnTile(Tile tile)
+    {
+        if (tile.ContainsTowers())
+            return false;
+        
+        Vector3 tilePosition = tile.transform.position;
+        tilePosition.z = 0;
+                    
+        Instantiate(monkeyPrefab, tilePosition, Quaternion.identity);
+        isPlacingMonkey = false; //no more monkey for you!
+                    
+        tile.SetContainsTower(true);
+
+        return true;
     }
 }
 

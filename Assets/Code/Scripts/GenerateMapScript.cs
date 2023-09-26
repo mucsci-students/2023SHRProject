@@ -11,6 +11,7 @@ public class GenerateMapScript : MonoBehaviour
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private GameObject roadPrefab;
     [SerializeField] private WaveManager waveManager;
+    [SerializeField] private GameManager gameManager;
     
     [Header("Map Settings")]
     
@@ -27,9 +28,7 @@ public class GenerateMapScript : MonoBehaviour
     private int[,] _map;
     private bool[,] _visited;
     private int cornerCount = 0;  // Add this line at the top of your class with other member variables
-
-
-
+    
     private readonly Random _randomNumberGenerator = new Random();
     
     private enum MoveDirection
@@ -54,6 +53,8 @@ public class GenerateMapScript : MonoBehaviour
         GenerateRandomMap();
         DisplayMap(_map);
         DetectCorners();
+        Debug.Log(_map.GetLength(0) * _map.GetLength(1));
+        gameManager.EnableAI();
     }
     
     private void CalculateMapSize()
@@ -295,6 +296,11 @@ public class GenerateMapScript : MonoBehaviour
         }
         
         cornerCount++;
+    }
+
+    public int[,] GetMap()
+    {
+        return _map;
     }
     
 
