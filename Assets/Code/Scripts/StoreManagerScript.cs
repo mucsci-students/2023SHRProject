@@ -17,6 +17,13 @@ public class MonkeySpawner : MonoBehaviour
  
                 if (hit.collider != null && hit.collider.gameObject.TryGetComponent<Tile>(out Tile tile))
                 {
+                    if (!CanBuyTower())
+                    {
+                        Debug.Log("no monkey for you");
+                        isPlacingMonkey = false;
+                        return;
+                    }
+                        
                     PlaceMonkeyOnTile(tile);
                 }
             }
@@ -33,6 +40,11 @@ public class MonkeySpawner : MonoBehaviour
         isPlacingMonkey = true;
     }
 
+    public bool CanBuyTower()
+    {
+        return GameManager.Money >= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
+    }
+    
     public bool PlaceMonkeyOnTile(Tile tile)
     {
         if (tile.ContainsTowers())
@@ -46,19 +58,8 @@ public class MonkeySpawner : MonoBehaviour
                     
         tile.SetContainsTower(true);
 
+        GameManager.Money -= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
+
         return true;
     }
 }
-
-
-
-//grid - [10]
-//monkey - [0]
-//monkey radius - [1]
-//monkey projectiles/objects?
-//bloons [2 - 3]
-    //blue bloon - [2.85]
-    //red bloon - [2.9]
-//road & path - [3]
-
-//UI - drawn over

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MonkeyScript : MonoBehaviour
 {
-
+    
     private readonly List<GameObject> _enemiesInRange = new();
 
     [Header("Tower Settings")]
+    
+    [SerializeField] private int monkeyCost;
     
     [SerializeField] 
     [Tooltip("Measured as seconds between firing.")]
@@ -230,5 +232,10 @@ public class MonkeyScript : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         _enemiesInRange.Remove(other.gameObject);
+    }
+    
+    public int GetMonkeyCost()
+    {
+        return monkeyCost;
     }
 }
