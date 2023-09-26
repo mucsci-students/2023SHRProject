@@ -24,7 +24,7 @@
 2022.3.10f1
 
 ## Authors
-- [Justin Stevens]()
+- [Justin Stevens](https://github.com/JSteve0)
 - [Mitchell Harris0n]()
 - [Jonathan Riverra]()
 
@@ -37,7 +37,7 @@
 
 ### Install Python 3.8.8
 1. [Download](https://www.python.org/downloads/release/python-388/) and install Python 3.8.8. 
-2. Add python to your path to for ease of use. Follow this [guide](https://realpython.com/add-python-to-path/) for more information.
+2. Add python to your path for ease of use. Follow this [guide](https://realpython.com/add-python-to-path/) for more information.
 
 > Note: Other version of Python 3.8 may work. However, it has been tested and confirmed to work on 3.8.8. 
 > Do not use version 3.9 and above as that is know not to work with the correct version of PyTorch.
