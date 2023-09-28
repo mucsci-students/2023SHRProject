@@ -65,7 +65,8 @@ public class BloonScript : MonoBehaviour
             
             Destroy(gameObject);
         }
-        
+
+        GameManager.Money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
     }
 
