@@ -123,11 +123,14 @@ public class MonkeyScript : MonoBehaviour
         GameObject target = null;
         var maxDistanceTravelled = Mathf.NegativeInfinity;
 
-        foreach (var enemy in _enemiesInRange)
+        for (int i = 0; i < _enemiesInRange.Count; ++i)
         {
+            GameObject enemy = _enemiesInRange[i];            
+            
             if (enemy == null)
             {
                 _enemiesInRange.Remove(enemy);
+                --i;
                 continue;
             }
             
@@ -147,11 +150,14 @@ public class MonkeyScript : MonoBehaviour
         GameObject target = null;
         var leastDistanceTravelled = Mathf.Infinity;
 
-        foreach (var enemy in _enemiesInRange)
+        for (int i = 0; i < _enemiesInRange.Count; ++i)
         {
+            GameObject enemy = _enemiesInRange[i];
+            
             if (enemy == null)
             {
                 _enemiesInRange.Remove(enemy);
+                --i;
                 continue;
             }
             
@@ -173,11 +179,14 @@ public class MonkeyScript : MonoBehaviour
         var maxDistanceTravelled = Mathf.NegativeInfinity;
         const float tolerance = 0.1f;
 
-        foreach (var enemy in _enemiesInRange)
+        for (int i = 0; i < _enemiesInRange.Count; ++i)
         {
+            GameObject enemy = _enemiesInRange[i];
+            
             if (enemy == null)
             {
                 _enemiesInRange.Remove(enemy);
+                --i;
                 continue;
             }
             
