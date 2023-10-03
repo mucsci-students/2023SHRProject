@@ -95,4 +95,15 @@ public class GameManager : MonoBehaviour
         //AI.SetActive(true);
         //AI.GetComponent<AgentScript>().SetMap(generateMapScript.GetMap());
     }
+    
+    // Cheats
+    public void AddMoney(int amount)
+    {
+        Money += amount;
+    }
+    
+    public void AddLives(int amount)
+    {
+        Lives += amount;
+    }
 }

@@ -29,7 +29,7 @@ public class GenerateMapScript : MonoBehaviour
     private bool[,] _visited;
     private int cornerCount = 0;  // Add this line at the top of your class with other member variables
     
-    private readonly Random _randomNumberGenerator = new Random();
+    private readonly Random _randomNumberGenerator = new();
     
     private enum MoveDirection
     {
@@ -47,16 +47,11 @@ public class GenerateMapScript : MonoBehaviour
             Destroy(gameObject);
         }
         
-        CalculateMapSize();
-        _visited = new bool[(int)Math.Ceiling(yBlocks), (int)Math.Ceiling(xBlocks)];
-        _map = new int[(int)Math.Ceiling(yBlocks), (int)Math.Ceiling(xBlocks)];
-        GenerateRandomMap();
-        DisplayMap(_map);
-        DetectCorners();
+        GenerateMap();
         Debug.Log(_map.GetLength(0) * _map.GetLength(1));
         gameManager.EnableAI();
     }
-    
+
     private void CalculateMapSize()
     {
         Vector3 bottomLeftCameraPosition = currentSceneCamera.ViewportToWorldPoint(new Vector3(0f, 0f));
@@ -70,24 +65,23 @@ public class GenerateMapScript : MonoBehaviour
         yBlocks = Math.Abs(topCameraPosition - bottomCameraPosition) / blockSize;
         xBlocks = Math.Abs(leftCameraPosition - rightCameraPosition) / blockSize - 2;
     }
-
-    [ContextMenu("Regenerate Map")]
-    private void RegenerateMap()
+    
+    public void GenerateMap()
     {
+        CalculateMapSize();
         _visited = new bool[(int)Math.Ceiling(yBlocks), (int)Math.Ceiling(xBlocks)];
         _map = new int[(int)Math.Ceiling(yBlocks), (int)Math.Ceiling(xBlocks)];
-        DeleteMap();
         GenerateRandomMap();
         DisplayMap(_map);
         DetectCorners();
     }
-
-    [ContextMenu("Delete Map")]
-    private void DeleteMap()
+    
+    public void DeleteMap()
     {
-        foreach (Transform child in transform)
+        // Loop through child transforms without using foreach to avoid errors when deleting children
+        while (transform.childCount > 0)
         {
-            Destroy(child.gameObject);
+            DestroyImmediate(transform.GetChild(0).gameObject);
         }
     }
 
@@ -302,6 +296,5 @@ public class GenerateMapScript : MonoBehaviour
     {
         return _map;
     }
-    
-
 }
+
