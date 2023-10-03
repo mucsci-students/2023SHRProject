@@ -96,12 +96,17 @@ public class WaveManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // Do not run if the number of waves exceeds the number of RBEs
+        if (CurrentWaveNumber == RBES.Count + 1 && enemiesRemaining <= 0)
+            return;
+        
         // Update debugging variables
         #if UNITY_EDITOR
         EnemiesRemaining = enemiesRemaining;
         #endif
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isPlaying)
+        // Start the wave manager if the user presses space and the game is not already playing
+        if (Input.GetKeyDown(KeyCode.Space) && !isPlaying && CurrentWaveNumber == 0)
             StartWave();
 
         if (!isPlaying)
