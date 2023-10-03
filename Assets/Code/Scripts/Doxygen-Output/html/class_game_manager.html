@@ -71,6 +71,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
@@ -89,6 +90,18 @@ Inheritance diagram for GameManager:</div>
   <img src="class_game_manager.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad15e804063dfdbfa7853bb10bf97490c" id="r_ad15e804063dfdbfa7853bb10bf97490c"><td class="memItemLeft" align="right" valign="top"><a id="ad15e804063dfdbfa7853bb10bf97490c" name="ad15e804063dfdbfa7853bb10bf97490c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>EnableAI</b> ()</td></tr>
+<tr class="separator:ad15e804063dfdbfa7853bb10bf97490c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43fe7e365be55b4f6e9301009ad260bf" id="r_a43fe7e365be55b4f6e9301009ad260bf"><td class="memItemLeft" align="right" valign="top"><a id="a43fe7e365be55b4f6e9301009ad260bf" name="a43fe7e365be55b4f6e9301009ad260bf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>AddMoney</b> (int amount)</td></tr>
+<tr class="separator:a43fe7e365be55b4f6e9301009ad260bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa57c8fd26a3905abdb3e8fbf3d244444" id="r_aa57c8fd26a3905abdb3e8fbf3d244444"><td class="memItemLeft" align="right" valign="top"><a id="aa57c8fd26a3905abdb3e8fbf3d244444" name="aa57c8fd26a3905abdb3e8fbf3d244444"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>AddLives</b> (int amount)</td></tr>
+<tr class="separator:aa57c8fd26a3905abdb3e8fbf3d244444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a468b878d0a41b5020877df03706b9847" id="r_a468b878d0a41b5020877df03706b9847"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a468b878d0a41b5020877df03706b9847">SubtractLives</a> (int count)</td></tr>
@@ -124,6 +137,14 @@ Private Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Start</b> ()</td></tr>
 <tr class="memdesc:a5ccfacd027ad08eeb4ff1f25a7f59c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unity method called on object creation. Sets the initial values for the class variables. <br /></td></tr>
 <tr class="separator:a5ccfacd027ad08eeb4ff1f25a7f59c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44c79b205dec16bfe650e21259860c5b" id="r_a44c79b205dec16bfe650e21259860c5b"><td class="memItemLeft" align="right" valign="top"><a id="a44c79b205dec16bfe650e21259860c5b" name="a44c79b205dec16bfe650e21259860c5b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></tr>
+<tr class="memdesc:a44c79b205dec16bfe650e21259860c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unity method called once per frame. <br /></td></tr>
+<tr class="separator:a44c79b205dec16bfe650e21259860c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a7b6c0256ea7294b965c2119f6671fd" id="r_a3a7b6c0256ea7294b965c2119f6671fd"><td class="memItemLeft" align="right" valign="top"><a id="a3a7b6c0256ea7294b965c2119f6671fd" name="a3a7b6c0256ea7294b965c2119f6671fd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ExitGameOnZeroLives</b> ()</td></tr>
+<tr class="memdesc:a3a7b6c0256ea7294b965c2119f6671fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the users lives are 0 or less and exits the game if they are. Works in the unity editor and in the built game. <br /></td></tr>
+<tr class="separator:a3a7b6c0256ea7294b965c2119f6671fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f6f5b7ec01a15d7c31c5642f123812f" id="r_a9f6f5b7ec01a15d7c31c5642f123812f"><td class="memItemLeft" align="right" valign="top"><a id="a9f6f5b7ec01a15d7c31c5642f123812f" name="a9f6f5b7ec01a15d7c31c5642f123812f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetValues</b> ()</td></tr>
 <tr class="memdesc:a9f6f5b7ec01a15d7c31c5642f123812f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the values of the class variables to their initial values. <br /></td></tr>
@@ -139,6 +160,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>StartingMoney</b> = 20
 int&#160;</td><td class="memItemRight" valign="bottom"><b>StartingLives</b> = 200</td></tr>
 <tr class="memdesc:acc5129bb0fb819b40ef974aa47f8acd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the starting lives for the game. <br /></td></tr>
 <tr class="separator:acc5129bb0fb819b40ef974aa47f8acd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c413a9f3eb2a15be5d452afca386b1e" id="r_a5c413a9f3eb2a15be5d452afca386b1e"><td class="memItemLeft" align="right" valign="top"><a id="a5c413a9f3eb2a15be5d452afca386b1e" name="a5c413a9f3eb2a15be5d452afca386b1e"></a>
+GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>AI</b></td></tr>
+<tr class="separator:a5c413a9f3eb2a15be5d452afca386b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa82da778acc76f8411b86deead79cda8" id="r_aa82da778acc76f8411b86deead79cda8"><td class="memItemLeft" align="right" valign="top"><a id="aa82da778acc76f8411b86deead79cda8" name="aa82da778acc76f8411b86deead79cda8"></a>
+<a class="el" href="class_generate_map_script.html">GenerateMapScript</a>&#160;</td><td class="memItemRight" valign="bottom"><b>generateMapScript</b></td></tr>
+<tr class="separator:aa82da778acc76f8411b86deead79cda8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores and initializes widely used variables. Resets static variables on game start or restart. </p>
