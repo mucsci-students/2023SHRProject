@@ -5,6 +5,9 @@ using Random = System.Random;
 
 public class GenerateMapScript : MonoBehaviour
 {
+
+    #region Variables
+
     [Header("Object Links")]
     
     [SerializeField] private Camera currentSceneCamera;
@@ -30,6 +33,8 @@ public class GenerateMapScript : MonoBehaviour
     private int cornerCount = 0;  // Add this line at the top of your class with other member variables
     
     private readonly Random _randomNumberGenerator = new();
+    
+    #endregion
     
     private enum MoveDirection
     {

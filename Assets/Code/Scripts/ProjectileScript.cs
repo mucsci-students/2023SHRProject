@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Handles the movement and collision of projectiles.
+/// </summary>
 public class ProjectileScript : MonoBehaviour
 {
     public float _speed = 1f;

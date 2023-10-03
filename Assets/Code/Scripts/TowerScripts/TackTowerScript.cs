@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles all logic for the tack tower.
+/// </summary>
 public class TackTowerScript : MonkeyScript
 {
     

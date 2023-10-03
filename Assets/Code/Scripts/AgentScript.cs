@@ -6,6 +6,9 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 
+/// <summary>
+/// Used to control and communicate with the agent.
+/// </summary>
 public class AgentScript : Agent
 {
     private int[,] _map;

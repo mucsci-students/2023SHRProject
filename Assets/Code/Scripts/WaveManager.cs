@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the spawning of bloons and waves.
+/// Semi-randomly generates waves based on a list of RBEs.
+/// </summary>
 public class WaveManager : MonoBehaviour
 {
 

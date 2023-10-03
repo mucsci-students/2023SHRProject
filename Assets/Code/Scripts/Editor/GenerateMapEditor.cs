@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Adds a custom inspector to the GenerateMapScript class.
+/// </summary>
 [CustomEditor(typeof(GenerateMapScript))]
 public class GenerateMapEditor : Editor
 {

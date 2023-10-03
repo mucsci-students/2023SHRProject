@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Adds a custom inspector to the GameManager class.
+/// </summary>
 [CustomEditor(typeof(GameManager))]
 public class GameManagerEditor : Editor
 {
