@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class MonkeyScript : MonoBehaviour
+public abstract class MonkeyScript : MonoBehaviour
 {
     
     private readonly List<GameObject> _enemiesInRange = new();
@@ -14,7 +15,7 @@ public class MonkeyScript : MonoBehaviour
     [SerializeField] 
     [Tooltip("Measured as seconds between firing.")]
     [Min(0.01f)]
-    private float firingRate = 1f;
+    protected float firingRate = 1f;
 
     [SerializeField] 
     protected Enums.TargetingMode targetingMode = Enums.TargetingMode.First; 
@@ -23,7 +24,13 @@ public class MonkeyScript : MonoBehaviour
     [Range(0, 720)]
     [Tooltip("Rotation speed in angular degrees per second")]
     private float rotateSpeed = 270f;
+
+    [SerializeField]
+    protected List<Upgrade> upgradePath1 = new(2);
     
+    [SerializeField]
+    protected List<Upgrade> upgradePath2 = new(2);
+
     [Header("Projectile Settings")]
     
     [SerializeField]
@@ -49,13 +56,17 @@ public class MonkeyScript : MonoBehaviour
     [Header("Object Links")] 
     
     [SerializeField]
-    private SpriteRenderer radiusSpriteRenderer;
+    protected SpriteRenderer radiusSpriteRenderer;
+
+    [SerializeField]
+    protected CircleCollider2D radiusCollider;
 
     private float _timer = 0f;
 
     protected virtual void Start()
     {
         SetIsShowingRadius(false);
+        PopulateUpgrades();
     }
 
     // Update is called once per frame
@@ -77,6 +88,14 @@ public class MonkeyScript : MonoBehaviour
                 _timer = 0;
             }
         }
+    }
+
+    private void PopulateUpgrades()
+    {
+        upgradePath1[0].SetUpgrade(Upgrade1_1);
+        upgradePath1[1].SetUpgrade(Upgrade1_2);
+        upgradePath2[0].SetUpgrade(Upgrade2_1);
+        upgradePath2[1].SetUpgrade(Upgrade2_2);
     }
 
     public void IncrementLayersPopped(int layersPopped)
@@ -246,5 +265,39 @@ public class MonkeyScript : MonoBehaviour
     public int GetMonkeyCost()
     {
         return monkeyCost;
+    }
+
+    protected abstract void Upgrade1_1();
+
+    protected abstract void Upgrade1_2();
+
+    protected abstract void Upgrade2_1();
+
+    protected abstract void Upgrade2_2();
+    
+    // Testing
+    
+    [ContextMenu("Upgrade 1-1")]
+    public void Upgrade1_1Test()
+    {
+        upgradePath1[0].UpgradeTower();
+    }
+    
+    [ContextMenu("Upgrade 1-2")]
+    public void Upgrade1_2Test()
+    {
+        upgradePath1[1].UpgradeTower();
+    }
+    
+    [ContextMenu("Upgrade 2-1")]
+    public void Upgrade2_1Test()
+    {
+        upgradePath2[0].UpgradeTower();
+    }
+    
+    [ContextMenu("Upgrade 2-2")]
+    public void Upgrade2_2Test()
+    {
+        upgradePath2[1].UpgradeTower();
     }
 }

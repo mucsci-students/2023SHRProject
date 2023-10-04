@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913aadab9e6296a409a350a13f449208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentMonkeyScript: {fileID: 6425238001161290763}
+  parentMonkeyScript: {fileID: 0}
 --- !u!1 &6425238001161290767
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 6425238001161290764}
   - component: {fileID: 6425238001161290765}
   - component: {fileID: 6425238001161290762}
-  - component: {fileID: 6425238001161290763}
+  - component: {fileID: 8332110718181161042}
   m_Layer: 0
   m_Name: Monkey
   m_TagString: Untagged
@@ -266,7 +266,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.38, y: 0.38}
   m_EdgeRadius: 0
---- !u!114 &6425238001161290763
+--- !u!114 &8332110718181161042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,13 +275,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 6425238001161290767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e49b92d0e1c61f049ad44f7987886b9a, type: 3}
+  m_Script: {fileID: 11500000, guid: ab3ec5cbbbd54554ab2b8648c356ab97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monkeyCost: 200
   firingRate: 1
   targetingMode: 0
   rotateSpeed: 270
+  upgradePath1:
+  - cost: 0
+    tier: 1
+    description: 
+    sprite: {fileID: -964804493, guid: d79839b7155533240a3968074ca52c55, type: 3}
+  - cost: 0
+    tier: 2
+    description: 
+    sprite: {fileID: 1642377537, guid: d79839b7155533240a3968074ca52c55, type: 3}
+  upgradePath2:
+  - cost: 0
+    tier: 1
+    description: 
+    sprite: {fileID: -1838434661, guid: d79839b7155533240a3968074ca52c55, type: 3}
+  - cost: 0
+    tier: 2
+    description: 
+    sprite: {fileID: -1624935315, guid: d79839b7155533240a3968074ca52c55, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
@@ -289,3 +307,4 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 6425238000497879260}
+  radiusCollider: {fileID: 6425238000497879258}

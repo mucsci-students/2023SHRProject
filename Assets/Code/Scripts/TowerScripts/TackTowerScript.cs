@@ -24,7 +24,7 @@ public class TackTowerScript : MonkeyScript
         base.Start();
         targetingMode = Enums.TargetingMode.None;
     }
-    
+
     /// <summary>
     /// Fires 8 projectiles in all directions
     /// </summary>
@@ -37,6 +37,26 @@ public class TackTowerScript : MonkeyScript
             var projectileScript = projectile.GetComponent<ProjectileScript>();
             projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, direction, this);
         }
+    }
+
+    protected override void Upgrade1_1()
+    {
+        
+    }
+    
+    protected override void Upgrade1_2()
+    {
+        
+    }
+    
+    protected override void Upgrade2_1()
+    {
+        
+    }
+    
+    protected override void Upgrade2_2()
+    {
+        
     }
     
 }
