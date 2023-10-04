@@ -5,28 +5,31 @@ using UnityEngine;
 public class DartMonkeyScript : MonkeyScript
 {
     protected override void Upgrade1_1()
-    {
-        firingRate /= 2;
+    {   
+        //Long Range Darts
+        radiusSpriteRenderer.transform.localScale *= 1.1f;
         GetComponent<SpriteRenderer>().sprite = upgradePath1[0].GetSprite();
     }
-
+    
     protected override void Upgrade1_2()
     {
-        firingRate /= 2;
+        //Enhanced Eyesight
+        radiusSpriteRenderer.transform.localScale *= 1.11f;
+        //TODO: ADD CAMO
         GetComponent<SpriteRenderer>().sprite = upgradePath1[1].GetSprite();
     }
     
     protected override void Upgrade2_1()
     {
-        radiusSpriteRenderer.transform.localScale *= 1.5f;
-        
+        //Sharp Shots
+        layersPoppedPerHit = 2;
         GetComponent<SpriteRenderer>().sprite = upgradePath2[0].GetSprite();
     }
 
     protected override void Upgrade2_2()
     {
-        radiusSpriteRenderer.transform.localScale *= 1.5f;
-        
+        //Razor Sharp Shots
+        layersPoppedPerHit = 4;
         GetComponent<SpriteRenderer>().sprite = upgradePath2[1].GetSprite();
     }
 }

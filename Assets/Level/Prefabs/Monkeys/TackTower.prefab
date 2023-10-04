@@ -282,6 +282,24 @@ MonoBehaviour:
   firingRate: 1.5
   targetingMode: 3
   rotateSpeed: 0
+  upgradePath1:
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
+  upgradePath2:
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
   projectileSpeed: 5
   maxProjectileDistance: 1
   layersPoppedPerHit: 1
@@ -289,3 +307,4 @@ MonoBehaviour:
   projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 7230272996242019207}
+  radiusCollider: {fileID: 0}

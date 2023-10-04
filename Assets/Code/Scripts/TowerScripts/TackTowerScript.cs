@@ -41,21 +41,31 @@ public class TackTowerScript : MonkeyScript
 
     protected override void Upgrade1_1()
     {
-        
+        //Faster Shooting 
+        firingRate = 1.25f;
+        GetComponent<SpriteRenderer>().sprite = upgradePath1[0].GetSprite();
     }
     
     protected override void Upgrade1_2()
     {
-        
+        //Even Faster Shooting
+        firingRate = 1f;
+        GetComponent<SpriteRenderer>().sprite = upgradePath1[1].GetSprite();
     }
     
     protected override void Upgrade2_1()
     {
+        //Extra Range Tacks
+        radiusSpriteRenderer.transform.localScale *= 1.1f;
+        GetComponent<SpriteRenderer>().sprite = upgradePath2[0].GetSprite();
         
     }
     
     protected override void Upgrade2_2()
     {
+        //Super Range Tacks
+        radiusSpriteRenderer.transform.localScale *= 1.12f;
+        GetComponent<SpriteRenderer>().sprite = upgradePath2[1].GetSprite();
         
     }
     
