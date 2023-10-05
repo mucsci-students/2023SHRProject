@@ -15,6 +15,7 @@ public class AsyncManagerScript : MonoBehaviour
 
     public void LoadLevelBtn(string levelToLoad)
     {
+        Time.timeScale = 1f;
         mainMenu.SetActive(false);
         loadingScreen.SetActive(true);
         StartCoroutine(LoadLevelAsync(levelToLoad));

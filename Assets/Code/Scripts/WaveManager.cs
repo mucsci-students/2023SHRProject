@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Manages the spawning of bloons and waves.
@@ -79,6 +81,15 @@ public class WaveManager : MonoBehaviour
     private float timer = 0f;
     
     #endregion
+
+    /// <summary>
+    /// Unity method called once before the first frame.
+    /// </summary>
+    private void Start()
+    {
+        // Reset all static variables
+        enemiesRemaining = 0;
+    }
 
     /// <summary>
     /// Called at the start of a wave.

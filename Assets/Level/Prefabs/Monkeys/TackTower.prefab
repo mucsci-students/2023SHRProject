@@ -304,7 +304,7 @@ MonoBehaviour:
   maxProjectileDistance: 1
   layersPoppedPerHit: 1
   pierceAmount: 1
-  projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
+  projectilePrefab: {fileID: 4069108416899728122, guid: d10d322053a5e714796502ee6c1f5ef5, type: 3}
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 7230272996242019207}
   radiusCollider: {fileID: 0}
