@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MonkeyScript : MonoBehaviour
 {
-    
+    #region Fields
+
     private readonly List<GameObject> _enemiesInRange = new();
 
     [Header("Tower Settings")]
@@ -62,6 +64,10 @@ public abstract class MonkeyScript : MonoBehaviour
     protected CircleCollider2D radiusCollider;
 
     private float _timer = 0f;
+    
+    #endregion
+    
+    #region Unity Functions
 
     protected virtual void Start()
     {
@@ -89,20 +95,33 @@ public abstract class MonkeyScript : MonoBehaviour
             }
         }
     }
-
-    private void PopulateUpgrades()
+    
+    private void OnMouseDown()
     {
-        upgradePath1[0].SetUpgrade(Upgrade1_1);
-        upgradePath1[1].SetUpgrade(Upgrade1_2);
-        upgradePath2[0].SetUpgrade(Upgrade2_1);
-        upgradePath2[1].SetUpgrade(Upgrade2_2);
+        ToggleIsShowingRadius();
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        _enemiesInRange.Add(other.gameObject);
     }
 
-    public void IncrementLayersPopped(int layersPopped)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        totalLayersPopped += layersPopped;
+        _enemiesInRange.Remove(other.gameObject);
     }
+    
+    #endregion
 
+    #region Targeting Modes/Firing and Logic
+    
+    protected virtual void Fire(GameObject target)
+    { 
+        var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        var projectileScript = projectile.GetComponent<ProjectileScript>();
+        projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
+    }
+    
     private void LookAt(Vector3 targetPosition)
     {
         Vector3 myLocation = transform.position;
@@ -116,13 +135,6 @@ public abstract class MonkeyScript : MonoBehaviour
         // Angular speed in degrees per sec.
         var maxRotateSpeed = rotateSpeed * Time.deltaTime;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotateSpeed);
-    }
-
-    protected virtual void Fire(GameObject target)
-    { 
-        var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        var projectileScript = projectile.GetComponent<ProjectileScript>();
-        projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
     }
 
     private GameObject GetTarget(Enums.TargetingMode currentTargetingMode)
@@ -226,10 +238,14 @@ public abstract class MonkeyScript : MonoBehaviour
         
         return target;
     }
+    
+    #endregion
 
-    private void OnMouseDown()
+    #region Getters and Setters
+    
+    public void IncrementLayersPopped(int layersPopped)
     {
-        ToggleIsShowingRadius();
+        totalLayersPopped += layersPopped;
     }
     
     public void AddBloonToRange(GameObject bloon)
@@ -252,19 +268,75 @@ public abstract class MonkeyScript : MonoBehaviour
         radiusSpriteRenderer.enabled = state;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        _enemiesInRange.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        _enemiesInRange.Remove(other.gameObject);
-    }
-    
     public int GetMonkeyCost()
     {
         return monkeyCost;
+    }
+    
+    public List<Upgrade> GetUpgradePath1()
+    {
+        return upgradePath1;
+    }
+    
+    public List<Upgrade> GetUpgradePath2()
+    {
+        return upgradePath2;
+    }
+    
+    #endregion
+
+    #region Upgrades and Logic
+
+    private void PopulateUpgrades()
+    {
+        upgradePath1[0].SetUpgrade(Upgrade1_1Helper);
+        upgradePath1[1].SetUpgrade(Upgrade1_2Helper);
+        upgradePath2[0].SetUpgrade(Upgrade2_1Helper);
+        upgradePath2[1].SetUpgrade(Upgrade2_2Helper);
+    }
+    
+    private void Upgrade1_1Helper()
+    {
+        if (upgradePath1.Count == 0)
+            return;
+        
+        Upgrade1_1();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath1[0].GetSprite();
+        upgradePath1.RemoveAt(0);
+    }
+    
+    private void Upgrade1_2Helper()
+    {
+        if (upgradePath1.Count == 0)
+            return;
+        
+        Upgrade1_2();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath1[0].GetSprite();
+        upgradePath1.RemoveAt(0);
+    }
+    
+    private void Upgrade2_1Helper()
+    {
+        if (upgradePath2.Count == 0)
+            return;
+        
+        Upgrade2_1();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath2[0].GetSprite();
+        upgradePath2.RemoveAt(0);
+    }
+    
+    private void Upgrade2_2Helper()
+    {
+        if (upgradePath2.Count == 0)
+            return;
+        
+        Upgrade2_2();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath2[0].GetSprite();
+        upgradePath2.RemoveAt(0);
     }
 
     protected abstract void Upgrade1_1();
@@ -277,27 +349,17 @@ public abstract class MonkeyScript : MonoBehaviour
     
     // Testing
     
-    [ContextMenu("Upgrade 1-1")]
-    public void Upgrade1_1Test()
+    [ContextMenu("Upgrade 1")]
+    public void Upgrade1Test()
     {
         upgradePath1[0].UpgradeTower();
     }
     
-    [ContextMenu("Upgrade 1-2")]
-    public void Upgrade1_2Test()
-    {
-        upgradePath1[1].UpgradeTower();
-    }
-    
-    [ContextMenu("Upgrade 2-1")]
-    public void Upgrade2_1Test()
+    [ContextMenu("Upgrade 2")]
+    public void Upgrade2Test()
     {
         upgradePath2[0].UpgradeTower();
     }
     
-    [ContextMenu("Upgrade 2-2")]
-    public void Upgrade2_2Test()
-    {
-        upgradePath2[1].UpgradeTower();
-    }
+    #endregion
 }

@@ -9,7 +9,7 @@ public class InputManagerScript : MonoBehaviour
 
     [SerializeField] private bool isSpedUp = false;
     [SerializeField] private float speedUpFactor = 2.0f;
-    private float previousSpeedUpFactor;
+    private float previousSpeedUpFactor = 1f;
 
     [SerializeField] private GameObject pauseMenu;
     

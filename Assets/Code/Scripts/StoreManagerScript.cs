@@ -8,25 +8,34 @@ public class MonkeySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (!Input.GetMouseButtonDown(0))
+            return;
+        
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+        
         if (isPlacingMonkey)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (hit.collider != null && hit.collider.gameObject.TryGetComponent<Tile>(out Tile tile))
             {
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
- 
-                if (hit.collider != null && hit.collider.gameObject.TryGetComponent<Tile>(out Tile tile))
+                if (!CanBuyTower())
                 {
-                    if (!CanBuyTower())
-                    {
-                        Debug.Log("no monkey for you");
-                        isPlacingMonkey = false;
-                        return;
-                    }
-                        
-                    PlaceMonkeyOnTile(tile);
+                    Debug.Log("no monkey for you");
+                    isPlacingMonkey = false;
+                    return;
                 }
+                    
+                PlaceMonkeyOnTile(tile);
+                return;
             }
+        }
+ 
+        if (hit.collider != null && hit.collider.gameObject.TryGetComponent<MonkeyScript>(out MonkeyScript monkeyScript) && !isPlacingMonkey)
+        {
+            // We clicked a monkey and we are not placing a tower
+            if (monkeyScript.GetUpgradePath1().Count == 0)
+                return;
+            monkeyScript.GetUpgradePath1()[0].UpgradeTower();
         }
     }
     
