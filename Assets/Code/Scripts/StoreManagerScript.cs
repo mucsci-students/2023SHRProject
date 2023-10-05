@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class MonkeySpawner : MonoBehaviour
 {
     private GameObject monkeyPrefab;
     private bool isPlacingMonkey = false;
 
+    [SerializeField] private GameObject UpgradeMenuCanvas;
+    [SerializeField] private Image MonkeyImage;
+    //NOTE: ADD TARGETING MODE AS A LIST? OR SLIDER? or somethin else?
+    [SerializeField] private TextMeshProUGUI monkeyNameText;
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0))
@@ -29,14 +35,52 @@ public class MonkeySpawner : MonoBehaviour
                 return;
             }
         }
- 
+        
         if (hit.collider != null && hit.collider.gameObject.TryGetComponent<MonkeyScript>(out MonkeyScript monkeyScript) && !isPlacingMonkey)
         {
-            // We clicked a monkey and we are not placing a tower
-            if (monkeyScript.GetUpgradePath1().Count == 0)
-                return;
-            monkeyScript.GetUpgradePath1()[0].UpgradeTower();
+            // We clicked a monkey and we are not placing a tower so show upgrade menu
+            showUpgradeCanvas(monkeyScript);
         }
+    }
+
+    public void showUpgradeCanvas(MonkeyScript currentMonkey)
+    {
+        UpgradeMenuCanvas.SetActive(true);
+        monkeyNameText.text = currentMonkey.getMonkeyName();
+        MonkeyImage.sprite = currentMonkey.getMonkeyImage();
+        
+        //add targeting mode - suggestions??? slider menu? or somthin, still thinkin 
+        
+        //also add sell price? ( based off round and purchased upgrades,
+            //so keep track of upgrade costs player gets and add it to variable and put it into sell button
+            //also make sure to update current money if selling
+            
+        //dont purchase in here, player might just want to view upgrades/monkey
+        
+        //also add how many bloons it popped, its popping power, other helpful info for player
+    }
+
+    public void closeUpgradeMenu()
+    {
+        UpgradeMenuCanvas.SetActive(false);
+    }
+
+    public void purchaseUpgradePath1(MonkeyScript currentMonkey)
+    {
+        //note: also make sure to decrease money when purchased
+        
+        if (currentMonkey.GetUpgradePath1().Count == 0)
+            return;
+        currentMonkey.GetUpgradePath1()[0].UpgradeTower();
+    }
+
+    public void purchaseUpgradePath2(MonkeyScript currentMonkey)
+    {
+        //note: also make sure to decrease money when purchased
+        
+        if (currentMonkey.GetUpgradePath2().Count == 0)
+            return;
+        currentMonkey.GetUpgradePath2()[0].UpgradeTower();
     }
     
     public void SetMonkeyPrefab(GameObject newMonkeyPrefab)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class MonkeyScript : MonoBehaviour
 {
@@ -10,7 +11,13 @@ public abstract class MonkeyScript : MonoBehaviour
 
     private readonly List<GameObject> _enemiesInRange = new();
 
-    [Header("Tower Settings")]
+    [Header("Tower Settings")] 
+    
+    [SerializeField]
+    private string monkeyName;
+
+    [SerializeField] 
+    private Sprite monkeyImage;
     
     [SerializeField] private int monkeyCost;
     
@@ -242,6 +249,16 @@ public abstract class MonkeyScript : MonoBehaviour
     #endregion
 
     #region Getters and Setters
+
+    public string getMonkeyName()
+    {
+        return monkeyName;
+    }
+
+    public Sprite getMonkeyImage()
+    {
+        return monkeyImage;
+    }
     
     public void IncrementLayersPopped(int layersPopped)
     {

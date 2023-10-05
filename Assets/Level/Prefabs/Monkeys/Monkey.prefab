@@ -278,6 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3ec5cbbbd54554ab2b8648c356ab97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monkeyName: Dart Monkey
+  monkeyImage: {fileID: 1986054697, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   monkeyCost: 200
   firingRate: 1
   targetingMode: 0
@@ -286,20 +288,20 @@ MonoBehaviour:
   - cost: 75
     tier: 1
     description: 
-    sprite: {fileID: -964804493, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: -394613916, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 1
     tier: 2
     description: 
-    sprite: {fileID: 1642377537, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: 374119849, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
   - cost: 0
     tier: 1
     description: 
-    sprite: {fileID: -1838434661, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: -546966488, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 0
     tier: 2
     description: 
-    sprite: {fileID: -1624935315, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: -528201166, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
