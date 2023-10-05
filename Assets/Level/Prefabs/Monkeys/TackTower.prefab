@@ -283,23 +283,23 @@ MonoBehaviour:
   targetingMode: 3
   rotateSpeed: 0
   upgradePath1:
-  - cost: 0
-    tier: 0
+  - cost: 180
+    tier: 1
     description: 
-    sprite: {fileID: 0}
-  - cost: 0
-    tier: 0
+    sprite: {fileID: -1038093394, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+  - cost: 255
+    tier: 2
     description: 
-    sprite: {fileID: 0}
+    sprite: {fileID: -1334188628, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
-  - cost: 0
-    tier: 0
+  - cost: 85
+    tier: 1
     description: 
-    sprite: {fileID: 0}
-  - cost: 0
-    tier: 0
+    sprite: {fileID: 444307246, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+  - cost: 190
+    tier: 2
     description: 
-    sprite: {fileID: 0}
+    sprite: {fileID: -1504152534, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 5
   maxProjectileDistance: 1
   layersPoppedPerHit: 1
