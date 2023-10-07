@@ -16,9 +16,6 @@ public abstract class MonkeyScript : MonoBehaviour
     [SerializeField]
     private string monkeyName;
 
-    [SerializeField] 
-    private Sprite monkeyImage;
-    
     [SerializeField] private int monkeyCost;
     
     [SerializeField] 
@@ -72,12 +69,15 @@ public abstract class MonkeyScript : MonoBehaviour
 
     private float _timer = 0f;
     
+    private Sprite MonkeyImage;
+    
     #endregion
     
     #region Unity Functions
 
     protected virtual void Start()
     {
+        MonkeyImage = GetComponent<SpriteRenderer>().sprite;
         SetIsShowingRadius(false);
         PopulateUpgrades();
     }
@@ -250,14 +250,14 @@ public abstract class MonkeyScript : MonoBehaviour
 
     #region Getters and Setters
 
-    public string getMonkeyName()
+    public string GetMonkeyName()
     {
         return monkeyName;
     }
 
-    public Sprite getMonkeyImage()
+    public Sprite GetMonkeyImage()
     {
-        return monkeyImage;
+        return MonkeyImage;
     }
     
     public void IncrementLayersPopped(int layersPopped)

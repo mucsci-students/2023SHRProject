@@ -6,8 +6,9 @@ using TMPro;
 public class MonkeySpawner : MonoBehaviour
 {
     private GameObject monkeyPrefab;
-    private bool isPlacingMonkey = false;
+    private bool isPlacingMonkey;
 
+    [SerializeField] private MonkeyScript currentMonkeyScriptUpgradesMenu;
     [SerializeField] private GameObject UpgradeMenuCanvas;
     [SerializeField] private Image MonkeyImage;
     //NOTE: ADD TARGETING MODE AS A LIST? OR SLIDER? or somethin else?
@@ -22,7 +23,7 @@ public class MonkeySpawner : MonoBehaviour
         
         if (isPlacingMonkey)
         {
-            if (hit.collider != null && hit.collider.gameObject.TryGetComponent<Tile>(out Tile tile))
+            if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out Tile tile))
             {
                 if (!CanBuyTower())
                 {
@@ -36,18 +37,28 @@ public class MonkeySpawner : MonoBehaviour
             }
         }
         
-        if (hit.collider != null && hit.collider.gameObject.TryGetComponent<MonkeyScript>(out MonkeyScript monkeyScript) && !isPlacingMonkey)
+        if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out MonkeyScript monkeyScript) && !isPlacingMonkey)
         {
-            // We clicked a monkey and we are not placing a tower so show upgrade menu
-            showUpgradeCanvas(monkeyScript);
+            // If we already have that monkey open in the upgrade menu and we clicked the monkey again, close it
+            if (UpgradeMenuCanvas.activeInHierarchy && currentMonkeyScriptUpgradesMenu == monkeyScript)
+            {
+                closeUpgradeMenu();
+                currentMonkeyScriptUpgradesMenu = null;
+            }
+            else
+            {
+                // We clicked a monkey and we are not placing a tower so show upgrade menu
+                showUpgradeCanvas(monkeyScript);
+                currentMonkeyScriptUpgradesMenu = monkeyScript;
+            }
         }
     }
 
     public void showUpgradeCanvas(MonkeyScript currentMonkey)
     {
         UpgradeMenuCanvas.SetActive(true);
-        monkeyNameText.text = currentMonkey.getMonkeyName();
-        MonkeyImage.sprite = currentMonkey.getMonkeyImage();
+        monkeyNameText.text = currentMonkey.GetMonkeyName();
+        MonkeyImage.sprite = currentMonkey.GetMonkeyImage();
         
         //add targeting mode - suggestions??? slider menu? or somthin, still thinkin 
         
