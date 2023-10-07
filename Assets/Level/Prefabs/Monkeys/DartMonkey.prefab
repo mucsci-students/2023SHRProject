@@ -264,7 +264,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38, y: 0.38}
+  m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &8332110718181161042
 MonoBehaviour:
@@ -279,7 +279,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monkeyName: Dart Monkey
-  monkeyImage: {fileID: 1986054697, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   monkeyCost: 200
   firingRate: 1
   targetingMode: 0

@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6425238001161290764}
   - component: {fileID: 6425238001161290765}
-  - component: {fileID: 6425238001161290762}
+  - component: {fileID: 1957881687489847909}
   - component: {fileID: 8332110718181161042}
   m_Layer: 0
   m_Name: SuperMonkey
@@ -221,7 +221,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6425238001161290762
+--- !u!61 &1957881687489847909
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,7 +250,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -264,7 +264,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38, y: 0.38}
+  m_Size: {x: 1.0625, y: 1.4375}
   m_EdgeRadius: 0
 --- !u!114 &8332110718181161042
 MonoBehaviour:
