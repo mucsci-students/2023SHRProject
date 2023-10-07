@@ -280,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monkeyName: Dart Monkey
   monkeyCost: 200
-  firingRate: 1
+  firingRate: 0.9
   targetingMode: 0
   rotateSpeed: 270
   upgradePath1:

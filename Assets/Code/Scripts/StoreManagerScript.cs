@@ -8,7 +8,7 @@ public class MonkeySpawner : MonoBehaviour
     private GameObject monkeyPrefab;
     private bool isPlacingMonkey;
 
-    [SerializeField] private MonkeyScript currentMonkeyScriptUpgradesMenu;
+    private MonkeyScript currentMonkeyInUpgradesMenu;
     [SerializeField] private GameObject UpgradeMenuCanvas;
     [SerializeField] private Image MonkeyImage;
     //NOTE: ADD TARGETING MODE AS A LIST? OR SLIDER? or somethin else?
@@ -40,16 +40,16 @@ public class MonkeySpawner : MonoBehaviour
         if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out MonkeyScript monkeyScript) && !isPlacingMonkey)
         {
             // If we already have that monkey open in the upgrade menu and we clicked the monkey again, close it
-            if (UpgradeMenuCanvas.activeInHierarchy && currentMonkeyScriptUpgradesMenu == monkeyScript)
+            if (UpgradeMenuCanvas.activeInHierarchy && currentMonkeyInUpgradesMenu == monkeyScript)
             {
                 closeUpgradeMenu();
-                currentMonkeyScriptUpgradesMenu = null;
+                currentMonkeyInUpgradesMenu = null;
             }
             else
             {
                 // We clicked a monkey and we are not placing a tower so show upgrade menu
                 showUpgradeCanvas(monkeyScript);
-                currentMonkeyScriptUpgradesMenu = monkeyScript;
+                currentMonkeyInUpgradesMenu = monkeyScript;
             }
         }
     }
@@ -76,22 +76,22 @@ public class MonkeySpawner : MonoBehaviour
         UpgradeMenuCanvas.SetActive(false);
     }
 
-    public void purchaseUpgradePath1(MonkeyScript currentMonkey)
+    public void purchaseUpgradePath1()
     {
         //note: also make sure to decrease money when purchased
         
-        if (currentMonkey.GetUpgradePath1().Count == 0)
+        if (currentMonkeyInUpgradesMenu.GetUpgradePath1().Count == 0)
             return;
-        currentMonkey.GetUpgradePath1()[0].UpgradeTower();
+        currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].UpgradeTower();
     }
 
-    public void purchaseUpgradePath2(MonkeyScript currentMonkey)
+    public void purchaseUpgradePath2()
     {
         //note: also make sure to decrease money when purchased
         
-        if (currentMonkey.GetUpgradePath2().Count == 0)
+        if (currentMonkeyInUpgradesMenu.GetUpgradePath2().Count == 0)
             return;
-        currentMonkey.GetUpgradePath2()[0].UpgradeTower();
+        currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].UpgradeTower();
     }
     
     public void SetMonkeyPrefab(GameObject newMonkeyPrefab)
@@ -108,7 +108,7 @@ public class MonkeySpawner : MonoBehaviour
     {
         return GameManager.Money >= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
     }
-    
+
     public bool PlaceMonkeyOnTile(Tile tile)
     {
         if (tile.ContainsTowers())
