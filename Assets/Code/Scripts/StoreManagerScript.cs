@@ -11,7 +11,7 @@ public class MonkeySpawner : MonoBehaviour
     private MonkeyScript currentMonkeyInUpgradesMenu;
     [SerializeField] private GameObject UpgradeMenuCanvas;
     [SerializeField] private Image MonkeyImage;
-    //NOTE: ADD TARGETING MODE AS A LIST? OR SLIDER? or somethin else?
+    //Note: add targeting mode thing 
     [SerializeField] private TextMeshProUGUI monkeyNameText;
     private void Update()
     {
@@ -60,38 +60,37 @@ public class MonkeySpawner : MonoBehaviour
         monkeyNameText.text = currentMonkey.GetMonkeyName();
         MonkeyImage.sprite = currentMonkey.GetMonkeyImage();
         
-        //add targeting mode - suggestions??? slider menu? or somthin, still thinkin 
+        //add targeting mode
         
-        //also add sell price? ( based off round and purchased upgrades,
-            //so keep track of upgrade costs player gets and add it to variable and put it into sell button
-            //also make sure to update current money if selling
-            
-        //dont purchase in here, player might just want to view upgrades/monkey
+        //add sell price: based off purchase price and upgrades
+            //keep track of upgrades player gets and add it to var and put it into sell var
+            //also update current money if selling
         
         //also add how many bloons it popped, its popping power, other helpful info for player
     }
 
     public void closeUpgradeMenu()
     {
+        //I removed the button from the menu so this is not needed
         UpgradeMenuCanvas.SetActive(false);
     }
 
     public void purchaseUpgradePath1()
     {
-        //note: also make sure to decrease money when purchased
-        
         if (currentMonkeyInUpgradesMenu.GetUpgradePath1().Count == 0)
             return;
+        
         currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].UpgradeTower();
+        //GameManager.Money -= currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].GetCost();
+        //Debug.Log(currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost());
     }
 
     public void purchaseUpgradePath2()
     {
-        //note: also make sure to decrease money when purchased
-        
         if (currentMonkeyInUpgradesMenu.GetUpgradePath2().Count == 0)
             return;
         currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].UpgradeTower();
+        //GameManager.Money -= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
     }
     
     public void SetMonkeyPrefab(GameObject newMonkeyPrefab)
@@ -99,7 +98,7 @@ public class MonkeySpawner : MonoBehaviour
         monkeyPrefab = newMonkeyPrefab;
     }
     
-    public void StartPlacingMonkey() //you can start placin some monkey -- replace with money mechanic!!
+    public void StartPlacingMonkey()
     {
         isPlacingMonkey = true;
     }
