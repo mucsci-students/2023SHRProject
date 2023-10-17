@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Handles the movement and collision of projectiles.
+/// </summary>
 public class ProjectileScript : MonoBehaviour
 {
     public float _speed = 1f;
@@ -28,6 +31,7 @@ public class ProjectileScript : MonoBehaviour
         }
         else if (_target != null)
         {
+            LookAt(_target.transform.position);
             MoveTowardsTarget(_target.transform.position, _speed * Time.deltaTime);
         }
         else
@@ -87,6 +91,17 @@ public class ProjectileScript : MonoBehaviour
         Vector3 newPosition = GetNewPosition(targetPosition, speed);
         _lastTargetDirection = newPosition - transform.position;
         SetPosition(newPosition);
+    }
+    
+    private void LookAt(Vector3 targetPosition)
+    {
+        Vector3 myLocation = transform.position;
+        Vector3 vectorToTarget = targetPosition - myLocation;
+
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+
+        // Apply the rotation
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90); // Subtract 90 to align with the sprite's orientation
     }
 
     private void MoveInDirection(Vector3 direction)

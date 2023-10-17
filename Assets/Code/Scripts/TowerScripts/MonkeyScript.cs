@@ -1,20 +1,27 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class MonkeyScript : MonoBehaviour
+public abstract class MonkeyScript : MonoBehaviour
 {
-    
+    #region Fields
+
     private readonly List<GameObject> _enemiesInRange = new();
 
-    [Header("Tower Settings")]
+    [Header("Tower Settings")] 
     
+    [SerializeField]
+    private string monkeyName;
+
     [SerializeField] private int monkeyCost;
     
     [SerializeField] 
     [Tooltip("Measured as seconds between firing.")]
     [Min(0.01f)]
-    private float firingRate = 1f;
+    protected float firingRate = 1f;
 
     [SerializeField] 
     protected Enums.TargetingMode targetingMode = Enums.TargetingMode.First; 
@@ -23,7 +30,13 @@ public class MonkeyScript : MonoBehaviour
     [Range(0, 720)]
     [Tooltip("Rotation speed in angular degrees per second")]
     private float rotateSpeed = 270f;
+
+    [SerializeField]
+    protected List<Upgrade> upgradePath1 = new(2);
     
+    [SerializeField]
+    protected List<Upgrade> upgradePath2 = new(2);
+
     [Header("Projectile Settings")]
     
     [SerializeField]
@@ -49,13 +62,24 @@ public class MonkeyScript : MonoBehaviour
     [Header("Object Links")] 
     
     [SerializeField]
-    private SpriteRenderer radiusSpriteRenderer;
+    protected SpriteRenderer radiusSpriteRenderer;
+
+    [SerializeField]
+    protected CircleCollider2D radiusCollider;
 
     private float _timer = 0f;
+    
+    private Sprite MonkeyImage;
+    
+    #endregion
+    
+    #region Unity Functions
 
     protected virtual void Start()
     {
+        MonkeyImage = GetComponent<SpriteRenderer>().sprite;
         SetIsShowingRadius(false);
+        PopulateUpgrades();
     }
 
     // Update is called once per frame
@@ -78,12 +102,33 @@ public class MonkeyScript : MonoBehaviour
             }
         }
     }
-
-    public void IncrementLayersPopped(int layersPopped)
+    
+    private void OnMouseDown()
     {
-        totalLayersPopped += layersPopped;
+        ToggleIsShowingRadius();
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        _enemiesInRange.Add(other.gameObject);
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        _enemiesInRange.Remove(other.gameObject);
+    }
+    
+    #endregion
+
+    #region Targeting Modes/Firing and Logic
+    
+    protected virtual void Fire(GameObject target)
+    { 
+        var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        var projectileScript = projectile.GetComponent<ProjectileScript>();
+        projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
+    }
+    
     private void LookAt(Vector3 targetPosition)
     {
         Vector3 myLocation = transform.position;
@@ -97,13 +142,6 @@ public class MonkeyScript : MonoBehaviour
         // Angular speed in degrees per sec.
         var maxRotateSpeed = rotateSpeed * Time.deltaTime;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotateSpeed);
-    }
-
-    protected virtual void Fire(GameObject target)
-    { 
-        var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        var projectileScript = projectile.GetComponent<ProjectileScript>();
-        projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
     }
 
     private GameObject GetTarget(Enums.TargetingMode currentTargetingMode)
@@ -123,11 +161,14 @@ public class MonkeyScript : MonoBehaviour
         GameObject target = null;
         var maxDistanceTravelled = Mathf.NegativeInfinity;
 
-        foreach (var enemy in _enemiesInRange)
+        for (int i = 0; i < _enemiesInRange.Count; ++i)
         {
+            GameObject enemy = _enemiesInRange[i];            
+            
             if (enemy == null)
             {
                 _enemiesInRange.Remove(enemy);
+                --i;
                 continue;
             }
             
@@ -147,11 +188,14 @@ public class MonkeyScript : MonoBehaviour
         GameObject target = null;
         var leastDistanceTravelled = Mathf.Infinity;
 
-        foreach (var enemy in _enemiesInRange)
+        for (int i = 0; i < _enemiesInRange.Count; ++i)
         {
+            GameObject enemy = _enemiesInRange[i];
+            
             if (enemy == null)
             {
                 _enemiesInRange.Remove(enemy);
+                --i;
                 continue;
             }
             
@@ -173,11 +217,14 @@ public class MonkeyScript : MonoBehaviour
         var maxDistanceTravelled = Mathf.NegativeInfinity;
         const float tolerance = 0.1f;
 
-        foreach (var enemy in _enemiesInRange)
+        for (int i = 0; i < _enemiesInRange.Count; ++i)
         {
+            GameObject enemy = _enemiesInRange[i];
+            
             if (enemy == null)
             {
                 _enemiesInRange.Remove(enemy);
+                --i;
                 continue;
             }
             
@@ -198,10 +245,24 @@ public class MonkeyScript : MonoBehaviour
         
         return target;
     }
+    
+    #endregion
 
-    private void OnMouseDown()
+    #region Getters and Setters
+
+    public string GetMonkeyName()
     {
-        ToggleIsShowingRadius();
+        return monkeyName;
+    }
+
+    public Sprite GetMonkeyImage()
+    {
+        return MonkeyImage;
+    }
+    
+    public void IncrementLayersPopped(int layersPopped)
+    {
+        totalLayersPopped += layersPopped;
     }
     
     public void AddBloonToRange(GameObject bloon)
@@ -224,18 +285,98 @@ public class MonkeyScript : MonoBehaviour
         radiusSpriteRenderer.enabled = state;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        _enemiesInRange.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        _enemiesInRange.Remove(other.gameObject);
-    }
-    
     public int GetMonkeyCost()
     {
         return monkeyCost;
     }
+    
+    public List<Upgrade> GetUpgradePath1()
+    {
+        return upgradePath1;
+    }
+    
+    public List<Upgrade> GetUpgradePath2()
+    {
+        return upgradePath2;
+    }
+    
+    #endregion
+
+    #region Upgrades and Logic
+
+    private void PopulateUpgrades()
+    {
+        upgradePath1[0].SetUpgrade(Upgrade1_1Helper);
+        upgradePath1[1].SetUpgrade(Upgrade1_2Helper);
+        upgradePath2[0].SetUpgrade(Upgrade2_1Helper);
+        upgradePath2[1].SetUpgrade(Upgrade2_2Helper);
+    }
+    
+    private void Upgrade1_1Helper()
+    {
+        if (upgradePath1.Count == 0)
+            return;
+        
+        Upgrade1_1();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath1[0].GetSprite();
+        upgradePath1.RemoveAt(0);
+    }
+    
+    private void Upgrade1_2Helper()
+    {
+        if (upgradePath1.Count == 0)
+            return;
+        
+        Upgrade1_2();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath1[0].GetSprite();
+        upgradePath1.RemoveAt(0);
+    }
+    
+    private void Upgrade2_1Helper()
+    {
+        if (upgradePath2.Count == 0)
+            return;
+        
+        Upgrade2_1();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath2[0].GetSprite();
+        upgradePath2.RemoveAt(0);
+    }
+    
+    private void Upgrade2_2Helper()
+    {
+        if (upgradePath2.Count == 0)
+            return;
+        
+        Upgrade2_2();
+        
+        GetComponent<SpriteRenderer>().sprite = upgradePath2[0].GetSprite();
+        upgradePath2.RemoveAt(0);
+    }
+
+    protected abstract void Upgrade1_1();
+
+    protected abstract void Upgrade1_2();
+
+    protected abstract void Upgrade2_1();
+
+    protected abstract void Upgrade2_2();
+    
+    // Testing
+    
+    [ContextMenu("Upgrade 1")]
+    public void Upgrade1Test()
+    {
+        upgradePath1[0].UpgradeTower();
+    }
+    
+    [ContextMenu("Upgrade 2")]
+    public void Upgrade2Test()
+    {
+        upgradePath2[0].UpgradeTower();
+    }
+    
+    #endregion
 }

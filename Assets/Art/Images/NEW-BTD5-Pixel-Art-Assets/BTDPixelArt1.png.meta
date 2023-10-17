@@ -1,0 +1,1966 @@
+fileFormatVersion: 2
+guid: 21620dcb548f24c608ef32dfa42ee6f0
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BTDPixelArt1_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1772
+        width: 55
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f827c8afd164ebb9c3a240821c1748
+      internalID: -1245220674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_1
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 1772
+        width: 55
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e10d42e45011465495dbb55fb00d73f
+      internalID: -1743940357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_2
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 1772
+        width: 55
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 720d3fe3741f1461da2d0cb18729d524
+      internalID: -1727307819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_3
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 1772
+        width: 55
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7318e51c7e77b4e84af12b78861171c0
+      internalID: 1116457040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_4
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 1699
+        width: 221
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a6159c5ca0c44d9198716c6a2cb5fcf
+      internalID: 1869255858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_5
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 1772
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e5f282a00b1f49b5bbfbdb4fbf3239e
+      internalID: 1986054697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_6
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 1772
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff41dd3b413164d848fce12eb912daef
+      internalID: -546966488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_7
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 1772
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d476c63327b345d0b43220bc51b2a7b
+      internalID: -394613916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_8
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1772
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf9ce01dc13e949889c18f89a79cedf7
+      internalID: 374119849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_9
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 1772
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77a0d7bc0f6784682aaa9bebbc6d89db
+      internalID: -528201166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_10
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1662
+        width: 55
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16b00b679ac5d4500824148014b1253b
+      internalID: 1492830885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_11
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 1662
+        width: 55
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 988a6c70377dc49f39a816f3df8d2d37
+      internalID: 1321113668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_12
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 1662
+        width: 55
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d1a5fda35a2c4788b76d73ec99382b5
+      internalID: 95986598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_13
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 1662
+        width: 55
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 244739a911af14ff5a7383f0f4bde253
+      internalID: -1417676115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_14
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1615
+        width: 147
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 510998b8aa1514aa5915d338d405e030
+      internalID: 393789359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_15
+      rect:
+        serializedVersion: 2
+        x: 1735
+        y: 1611
+        width: 148
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2da9c25c8d9e94f049f08cddf232d39e
+      internalID: 2143942121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_16
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1551
+        width: 55
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a09cad0697647b69883d9c6f5cc0dd
+      internalID: 1815562664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_17
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 1551
+        width: 55
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 939b086d2289349299dd273532a8b824
+      internalID: -48055879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_18
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1565
+        width: 37
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c831936890fb443498e43bae625ca1d6
+      internalID: -1382413538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_19
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 1565
+        width: 36
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 956a25aebda6341c985aa4ff56bff1e3
+      internalID: 185730918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_20
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 1440
+        width: 295
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5456b45981b504590ac0cd455ca12bc9
+      internalID: 628264804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_21
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 1514
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff917182cb2d54b99bd07d9dcbc1baf4
+      internalID: 1725227726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_22
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 1519
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fad93a11ff1746419692b76ff7c1f65
+      internalID: 444307246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_23
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 1514
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaca3785e6eca4597a91e34619227157
+      internalID: -1038093394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_24
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1514
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3670fd366ebc543b0875ca275209cd5e
+      internalID: -1334188628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_25
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 1509
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93f6bc4972f0d40549e171417de820b3
+      internalID: -1624896095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_26
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1366
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 689e1a9c30a524d4687abeb11485c495
+      internalID: -2011121566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_27
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 1366
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d7881aa788234e0185042f077ebc40c
+      internalID: -1070843986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_28
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 1366
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5bebbcb424e343388ff855a641f4ed9
+      internalID: -453178803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_29
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 1366
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b340d5af7ee824dbaba82c5fcc150844
+      internalID: 834411734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_30
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1403
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28b15d36f2dfb477db05f5536b385151
+      internalID: -1504152534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_31
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 1403
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5edb412225c9b47eeafd7a397a63d0b4
+      internalID: 970481026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_32
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1256
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b57502bed53f464cb8bb5526c1134d9
+      internalID: -293852182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_33
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 1255
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56bcb9b743ac9405bb36271084bc655a
+      internalID: -617489942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_34
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 1256
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0193f53e5201d4686b37eec00733a04a
+      internalID: 1891060331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_35
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 1256
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5066b6d21e274490a68f08548d96d48
+      internalID: 1212216522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_36
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 1182
+        width: 332
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee761471b36054838a53d3f9a669d720
+      internalID: -1927981561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_37
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 1292
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be51b9e0a90549c6a5f8a0bd0788134
+      internalID: -459362760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_38
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 1292
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84128981d7cf34661bad32932a0bded9
+      internalID: -1897710654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_39
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 1292
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e514aa40975b403db4f5e372aa1c3ab
+      internalID: 2089191854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_40
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1292
+        width: 73
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c31cbbc577324a46842c0a996eedb03
+      internalID: -1817173748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_41
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1145
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bf2afc9816e540378bc3cd384d9831b
+      internalID: 2062605267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_42
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 1145
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df9cee9d9e595447d999d3362d9cae75
+      internalID: 866058203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_43
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 1159
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10e89351d6f56477a964e320c1a08f6b
+      internalID: -2118930770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_44
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 1159
+        width: 46
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 307af555adae94ca2bcedc572ba065e7
+      internalID: 187777373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_45
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 1182
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4148eb9ea64341e8978dd8af0cc0d89
+      internalID: -1361811074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_46
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 1182
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e45e5117879e4502bf8bf30704b9546
+      internalID: 633717537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_47
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 1182
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a378c1b51c73471a8880c5eee17705b
+      internalID: -795846855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_48
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 1182
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aec9031f656e4e84b65f03c744359c4
+      internalID: 551765282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_49
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 1071
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 860112aca8fcd4f90941bf19ac264cdd
+      internalID: 1037623816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_50
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 1071
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15e66f9f1431a44e281c114e08b8ca66
+      internalID: -1735976362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_51
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 1071
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53192b3e7feab47f7a30a3a6a84d0e94
+      internalID: 75446687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_52
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 1062
+        width: 92
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fb563a0ed5ae4866ab0251ff39d8905
+      internalID: -471149001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_53
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 1062
+        width: 93
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 602c0f3760e07406482934eed9bcf631
+      internalID: 446852513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_54
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 942
+        width: 110
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a0a4e02e918e4de8acd625899fc7bfd
+      internalID: -1925869716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_55
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 942
+        width: 111
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ee9f2ba0d83042d181cfd904c038079
+      internalID: 1221079171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_56
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 942
+        width: 111
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d573857aa7ab646ce921da99498d0d82
+      internalID: 1019941169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_57
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 849
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22bfa937e9a3347af84ab489f6de92fe
+      internalID: 1937070192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_58
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 849
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c62838f5cd934b73b928bd4f351ee3d
+      internalID: 74525518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_59
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 849
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 586b32129e7f54796badd99d75b80cb9
+      internalID: -719769999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_60
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 849
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71efe6ab0aea8492aa68e011b193f9cb
+      internalID: -1958266630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_61
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 849
+        width: 73
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918cc466cc1e640d9858d25bc783b5f3
+      internalID: -1363572432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_62
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 739
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e8958b63824b4ff8804b0331a2ad149
+      internalID: -1321970590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_63
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 739
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c996ced53e5cd4895b18258ef3545da4
+      internalID: 502953281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_64
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 739
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a277db5dee167438a913afa4daf85e83
+      internalID: -162473821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_65
+      rect:
+        serializedVersion: 2
+        x: 1662
+        y: 739
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef40545ff3a964993bbac82e7c6090e4
+      internalID: 784414073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_66
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 572
+        width: 75
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edc5b3fb8d4174273b50499ef098a9f3
+      internalID: -1906224706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_67
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 572
+        width: 74
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d003a11febaaf41a39ad8d702d02b7e2
+      internalID: -1584279670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_68
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 572
+        width: 74
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d799235c6697d4ff3822ac202d092ca9
+      internalID: -2077170398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_69
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 572
+        width: 84
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa38adc73597242c8a6dc27bcfeed119
+      internalID: -1886408595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_70
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 568
+        width: 83
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d99013221ade4b6b91b8666babfbd42
+      internalID: 1085947306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_71
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 424
+        width: 74
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 987a2dad9e4a541029095b0e2a6b3cea
+      internalID: 1401865668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_72
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 424
+        width: 74
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b2f79e98d4704d7bb3ca19acc0b3500
+      internalID: -756621679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_73
+      rect:
+        serializedVersion: 2
+        x: 1661
+        y: 424
+        width: 75
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1078d7913178c463b9f7c74da9d3e5bd
+      internalID: -728932381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_74
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 328
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b503b790ee114bc397fa4f33b3e3806
+      internalID: -1024735602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_75
+      rect:
+        serializedVersion: 2
+        x: 1325
+        y: 328
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 434726286f80344738aefb388f0edb5a
+      internalID: 1428263917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_76
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 328
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8571c3c17ad0457a8f4cc2e686f0a0b
+      internalID: 954702911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_77
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 328
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bbf07dd374c94701b73a997f99ab841
+      internalID: 1278447373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_78
+      rect:
+        serializedVersion: 2
+        x: 1643
+        y: 328
+        width: 111
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbfc4f7feae5c4fedba3aa4b4f340905
+      internalID: -494094848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_79
+      rect:
+        serializedVersion: 2
+        x: 1325
+        y: 217
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef8ce302b369148f7a5316c4c6d88fd9
+      internalID: 1047613418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_80
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 217
+        width: 102
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc7d1a18186114b0e86fd3add1fedd7e
+      internalID: 1572495123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_81
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 217
+        width: 101
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9776473ffe04a8aa1703a62c09cc7f
+      internalID: -248606303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BTDPixelArt1_82
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 208
+        width: 101
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d48e8b9c3b33f4623a9dad5293226cc1
+      internalID: -1657503932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BTDPixelArt1_0: -1245220674
+      BTDPixelArt1_1: -1743940357
+      BTDPixelArt1_10: 1492830885
+      BTDPixelArt1_11: 1321113668
+      BTDPixelArt1_12: 95986598
+      BTDPixelArt1_13: -1417676115
+      BTDPixelArt1_14: 393789359
+      BTDPixelArt1_15: 2143942121
+      BTDPixelArt1_16: 1815562664
+      BTDPixelArt1_17: -48055879
+      BTDPixelArt1_18: -1382413538
+      BTDPixelArt1_19: 185730918
+      BTDPixelArt1_2: -1727307819
+      BTDPixelArt1_20: 628264804
+      BTDPixelArt1_21: 1725227726
+      BTDPixelArt1_22: 444307246
+      BTDPixelArt1_23: -1038093394
+      BTDPixelArt1_24: -1334188628
+      BTDPixelArt1_25: -1624896095
+      BTDPixelArt1_26: -2011121566
+      BTDPixelArt1_27: -1070843986
+      BTDPixelArt1_28: -453178803
+      BTDPixelArt1_29: 834411734
+      BTDPixelArt1_3: 1116457040
+      BTDPixelArt1_30: -1504152534
+      BTDPixelArt1_31: 970481026
+      BTDPixelArt1_32: -293852182
+      BTDPixelArt1_33: -617489942
+      BTDPixelArt1_34: 1891060331
+      BTDPixelArt1_35: 1212216522
+      BTDPixelArt1_36: -1927981561
+      BTDPixelArt1_37: -459362760
+      BTDPixelArt1_38: -1897710654
+      BTDPixelArt1_39: 2089191854
+      BTDPixelArt1_4: 1869255858
+      BTDPixelArt1_40: -1817173748
+      BTDPixelArt1_41: 2062605267
+      BTDPixelArt1_42: 866058203
+      BTDPixelArt1_43: -2118930770
+      BTDPixelArt1_44: 187777373
+      BTDPixelArt1_45: -1361811074
+      BTDPixelArt1_46: 633717537
+      BTDPixelArt1_47: -795846855
+      BTDPixelArt1_48: 551765282
+      BTDPixelArt1_49: 1037623816
+      BTDPixelArt1_5: 1986054697
+      BTDPixelArt1_50: -1735976362
+      BTDPixelArt1_51: 75446687
+      BTDPixelArt1_52: -471149001
+      BTDPixelArt1_53: 446852513
+      BTDPixelArt1_54: -1925869716
+      BTDPixelArt1_55: 1221079171
+      BTDPixelArt1_56: 1019941169
+      BTDPixelArt1_57: 1937070192
+      BTDPixelArt1_58: 74525518
+      BTDPixelArt1_59: -719769999
+      BTDPixelArt1_6: -546966488
+      BTDPixelArt1_60: -1958266630
+      BTDPixelArt1_61: -1363572432
+      BTDPixelArt1_62: -1321970590
+      BTDPixelArt1_63: 502953281
+      BTDPixelArt1_64: -162473821
+      BTDPixelArt1_65: 784414073
+      BTDPixelArt1_66: -1906224706
+      BTDPixelArt1_67: -1584279670
+      BTDPixelArt1_68: -2077170398
+      BTDPixelArt1_69: -1886408595
+      BTDPixelArt1_7: -394613916
+      BTDPixelArt1_70: 1085947306
+      BTDPixelArt1_71: 1401865668
+      BTDPixelArt1_72: -756621679
+      BTDPixelArt1_73: -728932381
+      BTDPixelArt1_74: -1024735602
+      BTDPixelArt1_75: 1428263917
+      BTDPixelArt1_76: 954702911
+      BTDPixelArt1_77: 1278447373
+      BTDPixelArt1_78: -494094848
+      BTDPixelArt1_79: 1047613418
+      BTDPixelArt1_8: 374119849
+      BTDPixelArt1_80: 1572495123
+      BTDPixelArt1_81: -248606303
+      BTDPixelArt1_82: -1657503932
+      BTDPixelArt1_9: -528201166
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
