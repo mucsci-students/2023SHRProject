@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: -5544706280735935262}
   - component: {fileID: 6047827432418318122}
   - component: {fileID: 2816892331646163506}
-  - component: {fileID: 4498199164610912599}
   m_Layer: 0
   m_Name: Boomerang
   m_TagString: Untagged
@@ -172,37 +171,10 @@ MonoBehaviour:
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
-  projectilePrefab: {fileID: 1807485524874869952, guid: 75ab67625de4f8f468906111614d99ff, type: 3}
+  projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 7956948779632064154}
-  radiusCollider: {fileID: 8015144817860210258}
---- !u!50 &4498199164610912599
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877022110297304424}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  radiusCollider: {fileID: 0}
 --- !u!1 &7140571253694289982
 GameObject:
   m_ObjectHideFlags: 0
