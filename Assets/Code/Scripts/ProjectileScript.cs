@@ -10,20 +10,20 @@ using UnityEngine;
 public class ProjectileScript : MonoBehaviour
 {
     public float _speed = 1f;
-    private float _maxDistance = 10f;
-    private uint _layersPerHit = 1;
-    
+    protected float _maxDistance = 10f;
+    protected uint _layersPerHit = 1;
+
     // TODO - Implement this 
-    private uint _pierceAmount = 1;
+    protected uint _pierceAmount = 1;
 
-    private float _distanceTraveled;
-    private Vector3 _lastTargetDirection = Vector3.zero;
+    protected float _distanceTraveled;
+    protected Vector3 _lastTargetDirection = Vector3.zero;
 
-    public GameObject _target;
-    private MonkeyScript _parentMonkeyScript;
+    protected GameObject _target;
+    public MonkeyScript _parentMonkeyScript;
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         if (_distanceTraveled > _maxDistance)
         {
@@ -60,7 +60,7 @@ public class ProjectileScript : MonoBehaviour
         _parentMonkeyScript = parent;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != null && other.gameObject.CompareTag("Bloon"))
         {
@@ -86,14 +86,14 @@ public class ProjectileScript : MonoBehaviour
     /// </summary>
     /// <param name="targetPosition">The position to move this projectile towards</param>
     /// <param name="speed">Speed of the projectile. Should be calculated based on delta time.</param>
-    private void MoveTowardsTarget(Vector3 targetPosition, float speed)
+    protected void MoveTowardsTarget(Vector3 targetPosition, float speed)
     {
         Vector3 newPosition = GetNewPosition(targetPosition, speed);
         _lastTargetDirection = newPosition - transform.position;
         SetPosition(newPosition);
     }
-    
-    private void LookAt(Vector3 targetPosition)
+
+    protected void LookAt(Vector3 targetPosition)
     {
         Vector3 myLocation = transform.position;
         Vector3 vectorToTarget = targetPosition - myLocation;
@@ -104,7 +104,7 @@ public class ProjectileScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle - 90); // Subtract 90 to align with the sprite's orientation
     }
 
-    private void MoveInDirection(Vector3 direction)
+    protected void MoveInDirection(Vector3 direction)
     {
         Vector3 newPosition = GetNewPosition(transform.position + direction, _speed * Time.deltaTime);
         SetPosition(newPosition);
@@ -114,7 +114,7 @@ public class ProjectileScript : MonoBehaviour
     /// Sets the position of this transform and updates distance traveled.
     /// </summary>
     /// <param name="newPosition">The new position to move the projectile to during this frame</param>
-    private void SetPosition(Vector3 newPosition)
+    protected void SetPosition(Vector3 newPosition)
     {
         _distanceTraveled += Vector3.Distance(newPosition , transform.position);
         transform.position = newPosition;
@@ -127,7 +127,7 @@ public class ProjectileScript : MonoBehaviour
     /// <param name="targetPosition">The targetPosition position for this projectile to move towards</param>
     /// <param name="speed">How fast to move towards the targetPosition position</param>
     /// <returns>The new position of this projectile</returns>
-    private Vector3 GetNewPosition(Vector3 targetPosition, float speed)
+    protected Vector3 GetNewPosition(Vector3 targetPosition, float speed)
     {
         // Force projectile to move in 2D space
         targetPosition.z = transform.position.z;
