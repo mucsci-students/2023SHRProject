@@ -107,17 +107,7 @@ public abstract class MonkeyScript : MonoBehaviour
     {
         ToggleIsShowingRadius();
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        _enemiesInRange.Add(other.gameObject);
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        _enemiesInRange.Remove(other.gameObject);
-    }
-    
     #endregion
 
     #region Targeting Modes/Firing and Logic
