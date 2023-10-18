@@ -23,6 +23,7 @@ public class MonkeyRangeScript : MonoBehaviour
     {
         if (other.gameObject != null && other.gameObject.CompareTag("Bloon"))
         {
+            Debug.Log(other.gameObject.name);
             parentMonkeyScript.AddBloonToRange(other.gameObject);
         }
     }
