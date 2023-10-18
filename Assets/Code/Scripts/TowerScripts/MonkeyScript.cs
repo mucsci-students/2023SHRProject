@@ -17,6 +17,8 @@ public abstract class MonkeyScript : MonoBehaviour
     private string monkeyName;
 
     [SerializeField] private int monkeyCost;
+
+    private int sellPrice;
     
     [SerializeField] 
     [Tooltip("Measured as seconds between firing.")]
@@ -80,6 +82,7 @@ public abstract class MonkeyScript : MonoBehaviour
         MonkeyImage = GetComponent<SpriteRenderer>().sprite;
         SetIsShowingRadius(false);
         PopulateUpgrades();
+        sellPrice = monkeyCost;
     }
 
     // Update is called once per frame
@@ -278,6 +281,16 @@ public abstract class MonkeyScript : MonoBehaviour
     public int GetMonkeyCost()
     {
         return monkeyCost;
+    }
+
+    public int GetMonkeySellPrice()
+    {
+        return sellPrice;
+    }
+    
+    public int SetMonkeySellPrice(int newSellPrice)
+    {
+        return sellPrice = newSellPrice;
     }
     
     public List<Upgrade> GetUpgradePath1()

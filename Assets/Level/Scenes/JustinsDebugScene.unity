@@ -1115,6 +1115,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1942067527}
     - target: {fileID: 920651646, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: SellPriceText
+      value: 
+      objectReference: {fileID: 1109197562}
+    - target: {fileID: 920651646, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: monkeyNameText
       value: 
       objectReference: {fileID: 1305007475}
@@ -1130,6 +1134,14 @@ PrefabInstance:
       propertyPath: MonkeyNameObject
       value: 
       objectReference: {fileID: 1301468230}
+    - target: {fileID: 920651646, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: UpgradePath1Text
+      value: 
+      objectReference: {fileID: 1580325067}
+    - target: {fileID: 920651646, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: UpgradePath2Text
+      value: 
+      objectReference: {fileID: 335320772}
     - target: {fileID: 920651646, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: UpgradeMenuCanvas
       value: 
