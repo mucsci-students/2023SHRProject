@@ -36,6 +36,7 @@ public class MonkeySpawner : MonoBehaviour
                 }
                     
                 PlaceMonkeyOnTile(tile);
+                
                 return;
             }
         }
@@ -187,20 +188,20 @@ public class MonkeySpawner : MonoBehaviour
         Vector3 tilePosition = tile.transform.position;
         tilePosition.z = 0;
                     
-        Instantiate(monkeyPrefab, tilePosition, Quaternion.identity);
+        GameObject newMonkey = Instantiate(monkeyPrefab, tilePosition, Quaternion.identity);
         isPlacingMonkey = false; //no more monkey for you!
                     
         tile.SetContainsTower(true);
-
+        newMonkey.GetComponent<MonkeyScript>().SetTile(tile);
         GameManager.Money -= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
         return true;
     }
 
     public void SellTower()
     {
-        //update gamemanager money
-        //destroy tower
-        //update tile?
-        //close upgrade menu for the monkey
+        GameManager.Money += currentMonkeyInUpgradesMenu.GetMonkeySellPrice();
+        currentMonkeyInUpgradesMenu.GetTile().SetContainsTower(false);
+        Destroy(currentMonkeyInUpgradesMenu.gameObject);
+        UpgradeMenuCanvas.SetActive(false);
     }
 }

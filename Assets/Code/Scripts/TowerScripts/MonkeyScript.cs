@@ -72,6 +72,8 @@ public abstract class MonkeyScript : MonoBehaviour
     private float _timer = 0f;
     
     private Sprite MonkeyImage;
+
+    private Tile currentTile;
     
     #endregion
     
@@ -288,9 +290,9 @@ public abstract class MonkeyScript : MonoBehaviour
         return sellPrice;
     }
     
-    public int SetMonkeySellPrice(int newSellPrice)
+    public void SetMonkeySellPrice(int newSellPrice)
     {
-        return sellPrice = newSellPrice;
+        sellPrice = newSellPrice;
     }
     
     public List<Upgrade> GetUpgradePath1()
@@ -302,7 +304,16 @@ public abstract class MonkeyScript : MonoBehaviour
     {
         return upgradePath2;
     }
+
+    public Tile GetTile()
+    {
+        return currentTile;
+    }
     
+    public void SetTile(Tile tile)
+    {
+        currentTile = tile;
+    }
     #endregion
 
     #region Upgrades and Logic
