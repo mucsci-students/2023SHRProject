@@ -79,18 +79,16 @@ public class MonkeySpawner : MonoBehaviour
     {
         if (currentMonkeyInUpgradesMenu.GetUpgradePath1().Count == 0)
             return;
-        
+        GameManager.Money -= currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].GetCost();
         currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].UpgradeTower();
-        //GameManager.Money -= currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].GetCost();
-        //Debug.Log(currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost());
     }
 
     public void purchaseUpgradePath2()
     {
         if (currentMonkeyInUpgradesMenu.GetUpgradePath2().Count == 0)
             return;
+        GameManager.Money -= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
         currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].UpgradeTower();
-        //GameManager.Money -= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
     }
     
     public void SetMonkeyPrefab(GameObject newMonkeyPrefab)
