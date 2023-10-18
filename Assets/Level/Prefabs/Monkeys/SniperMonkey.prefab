@@ -286,21 +286,20 @@ MonoBehaviour:
   upgradePath1:
   - cost: 350
     tier: 1
-    description: Shots can pop through 4 layers of bloon - and can pop lead and frozen
-      bloons.
+    description: +4 Popping Power
     sprite: {fileID: 403388993, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 1200
     tier: 2
-    description: Shots can pop through 7 layers of bloon!
+    description: +7 Popping Power
     sprite: {fileID: 1496502920, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   upgradePath2:
   - cost: 340
     tier: 1
-    description: Allows Sniper to shoot faster(40%).
+    description: 'Shoot 40%  Faster '
     sprite: {fileID: 131771419, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 255
     tier: 2
-    description: Allows Sniper to detect and shoot Camo bloons.
+    description: Detect Camo Bloons
     sprite: {fileID: -727407275, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   projectileSpeed: 50
   maxProjectileDistance: 100

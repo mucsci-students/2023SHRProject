@@ -286,20 +286,20 @@ MonoBehaviour:
   upgradePath1:
   - cost: 75
     tier: 1
-    description: 
+    description: Increase Range
     sprite: {fileID: -394613916, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
-  - cost: 1
+  - cost: 100
     tier: 2
-    description: 
+    description: Even More Range
     sprite: {fileID: 374119849, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
-  - cost: 0
+  - cost: 120
     tier: 1
-    description: 
+    description: +1 Popping Power
     sprite: {fileID: -546966488, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
-  - cost: 0
+  - cost: 145
     tier: 2
-    description: 
+    description: +2 Popping Power
     sprite: {fileID: -528201166, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10
