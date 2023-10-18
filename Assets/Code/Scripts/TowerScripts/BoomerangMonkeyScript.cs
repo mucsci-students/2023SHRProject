@@ -6,25 +6,27 @@ public class BoomerangMonkeyScript : MonkeyScript
 {
     protected override void Upgrade1_1()
     {
-        //Multi-Target 
-        throw new System.NotImplementedException();
+        //Sharp Shots
+        layersPoppedPerHit = 2;
     }
 
     protected override void Upgrade1_2()
     {
-        //Glaive Thrower 
-        throw new System.NotImplementedException();
+       //Sharper Shots
+        layersPoppedPerHit = 3;
     }
 
     protected override void Upgrade2_1()
     {
-        //Sonic Boom
-        throw new System.NotImplementedException();
+        //More Range
+        radiusSpriteRenderer.transform.localScale *= 1.1f;
+        
     }
 
     protected override void Upgrade2_2()
     {
-        //Red Hot 'Rangs 
-        throw new System.NotImplementedException();
+        //Even more Range
+        radiusSpriteRenderer.transform.localScale *= 1.12f;
+        
     }
 }
