@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -39,7 +40,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject YellowBloonPrefab;
     [SerializeField] private GameObject PinkBloonPrefab;
     //[SerializeField] private GameObject BlackBloonPrefab;
-    //[SerializeField] private GameObject WhiteBloonPrefab;
+    [SerializeField] private GameObject WhiteBloonPrefab;
     //[SerializeField] private GameObject LeadBloonPrefab;
     //[SerializeField] private GameObject ZebraBloonPrefab;
     //[SerializeField] private GameObject RainbowBloonPrefab;
@@ -53,7 +54,7 @@ public class WaveManager : MonoBehaviour
     #region Debugging
 
     [Header("Debugging")]
-    public List<GameObject> possible_enemies = new();
+    public List<GameObject> possibleEnemies = new();
     public int CurrentWaveNumber = 0;
     public float timerRef;
     public int EnemiesRemaining;
@@ -165,15 +166,27 @@ public class WaveManager : MonoBehaviour
     {
         if (CurrentWaveNumber == 1)
         {
-            possible_enemies.Add(RedBloonPrefab);
+            possibleEnemies.Add(RedBloonPrefab);
         }
         else if (CurrentWaveNumber == 2)
         {
-            possible_enemies.Add(BlueBloonPrefab);
+            possibleEnemies.Add(BlueBloonPrefab);
         }
         else if (CurrentWaveNumber == 3)
         {
-            possible_enemies.Add(GreenBloonPrefab);
+            possibleEnemies.Add(GreenBloonPrefab);
+        }
+        else if (CurrentWaveNumber == 4)
+        {
+            possibleEnemies.Add(YellowBloonPrefab);
+        }
+        else if (CurrentWaveNumber == 5)
+        {
+            possibleEnemies.Add(PinkBloonPrefab);
+        }
+        else if (CurrentWaveNumber == 6)
+        {
+            possibleEnemies.Add(WhiteBloonPrefab);
         }
     }
 
@@ -241,8 +254,8 @@ public class WaveManager : MonoBehaviour
     private GameObject GetRandomBloon()
     {
         // Generate me a random int
-        int randomNum = Random.Range(0, possible_enemies.Count);
-        return possible_enemies[randomNum];
+        int randomNum = Random.Range(0, possibleEnemies.Count);
+        return possibleEnemies[randomNum];
     }
 
     [System.Serializable]

@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class BloonScript : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D Rigidbody2D;
+    [SerializeField] protected Rigidbody2D Rigidbody2D;
     
     /// <summary>
     /// Speed of the bloon. It will be consistent in X/Y direction and always greater than 0, which removes the need for a Vector2 type.
     /// </summary>
-    [SerializeField] private uint speed;
+    [SerializeField] protected uint speed;
 
-    [SerializeField] private int health;
+    [SerializeField] protected int health;
 
-    [SerializeField] private BloonLookUpScript bloonLookUpScript;
+    [SerializeField] protected BloonLookUpScript bloonLookUpScript;
 
     // Start is called before the first frame update
     private void Start()
@@ -29,18 +29,12 @@ public class BloonScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-
     /// <summary>
     /// Updates the bloons health based on damage param. Destroys itself if it loses all its health
     /// </summary>
     /// <param name="damage">The amountToSpawn of damage the bloon should take</param>
     /// <returns>The amountToSpawn of damage the bloon actually took, to be able to update pop counts</returns>
-    public int ReceiveDamage(int damage)
+    public virtual int ReceiveDamage(int damage)
     {
         var originalHealth = health;
         health -= damage;
@@ -52,22 +46,27 @@ public class BloonScript : MonoBehaviour
         }
         else
         {
-            var newBloon = Instantiate(bloonLookUpScript.GetNewBloon(health), gameObject.transform.position, Quaternion.identity);
-
-            var newBloonScript = newBloon.GetComponent<BloonScript>();
-            newBloonScript.SetBloonLookUpScript(bloonLookUpScript);
-            
-            var newBloonFollowingScript = newBloon.GetComponent<PathFollowingScript>();
-            var currentBloonFollowingScript = GetComponent<PathFollowingScript>();
-            newBloonFollowingScript.SetBloonPath(currentBloonFollowingScript.GetBloonPath());
-            newBloonFollowingScript.SetCurrentTargetIndex(currentBloonFollowingScript.GetCurrentTargetIndex());
-            newBloonFollowingScript.SetDistanceTravelled(currentBloonFollowingScript.GetDistanceTravelled());
+            SpawnAndInitializeBloon(bloonLookUpScript.GetNewBloon(health));
             
             Destroy(gameObject);
         }
 
         GameManager.Money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
+    }
+
+    protected void SpawnAndInitializeBloon(GameObject bloonPrefab)
+    {
+        var newBloon = Instantiate(bloonPrefab, gameObject.transform.position, Quaternion.identity);
+
+        var newBloonScript = newBloon.GetComponent<BloonScript>();
+        newBloonScript.SetBloonLookUpScript(bloonLookUpScript);
+            
+        var newBloonFollowingScript = newBloon.GetComponent<PathFollowingScript>();
+        var currentBloonFollowingScript = GetComponent<PathFollowingScript>();
+        newBloonFollowingScript.SetBloonPath(currentBloonFollowingScript.GetBloonPath());
+        newBloonFollowingScript.SetCurrentTargetIndex(currentBloonFollowingScript.GetCurrentTargetIndex());
+        newBloonFollowingScript.SetDistanceTravelled(currentBloonFollowingScript.GetDistanceTravelled());
     }
 
     public uint GetSpeed()
