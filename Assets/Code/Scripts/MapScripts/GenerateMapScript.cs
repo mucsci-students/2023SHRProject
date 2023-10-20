@@ -53,7 +53,6 @@ public class GenerateMapScript : MonoBehaviour
         }
         
         GenerateMap();
-        Debug.Log(_map.GetLength(0) * _map.GetLength(1));
         gameManager.EnableAI();
     }
 
