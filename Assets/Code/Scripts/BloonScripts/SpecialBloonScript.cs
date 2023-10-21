@@ -33,6 +33,9 @@ public class SpecialBloonScript : BloonScript
             GetComponent<Collider2D>().enabled = false;
             //Disable the sprite renderer
             GetComponent<SpriteRenderer>().enabled = false;
+            
+            WaveManager.enemiesRemaining -= 1;
+            WaveManager.enemiesRemaining += bloonsToSpawn.Count;
 
             StartCoroutine(coroutine);
         }
