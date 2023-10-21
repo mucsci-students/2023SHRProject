@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ using TMPro;
 public class MonkeySpawner : MonoBehaviour
 {
     private GameObject monkeyPrefab;
+    private GameObject currentMonkey;
     private bool isPlacingMonkey;
     private MonkeyScript currentMonkeyInUpgradesMenu;
 
@@ -16,45 +18,79 @@ public class MonkeySpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UpgradePath1Text;
     [SerializeField] private TextMeshProUGUI UpgradePath2Text;
     [SerializeField] private TextMeshProUGUI SellPriceText;
+
     private void Update()
     {
-        if (!Input.GetMouseButtonDown(0))
-            return;
+        if (Input.GetMouseButtonDown(1) && currentMonkey != null)
+        {
+            isPlacingMonkey = false;
+            Destroy(currentMonkey);
+            currentMonkey = null;
+        }
         
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        
-        if (isPlacingMonkey)
+
+        if (currentMonkey != null)
         {
-            if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out Tile tile))
+            currentMonkey.transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+            if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out Tile tile) && !tile.ContainsTowers())
             {
-                if (!CanBuyTower())
-                {
-                    Debug.Log("no monkey for you");
-                    isPlacingMonkey = false;
-                    return;
-                }
-                    
-                PlaceMonkeyOnTile(tile);
-                
-                return;
+                currentMonkey.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
             }
         }
         
-        if (hit.collider != null && hit.collider.gameObject.TryGetComponent(out MonkeyScript monkeyScript) && !isPlacingMonkey)
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        if (hit.collider == null)
+            return;
+
+        HandleClick(hit);
+    }
+
+    private void HandleClick(RaycastHit2D hit)
+    {
+        if (isPlacingMonkey)
         {
-            // If we already have that monkey open in the upgrade menu and we clicked the monkey again, close it
-            if (UpgradeMenuCanvas.activeInHierarchy && currentMonkeyInUpgradesMenu == monkeyScript)
+            TryPlaceMonkey(hit);
+        } 
+        else if (hit.collider.gameObject.TryGetComponent(out MonkeyScript monkeyScript))
+        {
+            HandleMonkeyClick(monkeyScript);
+        }
+    }
+
+    private void TryPlaceMonkey(RaycastHit2D hit)
+    {
+        if (hit.collider.gameObject.TryGetComponent(out Tile tile))
+        {
+            if (!CanBuyTower())
             {
-                closeUpgradeMenu();
-                currentMonkeyInUpgradesMenu = null;
+                Debug.Log("no monkey for you");
+                isPlacingMonkey = false;
+                Destroy(currentMonkey);
+                currentMonkey = null;
+                return;
             }
-            else
-            {
-                // We clicked a monkey and we are not placing a tower so show upgrade menu
-                showUpgradeCanvas(monkeyScript);
-                currentMonkeyInUpgradesMenu = monkeyScript;
-            }
+                    
+            PlaceMonkeyOnTile(tile);
+        }
+    }
+
+    private void HandleMonkeyClick(MonkeyScript monkeyScript)
+    {
+        // If we already have that monkey open in the upgrade menu and we clicked the monkey again, close it
+        if (UpgradeMenuCanvas.activeInHierarchy && currentMonkeyInUpgradesMenu == monkeyScript)
+        {
+            closeUpgradeMenu();
+            currentMonkeyInUpgradesMenu = null;
+        }
+        else
+        {
+            // We clicked a monkey and we are not placing a tower so show upgrade menu
+            showUpgradeCanvas(monkeyScript);
+            currentMonkeyInUpgradesMenu = monkeyScript;
         }
     }
     
@@ -62,24 +98,13 @@ public class MonkeySpawner : MonoBehaviour
     {
         UpgradeMenuCanvas.SetActive(true);
         
-        //NOTE: come back and update monkey Image? possibly?
-        //NOTE: also add indicator for upgrade path 1 and 2
-        
         monkeyNameText.text = currentMonkey.GetMonkeyName();
         MonkeyImage.sprite = currentMonkey.GetMonkeyImage();
-        
-        //if i click on a different monkey, the upgrade paths will be different so you need to check 
-        //if the upgrade paths are empty or not
-        //probably a better way to do this considering that this is repeated code
-        if (currentMonkey.GetUpgradePath1().Count != 0)
-            UpgradePath1Text.text = currentMonkey.GetUpgradePath1()[0].GetDescription() + " Cost: " + currentMonkey.GetUpgradePath1()[0].GetCost();
-        else
-            UpgradePath1Text.text = "No more upgrades";
 
-        if (currentMonkey.GetUpgradePath2().Count != 0)
-            UpgradePath2Text.text = currentMonkey.GetUpgradePath2()[0].GetDescription() + " Cost: " + currentMonkey.GetUpgradePath2()[0].GetCost();
-        else
-            UpgradePath2Text.text = "No more upgrades";
+        var noUpgradesText = "No more upgrades";
+        
+        UpgradePath1Text.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath1()[0]);
+        UpgradePath2Text.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath2()[0]);
         
         SellPriceText.text = "Sell Price: " + currentMonkey.GetMonkeySellPrice();
         //check if this runs 2x later
@@ -89,75 +114,53 @@ public class MonkeySpawner : MonoBehaviour
         //also add how many bloons it popped, its popping power, other helpful info for player
     }
     
-    public void closeUpgradeMenu()
+    private string CreateDescriptionText(Upgrade upgrade)
     {
-        //I removed the button from the menu so this is not needed
-        UpgradeMenuCanvas.SetActive(false);
+        string description = upgrade.GetDescription();
+        description += " Cost: " + upgrade.GetCost();
+        return description;
+    }
+
+    
+    public void PurchaseUpgrade(List<Upgrade> upgradePath, Func<bool> canBuyUpgrade)
+    {
+        if (upgradePath.Count == 0 || !canBuyUpgrade())
+            return;
+
+        Upgrade currentUpgrade = upgradePath[0];
+
+        GameManager.Money -= currentUpgrade.GetCost();
+        currentMonkeyInUpgradesMenu.SetMonkeySellPrice(currentMonkeyInUpgradesMenu.GetMonkeySellPrice() + currentUpgrade.GetCost());
+        currentUpgrade.UpgradeTower();
+
+        showUpgradeCanvas(currentMonkeyInUpgradesMenu);
     }
 
     public void purchaseUpgradePath1()
     {
-        List<Upgrade> upgradePath1 = currentMonkeyInUpgradesMenu.GetUpgradePath1();
-        
-        if (upgradePath1.Count == 0 || !CanBuyUpgradePath1())
-            return;
-
-        Upgrade CurrentUpgrade = upgradePath1[0];
-        
-        //if there are 2 upgrades then we update the text to be the next upgrade (which is spot [1] in the list)
-        //then we decrease money and upgrade the tower like normal
-        //however, if there is only 1 upgrade left, we cant update the text to be spot [1] in the list cuz that doesnt exist
-        //so insstead we can just say "no more upgrades" and then upgrade the tower like normal
-        if (upgradePath1.Count > 1)
-        {
-            UpgradePath1Text.text = upgradePath1[1].GetDescription() + " Cost: " + upgradePath1[1].GetCost();
-        }
-        else
-        {
-            UpgradePath1Text.text = "No more upgrades";
-        }
-
-        GameManager.Money -= CurrentUpgrade.GetCost();
-        currentMonkeyInUpgradesMenu.SetMonkeySellPrice(currentMonkeyInUpgradesMenu.GetMonkeySellPrice() + CurrentUpgrade.GetCost());
-        SellPriceText.text = "Sell Price: " + currentMonkeyInUpgradesMenu.GetMonkeySellPrice();
-        CurrentUpgrade.UpgradeTower();
+        PurchaseUpgrade(currentMonkeyInUpgradesMenu.GetUpgradePath1(), CanBuyUpgradePath1);
     }
 
     public void purchaseUpgradePath2()
     {
-        List<Upgrade> upgradePath2 = currentMonkeyInUpgradesMenu.GetUpgradePath2();
-        
-        if (upgradePath2.Count == 0 || !CanBuyUpgradePath2())
-            return;
-        
-        Upgrade CurrentUpgrade = upgradePath2[0];
-        
-        if (upgradePath2.Count > 1)
-        {
-            UpgradePath2Text.text = upgradePath2[1].GetDescription() + " Cost: " + upgradePath2[1].GetCost();
-        }
-        else
-        {
-            UpgradePath2Text.text = "No more upgrades";
-        }
-        
-        GameManager.Money -= CurrentUpgrade.GetCost();
-        currentMonkeyInUpgradesMenu.SetMonkeySellPrice(currentMonkeyInUpgradesMenu.GetMonkeySellPrice() + CurrentUpgrade.GetCost());
-        SellPriceText.text = "Sell Price: " + currentMonkeyInUpgradesMenu.GetMonkeySellPrice();
-        CurrentUpgrade.UpgradeTower();
-        
-        //before change
-        // if (currentMonkeyInUpgradesMenu.GetUpgradePath2().Count == 0 || !CanBuyUpgradePath2()) 
-        //      return;
-        // //UpgradePath2Text.text = currentMonkeyInUpgradesMenu.GetUpgradePath2()[1].GetDescription(); //this is obvi an error cuz ur checkin spot [1] which
-            //doesnt exist if there is only 1 upgrade left
-        // GameManager.Money -= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
-        // currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].UpgradeTower();
+        PurchaseUpgrade(currentMonkeyInUpgradesMenu.GetUpgradePath2(), CanBuyUpgradePath2);
+    }
+    
+    private void closeUpgradeMenu()
+    {
+        //I removed the button from the menu so this is not needed
+        UpgradeMenuCanvas.SetActive(false);
     }
     
     public void SetMonkeyPrefab(GameObject newMonkeyPrefab)
     {
+        if (currentMonkey != null)
+            Destroy(currentMonkey);
+        
         monkeyPrefab = newMonkeyPrefab;
+        currentMonkey = Instantiate(newMonkeyPrefab);
+        currentMonkey.GetComponent<BoxCollider2D>().enabled = false;
+        currentMonkey.GetComponent<MonkeyScript>().enabled = false;
     }
     
     public void StartPlacingMonkey()
@@ -188,12 +191,17 @@ public class MonkeySpawner : MonoBehaviour
         Vector3 tilePosition = tile.transform.position;
         tilePosition.z = 0;
                     
-        GameObject newMonkey = Instantiate(monkeyPrefab, tilePosition, Quaternion.identity);
+        //GameObject newMonkey = Instantiate(monkeyPrefab, tilePosition, Quaternion.identity);
+        currentMonkey.transform.SetPositionAndRotation(tilePosition, Quaternion.identity);
         isPlacingMonkey = false; //no more monkey for you!
                     
         tile.SetContainsTower(true);
-        newMonkey.GetComponent<MonkeyScript>().SetTile(tile);
+        currentMonkey.GetComponent<MonkeyScript>().SetTile(tile);
         GameManager.Money -= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
+
+        currentMonkey.GetComponent<BoxCollider2D>().enabled = true;
+        currentMonkey.GetComponent<MonkeyScript>().enabled = true;
+        currentMonkey = null;
         return true;
     }
 

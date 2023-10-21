@@ -391,6 +391,6 @@ public abstract class MonkeyScript : MonoBehaviour
     {
         upgradePath2[0].UpgradeTower();
     }
-    
+
     #endregion
 }
