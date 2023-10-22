@@ -10,7 +10,7 @@ public class MonkeySpawner : MonoBehaviour
     private GameObject currentMonkey;
     private bool isPlacingMonkey;
     private MonkeyScript currentMonkeyInUpgradesMenu;
-    private int sellBackRate = 70; //70% of the original cost, you could make it a float and round up to int for more precision
+    private int sellBackRate = 70;
 
     [SerializeField] private GameObject UpgradeMenuCanvas;
     [SerializeField] private Image MonkeyImage;

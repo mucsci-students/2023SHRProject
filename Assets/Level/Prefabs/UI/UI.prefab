@@ -1370,6 +1370,7 @@ GameObject:
   - component: {fileID: 6050963793838212934}
   - component: {fileID: 6050963793838212928}
   - component: {fileID: 6050963793838212929}
+  - component: {fileID: 3437022018750080022}
   m_Layer: 5
   m_Name: RoundNumb
   m_TagString: Untagged
@@ -1493,6 +1494,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3437022018750080022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050963793838212935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59cae6b745f04348a3e0f05acfa22f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roundText: {fileID: 0}
 --- !u!1 &6050963793918333965
 GameObject:
   m_ObjectHideFlags: 0
