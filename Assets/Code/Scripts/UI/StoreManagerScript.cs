@@ -10,7 +10,7 @@ public class MonkeySpawner : MonoBehaviour
     private GameObject currentMonkey;
     private bool isPlacingMonkey;
     private MonkeyScript currentMonkeyInUpgradesMenu;
-    private float sellBackRate = 0.7f;
+    private int sellBackRate = 70; //70% of the original cost, you could make it a float and round up to int for more precision
 
     [SerializeField] private GameObject UpgradeMenuCanvas;
     [SerializeField] private Image MonkeyImage;
@@ -107,7 +107,7 @@ public class MonkeySpawner : MonoBehaviour
         UpgradePath1Text.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath1()[0]);
         UpgradePath2Text.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath2()[0]);
         
-        SellPriceText.text = "Sell Price: " + (currentMonkey.GetMonkeySellPrice() * sellBackRate);
+        SellPriceText.text = "Sell Price: " + (currentMonkey.GetMonkeySellPrice() * sellBackRate)/100;
         
         targetingModeDropdown.value = (int)currentMonkey.GetTargetingMode();
     }
@@ -214,7 +214,7 @@ public class MonkeySpawner : MonoBehaviour
 
     public void SellTower()
     {
-        GameManager.Money += (int)(currentMonkeyInUpgradesMenu.GetMonkeySellPrice()*sellBackRate);
+        GameManager.Money += (currentMonkeyInUpgradesMenu.GetMonkeySellPrice()*sellBackRate)/100;
         currentMonkeyInUpgradesMenu.GetTile().SetContainsTower(false);
         Destroy(currentMonkeyInUpgradesMenu.gameObject);
         UpgradeMenuCanvas.SetActive(false);
