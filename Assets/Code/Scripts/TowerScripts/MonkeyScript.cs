@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class MonkeyScript : MonoBehaviour
 {
