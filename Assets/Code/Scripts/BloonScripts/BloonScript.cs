@@ -39,6 +39,9 @@ public class BloonScript : MonoBehaviour
         var originalHealth = health;
         health -= damage;
         
+        if (!gameObject.activeInHierarchy)
+            return 0;
+        
         if (health <= 0)
         {
             Destroy(gameObject);
@@ -50,7 +53,10 @@ public class BloonScript : MonoBehaviour
             
             Destroy(gameObject);
         }
-
+        
+        gameObject.SetActive(false);
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         GameManager.Money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
     }

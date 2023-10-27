@@ -440,6 +440,10 @@ MonoBehaviour:
   MaxStep: 0
   timer: 0
   guess: 0
+  negativeReward: -0.1
+  perDecisionReward: 0.001
+  goodReward: 0.5
+  greatReward: 1
 --- !u!114 &5138473814648727517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +506,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenWaves: 15
   spawn: {fileID: 0}
-  autoPlay: 0
   RBES: 0a0000000f00000019000000230000002d0000003700000041000000550000005a0000005f00000064000000
   path: []
   bloonGroups:
@@ -543,7 +546,6 @@ MonoBehaviour:
   PinkBloonPrefab: {fileID: 8023372576191469905, guid: 08d1314cc9d2d0d48968c2c6e0ea5198, type: 3}
   WhiteBloonPrefab: {fileID: 8023372576191469905, guid: 5c0853f4f78777a44be3fc728584b779, type: 3}
   possibleEnemies: []
-  CurrentWaveNumber: 0
   timerRef: 0
   EnemiesRemaining: 0
   BLUS: {fileID: 8011398082764069274}
@@ -2964,6 +2966,10 @@ PrefabInstance:
       propertyPath: UpgradeMenuCanvas
       value: 
       objectReference: {fileID: 9097742450388488846}
+    - target: {fileID: 920651646, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: targetingModeDropdown
+      value: 
+      objectReference: {fileID: 2775235383767689637}
     - target: {fileID: 2323608379360333092, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: m_Enabled
       value: 1

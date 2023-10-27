@@ -18,6 +18,9 @@ public class SpecialBloonScript : BloonScript
         var originalHealth = health;
         health -= damage;
         
+        if (!gameObject.activeInHierarchy)
+            return 0;
+        
         if (health <= 0)
         {
             Destroy(gameObject);

@@ -203,7 +203,7 @@ public class WaveManager : MonoBehaviour
 
         foreach (var bloonGroup in bloonGroups)
         {
-            bloonGroup.SpawnBloon(path, spawn, BLUS);
+            bloonGroup.SpawnBloon(path, spawn, BLUS, gameObject.transform);
             // If any bloon group is not finished, set flag to true meaning that at least one bloon group is still spawning
             if (!bloonGroup.isFinished())
                 flag = true;
@@ -303,7 +303,7 @@ public class WaveManager : MonoBehaviour
         /// <param name="path">The path the bloon will follow. /param>
         /// <param name="spawn">The spawn point of the bloon.</param>
         /// <param name="BLUS">The BloonLookUpScript to pass to the bloon.</param>
-        public void SpawnBloon(List<Transform> path, Transform spawn, BloonLookUpScript BLUS)
+        public void SpawnBloon(List<Transform> path, Transform spawn, BloonLookUpScript BLUS, Transform parent)
         {
             if (Time.time - startTime < countdownToFirstBloonSpawn || amountToSpawn <= 0)
                 return;
@@ -311,8 +311,8 @@ public class WaveManager : MonoBehaviour
             if (spawnInstant || Time.time - lastTime >= interval)
             {
                 GameObject bloon = Instantiate(Bloon);
-                bloon.transform.position = spawn.position;
-                bloon.transform.rotation = spawn.rotation;
+                bloon.transform.parent = parent;
+                bloon.transform.SetPositionAndRotation(spawn.position, spawn.rotation);
 
                 bloon.GetComponent<BloonScript>().SetBloonLookUpScript(BLUS);
                 bloon.GetComponent<PathFollowingScript>().SetBloonPath(path);
