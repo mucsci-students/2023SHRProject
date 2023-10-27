@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public static int Money;
     /// <summary> Stores the users current lives </summary>
     public static int Lives;
-    /// <summary> Stores the current wave number </summary>
-    public static int WaveNumber = 0;
+
+    private int prevWaveNumb = 2;
+    
     /// <summary> Stores the number of enemies remaining in the current wave. 0 if wave is over </summary>
     public static int EnemiesRemaining = 0;
     /// <summary> Stores the total number of layers popped in the current game </summary>
@@ -46,6 +47,11 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         ExitGameOnZeroLives();
+        if (WaveManager.CurrentWaveNumber == prevWaveNumb)
+        {
+            ++prevWaveNumb;
+            Money+= 100+WaveManager.CurrentWaveNumber;
+        }
     }
 
     /// <summary>
@@ -76,7 +82,6 @@ public class GameManager : MonoBehaviour
     {
         Money = StartingMoney;
         Lives = StartingLives;
-        WaveNumber = 0;
         EnemiesRemaining = 0;
         LayersPopped = 0;
     }
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
     {
         Lives -= count;
     }
-    
+
     public void EnableAI()
     {
         //AI.SetActive(true);

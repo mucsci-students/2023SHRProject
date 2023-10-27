@@ -10,10 +10,11 @@ public class MonkeySpawner : MonoBehaviour
     private GameObject currentMonkey;
     private bool isPlacingMonkey;
     private MonkeyScript currentMonkeyInUpgradesMenu;
+    private int sellBackRate = 70;
 
     [SerializeField] private GameObject UpgradeMenuCanvas;
     [SerializeField] private Image MonkeyImage;
-    //Note: add targeting mode thing 
+    [SerializeField] private TMP_Dropdown targetingModeDropdown;
     [SerializeField] private TextMeshProUGUI monkeyNameText;
     [SerializeField] private TextMeshProUGUI UpgradePath1Text;
     [SerializeField] private TextMeshProUGUI UpgradePath2Text;
@@ -106,12 +107,9 @@ public class MonkeySpawner : MonoBehaviour
         UpgradePath1Text.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath1()[0]);
         UpgradePath2Text.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath2()[0]);
         
-        SellPriceText.text = "Sell Price: " + currentMonkey.GetMonkeySellPrice();
-        //check if this runs 2x later
-
-        //add targeting mode thing
-        //also update current money if selling
-        //also add how many bloons it popped, its popping power, other helpful info for player
+        SellPriceText.text = "Sell Price: " + (currentMonkey.GetMonkeySellPrice() * sellBackRate)/100;
+        
+        targetingModeDropdown.value = (int)currentMonkey.GetTargetingMode();
     }
     
     private string CreateDescriptionText(Upgrade upgrade)
@@ -120,8 +118,17 @@ public class MonkeySpawner : MonoBehaviour
         description += " Cost: " + upgrade.GetCost();
         return description;
     }
-
     
+    public void OnTargetingModeDropdownValueChanged()
+    {
+        if (currentMonkeyInUpgradesMenu != null)
+        {
+            int selectedValue = targetingModeDropdown.value;
+            Enums.TargetingMode newTargetingMode = (Enums.TargetingMode)selectedValue;
+            currentMonkeyInUpgradesMenu.SetTargetingMode(newTargetingMode);
+        }
+    }
+
     public void PurchaseUpgrade(List<Upgrade> upgradePath, Func<bool> canBuyUpgrade)
     {
         if (upgradePath.Count == 0 || !canBuyUpgrade())
@@ -207,7 +214,7 @@ public class MonkeySpawner : MonoBehaviour
 
     public void SellTower()
     {
-        GameManager.Money += currentMonkeyInUpgradesMenu.GetMonkeySellPrice();
+        GameManager.Money += (currentMonkeyInUpgradesMenu.GetMonkeySellPrice()*sellBackRate)/100;
         currentMonkeyInUpgradesMenu.GetTile().SetContainsTower(false);
         Destroy(currentMonkeyInUpgradesMenu.gameObject);
         UpgradeMenuCanvas.SetActive(false);

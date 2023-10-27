@@ -255,6 +255,16 @@ public abstract class MonkeyScript : MonoBehaviour
         return MonkeyImage;
     }
     
+    public Enums.TargetingMode GetTargetingMode()
+    {
+        return targetingMode;
+    }
+    
+    public void SetTargetingMode(Enums.TargetingMode newTargetingMode)
+    {
+        targetingMode = newTargetingMode;
+    }
+    
     public void IncrementLayersPopped(int layersPopped)
     {
         totalLayersPopped += layersPopped;

@@ -55,7 +55,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("Debugging")]
     public List<GameObject> possibleEnemies = new();
-    public int CurrentWaveNumber = 0;
+    public static int CurrentWaveNumber = 0;
     public float timerRef;
     public int EnemiesRemaining;
 
@@ -90,6 +90,7 @@ public class WaveManager : MonoBehaviour
     {
         // Reset all static variables
         enemiesRemaining = 0;
+        CurrentWaveNumber = 0;
     }
 
     /// <summary>
@@ -132,6 +133,8 @@ public class WaveManager : MonoBehaviour
         if (!betweenRounds && !RunCurrentWave() && enemiesRemaining == 0)
         {
             Debug.Log("Wave Ended");
+            //give round bonus & update round number
+            //GameManager.UpdateWaveNumber();
             if (CurrentWaveNumber > RBES.Count - 1)
             {
                 Debug.Log("Waves over");

@@ -25,8 +25,8 @@
 
 ## Authors
 - [Justin Stevens](https://github.com/JSteve0)
-- [Mitchell Harris0n]()
-- [Jonathan Riverra]()
+- [Mitchell Harris0n](https://github.com/mharrison7787)
+- [Jonathan Riverra](https://github.com/jjriver1)
 
 ## [ML Agents](https://unity.com/products/machine-learning-agents) Setup and Installation
 
