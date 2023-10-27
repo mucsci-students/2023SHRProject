@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,34 +6,42 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] private Sprite baseSprite, offSetSprite;
-    [SerializeField] private SpriteRenderer renderer;
-    [SerializeField] private GameObject highlight;
     
-    private bool containsTower = false;
+    private SpriteRenderer _renderer;
+    private GameObject _highlight;
+    private bool _isOffsetColor = false;
+    private bool _containsTower = false;
 
-    public void Init(bool isOffsetColor)
+    private void Start()
     {
-        renderer.sprite = isOffsetColor ? offSetSprite : baseSprite;
+        _renderer = GetComponent<SpriteRenderer>();
+        _renderer.sprite = _isOffsetColor ? offSetSprite : baseSprite;
+        _highlight = transform.GetChild(0).gameObject;
     }
 
-    void OnMouseEnter()
+    public void SetColor(bool isOffsetColor)
     {
-        highlight.SetActive(true);
+        _isOffsetColor = isOffsetColor;
+    }
+
+    private void OnMouseEnter()
+    {
+        _highlight.SetActive(true);
     }
     
-    void OnMouseExit()
+    private void OnMouseExit()
     {
-        highlight.SetActive(false);
+        _highlight.SetActive(false);
     }
 
     public bool ContainsTowers()
     {
-        return containsTower;
+        return _containsTower;
     }
     
     public void SetContainsTower(bool state)
     {
-        containsTower = state;
+        _containsTower = state;
     }
     
 }

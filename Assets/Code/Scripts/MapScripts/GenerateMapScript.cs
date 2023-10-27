@@ -207,7 +207,7 @@ public class GenerateMapScript : MonoBehaviour
                     spawnedTile.name = $"Tile {y} {x}";
 
                     var isOffsetColor = (y % 2 == 0 && x % 2 != 0) || (y % 2 != 0 && x % 2 == 0);
-                    spawnedTile.Init(isOffsetColor);
+                    spawnedTile.SetColor(isOffsetColor);
                     spawnedTile.transform.parent = transform;
                 }
                 else if (array[y, x] == 1)

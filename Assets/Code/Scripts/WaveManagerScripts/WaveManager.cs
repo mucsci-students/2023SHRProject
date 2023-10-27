@@ -24,7 +24,7 @@ public class WaveManager : MonoBehaviour
     [Tooltip("The spawn point for the bloons")]
     public Transform spawn;
 
-    [SerializeField] private bool autoPlay = false;
+    //[SerializeField] private bool autoPlay = false;
 
     [SerializeField] private List<int> RBES = new();
 
