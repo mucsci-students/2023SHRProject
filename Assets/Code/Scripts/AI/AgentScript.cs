@@ -11,30 +11,57 @@ using Unity.MLAgents.Sensors;
 public class AgentScript : Agent
 {
     private int[,] _map;
+    private Tile[,] _tiles;
 
-    public float timer = 0;
+    [SerializeField] private GenerateMapScript generateMapScript;
+    [SerializeField] private WaveManager waveManager;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private MonkeySpawner storeManagerScript;
+    [SerializeField] private DartMonkeyScript dartMonkeyScript;
 
-    public int guess = 0;
+    public int previousWave = 1;
     
-    [SerializeField] private float negativeReward = -0.1f;
-    [SerializeField] private float perDecisionReward = 0.001f;
-    [SerializeField] private float goodReward = 0.5f;
-    [SerializeField] private float greatReward = 1f;
+    //[SerializeField] private float negativeReward = -0.1f;
+    //[SerializeField] private float perDecisionReward = 0.001f;
+    //[SerializeField] private float goodReward = 0.5f;
+    //[SerializeField] private float greatReward = 1f;
 
-    public void SetMap(int[,] map)
+    public void Start()
     {
-        //_map = map;
+        Debug.Log("AI starting");
     }
 
     public override void OnEpisodeBegin()
     {
-        guess = UnityEngine.Random.Range(0, 2);
+        // Destroy all monkeys
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        waveManager.DestroyAllBloons();
+        storeManagerScript.DestroyAllProjectiles();
+
+        previousWave = 1;
+        generateMapScript.GenerateMap();
+        _map = generateMapScript.GetMap();
+        _tiles = generateMapScript.GetTileMap();
+        waveManager.ResetAll();
+        gameManager.ResetAll();
+        waveManager.StartWave();
+        Utils.Print2DArray(_map);
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         //Generate random int between 0 and 1
-        sensor.AddObservation(guess);
+        for (int i = 0; i < _map.GetLength(0); i++)
+        {
+            for (int j = 0; j < _map.GetLength(1); j++)
+            {
+                sensor.AddObservation(_map[i, j]);
+            }
+        }
+        //Utils.Print2DArray(_map);
     }
     
     // 1. Can do nothing
@@ -60,12 +87,12 @@ public class AgentScript : Agent
     {
         DoNothing,
         PlaceTower,
-        UpgradeTower
+        //UpgradeTower
     }
     
     private enum TowerType
     {
-        DoNothing,
+        //DoNothing,
         DartMonkey,
         TackShooter,
         SniperMonkey,
@@ -76,39 +103,61 @@ public class AgentScript : Agent
         SuperMonkey
     }
 
-    private bool ContainsTower()
-    {
-        //TODO: implement
-        return true;
-    }
-
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Each time makes a decision give it very small reward.
-        AddReward(perDecisionReward);
-        
-        Decision choice = (Decision) actions.DiscreteActions[0];
-        TowerType towerType = (TowerType)actions.DiscreteActions[1];
-        
-        switch (choice)
+        if (waveManager.isGameOver)
         {
-            case Decision.DoNothing:
-                if (towerType != TowerType.DoNothing)
-                {
-                    AddReward(negativeReward);
-                }
-                break;
-            case Decision.PlaceTower:
-                if (towerType != TowerType.DoNothing || ContainsTower())
-                {
-                    AddReward(negativeReward);
-                }
-                else
-                {
-                    AddReward(goodReward);
-                }
-                break;
+            AddReward(1f);
+            EndEpisode();
+            return;
         }
         
+        if (gameManager.GetLives() <= 0)
+        {
+            AddReward(-1f);
+            EndEpisode();
+            return;
+        }
+        
+        if (waveManager.CurrentWaveNumber > previousWave)
+        {
+            previousWave = waveManager.CurrentWaveNumber;
+            AddReward(0.5f);
+        }
+        
+
+        Decision choice = (Decision) actions.DiscreteActions[0];
+        int xPos = actions.DiscreteActions[1] % 8;
+        int yPos = actions.DiscreteActions[1] / 8;
+
+        if (choice == Decision.PlaceTower)
+        {
+            Tile tile = _tiles[yPos, xPos];
+            
+            if (tile == null || tile.ContainsTowers())
+            {
+                AddReward(-0.0125f);
+                Debug.Log("Failed to place tower");
+            }
+            else
+            {
+                tile.SetContainsTower(true);
+                Vector3 tilePos = tile.transform.position;
+                tilePos.z = 0;
+                DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
+                script.SetProjectileContainer(storeManagerScript.projectileContainer);
+                script.gameObject.transform.parent = gameObject.transform;
+                script.SetTile(tile);
+                // Set script pos z to 0
+                _map[yPos, xPos] = 2;
+                Utils.Print2DArray(_map);
+                Debug.Log("Placed tower");
+            }
+        }
+        else
+        {
+            Debug.Log("Do nothing");
+        }
+
     }
 }

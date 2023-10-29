@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEditor;
 
@@ -7,16 +9,16 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     /// <summary> Stores the users current money </summary>
-    public static int Money;
+    public int Money;
     /// <summary> Stores the users current lives </summary>
-    public static int Lives;
+    public int Lives;
 
     private int prevWaveNumb = 2;
     
     /// <summary> Stores the number of enemies remaining in the current wave. 0 if wave is over </summary>
-    public static int EnemiesRemaining = 0;
+    public int EnemiesRemaining = 0;
     /// <summary> Stores the total number of layers popped in the current game </summary>
-    public static int LayersPopped = 0;
+    public int LayersPopped = 0;
 
     /// <summary> Stores the starting money for the game </summary>
     [SerializeField]
@@ -27,16 +29,32 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Tooltip("Stores the starting lives for the game")]
     private int StartingLives = 200;
-
+    
+    [SerializeField]
+    private bool isAIEnabled = false;
+    
+    [Header("Object Links")]
+    
     [SerializeField] private GameObject AI;
 
     [SerializeField] private GenerateMapScript generateMapScript;
+    
+    [SerializeField] private WaveManager waveManager;
 
     /// <summary>
     /// Unity method called on object creation.
     /// Sets the initial values for the class variables.
     /// </summary>
     private void Start()
+    {
+        ResetAll();
+        if (isAIEnabled)
+        {
+            StartCoroutine(StartAI());
+        }
+    }
+
+    public void ResetAll()
     {
         ResetValues();
     }
@@ -46,11 +64,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        ExitGameOnZeroLives();
-        if (WaveManager.CurrentWaveNumber == prevWaveNumb)
+        if (!isAIEnabled)
+        {
+            ExitGameOnZeroLives();
+        }
+        
+        if (waveManager.CurrentWaveNumber == prevWaveNumb)
         {
             ++prevWaveNumb;
-            Money+= 100+WaveManager.CurrentWaveNumber;
+            Money += 100 + waveManager.CurrentWaveNumber;
         }
     }
 
@@ -90,17 +112,27 @@ public class GameManager : MonoBehaviour
     /// Decrements the users lives by the count param.
     /// </summary>
     /// <param name="count"> The amount of lives to subtract from the users lives </param>
-    public static void SubtractLives(int count)
+    public void SubtractLives(int count)
     {
         Lives -= count;
     }
-
-    public void EnableAI()
+    
+    private IEnumerator StartAI()
     {
-        //AI.SetActive(true);
-        //AI.GetComponent<AgentScript>().SetMap(generateMapScript.GetMap());
+        yield return new WaitForSeconds(1);
+        EnableAI();
+    }
+
+    private void EnableAI()
+    {
+        AI.SetActive(true);
     }
     
+    public int GetLives()
+    {
+        return Lives;
+    }
+
     // Cheats
     public void AddMoney(int amount)
     {

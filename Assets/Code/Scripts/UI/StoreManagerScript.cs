@@ -19,6 +19,9 @@ public class MonkeySpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UpgradePath1Text;
     [SerializeField] private TextMeshProUGUI UpgradePath2Text;
     [SerializeField] private TextMeshProUGUI SellPriceText;
+    
+    [SerializeField] private GameManager gameManager;
+    public Transform projectileContainer;
 
     private void Update()
     {
@@ -136,7 +139,7 @@ public class MonkeySpawner : MonoBehaviour
 
         Upgrade currentUpgrade = upgradePath[0];
 
-        GameManager.Money -= currentUpgrade.GetCost();
+        gameManager.Money -= currentUpgrade.GetCost();
         currentMonkeyInUpgradesMenu.SetMonkeySellPrice(currentMonkeyInUpgradesMenu.GetMonkeySellPrice() + currentUpgrade.GetCost());
         currentUpgrade.UpgradeTower();
 
@@ -177,17 +180,17 @@ public class MonkeySpawner : MonoBehaviour
     
     public bool CanBuyUpgradePath1()
     {
-        return GameManager.Money >= currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].GetCost();
+        return gameManager.Money >= currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].GetCost();
     }
     
     public bool CanBuyUpgradePath2()
     {
-        return GameManager.Money >= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
+        return gameManager.Money >= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
     }
 
     public bool CanBuyTower()
     {
-        return GameManager.Money >= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
+        return gameManager.Money >= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
     }
 
     public bool PlaceMonkeyOnTile(Tile tile)
@@ -204,17 +207,35 @@ public class MonkeySpawner : MonoBehaviour
                     
         tile.SetContainsTower(true);
         currentMonkey.GetComponent<MonkeyScript>().SetTile(tile);
-        GameManager.Money -= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
+        gameManager.Money -= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
 
         currentMonkey.GetComponent<BoxCollider2D>().enabled = true;
         currentMonkey.GetComponent<MonkeyScript>().enabled = true;
+        currentMonkey.GetComponent<MonkeyScript>().SetProjectileContainer(projectileContainer);
+        currentMonkey.transform.parent = gameObject.transform;
         currentMonkey = null;
         return true;
     }
 
+    public void DestroyAllMonkeys()
+    {
+        foreach (Transform child in transform)
+        {
+            DestroyImmediate(child.gameObject);
+        }
+    }
+    
+    public void DestroyAllProjectiles()
+    {
+        foreach (Transform child in projectileContainer)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     public void SellTower()
     {
-        GameManager.Money += (currentMonkeyInUpgradesMenu.GetMonkeySellPrice()*sellBackRate)/100;
+        gameManager.Money += (currentMonkeyInUpgradesMenu.GetMonkeySellPrice()*sellBackRate)/100;
         currentMonkeyInUpgradesMenu.GetTile().SetContainsTower(false);
         Destroy(currentMonkeyInUpgradesMenu.gameObject);
         UpgradeMenuCanvas.SetActive(false);

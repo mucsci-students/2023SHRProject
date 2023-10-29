@@ -66,6 +66,8 @@ public abstract class MonkeyScript : MonoBehaviour
     [SerializeField]
     protected CircleCollider2D radiusCollider;
 
+    [SerializeField] protected Transform projectileContainer;
+         
     private float _timer = 0f;
     
     private Sprite MonkeyImage;
@@ -117,6 +119,7 @@ public abstract class MonkeyScript : MonoBehaviour
     protected virtual void Fire(GameObject target)
     { 
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        projectile.transform.parent = projectileContainer;
         var projectileScript = projectile.GetComponent<ProjectileScript>();
         projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
     }
@@ -241,6 +244,11 @@ public abstract class MonkeyScript : MonoBehaviour
     #endregion
 
     #region Getters and Setters
+    
+    public void SetProjectileContainer(Transform transform)
+    {
+        projectileContainer = transform;
+    }
 
     public string GetMonkeyName()
     {

@@ -37,6 +37,7 @@ public class NinjaMonkeyScript : MonkeyScript
     {
         //this is for the original projectile - basically only 1 projectile
         var originalProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        originalProjectile.transform.parent = projectileContainer;
         var originalProjectileScript = originalProjectile.GetComponent<ProjectileScript>();
         originalProjectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
         

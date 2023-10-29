@@ -6,6 +6,7 @@ using UnityEngine;
 public class RoundUIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI roundText;
+    [SerializeField] private WaveManager waveManager;
     
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,8 @@ public class RoundUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        roundText.text = WaveManager.CurrentWaveNumber == 0 
+        roundText.text = waveManager.CurrentWaveNumber == 0 
             ? "1" 
-            : WaveManager.CurrentWaveNumber.ToString();
+            : waveManager.CurrentWaveNumber.ToString();
     }
 }

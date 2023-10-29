@@ -21,6 +21,10 @@ public class MonkeyRangeScript : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (parentMonkeyScript == null)
+        {
+            return;
+        }
         if (other.gameObject != null && other.gameObject.CompareTag("Bloon"))
         {
             parentMonkeyScript.AddBloonToRange(other.gameObject);
@@ -29,6 +33,10 @@ public class MonkeyRangeScript : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (parentMonkeyScript == null)
+        {
+            return;
+        }
         if (other.gameObject != null && other.gameObject.CompareTag("Bloon"))
         {
             parentMonkeyScript.RemoveBloonFromRange(other.gameObject);

@@ -34,6 +34,7 @@ public class TackTowerScript : MonkeyScript
         foreach (Vector3 direction in directions)
         {
             var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            projectile.transform.parent = projectileContainer;
             var projectileScript = projectile.GetComponent<ProjectileScript>();
             projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, direction, this);
         }
