@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6425238000497879261}
   - component: {fileID: 6425238000497879260}
   - component: {fileID: 6425238000497879258}
-  - component: {fileID: 6425238000497879259}
+  - component: {fileID: 4021442348252588506}
   m_Layer: 2
   m_Name: Radius
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6425238001161290764}
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6425238000497879259
+--- !u!114 &4021442348252588506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,9 +145,9 @@ GameObject:
   - component: {fileID: 6425238001161290764}
   - component: {fileID: 6425238001161290765}
   - component: {fileID: 6425238001161290762}
-  - component: {fileID: 3720204621822938181}
+  - component: {fileID: 7014256425518720067}
   m_Layer: 0
-  m_Name: SpikeFactory
+  m_Name: DartlingGunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,14 +161,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6425238001161290767}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6425238000497879261}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &6425238001161290765
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -210,10 +210,10 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1024735602, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+  m_Sprite: {fileID: 2142717697, guid: aab4df575745c445286acf1615ad78ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -257,7 +257,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.83, y: 0.83}
+    oldSize: {x: 0.18, y: 0.48}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -266,7 +266,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
---- !u!114 &3720204621822938181
+--- !u!114 &7014256425518720067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,37 +275,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 6425238001161290767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7cefef9a3cbe47cba3de10cd3db2b17, type: 3}
+  m_Script: {fileID: 11500000, guid: eee613306ac974c3ca30d6003a96ea8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monkeyName: Spike Factory
-  monkeyCost: 850
-  firingRate: 1
+  monkeyName: Dartling Gunner
+  monkeyCost: 720
+  firingRate: 0.6
   targetingMode: 0
-  rotateSpeed: 270
+  rotateSpeed: 720
   upgradePath1:
-  - cost: 680
+  - cost: 255
     tier: 1
-    description: 'Bigger Stacks '
-    sprite: {fileID: 1428263917, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
-  - cost: 510
-    tier: 2
-    description: 'White Hot Spikes '
-    sprite: {fileID: 954702911, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+    description: Increases accuracy
+    sprite: {fileID: 288825273, guid: aab4df575745c445286acf1615ad78ed, type: 3}
+  - cost: 1
+    tier: 1020
+    description: 'Darts gain +2 pierce per shot '
+    sprite: {fileID: 298962401, guid: aab4df575745c445286acf1615ad78ed, type: 3}
   upgradePath2:
-  - cost: 510
+  - cost: 810
     tier: 1
-    description: 'Faster Production '
-    sprite: {fileID: 1047613418, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
-  - cost: 680
+    description: Makes gun fire much faster.
+    sprite: {fileID: -176797148, guid: aab4df575745c445286acf1615ad78ed, type: 3}
+  - cost: 4080
     tier: 2
-    description: 'Even Faster Production '
-    sprite: {fileID: 1572495123, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
-  projectileSpeed: 1
+    description: Shoots depleted bloontonium missiles that can damage all Bloon types
+    sprite: {fileID: 11520142, guid: aab4df575745c445286acf1615ad78ed, type: 3}
+  projectileSpeed: 20
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 4069108416899728122, guid: 57e9ec0ff5e81473d842a6199d01ff2d, type: 3}
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 6425238000497879260}
   radiusCollider: {fileID: 6425238000497879258}
+  projectileContainer: {fileID: 0}
+  projectilesPerBurst: 3
+  burstDelay: 0.2
