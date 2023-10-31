@@ -391,19 +391,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 40
+    VectorObservationSize: 61
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 0200000028000000
-    VectorActionSize: 0200000028000000
+      BranchSizes: 02000000030000000a0000000600000003000000
+    VectorActionSize: 02000000030000000a0000000600000003000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
-  m_InferenceDevice: 1
+  m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: NewReward
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 20
+  DecisionPeriod: 10
   TakeActionsBetweenDecisions: 0
 --- !u!114 &3449493614834261606
 MonoBehaviour:
@@ -443,6 +443,7 @@ MonoBehaviour:
   gameManager: {fileID: 4365015116201456976}
   storeManagerScript: {fileID: 6982288789755033023}
   dartMonkeyScript: {fileID: 8332110718181161042, guid: cc38799dddd7040488e0b25a7a465fff, type: 3}
+  sniperMonkeyScript: {fileID: 7057270781938598212, guid: e13b5642812924487b50f6d09d1a684c, type: 3}
   previousWave: 1
 --- !u!114 &5138473814648727517
 MonoBehaviour:
@@ -506,7 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenWaves: 15
   spawn: {fileID: 0}
-  autoPlay: 0
+  autoPlay: 1
   RBES: 0a0000000f00000019000000230000002d0000003700000041000000550000005a0000005f00000064000000
   path: []
   bloonGroups:
@@ -1813,15 +1814,15 @@ MonoBehaviour:
   roadPrefab: {fileID: 6228069413267082070, guid: f2a7fbba161dd4840936c0d9c7bd1226, type: 3}
   waveManager: {fileID: 7724620301874222394}
   gameManager: {fileID: 4365015116201456976}
-  useCameraBounds: 1
-  moveRightProbability: 0.337
+  useCameraBounds: 0
+  moveRightProbability: 0.331
   leftCameraPosition: 0
   rightCameraPosition: 0
   topCameraPosition: 0
   bottomCameraPosition: 0
   blockSize: 0
-  yBlocks: 0
-  xBlocks: 0
+  yBlocks: 6
+  xBlocks: 10
 --- !u!1 &6100410495291488836
 GameObject:
   m_ObjectHideFlags: 0
