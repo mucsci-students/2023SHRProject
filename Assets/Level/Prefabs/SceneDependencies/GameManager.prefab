@@ -48,8 +48,8 @@ MonoBehaviour:
   Lives: 0
   EnemiesRemaining: 0
   LayersPopped: 0
-  StartingMoney: 1000
-  StartingLives: 100
+  StartingMoney: 500
+  StartingLives: 1
   isAIEnabled: 1
   AI: {fileID: 0}
   generateMapScript: {fileID: 0}
