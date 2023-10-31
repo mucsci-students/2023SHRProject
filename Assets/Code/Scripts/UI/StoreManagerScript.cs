@@ -110,7 +110,7 @@ public class MonkeySpawner : MonoBehaviour
         UpgradePath1Text.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath1()[0]);
         UpgradePath2Text.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath2()[0]);
         
-        SellPriceText.text = "Sell Price: " + (currentMonkey.GetMonkeySellPrice() * sellBackRate)/100;
+        SellPriceText.text = "Sell $" + (currentMonkey.GetMonkeySellPrice() * sellBackRate)/100;
         
         targetingModeDropdown.value = (int)currentMonkey.GetTargetingMode();
     }
