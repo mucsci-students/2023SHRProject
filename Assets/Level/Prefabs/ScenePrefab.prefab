@@ -2379,15 +2379,15 @@ MonoBehaviour:
   roadPrefab: {fileID: 6228069413267082070, guid: f2a7fbba161dd4840936c0d9c7bd1226, type: 3}
   waveManager: {fileID: 7724620301874222394}
   gameManager: {fileID: 4365015116201456976}
-  useCameraBounds: 0
+  useCameraBounds: 1
   moveRightProbability: 0.331
   leftCameraPosition: 0
   rightCameraPosition: 0
   topCameraPosition: 0
   bottomCameraPosition: 0
-  blockSize: 0
-  yBlocks: 6
-  xBlocks: 10
+  blockSize: 1
+  yBlocks: 10
+  xBlocks: 16
 --- !u!1 &6100410495291488836
 GameObject:
   m_ObjectHideFlags: 0
@@ -4166,6 +4166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6050963792836908114, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6050963792912653734, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4342,6 +4346,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1937070192, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+    - target: {fileID: 6050963794311115769, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: m_text
+      value: WAVE
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050963794311115775, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: m_Name
+      value: WaveLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 6050963794489226776, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
