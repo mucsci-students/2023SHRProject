@@ -1,0 +1,56 @@
+{
+    "NewReward": {
+        "checkpoints": [
+            {
+                "steps": 999912,
+                "file_path": "results\\test21\\NewReward\\NewReward-999912.onnx",
+                "reward": 3.6526788004807065,
+                "creation_time": 1698711113.969675,
+                "auxillary_file_paths": [
+                    "results\\test21\\NewReward\\NewReward-999912.pt"
+                ]
+            },
+            {
+                "steps": 1999683,
+                "file_path": "results\\test21\\NewReward\\NewReward-1999683.onnx",
+                "reward": 3.50116302800733,
+                "creation_time": 1698719340.1958148,
+                "auxillary_file_paths": [
+                    "results\\test21\\NewReward\\NewReward-1999683.pt"
+                ]
+            },
+            {
+                "steps": 2001240,
+                "file_path": "results\\test21\\NewReward\\NewReward-2001240.onnx",
+                "reward": 3.5558446884155273,
+                "creation_time": 1698719340.3435202,
+                "auxillary_file_paths": [
+                    "results\\test21\\NewReward\\NewReward-2001240.pt"
+                ]
+            },
+            {
+                "steps": 2285204,
+                "file_path": "results\\test21\\NewReward\\NewReward-2285204.onnx",
+                "reward": 3.373250126838684,
+                "creation_time": 1698722081.960302,
+                "auxillary_file_paths": [
+                    "results\\test21\\NewReward\\NewReward-2285204.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2285204,
+            "file_path": "results\\test21\\NewReward.onnx",
+            "reward": 3.373250126838684,
+            "creation_time": 1698722081.960302,
+            "auxillary_file_paths": [
+                "results\\test21\\NewReward\\NewReward-2285204.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
