@@ -18,15 +18,20 @@ public class DartlingGunnerScript : MonkeyScript
     [SerializeField]
     private float spreadAngle = 6.0f;
     
-     protected override void Update()
-     { 
-         
-     }
+    //  protected override void Update()
+    //  { 
+    //      
+    //  }
+    //
     
-    protected override void LookAt(Vector3 targetPosition)
-    {
-        
-    }
+     protected override void LookAt(Vector3 targetPosition)
+     {
+         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+         Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y); // Convert to Vector2
+         targetPosition = mousePosition2D;
+         //then use the base lookat
+         base.LookAt(targetPosition);
+     }
     
     protected override void Fire(GameObject target)
     {
@@ -35,14 +40,13 @@ public class DartlingGunnerScript : MonkeyScript
 
     private IEnumerator ShootBurst(GameObject target)
     {
-        // Get the mouse position in the world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the same z position as the tower
+        Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y); // Convert to Vector2
 
         for (int i = 0; i < projectilesPerBurst; i++)
         {
             // Calculate the direction towards the mouse position with spread
-            Vector3 direction = Quaternion.Euler(0, 0, spreadAngle * (i - (projectilesPerBurst - 1) / 2.0f)) * (mousePosition - transform.position);
+            Vector3 direction = Quaternion.Euler(0, 0, spreadAngle * (i - (projectilesPerBurst - 1) / 2.0f)) * (mousePosition2D - (Vector2)transform.position);
 
             // Calculate the rotation angle from the direction vector
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
