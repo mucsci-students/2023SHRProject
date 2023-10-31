@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8558711239149236226}
   - component: {fileID: 4650824212956930161}
   m_Layer: 0
-  m_Name: WhiteBloon
+  m_Name: BlackBloon
   m_TagString: Bloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1382413538, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+  m_Sprite: {fileID: 185730918, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,7 +151,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.37, y: 0.46}
+    oldSize: {x: 0.36, y: 0.46}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   waveManager: {fileID: 0}
   gameManager: {fileID: 0}
   bloonsToSpawn:
+  - {fileID: 8023372576191469905, guid: 08d1314cc9d2d0d48968c2c6e0ea5198, type: 3}
   - {fileID: 8023372576191469905, guid: 08d1314cc9d2d0d48968c2c6e0ea5198, type: 3}
   - {fileID: 8023372576191469905, guid: 08d1314cc9d2d0d48968c2c6e0ea5198, type: 3}
   SecondsBetweenBloonSpawns: 0.1

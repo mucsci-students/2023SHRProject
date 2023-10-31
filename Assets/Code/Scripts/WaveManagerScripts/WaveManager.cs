@@ -40,7 +40,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject GreenBloonPrefab;
     [SerializeField] private GameObject YellowBloonPrefab;
     [SerializeField] private GameObject PinkBloonPrefab;
-    //[SerializeField] private GameObject BlackBloonPrefab;
+    [SerializeField] private GameObject BlackBloonPrefab;
     [SerializeField] private GameObject WhiteBloonPrefab;
     //[SerializeField] private GameObject LeadBloonPrefab;
     //[SerializeField] private GameObject ZebraBloonPrefab;
@@ -200,21 +200,25 @@ public class WaveManager : MonoBehaviour
         {
             possibleEnemies.Add(BlueBloonPrefab);
         }
-        else if (CurrentWaveNumber == 3)
+        else if (CurrentWaveNumber == 6)
         {
             possibleEnemies.Add(GreenBloonPrefab);
         }
-        else if (CurrentWaveNumber == 4)
+        else if (CurrentWaveNumber == 11)
         {
             possibleEnemies.Add(YellowBloonPrefab);
         }
-        else if (CurrentWaveNumber == 5)
+        else if (CurrentWaveNumber == 15)
         {
             possibleEnemies.Add(PinkBloonPrefab);
         }
-        else if (CurrentWaveNumber == 6)
+        else if (CurrentWaveNumber == 23)
         {
             possibleEnemies.Add(WhiteBloonPrefab);
+        }
+        else if (CurrentWaveNumber == 23)
+        {
+            possibleEnemies.Add(BlackBloonPrefab);
         }
     }
 
