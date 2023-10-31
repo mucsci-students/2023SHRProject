@@ -44,7 +44,7 @@ public class NonRandomWaveManager : MonoBehaviour
     /// </summary>
     private bool betweenRounds = false;
 
-    private bool autoPlay = false;
+    //private bool autoPlay = false;
 
     private float timer = 0f;
 

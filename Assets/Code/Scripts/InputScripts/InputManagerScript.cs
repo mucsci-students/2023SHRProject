@@ -21,11 +21,6 @@ public class InputManagerScript : MonoBehaviour
         {
             ToggleSpeedUp();
         }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            Debug.Log("Enemies Remaining: " + WaveManager.enemiesRemaining);
-        }
     }
 
     public void ToggleSpeedUp()

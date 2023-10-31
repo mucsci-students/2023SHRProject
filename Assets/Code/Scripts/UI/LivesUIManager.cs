@@ -9,6 +9,8 @@ public class LivesUIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI livesText;
     
+    [SerializeField] private GameManager gameManager;
+    
     /// <summary> Unity event function called when the script is loaded </summary>
     private void Start()
     {
@@ -22,6 +24,6 @@ public class LivesUIManager : MonoBehaviour
     /// <summary> Unity event function, called once per frame </summary>
     private void Update()
     {
-        livesText.text = GameManager.Lives.ToString();
+        livesText.text = gameManager.Lives.ToString();
     }
 }

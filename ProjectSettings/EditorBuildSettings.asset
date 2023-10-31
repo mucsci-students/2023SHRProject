@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Level/Scenes/MainMenu.unity
     guid: 07c04a1b1ffec483bbd0cc50a5e58375
   - enabled: 1
-    path: Assets/Level/Scenes/JustinsDebugScene.unity
+    path: Assets/Level/Scenes/Debug/JustinsDebugScene.unity
     guid: 2d7364bc2314a3944b65e40e88e20816
   m_configObjects: {}

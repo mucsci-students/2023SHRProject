@@ -283,6 +283,7 @@ MonoBehaviour:
   firingRate: 0.9
   targetingMode: 0
   rotateSpeed: 270
+  shootingVariance: 0.01
   upgradePath1:
   - cost: 75
     tier: 1
@@ -309,3 +310,4 @@ MonoBehaviour:
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 6425238000497879260}
   radiusCollider: {fileID: 6425238000497879258}
+  projectileContainer: {fileID: 0}

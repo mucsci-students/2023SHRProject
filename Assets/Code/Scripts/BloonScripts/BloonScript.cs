@@ -13,6 +13,10 @@ public class BloonScript : MonoBehaviour
     [SerializeField] protected int health;
 
     [SerializeField] protected BloonLookUpScript bloonLookUpScript;
+    
+    [SerializeField] protected WaveManager waveManager;
+    
+    [SerializeField] protected GameManager gameManager;
 
     // Start is called before the first frame update
     private void Start()
@@ -39,10 +43,13 @@ public class BloonScript : MonoBehaviour
         var originalHealth = health;
         health -= damage;
         
+        if (!gameObject.activeInHierarchy)
+            return 0;
+        
         if (health <= 0)
         {
             Destroy(gameObject);
-            WaveManager.enemiesRemaining -= 1;
+            waveManager.enemiesRemaining -= 1;
         }
         else
         {
@@ -50,21 +57,29 @@ public class BloonScript : MonoBehaviour
             
             Destroy(gameObject);
         }
-
-        GameManager.Money += originalHealth - Math.Max(0, health);
+        
+        gameObject.SetActive(false);
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        gameManager.Money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
     }
 
     protected void SpawnAndInitializeBloon(GameObject bloonPrefab)
     {
         var newBloon = Instantiate(bloonPrefab, gameObject.transform.position, Quaternion.identity);
+        newBloon.transform.parent = transform.parent;
 
         var newBloonScript = newBloon.GetComponent<BloonScript>();
         newBloonScript.SetBloonLookUpScript(bloonLookUpScript);
+        newBloonScript.SetGameManager(gameManager);
+        newBloonScript.SetWaveManager(waveManager);
             
         var newBloonFollowingScript = newBloon.GetComponent<PathFollowingScript>();
         var currentBloonFollowingScript = GetComponent<PathFollowingScript>();
         newBloonFollowingScript.SetBloonPath(currentBloonFollowingScript.GetBloonPath());
+        newBloonFollowingScript.SetGameManager(gameManager);
+        newBloonFollowingScript.SetWaveManager(waveManager);
         newBloonFollowingScript.SetCurrentTargetIndex(currentBloonFollowingScript.GetCurrentTargetIndex());
         newBloonFollowingScript.SetDistanceTravelled(currentBloonFollowingScript.GetDistanceTravelled());
     }
@@ -82,5 +97,15 @@ public class BloonScript : MonoBehaviour
     public void SetBloonLookUpScript(BloonLookUpScript lookUpScript)
     {
         bloonLookUpScript = lookUpScript;
+    }
+
+    public void SetGameManager(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
+
+    public void SetWaveManager(WaveManager waveManager)
+    {
+        this.waveManager = waveManager;
     }
 }

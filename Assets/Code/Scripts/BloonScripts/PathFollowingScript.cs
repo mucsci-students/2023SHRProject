@@ -15,6 +15,10 @@ public class PathFollowingScript : MonoBehaviour
     /// </summary>
     [SerializeField] private List<Transform> bloonPath;
 
+    [SerializeField] private WaveManager waveManager;
+    
+    [SerializeField] private GameManager gameManager;
+
     private uint _currentTargetIndex = 0;
     private uint _speed;
     private float _distanceTraveled = 0;
@@ -41,6 +45,9 @@ public class PathFollowingScript : MonoBehaviour
         if (bloonPath.Count == 0)
             return;
 
+        if ((int)_currentTargetIndex >= bloonPath.Count)
+            return;
+        
         var targetPosition = bloonPath[(int)_currentTargetIndex].position;
         
 
@@ -51,7 +58,7 @@ public class PathFollowingScript : MonoBehaviour
             if (_currentTargetIndex == bloonPath.Count)
             {
                 SubtractLives();
-                WaveManager.enemiesRemaining -= 1;
+                waveManager.enemiesRemaining -= 1;
                 Destroy(gameObject);
             }
         }
@@ -74,7 +81,7 @@ public class PathFollowingScript : MonoBehaviour
 
     private void SubtractLives()
     {
-        GameManager.SubtractLives(_bloonScript.GetHealth());
+        gameManager.SubtractLives(_bloonScript.GetHealth());
     }
 
     /// <summary>
@@ -117,6 +124,16 @@ public class PathFollowingScript : MonoBehaviour
     public void SetBloonPath(List<Transform> newBloonPath)
     {
         bloonPath = newBloonPath;
+    }
+    
+    public void SetGameManager(GameManager newGameManager)
+    {
+        gameManager = newGameManager;
+    }
+    
+    public void SetWaveManager(WaveManager newWaveManagerManager)
+    {
+        waveManager = newWaveManagerManager;
     }
 
     public uint GetCurrentTargetIndex()

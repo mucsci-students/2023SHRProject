@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class MonkeyScript : MonoBehaviour
 {
@@ -32,6 +29,12 @@ public abstract class MonkeyScript : MonoBehaviour
     [Range(0, 720)]
     [Tooltip("Rotation speed in angular degrees per second")]
     private float rotateSpeed = 270f;
+    
+    [SerializeField]
+    [Tooltip("Adds a small variance to firing rate to make towers shoot at slightly different times.")]
+    protected float shootingVariance = 0.05f;
+
+    protected float actualVariance;
 
     [SerializeField]
     protected List<Upgrade> upgradePath1 = new(2);
@@ -69,6 +72,8 @@ public abstract class MonkeyScript : MonoBehaviour
     [SerializeField]
     protected CircleCollider2D radiusCollider;
 
+    [SerializeField] protected Transform projectileContainer;
+         
     private float _timer = 0f;
     
     private Sprite MonkeyImage;
@@ -85,6 +90,7 @@ public abstract class MonkeyScript : MonoBehaviour
         SetIsShowingRadius(false);
         PopulateUpgrades();
         sellPrice = monkeyCost;
+        actualVariance = UnityEngine.Random.Range(0, shootingVariance);
     }
 
     // Update is called once per frame
@@ -100,7 +106,7 @@ public abstract class MonkeyScript : MonoBehaviour
             }
             
             LookAt(target.transform.position);
-            if (_timer >= firingRate)
+            if (_timer >= firingRate - actualVariance)
             {
                 Fire(target);
                 _timer = 0;
@@ -120,6 +126,7 @@ public abstract class MonkeyScript : MonoBehaviour
     protected virtual void Fire(GameObject target)
     { 
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        projectile.transform.parent = projectileContainer;
         var projectileScript = projectile.GetComponent<ProjectileScript>();
         projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
     }
@@ -244,6 +251,11 @@ public abstract class MonkeyScript : MonoBehaviour
     #endregion
 
     #region Getters and Setters
+    
+    public void SetProjectileContainer(Transform transform)
+    {
+        projectileContainer = transform;
+    }
 
     public string GetMonkeyName()
     {
@@ -255,6 +267,16 @@ public abstract class MonkeyScript : MonoBehaviour
         return MonkeyImage;
     }
     
+    public Enums.TargetingMode GetTargetingMode()
+    {
+        return targetingMode;
+    }
+    
+    public void SetTargetingMode(Enums.TargetingMode newTargetingMode)
+    {
+        targetingMode = newTargetingMode;
+    }
+    
     public void IncrementLayersPopped(int layersPopped)
     {
         totalLayersPopped += layersPopped;
@@ -263,6 +285,12 @@ public abstract class MonkeyScript : MonoBehaviour
     public void AddBloonToRange(GameObject bloon)
     {
         _enemiesInRange.Add(bloon);
+    }
+    
+    public void TryAddBloonToRange(GameObject bloon)
+    {
+        if (!_enemiesInRange.Contains(bloon))
+            _enemiesInRange.Add(bloon);
     }
     
     public void RemoveBloonFromRange(GameObject bloon)
@@ -391,6 +419,6 @@ public abstract class MonkeyScript : MonoBehaviour
     {
         upgradePath2[0].UpgradeTower();
     }
-    
+
     #endregion
 }

@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 6425238001161290764}
   - component: {fileID: 6425238001161290765}
   - component: {fileID: 6425238001161290762}
-  - component: {fileID: 8476305411749378927}
+  - component: {fileID: -6456309373438653490}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -266,7 +266,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
---- !u!114 &8476305411749378927
+--- !u!114 &-6456309373438653490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,17 +279,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monkeyName: Cannon
-  monkeyCost: 650
-  firingRate: 1
+  monkeyCost: 445
+  firingRate: 1.5
   targetingMode: 0
   rotateSpeed: 270
-  upgradePath1: []
-  upgradePath2: []
-  projectileSpeed: 1
+  shootingVariance: 0.05
+  upgradePath1:
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
+  upgradePath2:
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
+  - cost: 0
+    tier: 0
+    description: 
+    sprite: {fileID: 0}
+  projectileSpeed: 10
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
   projectilePrefab: {fileID: 4069108416899728122, guid: 03049b022e51d6646ab8387c24ceaa0e, type: 3}
   totalLayersPopped: 0
-  radiusSpriteRenderer: {fileID: 0}
-  radiusCollider: {fileID: 0}
+  radiusSpriteRenderer: {fileID: 6425238000497879260}
+  radiusCollider: {fileID: 6425238000497879258}
+  projectileContainer: {fileID: 0}

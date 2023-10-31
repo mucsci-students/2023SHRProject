@@ -18,10 +18,13 @@ public class SpecialBloonScript : BloonScript
         var originalHealth = health;
         health -= damage;
         
+        if (!gameObject.activeInHierarchy)
+            return 0;
+        
         if (health <= 0)
         {
             Destroy(gameObject);
-            WaveManager.enemiesRemaining -= 1;
+            waveManager.enemiesRemaining -= 1;
         }
         else
         {
@@ -33,11 +36,14 @@ public class SpecialBloonScript : BloonScript
             GetComponent<Collider2D>().enabled = false;
             //Disable the sprite renderer
             GetComponent<SpriteRenderer>().enabled = false;
+            
+            waveManager.enemiesRemaining -= 1;
+            waveManager.enemiesRemaining += bloonsToSpawn.Count;
 
             StartCoroutine(coroutine);
         }
 
-        GameManager.Money += originalHealth - Math.Max(0, health);
+        gameManager.Money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
     }
     

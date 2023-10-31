@@ -32,6 +32,7 @@ public class WaveManager : MonoBehaviour
     public List<Transform> path = new();
 
     [SerializeField] private List<BloonGroup> bloonGroups = new();
+    private List<float> bloonGroupIntervalsCopy;
 
     [Header("Bloon Prefabs")]
     [SerializeField] private GameObject RedBloonPrefab;
@@ -39,7 +40,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject GreenBloonPrefab;
     [SerializeField] private GameObject YellowBloonPrefab;
     [SerializeField] private GameObject PinkBloonPrefab;
-    //[SerializeField] private GameObject BlackBloonPrefab;
+    [SerializeField] private GameObject BlackBloonPrefab;
     [SerializeField] private GameObject WhiteBloonPrefab;
     //[SerializeField] private GameObject LeadBloonPrefab;
     //[SerializeField] private GameObject ZebraBloonPrefab;
@@ -63,6 +64,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("Object Links")]
     [SerializeField] private BloonLookUpScript BLUS;
+    [SerializeField] private GameManager gameManager;
 
 
     // Private variables
@@ -72,7 +74,8 @@ public class WaveManager : MonoBehaviour
     /// </summary>
     private bool isPlaying = false;
 
-    public static int enemiesRemaining = 0;
+    public int enemiesRemaining = 0;
+    public bool isGameOver = false;
 
     /// <summary>
     /// Stores whether the game is currently between rounds. Is true if isPlaying is true and bloon count < 0.
@@ -90,13 +93,35 @@ public class WaveManager : MonoBehaviour
     {
         // Reset all static variables
         enemiesRemaining = 0;
+        CurrentWaveNumber = 0;
+        isGameOver = false;
+        bloonGroupIntervalsCopy = new List<float>();
+        foreach (var bloonGroup in bloonGroups)
+        {
+            bloonGroupIntervalsCopy.Add(bloonGroup.interval);
+        }
+    }
+
+    public void ResetAll()
+    {
+        enemiesRemaining = 0;
+        CurrentWaveNumber = 0;
+        isGameOver = false;
+        betweenRounds = false;
+        timer = 0f;
+        possibleEnemies.Clear();
+        foreach (var bloonGroup in bloonGroups)
+        {
+            bloonGroup.amountToSpawn = 0;
+            bloonGroup.interval = bloonGroupIntervalsCopy[bloonGroups.IndexOf(bloonGroup)];
+        }
     }
 
     /// <summary>
     /// Called at the start of a wave.
     /// Updates the list of possible enemies and generates a random wave.
     /// </summary>
-    private void StartWave()
+    public void StartWave()
     {
         isPlaying = true;
         ++CurrentWaveNumber;
@@ -129,13 +154,16 @@ public class WaveManager : MonoBehaviour
             return;
 
         // Run once when wave is first over
-        if (!betweenRounds && !RunCurrentWave() && enemiesRemaining == 0)
+        if (!betweenRounds && !RunCurrentWave() && transform.childCount == 0)
         {
             Debug.Log("Wave Ended");
+            //give round bonus & update round number
+            //GameManager.UpdateWaveNumber();
             if (CurrentWaveNumber > RBES.Count - 1)
             {
                 Debug.Log("Waves over");
                 isPlaying = false;
+                isGameOver = true;
             }
             else
             {
@@ -144,12 +172,12 @@ public class WaveManager : MonoBehaviour
         }
 
         // Run every frame when between rounds
-        if (enemiesRemaining <= 0)
+        if (transform.childCount == 0 && betweenRounds)
         {
             enemiesRemaining = 0;
             timer += Time.unscaledDeltaTime;
             timerRef = timer; // used for ui
-            if (timer > timeBetweenWaves || Input.GetKeyDown(KeyCode.Space))
+            if (timer > timeBetweenWaves || Input.GetKeyDown(KeyCode.Space) || autoPlay)
             {
                 StartWave();
                 timer = 0;
@@ -172,21 +200,25 @@ public class WaveManager : MonoBehaviour
         {
             possibleEnemies.Add(BlueBloonPrefab);
         }
-        else if (CurrentWaveNumber == 3)
+        else if (CurrentWaveNumber == 6)
         {
             possibleEnemies.Add(GreenBloonPrefab);
         }
-        else if (CurrentWaveNumber == 4)
+        else if (CurrentWaveNumber == 11)
         {
             possibleEnemies.Add(YellowBloonPrefab);
         }
-        else if (CurrentWaveNumber == 5)
+        else if (CurrentWaveNumber == 15)
         {
             possibleEnemies.Add(PinkBloonPrefab);
         }
-        else if (CurrentWaveNumber == 6)
+        else if (CurrentWaveNumber == 23)
         {
             possibleEnemies.Add(WhiteBloonPrefab);
+        }
+        else if (CurrentWaveNumber == 23)
+        {
+            possibleEnemies.Add(BlackBloonPrefab);
         }
     }
 
@@ -200,7 +232,7 @@ public class WaveManager : MonoBehaviour
 
         foreach (var bloonGroup in bloonGroups)
         {
-            bloonGroup.SpawnBloon(path, spawn, BLUS);
+            bloonGroup.SpawnBloon(path, spawn, BLUS, gameObject.transform, gameManager, this);
             // If any bloon group is not finished, set flag to true meaning that at least one bloon group is still spawning
             if (!bloonGroup.isFinished())
                 flag = true;
@@ -258,6 +290,14 @@ public class WaveManager : MonoBehaviour
         return possibleEnemies[randomNum];
     }
 
+    public void DestroyAllBloons()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     [System.Serializable]
     public class BloonGroup
     {
@@ -300,7 +340,7 @@ public class WaveManager : MonoBehaviour
         /// <param name="path">The path the bloon will follow. /param>
         /// <param name="spawn">The spawn point of the bloon.</param>
         /// <param name="BLUS">The BloonLookUpScript to pass to the bloon.</param>
-        public void SpawnBloon(List<Transform> path, Transform spawn, BloonLookUpScript BLUS)
+        public void SpawnBloon(List<Transform> path, Transform spawn, BloonLookUpScript BLUS, Transform parent, GameManager gameManager, WaveManager waveManager)
         {
             if (Time.time - startTime < countdownToFirstBloonSpawn || amountToSpawn <= 0)
                 return;
@@ -308,11 +348,17 @@ public class WaveManager : MonoBehaviour
             if (spawnInstant || Time.time - lastTime >= interval)
             {
                 GameObject bloon = Instantiate(Bloon);
-                bloon.transform.position = spawn.position;
-                bloon.transform.rotation = spawn.rotation;
+                bloon.transform.parent = parent;
+                bloon.transform.SetPositionAndRotation(spawn.position, spawn.rotation);
 
-                bloon.GetComponent<BloonScript>().SetBloonLookUpScript(BLUS);
-                bloon.GetComponent<PathFollowingScript>().SetBloonPath(path);
+                var bloonScript = bloon.GetComponent<BloonScript>();
+                bloonScript.SetBloonLookUpScript(BLUS);
+                bloonScript.SetGameManager(gameManager);
+                bloonScript.SetWaveManager(waveManager);
+                var pathFollowingScript = bloon.GetComponent<PathFollowingScript>();
+                pathFollowingScript.SetBloonPath(path);
+                pathFollowingScript.SetGameManager(gameManager);
+                pathFollowingScript.SetWaveManager(waveManager);
 
                 --amountToSpawn;
                 lastTime = Time.time;

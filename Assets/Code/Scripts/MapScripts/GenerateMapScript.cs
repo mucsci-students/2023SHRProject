@@ -18,17 +18,22 @@ public class GenerateMapScript : MonoBehaviour
     
     [Header("Map Settings")]
     
+    [SerializeField] private bool useCameraBounds = true;
+    
     [SerializeField] [Range(0, 1)] 
     private float moveRightProbability = 0.5f;
     
-    private float leftCameraPosition = 0f;
-    private float rightCameraPosition = 0f;
-    private float topCameraPosition = 0f;
-    private float bottomCameraPosition = 0f;
-    private float blockSize = 0f;
-    private float yBlocks = 0f;
-    private float xBlocks = 0f;
+    [Header("Debug")]
+    [SerializeField] private float leftCameraPosition = 0f;
+    [SerializeField] private float rightCameraPosition = 0f;
+    [SerializeField] private float topCameraPosition = 0f;
+    [SerializeField] private float bottomCameraPosition = 0f;
+    [SerializeField] private float blockSize = 0f;
+    [SerializeField] private float yBlocks = 0f;
+    [SerializeField] private float xBlocks = 0f;
     private int[,] _map;
+    private Tile[,] _tileMap;
+    
     private bool[,] _visited;
     private int cornerCount = 0;  // Add this line at the top of your class with other member variables
     
@@ -48,33 +53,64 @@ public class GenerateMapScript : MonoBehaviour
     {
         if (currentSceneCamera == null)
         {
-            Debug.LogError("Camera is null on GenerateMapScript on object " + name);
-            Destroy(gameObject);
+            Debug.Log("Camera is null on GenerateMapScript on object " + name);
         }
         
         GenerateMap();
-        gameManager.EnableAI();
     }
 
     private void CalculateMapSize()
     {
-        Vector3 bottomLeftCameraPosition = currentSceneCamera.ViewportToWorldPoint(new Vector3(0f, 0f));
-        leftCameraPosition = bottomLeftCameraPosition.x;
-        rightCameraPosition = -leftCameraPosition;
-        topCameraPosition = bottomLeftCameraPosition.y;
-        bottomCameraPosition = -topCameraPosition;
+        Vector3 bottomLeftCameraPosition;
+        if (useCameraBounds)
+        {
+            bottomLeftCameraPosition = currentSceneCamera.ViewportToWorldPoint(new Vector3(0f, 0f));
+        }
+        else
+        {
+            bottomLeftCameraPosition = transform.parent.position;
+        }
+        
+        
+        if (leftCameraPosition == 0f)
+        {
+            leftCameraPosition = bottomLeftCameraPosition.x;
+        }
+        if (rightCameraPosition == 0f)
+        {
+            rightCameraPosition = -leftCameraPosition;
+        }
+        if (bottomCameraPosition == 0f)
+        {
+            bottomCameraPosition = bottomLeftCameraPosition.y;
+        }
+        if (topCameraPosition == 0f)
+        {
+            topCameraPosition = -bottomCameraPosition;
+        }
 
-        blockSize = Math.Abs(topCameraPosition - bottomCameraPosition) / 10;
+        blockSize = 1;
 
-        yBlocks = Math.Abs(topCameraPosition - bottomCameraPosition) / blockSize;
-        xBlocks = Math.Abs(leftCameraPosition - rightCameraPosition) / blockSize - 2;
+        if (yBlocks == 0)
+        {
+            yBlocks = (float)Math.Ceiling(Math.Abs(topCameraPosition - bottomCameraPosition) / blockSize);
+        }
+
+        if (xBlocks == 0)
+        {
+            xBlocks = (float)Math.Ceiling(Math.Abs(leftCameraPosition - rightCameraPosition) / blockSize - 2);
+        }
     }
     
     public void GenerateMap()
     {
+        DeleteMap();
+        waveManager.path.Clear();
         CalculateMapSize();
-        _visited = new bool[(int)Math.Ceiling(yBlocks), (int)Math.Ceiling(xBlocks)];
-        _map = new int[(int)Math.Ceiling(yBlocks), (int)Math.Ceiling(xBlocks)];
+        _visited = new bool[(int)yBlocks, (int)xBlocks];
+        _map = new int[(int)yBlocks, (int)xBlocks];
+        _tileMap = new Tile[(int)yBlocks, (int)xBlocks];
+        cornerCount = 0;
         GenerateRandomMap();
         DisplayMap(_map);
         DetectCorners();
@@ -82,17 +118,17 @@ public class GenerateMapScript : MonoBehaviour
     
     public void DeleteMap()
     {
-        // Loop through child transforms without using foreach to avoid errors when deleting children
-        while (transform.childCount > 0)
+        // Destroy all children of this transform using a while loop
+        int childCount = transform.childCount;
+        for (int i = childCount - 1; i >= 0; --i)
         {
-            DestroyImmediate(transform.GetChild(0).gameObject);
+            DestroyImmediate(transform.GetChild(i).gameObject);
         }
     }
 
     private void GenerateRandomMap()
     {
         var startY = _randomNumberGenerator.Next(1, (int)yBlocks - 1);
-        var endY = _randomNumberGenerator.Next(1, (int)yBlocks - 1);
 
         var currPos = new Vector2(0, startY);
         SetMapValue(currPos, 1);
@@ -100,7 +136,7 @@ public class GenerateMapScript : MonoBehaviour
         SetMapValue(currPos, 1);
         var lastMove = MoveDirection.Right;
 
-        while (currPos.x < _map.GetLength(1) - 2)
+        while (currPos.x < _map.GetLength(1) - 3)
         {
             var nextMove = GetRandomMove(lastMove);
 
@@ -112,6 +148,8 @@ public class GenerateMapScript : MonoBehaviour
                 _ => lastMove
             };
         }
+
+        MoveRightOnMap(ref currPos, 2);
     }
 
     private MoveDirection MoveRightOnMap(ref Vector2 currentPosition, uint distance)
@@ -203,16 +241,18 @@ public class GenerateMapScript : MonoBehaviour
             {
                 if (array[y, x] == 0)
                 {
-                    var spawnedTile = Instantiate(tilePrefab, new Vector3(x + leftCameraPosition + blockSize / 2, y + topCameraPosition + blockSize / 2, 10), quaternion.identity);
+                    var spawnedTile = Instantiate(tilePrefab, new Vector3(x + leftCameraPosition + blockSize / 2, (topCameraPosition - y + blockSize / 2) - blockSize, 10), quaternion.identity);
                     spawnedTile.name = $"Tile {y} {x}";
 
                     var isOffsetColor = (y % 2 == 0 && x % 2 != 0) || (y % 2 != 0 && x % 2 == 0);
-                    spawnedTile.Init(isOffsetColor);
+                    spawnedTile.SetColor(isOffsetColor);
                     spawnedTile.transform.parent = transform;
+                    
+                    _tileMap[y, x] = spawnedTile;
                 }
                 else if (array[y, x] == 1)
                 {
-                    var spawnedRoad = Instantiate(roadPrefab, new Vector3(x + leftCameraPosition + blockSize / 2, y + topCameraPosition + blockSize / 2, 10), quaternion.identity);
+                    var spawnedRoad = Instantiate(roadPrefab, new Vector3(x + leftCameraPosition + blockSize / 2, (topCameraPosition - y + blockSize / 2) - blockSize, 10), quaternion.identity);
                     spawnedRoad.name = $"Road {y} {x}";
                     spawnedRoad.transform.parent = transform;
                 }
@@ -277,7 +317,7 @@ public class GenerateMapScript : MonoBehaviour
         {
             transform =
             {
-                position = new Vector3(x + leftCameraPosition + blockSize / 2, y + topCameraPosition + blockSize / 2, 10),
+                position = new Vector3(x + leftCameraPosition + blockSize / 2, (topCameraPosition - y + blockSize / 2) - blockSize, 10),
                 parent = transform
             }
         };
@@ -299,6 +339,11 @@ public class GenerateMapScript : MonoBehaviour
     public int[,] GetMap()
     {
         return _map;
+    }
+    
+    public Tile[,] GetTileMap()
+    {
+        return _tileMap;
     }
 }
 

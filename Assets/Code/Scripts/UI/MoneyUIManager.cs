@@ -8,6 +8,7 @@ public class MoneyUIManager : MonoBehaviour
     
     /// <summary> A reference to the lives text object </summary>
     [SerializeField] private TextMeshProUGUI money;
+    [SerializeField] private GameManager gameManager;
     
     /// <summary> Unity event function called when the script is loaded </summary>
     private void Start()
@@ -22,6 +23,6 @@ public class MoneyUIManager : MonoBehaviour
     /// <summary> Unity event function, called once per frame </summary>
     private void Update()
     {
-        money.text = GameManager.Money.ToString();
+        money.text = gameManager.Money.ToString();
     }
 }
