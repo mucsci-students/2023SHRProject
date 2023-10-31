@@ -286,23 +286,23 @@ MonoBehaviour:
   upgradePath1:
   - cost: 255
     tier: 1
-    description: Increases accuracy
+    description: Focused Firing
     sprite: {fileID: 288825273, guid: aab4df575745c445286acf1615ad78ed, type: 3}
-  - cost: 1
-    tier: 1020
-    description: 'Darts gain +2 pierce per shot '
+  - cost: 510
+    tier: 2
+    description: Powerful Darts
     sprite: {fileID: 298962401, guid: aab4df575745c445286acf1615ad78ed, type: 3}
   upgradePath2:
-  - cost: 810
+  - cost: 215
     tier: 1
-    description: Makes gun fire much faster.
+    description: Faster Barrel Spin
     sprite: {fileID: -176797148, guid: aab4df575745c445286acf1615ad78ed, type: 3}
-  - cost: 4080
+  - cost: 1020
     tier: 2
-    description: Shoots depleted bloontonium missiles that can damage all Bloon types
+    description: Buck Shot
     sprite: {fileID: 11520142, guid: aab4df575745c445286acf1615ad78ed, type: 3}
   projectileSpeed: 20
-  maxProjectileDistance: 10
+  maxProjectileDistance: 20
   layersPoppedPerHit: 1
   pierceAmount: 1
   projectilePrefab: {fileID: 4069108416899728122, guid: 57e9ec0ff5e81473d842a6199d01ff2d, type: 3}
@@ -312,3 +312,4 @@ MonoBehaviour:
   projectileContainer: {fileID: 0}
   projectilesPerBurst: 3
   burstDelay: 0.2
+  spreadAngle: 6
