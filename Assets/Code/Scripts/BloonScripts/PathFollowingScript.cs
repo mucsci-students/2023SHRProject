@@ -45,6 +45,9 @@ public class PathFollowingScript : MonoBehaviour
         if (bloonPath.Count == 0)
             return;
 
+        if ((int)_currentTargetIndex >= bloonPath.Count)
+            return;
+        
         var targetPosition = bloonPath[(int)_currentTargetIndex].position;
         
 

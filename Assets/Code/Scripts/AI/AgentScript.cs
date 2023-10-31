@@ -18,8 +18,16 @@ public class AgentScript : Agent
     [SerializeField] private GameManager gameManager;
     [SerializeField] private MonkeySpawner storeManagerScript;
     [SerializeField] private DartMonkeyScript dartMonkeyScript;
+    [SerializeField] private SniperMonkeyScript sniperMonkeyScript;
 
     public int previousWave = 1;
+
+    private int DartMonkeysPlaced = 0;
+    private int SniperMonkeysPlaced = 0;
+    private int PlaceMonkeyCorrectly = 0;
+    private int PlaceMonkeyIncorrectly = 0;
+    private int DoNothingCount = 0;
+    private int PlaceTowerCount = 0;
     
     //[SerializeField] private float negativeReward = -0.1f;
     //[SerializeField] private float perDecisionReward = 0.001f;
@@ -48,11 +56,19 @@ public class AgentScript : Agent
         waveManager.ResetAll();
         gameManager.ResetAll();
         waveManager.StartWave();
-        Utils.Print2DArray(_map);
+        //Utils.Print2DArray(_map);
+        
+        DartMonkeysPlaced = 0;
+        SniperMonkeysPlaced = 0;
+        PlaceMonkeyCorrectly = 0;
+        PlaceMonkeyIncorrectly = 0;
+        DoNothingCount = 0;
+        PlaceTowerCount = 0;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        sensor.AddObservation(waveManager.CurrentWaveNumber);
         //Generate random int between 0 and 1
         for (int i = 0; i < _map.GetLength(0); i++)
         {
@@ -92,19 +108,22 @@ public class AgentScript : Agent
     
     private enum TowerType
     {
-        //DoNothing,
+        DoNothing,
         DartMonkey,
-        TackShooter,
+        //BoomerangMonkey,
+        //TackShooter,
         SniperMonkey,
-        BoomerangMonkey,
-        NinjaMonkey,
-        BombShooter,
-        SpikeFactory,
-        SuperMonkey
+        //BoomerangMonkey,
+        //NinjaMonkey,
+        //BombShooter,
+        //SpikeFactory,
+        //SuperMonkey
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        var statsRecorder = Academy.Instance.StatsRecorder;
+        
         if (waveManager.isGameOver)
         {
             AddReward(1f);
@@ -114,10 +133,12 @@ public class AgentScript : Agent
         
         if (gameManager.GetLives() <= 0)
         {
-            AddReward(-1f);
+            //AddReward(-1f);
             EndEpisode();
             return;
         }
+        
+        //AddReward(0.005f);
         
         if (waveManager.CurrentWaveNumber > previousWave)
         {
@@ -127,37 +148,95 @@ public class AgentScript : Agent
         
 
         Decision choice = (Decision) actions.DiscreteActions[0];
-        int xPos = actions.DiscreteActions[1] % 8;
-        int yPos = actions.DiscreteActions[1] / 8;
+        TowerType towerType = (TowerType) actions.DiscreteActions[1];
+        int xPos = actions.DiscreteActions[2];
+        int yPos = actions.DiscreteActions[3];
+        
+        statsRecorder.Add("TowerType", (int) towerType);
+        statsRecorder.Add("X Placement", xPos);
+        statsRecorder.Add("Y Placement", yPos);
+        
+        Enums.TargetingMode targetingMode = (Enums.TargetingMode) actions.DiscreteActions[4];
 
         if (choice == Decision.PlaceTower)
         {
+            PlaceTowerCount++;
             Tile tile = _tiles[yPos, xPos];
             
             if (tile == null || tile.ContainsTowers())
             {
-                AddReward(-0.0125f);
+                AddReward(-0.001f);
                 Debug.Log("Failed to place tower");
+                PlaceMonkeyIncorrectly++;
             }
             else
             {
                 tile.SetContainsTower(true);
                 Vector3 tilePos = tile.transform.position;
                 tilePos.z = 0;
-                DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
-                script.SetProjectileContainer(storeManagerScript.projectileContainer);
-                script.gameObject.transform.parent = gameObject.transform;
-                script.SetTile(tile);
-                // Set script pos z to 0
-                _map[yPos, xPos] = 2;
-                Utils.Print2DArray(_map);
-                Debug.Log("Placed tower");
+                if (towerType == TowerType.DartMonkey)
+                {
+                    DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
+                    script.SetProjectileContainer(storeManagerScript.projectileContainer);
+                    script.gameObject.transform.parent = gameObject.transform;
+                    script.SetTile(tile);
+                    script.SetTargetingMode(targetingMode);
+                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
+                    statsRecorder.Add("TargetingMode", (int) targetingMode);
+                    _map[yPos, xPos] = 2;
+                    Debug.Log("Placed Dart Monkey");
+                    DartMonkeysPlaced++;
+                    PlaceMonkeyCorrectly++;
+                }
+                else if (towerType == TowerType.SniperMonkey)
+                {
+                    SniperMonkeyScript script = Instantiate(sniperMonkeyScript, tilePos, Quaternion.identity);
+                    script.SetProjectileContainer(storeManagerScript.projectileContainer);
+                    script.gameObject.transform.parent = gameObject.transform;
+                    script.SetTile(tile);
+                    script.SetTargetingMode(targetingMode);
+                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
+                    statsRecorder.Add("TargetingMode", (int) targetingMode);
+                    _map[yPos, xPos] = 3;
+                    Debug.Log("Placed Sniper Monkey");
+                    SniperMonkeysPlaced++;
+                    PlaceMonkeyCorrectly++;
+                }
+                else if (towerType == TowerType.DoNothing)
+                {
+                    Debug.Log("Failed to place tower");
+                    //AddReward(-0.005f);
+                    //PlaceMonkeyIncorrectly++;
+                }
+                //Utils.Print2DArray(_map);
+                //AddReward(0.01f);
             }
         }
         else
         {
-            Debug.Log("Do nothing");
+            DoNothingCount++;
+            if (towerType != TowerType.DoNothing)
+            {
+                //AddReward(-0.005f);
+                Debug.Log("Failed to place tower");
+                //PlaceMonkeyIncorrectly++;
+            }
+            else
+            {
+                Debug.Log("Do nothing");
+            }
         }
-
+        
+        statsRecorder.Add("DartMonkeysPlaced", DartMonkeysPlaced);
+        statsRecorder.Add("SniperMonkeysPlaced", SniperMonkeysPlaced);
+        statsRecorder.Add("PlaceMonkeyCorrectly", PlaceMonkeyCorrectly);
+        statsRecorder.Add("PlaceMonkeyIncorrectly", PlaceMonkeyIncorrectly);
+        statsRecorder.Add("DoNothingCount", DoNothingCount);
+        statsRecorder.Add("PlaceTowerCount", PlaceTowerCount);
+        if (PlaceMonkeyIncorrectly != 0)
+            statsRecorder.Add("PlacedTowerCorrectlyRatio", (float) PlaceMonkeyCorrectly / (float) PlaceMonkeyIncorrectly);
+        statsRecorder.Add("Wave", previousWave);
     }
 }

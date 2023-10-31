@@ -29,6 +29,12 @@ public abstract class MonkeyScript : MonoBehaviour
     [Range(0, 720)]
     [Tooltip("Rotation speed in angular degrees per second")]
     private float rotateSpeed = 270f;
+    
+    [SerializeField]
+    [Tooltip("Adds a small variance to firing rate to make towers shoot at slightly different times.")]
+    protected float shootingVariance = 0.05f;
+
+    protected float actualVariance;
 
     [SerializeField]
     protected List<Upgrade> upgradePath1 = new(2);
@@ -84,6 +90,7 @@ public abstract class MonkeyScript : MonoBehaviour
         SetIsShowingRadius(false);
         PopulateUpgrades();
         sellPrice = monkeyCost;
+        actualVariance = UnityEngine.Random.Range(0, shootingVariance);
     }
 
     // Update is called once per frame
@@ -99,7 +106,7 @@ public abstract class MonkeyScript : MonoBehaviour
             }
             
             LookAt(target.transform.position);
-            if (_timer >= firingRate)
+            if (_timer >= firingRate - actualVariance)
             {
                 Fire(target);
                 _timer = 0;
@@ -278,6 +285,12 @@ public abstract class MonkeyScript : MonoBehaviour
     public void AddBloonToRange(GameObject bloon)
     {
         _enemiesInRange.Add(bloon);
+    }
+    
+    public void TryAddBloonToRange(GameObject bloon)
+    {
+        if (!_enemiesInRange.Contains(bloon))
+            _enemiesInRange.Add(bloon);
     }
     
     public void RemoveBloonFromRange(GameObject bloon)

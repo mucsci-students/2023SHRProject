@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 100, y: 100, z: 1}
+  m_LocalScale: {x: 50, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6425238001161290764}
@@ -283,6 +283,7 @@ MonoBehaviour:
   firingRate: 0.9
   targetingMode: 0
   rotateSpeed: 270
+  shootingVariance: 0.075
   upgradePath1:
   - cost: 350
     tier: 1
@@ -302,10 +303,11 @@ MonoBehaviour:
     description: Detect Camo Bloons
     sprite: {fileID: -727407275, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   projectileSpeed: 50
-  maxProjectileDistance: 100
+  maxProjectileDistance: 10
   layersPoppedPerHit: 1
   pierceAmount: 1
   projectilePrefab: {fileID: 4069108416899728122, guid: 6a82d9e986b36064d8a9d785f0d8703d, type: 3}
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 6425238000497879260}
   radiusCollider: {fileID: 6425238000497879258}
+  projectileContainer: {fileID: 0}

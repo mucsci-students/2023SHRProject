@@ -154,7 +154,7 @@ public class WaveManager : MonoBehaviour
             return;
 
         // Run once when wave is first over
-        if (!betweenRounds && !RunCurrentWave() && enemiesRemaining <= 0)
+        if (!betweenRounds && !RunCurrentWave() && transform.childCount == 0)
         {
             Debug.Log("Wave Ended");
             //give round bonus & update round number
@@ -172,7 +172,7 @@ public class WaveManager : MonoBehaviour
         }
 
         // Run every frame when between rounds
-        if (enemiesRemaining <= 0 && betweenRounds)
+        if (transform.childCount == 0 && betweenRounds)
         {
             enemiesRemaining = 0;
             timer += Time.unscaledDeltaTime;
