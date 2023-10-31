@@ -1,6 +1,6 @@
 default_settings: null
 behaviors:
-  NewReward:
+  AIWithMoney:
     trainer_type: ppo
     hyperparameters:    
       batch_size:  4000
@@ -10,7 +10,7 @@ behaviors:
       epsilon: 0.25
       lambd: 0.93
       num_epoch: 6
-      learning_rate_schedule: constant
+      learning_rate_schedule: linear
       beta_schedule: linear
       epsilon_schedule: linear
     network_settings:
@@ -35,8 +35,8 @@ behaviors:
           deterministic: false
     init_path: null
     keep_checkpoints: 5
-    checkpoint_interval: 1000000
-    max_steps: 20000000
+    checkpoint_interval: 10000000
+    max_steps: 40000000
     time_horizon: 1000
     summary_freq: 10000
     threaded: false
