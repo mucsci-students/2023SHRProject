@@ -28,6 +28,8 @@ public class AgentScript : Agent
     private int PlaceMonkeyIncorrectly = 0;
     private int DoNothingCount = 0;
     private int PlaceTowerCount = 0;
+    private int TotalEpisodes = 0;
+    private int TotalRounds = 0;
     
     //[SerializeField] private float negativeReward = -0.1f;
     //[SerializeField] private float perDecisionReward = 0.001f;
@@ -64,10 +66,14 @@ public class AgentScript : Agent
         PlaceMonkeyIncorrectly = 0;
         DoNothingCount = 0;
         PlaceTowerCount = 0;
+        TotalEpisodes++;
+        TotalRounds++;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        float MaxMoney = 10000;
+        sensor.AddObservation(((float) gameManager.Money) / MaxMoney);
         sensor.AddObservation(waveManager.CurrentWaveNumber);
         //Generate random int between 0 and 1
         for (int i = 0; i < _map.GetLength(0); i++)
@@ -142,6 +148,7 @@ public class AgentScript : Agent
         
         if (waveManager.CurrentWaveNumber > previousWave)
         {
+            TotalRounds++;
             previousWave = waveManager.CurrentWaveNumber;
             AddReward(0.5f);
         }
@@ -176,33 +183,49 @@ public class AgentScript : Agent
                 tilePos.z = 0;
                 if (towerType == TowerType.DartMonkey)
                 {
-                    DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
-                    script.SetProjectileContainer(storeManagerScript.projectileContainer);
-                    script.gameObject.transform.parent = gameObject.transform;
-                    script.SetTile(tile);
-                    script.SetTargetingMode(targetingMode);
-                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
-                    statsRecorder.Add("TargetingMode", (int) targetingMode);
-                    _map[yPos, xPos] = 2;
-                    Debug.Log("Placed Dart Monkey");
-                    DartMonkeysPlaced++;
-                    PlaceMonkeyCorrectly++;
+                    if (CanBuyTower(dartMonkeyScript))
+                    {
+                        DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
+                        script.SetProjectileContainer(storeManagerScript.projectileContainer);
+                        script.gameObject.transform.parent = gameObject.transform;
+                        script.SetTile(tile);
+                        script.SetTargetingMode(targetingMode);
+                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
+                        statsRecorder.Add("TargetingMode", (int) targetingMode);
+                        _map[yPos, xPos] = 2;
+                        Debug.Log("Placed Dart Monkey");
+                        gameManager.Money -= script.GetMonkeyCost();
+                        DartMonkeysPlaced++;
+                        PlaceMonkeyCorrectly++;
+                    }
+                    else
+                    {
+                        AddReward(-0.001f);
+                    }
                 }
                 else if (towerType == TowerType.SniperMonkey)
                 {
-                    SniperMonkeyScript script = Instantiate(sniperMonkeyScript, tilePos, Quaternion.identity);
-                    script.SetProjectileContainer(storeManagerScript.projectileContainer);
-                    script.gameObject.transform.parent = gameObject.transform;
-                    script.SetTile(tile);
-                    script.SetTargetingMode(targetingMode);
-                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                    script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
-                    statsRecorder.Add("TargetingMode", (int) targetingMode);
-                    _map[yPos, xPos] = 3;
-                    Debug.Log("Placed Sniper Monkey");
-                    SniperMonkeysPlaced++;
-                    PlaceMonkeyCorrectly++;
+                    if (CanBuyTower(sniperMonkeyScript))
+                    {
+                        SniperMonkeyScript script = Instantiate(sniperMonkeyScript, tilePos, Quaternion.identity);
+                        script.SetProjectileContainer(storeManagerScript.projectileContainer);
+                        script.gameObject.transform.parent = gameObject.transform;
+                        script.SetTile(tile);
+                        script.SetTargetingMode(targetingMode);
+                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
+                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
+                        statsRecorder.Add("TargetingMode", (int) targetingMode);
+                        _map[yPos, xPos] = 3;
+                        Debug.Log("Placed Sniper Monkey");
+                        gameManager.Money -= script.GetMonkeyCost();
+                        SniperMonkeysPlaced++;
+                        PlaceMonkeyCorrectly++;
+                    }
+                    else
+                    {
+                        AddReward(-0.001f);
+                    }
                 }
                 else if (towerType == TowerType.DoNothing)
                 {
@@ -238,5 +261,12 @@ public class AgentScript : Agent
         if (PlaceMonkeyIncorrectly != 0)
             statsRecorder.Add("PlacedTowerCorrectlyRatio", (float) PlaceMonkeyCorrectly / (float) PlaceMonkeyIncorrectly);
         statsRecorder.Add("Wave", previousWave);
+        statsRecorder.Add("Total Rounds", TotalRounds);
+        statsRecorder.Add("Total Episodes", TotalEpisodes);
+    }
+    
+    private bool CanBuyTower(MonkeyScript monkeyScript)
+    {
+        return gameManager.Money >= monkeyScript.GetMonkeyCost();
     }
 }
