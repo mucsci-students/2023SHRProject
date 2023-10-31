@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class DartlingGunnerScript : MonkeyScript
 {
@@ -16,7 +17,17 @@ public class DartlingGunnerScript : MonkeyScript
     // Spread angle in degrees
     [SerializeField]
     private float spreadAngle = 6.0f;
-
+    
+     protected override void Update()
+     { 
+         
+     }
+    
+    protected override void LookAt(Vector3 targetPosition)
+    {
+        
+    }
+    
     protected override void Fire(GameObject target)
     {
         StartCoroutine(ShootBurst(target));

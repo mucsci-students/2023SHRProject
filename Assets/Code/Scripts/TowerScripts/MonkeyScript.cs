@@ -94,7 +94,7 @@ public abstract class MonkeyScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         _timer += Time.deltaTime;
         if (_enemiesInRange.Count > 0)
@@ -131,7 +131,7 @@ public abstract class MonkeyScript : MonoBehaviour
         projectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
     }
     
-    private void LookAt(Vector3 targetPosition)
+    protected virtual void LookAt(Vector3 targetPosition)
     {
         Vector3 myLocation = transform.position;
         targetPosition.z = myLocation.z; // ensure there is no 3D rotation by aligning Z position
