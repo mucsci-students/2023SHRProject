@@ -2391,9 +2391,9 @@ MonoBehaviour:
   rightCameraPosition: 0
   topCameraPosition: 0
   bottomCameraPosition: 0
-  blockSize: 0
-  yBlocks: 6
-  xBlocks: 10
+  blockSize: 1
+  yBlocks: 10
+  xBlocks: 16
 --- !u!1 &6100410495291488836
 GameObject:
   m_ObjectHideFlags: 0
@@ -4352,6 +4352,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1937070192, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+    - target: {fileID: 6050963794311115769, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: m_text
+      value: WAVE
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050963794311115775, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
+      propertyPath: m_Name
+      value: WaveLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 6050963794489226776, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
