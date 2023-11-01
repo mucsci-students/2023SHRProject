@@ -29,7 +29,6 @@ public class DartlingGunnerScript : MonkeyScript
          Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
          Vector2 mousePosition2D = new Vector2(mousePosition.x, mousePosition.y); // Convert to Vector2
          targetPosition = mousePosition2D;
-         //then use the base lookat
          base.LookAt(targetPosition);
      }
     
