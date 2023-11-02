@@ -803,9 +803,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 11da47e2208cc2941a0f66fe5eb8dc82, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: AIWithMoney
   TeamId: 0
   m_UseChildSensors: 1
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenWaves: 15
   spawn: {fileID: 0}
-  autoPlay: 0
+  autoPlay: 1
   RBES: 0a0000000f00000019000000230000002d0000003700000041000000550000005a0000005f00000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000
   path: []
   bloonGroups:
@@ -2385,15 +2385,15 @@ MonoBehaviour:
   roadPrefab: {fileID: 6228069413267082070, guid: f2a7fbba161dd4840936c0d9c7bd1226, type: 3}
   waveManager: {fileID: 7724620301874222394}
   gameManager: {fileID: 4365015116201456976}
-  useCameraBounds: 1
+  useCameraBounds: 0
   moveRightProbability: 0.331
   leftCameraPosition: 0
   rightCameraPosition: 0
   topCameraPosition: 0
   bottomCameraPosition: 0
   blockSize: 1
-  yBlocks: 10
-  xBlocks: 16
+  yBlocks: 6
+  xBlocks: 10
 --- !u!1 &6100410495291488836
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,10 +4171,6 @@ PrefabInstance:
     - target: {fileID: 6050963792836908114, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050963792836908114, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6050963792912653734, guid: c0d33a5fe9d248a46b2bdc45166161bd, type: 3}
       propertyPath: m_Sprite
