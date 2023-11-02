@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1698632266",
+        "python_version": "3.8.8 (tags/v3.8.8:024d805, Feb 19 2021, 13:18:16) [MSC v.1928 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\Justin\\Programs\\VsCode\\git\\2023SHRProject\\venv\\Scripts\\mlagents-learn .\\configuration.yaml --run-id=test13 --resume",
+        "mlagents_version": "0.29.0",
+        "mlagents_envs_version": "0.29.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1698632268"
+    },
+    "total": 2.1337294,
+    "count": 1,
+    "self": 0.004006700000000141,
+    "children": {
+        "run_training.setup": {
+            "total": 0.07129479999999999,
+            "count": 1,
+            "self": 0.07129479999999999
+        },
+        "TrainerController.start_learning": {
+            "total": 2.0584279,
+            "count": 1,
+            "self": 0.0002740000000001075,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 2.0581448,
+                    "count": 1,
+                    "self": 2.0581448
+                },
+                "trainer_threads": {
+                    "total": 6.999999997425732e-07,
+                    "count": 1,
+                    "self": 6.999999997425732e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 8.400000000019503e-06,
+                    "count": 1,
+                    "self": 8.400000000019503e-06
+                }
+            }
+        }
+    }
+}
