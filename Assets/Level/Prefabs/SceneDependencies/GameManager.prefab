@@ -49,7 +49,7 @@ MonoBehaviour:
   enemiesRemaining: 0
   layersPopped: 0
   startingMoney: 500
-  startingLives: 200
+  startingLives: 1
   isAIEnabled: 1
   ai: {fileID: 0}
   waveManager: {fileID: 0}

@@ -909,6 +909,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenWaves: 15
+  useRandomWaves: 0
+  randomSeed: 123213
   spawn: {fileID: 0}
   autoPlay: 1
   RBES: 1e0000001e0000003c0000003700000039000000550000005c0000005a000000cc0000004a00000050000000b9000000910000005b0000007000000020000000f00000006500000042000000460000005800000063000000030000007c000000cf000000210200005c000000a0000000cf000000210200005c000000a0000000cf000000e6000000ff020000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000
@@ -958,12 +960,10 @@ MonoBehaviour:
   WhiteBloonPrefab: {fileID: 8023372576191469905, guid: 5c0853f4f78777a44be3fc728584b779, type: 3}
   possibleEnemies: []
   CurrentWaveNumber: 0
+  enemiesRemaining: 0
   timerRef: 0
-  EnemiesRemaining: 0
   BLUS: {fileID: 8011398082764069274}
   gameManager: {fileID: 4365015116201456976}
-  enemiesRemaining: 0
-  isGameOver: 0
 --- !u!1 &1375880853059864935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,8 +2384,9 @@ MonoBehaviour:
   tilePrefab: {fileID: 3079216769869540384, guid: 3338fc03111d5440e81db8826748c8b6, type: 3}
   roadPrefab: {fileID: 6228069413267082070, guid: f2a7fbba161dd4840936c0d9c7bd1226, type: 3}
   waveManager: {fileID: 7724620301874222394}
-  gameManager: {fileID: 4365015116201456976}
   useCameraBounds: 0
+  useRandomMap: 0
+  seed: 524
   moveRightProbability: 0.331
   leftCameraPosition: 0
   rightCameraPosition: 0
@@ -4528,6 +4529,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
       propertyPath: AI
+      value: 
+      objectReference: {fileID: 1167465089238137358}
+    - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
+      propertyPath: ai
       value: 
       objectReference: {fileID: 1167465089238137358}
     - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
