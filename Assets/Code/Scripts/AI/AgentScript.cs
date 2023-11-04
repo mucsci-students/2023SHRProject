@@ -30,7 +30,7 @@ public class AgentScript : Agent
     private int PlaceTowerCount = 0;
     private int TotalEpisodes = 0;
     private int TotalRounds = 0;
-    
+
     //[SerializeField] private float negativeReward = -0.1f;
     //[SerializeField] private float perDecisionReward = 0.001f;
     //[SerializeField] private float goodReward = 0.5f;
@@ -58,7 +58,6 @@ public class AgentScript : Agent
         waveManager.ResetAll();
         gameManager.ResetAll();
         waveManager.StartWave();
-        //Utils.Print2DArray(_map);
         
         DartMonkeysPlaced = 0;
         SniperMonkeysPlaced = 0;
@@ -72,18 +71,47 @@ public class AgentScript : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        float MaxMoney = 10000;
-        sensor.AddObservation(((float) gameManager.Money) / MaxMoney);
-        sensor.AddObservation(waveManager.CurrentWaveNumber);
-        //Generate random int between 0 and 1
-        for (int i = 0; i < _map.GetLength(0); i++)
+        // Normalize all values between [-1, 1] for better learning
+        
+        float maxMoney = 10000;
+        float maxWaveNumber = 50;
+        float maxBoardVaule = 10;
+            
+        sensor.AddObservation(((float) gameManager.Money) / maxMoney);
+        sensor.AddObservation(waveManager.CurrentWaveNumber / maxWaveNumber);
+        
+        for (int i = 0; i < _map.GetLength(0); ++i)
         {
-            for (int j = 0; j < _map.GetLength(1); j++)
+            for (int j = 0; j < _map.GetLength(1); ++j)
             {
-                sensor.AddObservation(_map[i, j]);
+                sensor.AddObservation(_map[i, j] / maxBoardVaule);
             }
         }
-        //Utils.Print2DArray(_map);
+    }
+    
+    public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
+    {
+        int mainDecisionBranch = 0;
+        int monkeyBranch = 1;
+        int mapBranch = 2;
+
+        // If AI can not buy cheapest tower (dart monkey) prevent them from placing any tower
+        actionMask.SetActionEnabled(mainDecisionBranch, (int) Decision.PlaceTower, CanBuyTower(dartMonkeyScript));
+        
+        actionMask.SetActionEnabled(monkeyBranch, (int) TowerType.DartMonkey, CanBuyTower(dartMonkeyScript));
+        actionMask.SetActionEnabled(monkeyBranch, (int) TowerType.SniperMonkey, CanBuyTower(dartMonkeyScript));
+
+        // Prevent AI from placing tower anywhere that is not an open tile
+        for (int i = 0; i < _map.GetLength(0); ++i)
+        {
+            for (int j = 0; j < _map.GetLength(1); ++j)
+            {
+                if (_map[i, j] != 0)
+                {
+                    actionMask.SetActionEnabled(mapBranch, 10 * i + j, false);
+                }
+            }
+        }
     }
     
     // 1. Can do nothing
@@ -156,14 +184,14 @@ public class AgentScript : Agent
 
         Decision choice = (Decision) actions.DiscreteActions[0];
         TowerType towerType = (TowerType) actions.DiscreteActions[1];
-        int xPos = actions.DiscreteActions[2];
-        int yPos = actions.DiscreteActions[3];
+        int xPos = actions.DiscreteActions[2] % 10;
+        int yPos = actions.DiscreteActions[2] / 10;
         
         statsRecorder.Add("TowerType", (int) towerType);
         statsRecorder.Add("X Placement", xPos);
         statsRecorder.Add("Y Placement", yPos);
         
-        Enums.TargetingMode targetingMode = (Enums.TargetingMode) actions.DiscreteActions[4];
+        Enums.TargetingMode targetingMode = (Enums.TargetingMode) actions.DiscreteActions[3];
 
         if (choice == Decision.PlaceTower)
         {
@@ -181,60 +209,52 @@ public class AgentScript : Agent
                 tile.SetContainsTower(true);
                 Vector3 tilePos = tile.transform.position;
                 tilePos.z = 0;
-                if (towerType == TowerType.DartMonkey)
+                switch (towerType)
                 {
-                    if (CanBuyTower(dartMonkeyScript))
+                    case TowerType.DartMonkey when CanBuyTower(dartMonkeyScript):
                     {
-                        DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
-                        script.SetProjectileContainer(storeManagerScript.projectileContainer);
-                        script.gameObject.transform.parent = gameObject.transform;
-                        script.SetTile(tile);
-                        script.SetTargetingMode(targetingMode);
-                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
-                        statsRecorder.Add("TargetingMode", (int) targetingMode);
-                        _map[yPos, xPos] = 2;
                         Debug.Log("Placed Dart Monkey");
-                        gameManager.Money -= script.GetMonkeyCost();
+                        DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
+                        PlaceTower(script, tile, targetingMode);
+                        
+                        // Update map for AI to see
+                        _map[yPos, xPos] = 2;
+                        
+                        // Update stats for tensorboard
+                        statsRecorder.Add("TargetingMode", (int) targetingMode);
                         DartMonkeysPlaced++;
                         PlaceMonkeyCorrectly++;
+                        break;
                     }
-                    else
-                    {
+                    case TowerType.DartMonkey:
                         AddReward(-0.001f);
-                    }
-                }
-                else if (towerType == TowerType.SniperMonkey)
-                {
-                    if (CanBuyTower(sniperMonkeyScript))
+                        break;
+                    case TowerType.SniperMonkey when CanBuyTower(sniperMonkeyScript):
                     {
-                        SniperMonkeyScript script = Instantiate(sniperMonkeyScript, tilePos, Quaternion.identity);
-                        script.SetProjectileContainer(storeManagerScript.projectileContainer);
-                        script.gameObject.transform.parent = gameObject.transform;
-                        script.SetTile(tile);
-                        script.SetTargetingMode(targetingMode);
-                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                        script.transform.GetChild(0).gameObject.GetComponent<CircleCollider2D>().enabled = true;
-                        statsRecorder.Add("TargetingMode", (int) targetingMode);
-                        _map[yPos, xPos] = 3;
                         Debug.Log("Placed Sniper Monkey");
-                        gameManager.Money -= script.GetMonkeyCost();
+                        SniperMonkeyScript script = Instantiate(sniperMonkeyScript, tilePos, Quaternion.identity);
+                        PlaceTower(script, tile, targetingMode);
+                        
+                        // Update map for AI to see
+                        _map[yPos, xPos] = 3;
+                        
+                        // Update stats for tensorboard
+                        statsRecorder.Add("TargetingMode", (int) targetingMode);
                         SniperMonkeysPlaced++;
                         PlaceMonkeyCorrectly++;
+                        break;
                     }
-                    else
-                    {
+                    case TowerType.SniperMonkey:
                         AddReward(-0.001f);
-                    }
+                        break;
+                    case TowerType.DoNothing:
+                        Debug.Log("Failed to place tower");
+                        //AddReward(-0.005f);
+                        //PlaceMonkeyIncorrectly++;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
-                else if (towerType == TowerType.DoNothing)
-                {
-                    Debug.Log("Failed to place tower");
-                    //AddReward(-0.005f);
-                    //PlaceMonkeyIncorrectly++;
-                }
-                //Utils.Print2DArray(_map);
-                //AddReward(0.01f);
             }
         }
         else
@@ -252,6 +272,7 @@ public class AgentScript : Agent
             }
         }
         
+        // Update stats for tensorboard
         statsRecorder.Add("DartMonkeysPlaced", DartMonkeysPlaced);
         statsRecorder.Add("SniperMonkeysPlaced", SniperMonkeysPlaced);
         statsRecorder.Add("PlaceMonkeyCorrectly", PlaceMonkeyCorrectly);
@@ -263,6 +284,15 @@ public class AgentScript : Agent
         statsRecorder.Add("Wave", previousWave);
         statsRecorder.Add("Total Rounds", TotalRounds);
         statsRecorder.Add("Total Episodes", TotalEpisodes);
+    }
+
+    private void PlaceTower(MonkeyScript monkeyScript, Tile tile, Enums.TargetingMode targetingMode)
+    {
+        monkeyScript.SetProjectileContainer(storeManagerScript.projectileContainer);
+        monkeyScript.gameObject.transform.parent = gameObject.transform;
+        monkeyScript.SetTile(tile);
+        monkeyScript.SetTargetingMode(targetingMode);
+        gameManager.Money -= monkeyScript.GetMonkeyCost();
     }
     
     private bool CanBuyTower(MonkeyScript monkeyScript)

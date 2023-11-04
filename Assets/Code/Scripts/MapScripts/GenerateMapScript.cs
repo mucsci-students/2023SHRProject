@@ -19,6 +19,8 @@ public class GenerateMapScript : MonoBehaviour
     [Header("Map Settings")]
     
     [SerializeField] private bool useCameraBounds = true;
+    [SerializeField] private bool useRandomMap = false;
+    [SerializeField] private int seed = 524;
     
     [SerializeField] [Range(0, 1)] 
     private float moveRightProbability = 0.5f;
@@ -37,7 +39,7 @@ public class GenerateMapScript : MonoBehaviour
     private bool[,] _visited;
     private int cornerCount = 0;  // Add this line at the top of your class with other member variables
     
-    private readonly Random _randomNumberGenerator = new();
+    private Random _randomNumberGenerator = new();
     
     #endregion
     
@@ -104,6 +106,10 @@ public class GenerateMapScript : MonoBehaviour
     
     public void GenerateMap()
     {
+        if (!useRandomMap)
+        {
+            _randomNumberGenerator = new Random(seed);
+        }
         DeleteMap();
         waveManager.path.Clear();
         CalculateMapSize();

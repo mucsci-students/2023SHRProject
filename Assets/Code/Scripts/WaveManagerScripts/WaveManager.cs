@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
+using Random = System.Random;
 
 /// <summary>
 /// Manages the spawning of bloons and waves.
@@ -20,6 +20,12 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     [Tooltip("The time between waves in seconds")]
     private float timeBetweenWaves = 15f;
+    
+    [SerializeField]
+    private bool useRandomWaves = false;
+
+    [SerializeField] 
+    private int randomSeed = 123213;
 
     [Tooltip("The spawn point for the bloons")]
     public Transform spawn;
@@ -57,8 +63,8 @@ public class WaveManager : MonoBehaviour
     [Header("Debugging")]
     public List<GameObject> possibleEnemies = new();
     public int CurrentWaveNumber = 0;
+    public int enemiesRemaining = 0;
     public float timerRef;
-    public int EnemiesRemaining;
 
     #endregion
 
@@ -73,8 +79,8 @@ public class WaveManager : MonoBehaviour
     /// Stores whether the game is currently playing. Is true if any wave has ever started. False if all waves are over.
     /// </summary>
     private bool isPlaying = false;
-
-    public int enemiesRemaining = 0;
+    
+    [NonSerialized]
     public bool isGameOver = false;
 
     /// <summary>
@@ -83,6 +89,8 @@ public class WaveManager : MonoBehaviour
     private bool betweenRounds = false;
 
     private float timer = 0f;
+    
+    private Random _random = new Random();
 
     #endregion
 
@@ -91,6 +99,11 @@ public class WaveManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        if (!useRandomWaves)
+        {
+            _random = new Random(randomSeed);
+        }
+        
         // Reset all static variables
         enemiesRemaining = 0;
         CurrentWaveNumber = 0;
@@ -104,6 +117,10 @@ public class WaveManager : MonoBehaviour
 
     public void ResetAll()
     {
+        if (!useRandomWaves)
+        {
+            _random = new Random(randomSeed);
+        }
         enemiesRemaining = 0;
         CurrentWaveNumber = 0;
         isGameOver = false;
@@ -140,11 +157,6 @@ public class WaveManager : MonoBehaviour
         // Do not run if the number of waves exceeds the number of RBEs
         if (CurrentWaveNumber == RBES.Count + 1 && enemiesRemaining <= 0)
             return;
-
-        // Update debugging variables
-#if UNITY_EDITOR
-        EnemiesRemaining = enemiesRemaining;
-#endif
 
         // Start the wave manager if the user presses space and the game is not already playing
         if (Input.GetKeyDown(KeyCode.Space) && !isPlaying && CurrentWaveNumber == 0)
@@ -286,7 +298,7 @@ public class WaveManager : MonoBehaviour
     private GameObject GetRandomBloon()
     {
         // Generate me a random int
-        int randomNum = Random.Range(0, possibleEnemies.Count);
+        int randomNum = _random.Next(0, possibleEnemies.Count);
         return possibleEnemies[randomNum];
     }
 
@@ -365,11 +377,12 @@ public class WaveManager : MonoBehaviour
                 spawnInstant = false;
 
             }
+            
+            if (amountToSpawn == 0)
+                UpdateSpawnIntervals();
         }
 
-        /*
-
-        if (amountToSpawn == 0)
+        private void UpdateSpawnIntervals()
         {
             if (interval <= 0.1f)
             {
@@ -385,8 +398,6 @@ public class WaveManager : MonoBehaviour
             initialInterval = 0.025f;
             interval -= initialInterval;
         }
-        
-        */
 
         // Setters and getters
 
