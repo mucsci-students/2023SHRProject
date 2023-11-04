@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary> Updates the lives text on the UI </summary>
 public class MoneyUIManager : MonoBehaviour

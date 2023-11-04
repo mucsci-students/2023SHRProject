@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class InputManagerScript : MonoBehaviour
 {
 
-    [SerializeField] private bool isSpedUp = false;
+    [SerializeField] private bool isSpedUp;
     [SerializeField] private float speedUpFactor = 2.0f;
-    private float previousSpeedUpFactor = 1f;
+    private float _previousSpeedUpFactor = 1f;
 
     [SerializeField] private GameObject pauseMenu;
     
@@ -35,12 +31,12 @@ public class InputManagerScript : MonoBehaviour
     {
         if (Time.timeScale == 0f)
         {
-            Time.timeScale = previousSpeedUpFactor;
+            Time.timeScale = _previousSpeedUpFactor;
             pauseMenu.SetActive(false);
         }
         else
         {
-            previousSpeedUpFactor = Time.timeScale;
+            _previousSpeedUpFactor = Time.timeScale;
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);
         }

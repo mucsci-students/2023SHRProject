@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BloonScript : MonoBehaviour
 {
-    [SerializeField] protected Rigidbody2D Rigidbody2D;
+    [SerializeField] protected new Rigidbody2D rigidbody2D;
     
     /// <summary>
     /// Speed of the bloon. It will be consistent in X/Y direction and always greater than 0, which removes the need for a Vector2 type.
@@ -21,10 +21,10 @@ public class BloonScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        if (Rigidbody2D == null)
+        if (rigidbody2D == null)
         {
             Debug.LogWarning("Missing direct link on " + name);
-            Rigidbody2D = GetComponent<Rigidbody2D>();
+            rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         if (bloonLookUpScript == null)
@@ -99,13 +99,13 @@ public class BloonScript : MonoBehaviour
         bloonLookUpScript = lookUpScript;
     }
 
-    public void SetGameManager(GameManager gameManager)
+    public void SetGameManager(GameManager globalGameManager)
     {
-        this.gameManager = gameManager;
+        gameManager = globalGameManager;
     }
 
-    public void SetWaveManager(WaveManager waveManager)
+    public void SetWaveManager(WaveManager globalWaveManager)
     {
-        this.waveManager = waveManager;
+        waveManager = globalWaveManager;
     }
 }
