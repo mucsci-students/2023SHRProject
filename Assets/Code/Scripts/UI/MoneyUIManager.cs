@@ -22,6 +22,6 @@ public class MoneyUIManager : MonoBehaviour
     /// <summary> Unity event function, called once per frame </summary>
     private void Update()
     {
-        money.text = gameManager.Money.ToString();
+        money.text = gameManager.money.ToString();
     }
 }

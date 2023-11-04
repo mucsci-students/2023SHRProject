@@ -44,13 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224b0c0ef4f7dfa4b902857a0ccf35f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Money: 0
-  Lives: 0
-  EnemiesRemaining: 0
-  LayersPopped: 0
-  StartingMoney: 500
-  StartingLives: 1
+  money: 0
+  lives: 0
+  enemiesRemaining: 0
+  layersPopped: 0
+  startingMoney: 500
+  startingLives: 200
   isAIEnabled: 1
-  AI: {fileID: 0}
-  generateMapScript: {fileID: 0}
+  ai: {fileID: 0}
   waveManager: {fileID: 0}

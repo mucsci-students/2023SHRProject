@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,30 +5,31 @@ using UnityEngine;
 /// </summary>
 public class ProjectileScript : MonoBehaviour
 {
-    public float _speed = 1f;
-    protected float _maxDistance = 10f;
-    protected uint _layersPerHit = 1;
+    public float speed = 1f;
+    protected float MaxDistance = 10f;
+    protected uint LayersPerHit = 1;
 
     // TODO - Implement this 
-    protected uint _pierceAmount = 1;
+    protected uint PierceAmount = 1;
 
-    protected float _distanceTraveled;
-    protected Vector3 _lastTargetDirection = Vector3.zero;
+    protected float DistanceTraveled;
+    private Vector3 _lastTargetDirection = Vector3.zero;
 
-    protected GameObject _target;
-    public MonkeyScript _parentMonkeyScript;
+    protected GameObject Target;
+    public MonkeyScript parentMonkeyScript;
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (_distanceTraveled > _maxDistance)
+        if (DistanceTraveled > MaxDistance)
         {
             Destroy(gameObject);
         }
-        else if (_target != null)
+        else if (Target != null)
         {
-            LookAt(_target.transform.position);
-            MoveTowardsTarget(_target.transform.position, _speed * Time.deltaTime);
+            var position = Target.transform.position;
+            LookAt(position);
+            MoveTowardsTarget(position, speed * Time.deltaTime);
         }
         else
         {
@@ -39,24 +37,24 @@ public class ProjectileScript : MonoBehaviour
         }
     }
 
-    public void SetAllAttributes(float speed, float maxDistance, uint layersPerHit, uint pierceAmount, GameObject target, MonkeyScript parent)
+    public void SetAllAttributes(float newSpeed, float maxDistance, uint layersPerHit, uint pierceAmount, GameObject target, MonkeyScript parent)
     {
-        _speed = speed;
-        _maxDistance = maxDistance;
-        _layersPerHit = layersPerHit;
-        _pierceAmount = pierceAmount;
-        _target = target;
-        _parentMonkeyScript = parent;
+        speed = newSpeed;
+        MaxDistance = maxDistance;
+        LayersPerHit = layersPerHit;
+        PierceAmount = pierceAmount;
+        Target = target;
+        parentMonkeyScript = parent;
     }
     
-    public void SetAllAttributes(float speed, float maxDistance, uint layersPerHit, uint pierceAmount, Vector3 direction, MonkeyScript parent)
+    public void SetAllAttributes(float newSpeed, float maxDistance, uint layersPerHit, uint pierceAmount, Vector3 direction, MonkeyScript parent)
     {
-        _speed = speed;
-        _maxDistance = maxDistance;
-        _layersPerHit = layersPerHit;
-        _pierceAmount = pierceAmount;
+        speed = newSpeed;
+        MaxDistance = maxDistance;
+        LayersPerHit = layersPerHit;
+        PierceAmount = pierceAmount;
         _lastTargetDirection = direction;
-        _parentMonkeyScript = parent;
+        parentMonkeyScript = parent;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -71,12 +69,12 @@ public class ProjectileScript : MonoBehaviour
                 return;
             }
             
-            var layersPopped = bloonScript.ReceiveDamage((int)_layersPerHit);
-            _parentMonkeyScript.IncrementLayersPopped(layersPopped);
+            var layersPopped = bloonScript.ReceiveDamage((int)LayersPerHit);
+            parentMonkeyScript.IncrementLayersPopped(layersPopped);
             
             Destroy(gameObject);
             Destroy(this);
-            _layersPerHit = 0;
+            LayersPerHit = 0;
         }
     }
 
@@ -84,10 +82,10 @@ public class ProjectileScript : MonoBehaviour
     /// Moves the projectile towards a targetPosition based on a speed.
     /// </summary>
     /// <param name="targetPosition">The position to move this projectile towards</param>
-    /// <param name="speed">Speed of the projectile. Should be calculated based on delta time.</param>
-    protected void MoveTowardsTarget(Vector3 targetPosition, float speed)
+    /// <param name="currentSpeed">Speed of the projectile. Should be calculated based on delta time.</param>
+    protected void MoveTowardsTarget(Vector3 targetPosition, float currentSpeed)
     {
-        Vector3 newPosition = GetNewPosition(targetPosition, speed);
+        Vector3 newPosition = GetNewPosition(targetPosition, currentSpeed);
         _lastTargetDirection = newPosition - transform.position;
         SetPosition(newPosition);
     }
@@ -105,7 +103,7 @@ public class ProjectileScript : MonoBehaviour
 
     protected void MoveInDirection(Vector3 direction)
     {
-        Vector3 newPosition = GetNewPosition(transform.position + direction, _speed * Time.deltaTime);
+        Vector3 newPosition = GetNewPosition(transform.position + direction, speed * Time.deltaTime);
         SetPosition(newPosition);
     }
 
@@ -115,7 +113,7 @@ public class ProjectileScript : MonoBehaviour
     /// <param name="newPosition">The new position to move the projectile to during this frame</param>
     protected void SetPosition(Vector3 newPosition)
     {
-        _distanceTraveled += Vector3.Distance(newPosition , transform.position);
+        DistanceTraveled += Vector3.Distance(newPosition , transform.position);
         transform.position = newPosition;
     }
 
@@ -124,12 +122,13 @@ public class ProjectileScript : MonoBehaviour
     /// how far the projectile will move per frame.
     /// </summary>
     /// <param name="targetPosition">The targetPosition position for this projectile to move towards</param>
-    /// <param name="speed">How fast to move towards the targetPosition position</param>
+    /// <param name="currentSpeed">How fast to move towards the targetPosition position</param>
     /// <returns>The new position of this projectile</returns>
-    protected Vector3 GetNewPosition(Vector3 targetPosition, float speed)
+    private Vector3 GetNewPosition(Vector3 targetPosition, float currentSpeed)
     {
         // Force projectile to move in 2D space
-        targetPosition.z = transform.position.z;
-        return Vector3.MoveTowards(transform.position, targetPosition, speed);
+        var position = transform.position;
+        targetPosition.z = position.z;
+        return Vector3.MoveTowards(position, targetPosition, currentSpeed);
     }
 }

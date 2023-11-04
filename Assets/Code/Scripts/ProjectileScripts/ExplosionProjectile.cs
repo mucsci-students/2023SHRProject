@@ -1,16 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ExplosionProjectile : MonoBehaviour
 {
-    private List<GameObject> enemiesInRange = new List<GameObject>();
+    private readonly List<GameObject> _enemiesInRange = new ();
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != null && other.gameObject.CompareTag("Bloon"))
         {
-            enemiesInRange.Add(other.gameObject);
+            _enemiesInRange.Add(other.gameObject);
         }
     }
 
@@ -18,12 +17,12 @@ public class ExplosionProjectile : MonoBehaviour
     {
         if (other.gameObject != null && other.gameObject.CompareTag("Bloon"))
         {
-            enemiesInRange.Remove(other.gameObject);
+            _enemiesInRange.Remove(other.gameObject);
         }
     }
 
     public List<GameObject> GetEnemiesInRange()
     {
-        return enemiesInRange;
+        return _enemiesInRange;
     }
 }

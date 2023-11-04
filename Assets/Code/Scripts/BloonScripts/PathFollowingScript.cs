@@ -19,9 +19,9 @@ public class PathFollowingScript : MonoBehaviour
     
     [SerializeField] private GameManager gameManager;
 
-    private uint _currentTargetIndex = 0;
+    private uint _currentTargetIndex;
     private uint _speed;
-    private float _distanceTraveled = 0;
+    private float _distanceTraveled;
     
     private BloonScript _bloonScript;
 

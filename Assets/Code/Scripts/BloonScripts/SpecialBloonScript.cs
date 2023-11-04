@@ -43,7 +43,7 @@ public class SpecialBloonScript : BloonScript
             StartCoroutine(coroutine);
         }
 
-        gameManager.Money += originalHealth - Math.Max(0, health);
+        gameManager.money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
     }
     

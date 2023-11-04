@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -22,14 +21,14 @@ public class AgentScript : Agent
 
     public int previousWave = 1;
 
-    private int DartMonkeysPlaced = 0;
-    private int SniperMonkeysPlaced = 0;
-    private int PlaceMonkeyCorrectly = 0;
-    private int PlaceMonkeyIncorrectly = 0;
-    private int DoNothingCount = 0;
-    private int PlaceTowerCount = 0;
-    private int TotalEpisodes = 0;
-    private int TotalRounds = 0;
+    private int _dartMonkeysPlaced;
+    private int _sniperMonkeysPlaced;
+    private int _placeMonkeyCorrectly;
+    private int _placeMonkeyIncorrectly;
+    private int _doNothingCount;
+    private int _placeTowerCount;
+    private int _totalEpisodes;
+    private int _totalRounds;
 
     //[SerializeField] private float negativeReward = -0.1f;
     //[SerializeField] private float perDecisionReward = 0.001f;
@@ -59,14 +58,14 @@ public class AgentScript : Agent
         gameManager.ResetAll();
         waveManager.StartWave();
         
-        DartMonkeysPlaced = 0;
-        SniperMonkeysPlaced = 0;
-        PlaceMonkeyCorrectly = 0;
-        PlaceMonkeyIncorrectly = 0;
-        DoNothingCount = 0;
-        PlaceTowerCount = 0;
-        TotalEpisodes++;
-        TotalRounds++;
+        _dartMonkeysPlaced = 0;
+        _sniperMonkeysPlaced = 0;
+        _placeMonkeyCorrectly = 0;
+        _placeMonkeyIncorrectly = 0;
+        _doNothingCount = 0;
+        _placeTowerCount = 0;
+        _totalEpisodes++;
+        _totalRounds++;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -77,7 +76,7 @@ public class AgentScript : Agent
         float maxWaveNumber = 50;
         float maxBoardVaule = 10;
             
-        sensor.AddObservation(((float) gameManager.Money) / maxMoney);
+        sensor.AddObservation(((float) gameManager.money) / maxMoney);
         sensor.AddObservation(waveManager.CurrentWaveNumber / maxWaveNumber);
         
         for (int i = 0; i < _map.GetLength(0); ++i)
@@ -176,7 +175,7 @@ public class AgentScript : Agent
         
         if (waveManager.CurrentWaveNumber > previousWave)
         {
-            TotalRounds++;
+            _totalRounds++;
             previousWave = waveManager.CurrentWaveNumber;
             AddReward(0.5f);
         }
@@ -195,14 +194,14 @@ public class AgentScript : Agent
 
         if (choice == Decision.PlaceTower)
         {
-            PlaceTowerCount++;
+            _placeTowerCount++;
             Tile tile = _tiles[yPos, xPos];
             
             if (tile == null || tile.ContainsTowers())
             {
                 AddReward(-0.001f);
                 Debug.Log("Failed to place tower");
-                PlaceMonkeyIncorrectly++;
+                _placeMonkeyIncorrectly++;
             }
             else
             {
@@ -222,8 +221,8 @@ public class AgentScript : Agent
                         
                         // Update stats for tensorboard
                         statsRecorder.Add("TargetingMode", (int) targetingMode);
-                        DartMonkeysPlaced++;
-                        PlaceMonkeyCorrectly++;
+                        _dartMonkeysPlaced++;
+                        _placeMonkeyCorrectly++;
                         break;
                     }
                     case TowerType.DartMonkey:
@@ -240,8 +239,8 @@ public class AgentScript : Agent
                         
                         // Update stats for tensorboard
                         statsRecorder.Add("TargetingMode", (int) targetingMode);
-                        SniperMonkeysPlaced++;
-                        PlaceMonkeyCorrectly++;
+                        _sniperMonkeysPlaced++;
+                        _placeMonkeyCorrectly++;
                         break;
                     }
                     case TowerType.SniperMonkey:
@@ -259,7 +258,7 @@ public class AgentScript : Agent
         }
         else
         {
-            DoNothingCount++;
+            _doNothingCount++;
             if (towerType != TowerType.DoNothing)
             {
                 //AddReward(-0.005f);
@@ -273,17 +272,17 @@ public class AgentScript : Agent
         }
         
         // Update stats for tensorboard
-        statsRecorder.Add("DartMonkeysPlaced", DartMonkeysPlaced);
-        statsRecorder.Add("SniperMonkeysPlaced", SniperMonkeysPlaced);
-        statsRecorder.Add("PlaceMonkeyCorrectly", PlaceMonkeyCorrectly);
-        statsRecorder.Add("PlaceMonkeyIncorrectly", PlaceMonkeyIncorrectly);
-        statsRecorder.Add("DoNothingCount", DoNothingCount);
-        statsRecorder.Add("PlaceTowerCount", PlaceTowerCount);
-        if (PlaceMonkeyIncorrectly != 0)
-            statsRecorder.Add("PlacedTowerCorrectlyRatio", (float) PlaceMonkeyCorrectly / (float) PlaceMonkeyIncorrectly);
+        statsRecorder.Add("DartMonkeysPlaced", _dartMonkeysPlaced);
+        statsRecorder.Add("SniperMonkeysPlaced", _sniperMonkeysPlaced);
+        statsRecorder.Add("PlaceMonkeyCorrectly", _placeMonkeyCorrectly);
+        statsRecorder.Add("PlaceMonkeyIncorrectly", _placeMonkeyIncorrectly);
+        statsRecorder.Add("DoNothingCount", _doNothingCount);
+        statsRecorder.Add("PlaceTowerCount", _placeTowerCount);
+        if (_placeMonkeyIncorrectly != 0)
+            statsRecorder.Add("PlacedTowerCorrectlyRatio", (float) _placeMonkeyCorrectly / (float) _placeMonkeyIncorrectly);
         statsRecorder.Add("Wave", previousWave);
-        statsRecorder.Add("Total Rounds", TotalRounds);
-        statsRecorder.Add("Total Episodes", TotalEpisodes);
+        statsRecorder.Add("Total Rounds", _totalRounds);
+        statsRecorder.Add("Total Episodes", _totalEpisodes);
     }
 
     private void PlaceTower(MonkeyScript monkeyScript, Tile tile, Enums.TargetingMode targetingMode)
@@ -292,11 +291,11 @@ public class AgentScript : Agent
         monkeyScript.gameObject.transform.parent = gameObject.transform;
         monkeyScript.SetTile(tile);
         monkeyScript.SetTargetingMode(targetingMode);
-        gameManager.Money -= monkeyScript.GetMonkeyCost();
+        gameManager.money -= monkeyScript.GetMonkeyCost();
     }
     
     private bool CanBuyTower(MonkeyScript monkeyScript)
     {
-        return gameManager.Money >= monkeyScript.GetMonkeyCost();
+        return gameManager.money >= monkeyScript.GetMonkeyCost();
     }
 }

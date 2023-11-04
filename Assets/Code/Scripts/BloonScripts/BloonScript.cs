@@ -61,7 +61,7 @@ public class BloonScript : MonoBehaviour
         gameObject.SetActive(false);
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
-        gameManager.Money += originalHealth - Math.Max(0, health);
+        gameManager.money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
     }
 

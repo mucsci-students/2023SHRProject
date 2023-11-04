@@ -1250,6 +1250,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3683739074195170963, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3683739074474275777, guid: 508426681d3c64f4880752b47056358d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1385,6 +1389,18 @@ PrefabInstance:
     - target: {fileID: 4365015116201456976, guid: 508426681d3c64f4880752b47056358d, type: 3}
       propertyPath: isAIEnabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715187445730803491, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: xBlocks
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715187445730803491, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: yBlocks
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715187445730803491, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: useCameraBounds
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5715187445730803491, guid: 508426681d3c64f4880752b47056358d, type: 3}
       propertyPath: currentSceneCamera
