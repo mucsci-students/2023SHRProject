@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary> Updates the lives text on the UI </summary>
 public class MoneyUIManager : MonoBehaviour
@@ -23,6 +22,6 @@ public class MoneyUIManager : MonoBehaviour
     /// <summary> Unity event function, called once per frame </summary>
     private void Update()
     {
-        money.text = gameManager.Money.ToString();
+        money.text = gameManager.money.ToString();
     }
 }

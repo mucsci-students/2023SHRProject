@@ -19,8 +19,8 @@ public class CannonProjectile : ProjectileScript
         {
             if (enemies[i] != null)
             {
-              var layersPopped = enemies[i].GetComponent<BloonScript>().ReceiveDamage((int)_layersPerHit);
-              _parentMonkeyScript.IncrementLayersPopped(layersPopped);
+              var layersPopped = enemies[i].GetComponent<BloonScript>().ReceiveDamage((int)LayersPerHit);
+              parentMonkeyScript.IncrementLayersPopped(layersPopped);
             }
         }
     }
@@ -39,12 +39,12 @@ public class CannonProjectile : ProjectileScript
 
             KillAllInRange();
 
-            var layersPopped = bloonScript.ReceiveDamage((int)_layersPerHit);
-            _parentMonkeyScript.IncrementLayersPopped(layersPopped);
+            var layersPopped = bloonScript.ReceiveDamage((int)LayersPerHit);
+            parentMonkeyScript.IncrementLayersPopped(layersPopped);
 
             Destroy(gameObject);
             Destroy(this);
-            _layersPerHit = 0;
+            LayersPerHit = 0;
         }
     }
 

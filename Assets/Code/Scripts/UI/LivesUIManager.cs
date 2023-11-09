@@ -24,6 +24,6 @@ public class LivesUIManager : MonoBehaviour
     /// <summary> Unity event function, called once per frame </summary>
     private void Update()
     {
-        livesText.text = gameManager.Lives.ToString();
+        livesText.text = gameManager.lives.ToString();
     }
 }

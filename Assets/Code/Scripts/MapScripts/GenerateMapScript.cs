@@ -14,30 +14,31 @@ public class GenerateMapScript : MonoBehaviour
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private GameObject roadPrefab;
     [SerializeField] private WaveManager waveManager;
-    [SerializeField] private GameManager gameManager;
     
     [Header("Map Settings")]
     
     [SerializeField] private bool useCameraBounds = true;
+    [SerializeField] private bool useRandomMap;
+    [SerializeField] private int seed = 524;
     
     [SerializeField] [Range(0, 1)] 
     private float moveRightProbability = 0.5f;
     
     [Header("Debug")]
-    [SerializeField] private float leftCameraPosition = 0f;
-    [SerializeField] private float rightCameraPosition = 0f;
-    [SerializeField] private float topCameraPosition = 0f;
-    [SerializeField] private float bottomCameraPosition = 0f;
-    [SerializeField] private float blockSize = 0f;
-    [SerializeField] private float yBlocks = 0f;
-    [SerializeField] private float xBlocks = 0f;
+    [SerializeField] private float leftCameraPosition;
+    [SerializeField] private float rightCameraPosition;
+    [SerializeField] private float topCameraPosition;
+    [SerializeField] private float bottomCameraPosition;
+    [SerializeField] private float blockSize;
+    [SerializeField] private float yBlocks;
+    [SerializeField] private float xBlocks;
     private int[,] _map;
     private Tile[,] _tileMap;
     
     private bool[,] _visited;
-    private int cornerCount = 0;  // Add this line at the top of your class with other member variables
+    private int _cornerCount;  // Add this line at the top of your class with other member variables
     
-    private readonly Random _randomNumberGenerator = new();
+    private Random _randomNumberGenerator = new();
     
     #endregion
     
@@ -104,13 +105,17 @@ public class GenerateMapScript : MonoBehaviour
     
     public void GenerateMap()
     {
+        if (!useRandomMap)
+        {
+            _randomNumberGenerator = new Random(seed);
+        }
         DeleteMap();
         waveManager.path.Clear();
         CalculateMapSize();
         _visited = new bool[(int)yBlocks, (int)xBlocks];
         _map = new int[(int)yBlocks, (int)xBlocks];
         _tileMap = new Tile[(int)yBlocks, (int)xBlocks];
-        cornerCount = 0;
+        _cornerCount = 0;
         GenerateRandomMap();
         DisplayMap(_map);
         DetectCorners();
@@ -313,7 +318,7 @@ public class GenerateMapScript : MonoBehaviour
     private void CornerFunction(int x, int y)
     {
         // Create an empty GameObject at the corner
-        GameObject cornerObj = new GameObject($"Corner {cornerCount}")
+        GameObject cornerObj = new GameObject($"Corner {_cornerCount}")
         {
             transform =
             {
@@ -322,18 +327,19 @@ public class GenerateMapScript : MonoBehaviour
             }
         };
 
-        if (cornerCount == 0)
+        if (_cornerCount == 0)
         {
             waveManager.spawn = cornerObj.transform;
+            var position = cornerObj.transform.position;
             waveManager.spawn.transform.position =
-                new Vector3(cornerObj.transform.position.x, cornerObj.transform.position.y, 3);
+                new Vector3(position.x, position.y, 3);
         } 
         else
         {
             waveManager.path.Add(cornerObj.transform);
         }
         
-        cornerCount++;
+        _cornerCount++;
     }
 
     public int[,] GetMap()

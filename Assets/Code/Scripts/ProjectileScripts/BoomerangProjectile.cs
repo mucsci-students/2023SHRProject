@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,24 +5,25 @@ using UnityEngine;
 /// </summary>
 public class BoomerangProjectile : ProjectileScript
 {
-    private Vector3 midpoint = Vector3.zero;
-    public bool isReturningToTower = false;
+    private Vector3 _midpoint = Vector3.zero;
+    public bool isReturningToTower;
 
-    public bool invincible = false;
+    public bool invincible;
     public float noDamageTimeLimit = 0.00000001f;
-    public float timer = 0f;
+    public float timer;
     public float alpha = 1f;
 
     protected override void Update()
     {
-        if (_distanceTraveled > _maxDistance)
+        if (DistanceTraveled > MaxDistance)
         {
             Destroy(gameObject);
         }
-        else if (_target != null)
+        else if (Target != null)
         {
-            LookAt(_target.transform.position);
-            MoveTowardsTarget(_target.transform.position, _speed * Time.deltaTime);
+            var position = Target.transform.position;
+            LookAt(position);
+            MoveTowardsTarget(position, speed * Time.deltaTime);
         }
         else
         {
@@ -47,15 +45,17 @@ public class BoomerangProjectile : ProjectileScript
     {
         if (!isReturningToTower)
         {
-            midpoint = new Vector3((transform.position.x + _parentMonkeyScript.gameObject.transform.position.x) / 2f, (transform.position.y + _parentMonkeyScript.gameObject.transform.position.y) / 2f);
+            var position = transform.position;
+            var position1 = parentMonkeyScript.gameObject.transform.position;
+            _midpoint = new Vector3((position.x + position1.x) / 2f, (position.y + position1.y) / 2f);
             isReturningToTower = true;
         } 
         float degreesPerSecond = 2500f; // Desired rotation speed in degrees per second
-        float radius = Vector3.Distance(transform.position, midpoint);
+        float radius = Vector3.Distance(transform.position, _midpoint);
         float circumference = 2 * Mathf.PI * radius;
         float anglePerFrame = (degreesPerSecond / 360f) * 360f * (Time.deltaTime / circumference);
         //transform.position = new Vector2(midpoint.x + (1.5f * Mathf.Sin(Mathf.Deg2Rad * alpha)), midpoint.y + ( 2f * Mathf.Cos(Mathf.Deg2Rad * alpha)));
-        transform.RotateAround(midpoint, Vector3.forward, anglePerFrame);
+        transform.RotateAround(_midpoint, Vector3.forward, anglePerFrame);
         //alpha += 0.5f;
     }
 
@@ -70,18 +70,18 @@ public class BoomerangProjectile : ProjectileScript
                 return;
             }
 
-            var layersPopped = bloonScript.ReceiveDamage((int)_layersPerHit);
-            _parentMonkeyScript.IncrementLayersPopped(layersPopped);
+            var layersPopped = bloonScript.ReceiveDamage((int)LayersPerHit);
+            parentMonkeyScript.IncrementLayersPopped(layersPopped);
 
             invincible = true;
-            _target = null;
+            Target = null;
 
         }
-        else if (isReturningToTower && other.gameObject == _parentMonkeyScript.gameObject)
+        else if (isReturningToTower && other.gameObject == parentMonkeyScript.gameObject)
         {
             Destroy(gameObject);
             Destroy(this);
-            _layersPerHit = 0;
+            LayersPerHit = 0;
         }
     }
 }

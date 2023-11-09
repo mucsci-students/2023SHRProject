@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
+using Random = System.Random;
 
 /// <summary>
 /// Manages the spawning of bloons and waves.
@@ -20,11 +19,17 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     [Tooltip("The time between waves in seconds")]
     private float timeBetweenWaves = 15f;
+    
+    [SerializeField]
+    private bool useRandomWaves;
+
+    [SerializeField] 
+    private int randomSeed = 123213;
 
     [Tooltip("The spawn point for the bloons")]
     public Transform spawn;
 
-    [SerializeField] private bool autoPlay = false;
+    [SerializeField] private bool autoPlay;
 
     [SerializeField] private List<int> RBES = new();
 
@@ -32,7 +37,7 @@ public class WaveManager : MonoBehaviour
     public List<Transform> path = new();
 
     [SerializeField] private List<BloonGroup> bloonGroups = new();
-    private List<float> bloonGroupIntervalsCopy;
+    private List<float> _bloonGroupIntervalsCopy;
 
     [Header("Bloon Prefabs")]
     [SerializeField] private GameObject RedBloonPrefab;
@@ -56,9 +61,9 @@ public class WaveManager : MonoBehaviour
 
     [Header("Debugging")]
     public List<GameObject> possibleEnemies = new();
-    public int CurrentWaveNumber = 0;
+    public int CurrentWaveNumber;
+    public int enemiesRemaining;
     public float timerRef;
-    public int EnemiesRemaining;
 
     #endregion
 
@@ -73,16 +78,18 @@ public class WaveManager : MonoBehaviour
     /// Stores whether the game is currently playing. Is true if any wave has ever started. False if all waves are over.
     /// </summary>
     private bool isPlaying = false;
-
-    public int enemiesRemaining = 0;
+    
+    [NonSerialized]
     public bool isGameOver = false;
 
     /// <summary>
-    /// Stores whether the game is currently between rounds. Is true if isPlaying is true and bloon count < 0.
+    /// Stores whether the game is currently between rounds. Is true if isPlaying is true and bloon count less than 0.
     /// </summary>
     private bool betweenRounds = false;
 
-    private float timer = 0f;
+    private float _timer = 0f;
+    
+    private Random _random = new Random();
 
     #endregion
 
@@ -91,29 +98,38 @@ public class WaveManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        if (!useRandomWaves)
+        {
+            _random = new Random(randomSeed);
+        }
+        
         // Reset all static variables
         enemiesRemaining = 0;
         CurrentWaveNumber = 0;
         isGameOver = false;
-        bloonGroupIntervalsCopy = new List<float>();
+        _bloonGroupIntervalsCopy = new List<float>();
         foreach (var bloonGroup in bloonGroups)
         {
-            bloonGroupIntervalsCopy.Add(bloonGroup.interval);
+            _bloonGroupIntervalsCopy.Add(bloonGroup.interval);
         }
     }
 
     public void ResetAll()
     {
+        if (!useRandomWaves)
+        {
+            _random = new Random(randomSeed);
+        }
         enemiesRemaining = 0;
         CurrentWaveNumber = 0;
         isGameOver = false;
         betweenRounds = false;
-        timer = 0f;
+        _timer = 0f;
         possibleEnemies.Clear();
         foreach (var bloonGroup in bloonGroups)
         {
             bloonGroup.amountToSpawn = 0;
-            bloonGroup.interval = bloonGroupIntervalsCopy[bloonGroups.IndexOf(bloonGroup)];
+            bloonGroup.interval = _bloonGroupIntervalsCopy[bloonGroups.IndexOf(bloonGroup)];
         }
     }
 
@@ -125,8 +141,6 @@ public class WaveManager : MonoBehaviour
     {
         isPlaying = true;
         ++CurrentWaveNumber;
-
-        // TODO: Update bloon groups to spawn at faster intervals as the game progresses
 
         UpdatePossibleEnemies();
         GenerateSemiRandomWave();
@@ -140,11 +154,6 @@ public class WaveManager : MonoBehaviour
         // Do not run if the number of waves exceeds the number of RBEs
         if (CurrentWaveNumber == RBES.Count + 1 && enemiesRemaining <= 0)
             return;
-
-        // Update debugging variables
-#if UNITY_EDITOR
-        EnemiesRemaining = enemiesRemaining;
-#endif
 
         // Start the wave manager if the user presses space and the game is not already playing
         if (Input.GetKeyDown(KeyCode.Space) && !isPlaying && CurrentWaveNumber == 0)
@@ -175,12 +184,12 @@ public class WaveManager : MonoBehaviour
         if (transform.childCount == 0 && betweenRounds)
         {
             enemiesRemaining = 0;
-            timer += Time.unscaledDeltaTime;
-            timerRef = timer; // used for ui
-            if (timer > timeBetweenWaves || Input.GetKeyDown(KeyCode.Space) || autoPlay)
+            _timer += Time.unscaledDeltaTime;
+            timerRef = _timer; // used for ui
+            if (_timer > timeBetweenWaves || Input.GetKeyDown(KeyCode.Space) || autoPlay)
             {
                 StartWave();
-                timer = 0;
+                _timer = 0;
                 betweenRounds = false;
             }
         }
@@ -253,14 +262,7 @@ public class WaveManager : MonoBehaviour
             GameObject bloonToSpawn;
 
             // Hardcode certain RBEs to spawn certain bloons to prevent infinite loops
-            if (RBE == 1)
-            {
-                bloonToSpawn = RedBloonPrefab;
-            }
-            else
-            {
-                bloonToSpawn = GetRandomBloon();
-            }
+            bloonToSpawn = RBE == 1 ? RedBloonPrefab : GetRandomBloon();
 
             // Do not go over RBE, choose new bloon if this happens
             if (bloonToSpawn.GetComponent<BloonScript>().GetHealth() > RBE) continue;
@@ -286,7 +288,7 @@ public class WaveManager : MonoBehaviour
     private GameObject GetRandomBloon()
     {
         // Generate me a random int
-        int randomNum = Random.Range(0, possibleEnemies.Count);
+        int randomNum = _random.Next(0, possibleEnemies.Count);
         return possibleEnemies[randomNum];
     }
 
@@ -298,7 +300,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class BloonGroup
     {
 
@@ -337,9 +339,12 @@ public class WaveManager : MonoBehaviour
         /// Spawns a bloon if it has been at least interval seconds since the last bloon was spawned.
         /// Does not spawn bloons if amountToSpawn is 0.
         /// </summary>
-        /// <param name="path">The path the bloon will follow. /param>
+        /// <param name="path">The path the bloon will follow. </param>
         /// <param name="spawn">The spawn point of the bloon.</param>
         /// <param name="BLUS">The BloonLookUpScript to pass to the bloon.</param>
+        /// <param name="parent">The parent transform to attach each bloon to</param>
+        /// <param name="gameManager">The gameManager reference</param>
+        /// <param name="waveManager">The waveManager reference</param>
         public void SpawnBloon(List<Transform> path, Transform spawn, BloonLookUpScript BLUS, Transform parent, GameManager gameManager, WaveManager waveManager)
         {
             if (Time.time - startTime < countdownToFirstBloonSpawn || amountToSpawn <= 0)
@@ -347,8 +352,7 @@ public class WaveManager : MonoBehaviour
 
             if (spawnInstant || Time.time - lastTime >= interval)
             {
-                GameObject bloon = Instantiate(Bloon);
-                bloon.transform.parent = parent;
+                GameObject bloon = Instantiate(Bloon, parent);
                 bloon.transform.SetPositionAndRotation(spawn.position, spawn.rotation);
 
                 var bloonScript = bloon.GetComponent<BloonScript>();
@@ -365,11 +369,12 @@ public class WaveManager : MonoBehaviour
                 spawnInstant = false;
 
             }
+            
+            if (amountToSpawn == 0)
+                UpdateSpawnIntervals();
         }
 
-        /*
-
-        if (amountToSpawn == 0)
+        private void UpdateSpawnIntervals()
         {
             if (interval <= 0.1f)
             {
@@ -385,8 +390,6 @@ public class WaveManager : MonoBehaviour
             initialInterval = 0.025f;
             interval -= initialInterval;
         }
-        
-        */
 
         // Setters and getters
 

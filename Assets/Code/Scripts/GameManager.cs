@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEditor;
 
 /// <summary>
 /// Stores and initializes widely used variables. Resets static variables on game start or restart.
@@ -9,36 +7,34 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     /// <summary> Stores the users current money </summary>
-    public int Money;
+    public int money;
     /// <summary> Stores the users current lives </summary>
-    public int Lives;
+    public int lives;
 
-    private int prevWaveNumb = 2;
+    private int _prevWaveNumb = 2;
     
     /// <summary> Stores the number of enemies remaining in the current wave. 0 if wave is over </summary>
-    public int EnemiesRemaining = 0;
+    public int enemiesRemaining;
     /// <summary> Stores the total number of layers popped in the current game </summary>
-    public int LayersPopped = 0;
+    public int layersPopped;
 
     /// <summary> Stores the starting money for the game </summary>
     [SerializeField]
     [Tooltip("Stores the starting money for the game")]
-    private int StartingMoney = 200;
+    private int startingMoney = 200;
     
     /// <summary> Stores the starting lives for the game </summary>
     [SerializeField]
     [Tooltip("Stores the starting lives for the game")]
-    private int StartingLives = 200;
+    private int startingLives = 200;
     
     [SerializeField]
-    private bool isAIEnabled = false;
+    private bool isAIEnabled;
     
     [Header("Object Links")]
     
-    [SerializeField] private GameObject AI;
+    [SerializeField] private GameObject ai;
 
-    [SerializeField] private GenerateMapScript generateMapScript;
-    
     [SerializeField] private WaveManager waveManager;
 
     /// <summary>
@@ -69,10 +65,10 @@ public class GameManager : MonoBehaviour
             ExitGameOnZeroLives();
         }
         
-        if (waveManager.CurrentWaveNumber == prevWaveNumb)
+        if (waveManager.CurrentWaveNumber == _prevWaveNumb)
         {
-            ++prevWaveNumb;
-            Money += 100 + waveManager.CurrentWaveNumber;
+            ++_prevWaveNumb;
+            money += 100 + waveManager.CurrentWaveNumber;
         }
     }
 
@@ -82,16 +78,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void ExitGameOnZeroLives()
     {
-        if (Lives <= 0)
+        if (lives <= 0)
         {
-            Debug.Log("Game Over");
+           // Debug.Log("Game Over");
             
             // TODO: Add game over screen
             
-            //Exit unity editor
-            #if UNITY_EDITOR
-                EditorApplication.isPlaying = false;
-            #endif
             //Exit game
             Application.Quit();
         }
@@ -102,10 +94,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void ResetValues()
     {
-        Money = StartingMoney;
-        Lives = StartingLives;
-        EnemiesRemaining = 0;
-        LayersPopped = 0;
+        money = startingMoney;
+        lives = startingLives;
+        enemiesRemaining = 0;
+        layersPopped = 0;
     }
 
     /// <summary>
@@ -114,7 +106,7 @@ public class GameManager : MonoBehaviour
     /// <param name="count"> The amount of lives to subtract from the users lives </param>
     public void SubtractLives(int count)
     {
-        Lives -= count;
+        lives -= count;
     }
     
     private IEnumerator StartAI()
@@ -125,22 +117,22 @@ public class GameManager : MonoBehaviour
 
     private void EnableAI()
     {
-        AI.SetActive(true);
+        ai.SetActive(true);
     }
     
     public int GetLives()
     {
-        return Lives;
+        return lives;
     }
 
     // Cheats
     public void AddMoney(int amount)
     {
-        Money += amount;
+        money += amount;
     }
     
     public void AddLives(int amount)
     {
-        Lives += amount;
+        lives += amount;
     }
 }

@@ -6,16 +6,16 @@ using UnityEngine;
 public class TackTowerScript : MonkeyScript
 {
     
-    private readonly Vector3[] directions = 
+    private readonly Vector3[] _directions = 
     {
-        new Vector3(0f, 1f),
-        new Vector3(1f, 0f),
-        new Vector3(0f, -1f),
-        new Vector3(-1f, 0f),
-        new Vector3(1f, 1f),
-        new Vector3(1f, -1f),
-        new Vector3(-1f, -1f),
-        new Vector3(-1f, 1f),
+        new(0f, 1f),
+        new(1f, 0f),
+        new(0f, -1f),
+        new(-1f, 0f),
+        new(1f, 1f),
+        new(1f, -1f),
+        new(-1f, -1f),
+        new(-1f, 1f),
     };
 
     
@@ -31,7 +31,7 @@ public class TackTowerScript : MonkeyScript
     /// <param name="target">Unused</param>
     protected override void Fire(GameObject target)
     {
-        foreach (Vector3 direction in directions)
+        foreach (Vector3 direction in _directions)
         {
             var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             projectile.transform.parent = projectileContainer;

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -11,9 +8,9 @@ using UnityEditor;
 public class GameManagerEditor : Editor
 {
     
-    private GUIStyle _style = new();
-    private string money = "500";
-    private string lives = "50";
+    private readonly GUIStyle _style = new();
+    private string _money = "500";
+    private string _lives = "50";
     
     private void OnEnable()
     {
@@ -38,7 +35,7 @@ public class GameManagerEditor : Editor
         {
             try
             {
-                myScript.AddMoney(int.Parse(money));
+                myScript.AddMoney(int.Parse(_money));
             } catch
             {
                 Debug.Log("Invalid input");
@@ -47,7 +44,7 @@ public class GameManagerEditor : Editor
         
         GUILayout.FlexibleSpace();
 
-        money = GUILayout.TextField(money, 20, GUILayout.MinWidth(100), GUILayout.MaxWidth(400));
+        _money = GUILayout.TextField(_money, 20, GUILayout.MinWidth(100), GUILayout.MaxWidth(400));
         
         GUILayout.EndHorizontal();
         
@@ -59,7 +56,7 @@ public class GameManagerEditor : Editor
         {
             try
             {
-                myScript.AddLives(int.Parse(lives));
+                myScript.AddLives(int.Parse(_lives));
             } catch
             {
                 Debug.Log("Invalid input");
@@ -68,7 +65,7 @@ public class GameManagerEditor : Editor
         
         GUILayout.FlexibleSpace();
         
-        lives = GUILayout.TextField(lives, 20, GUILayout.MinWidth(100), GUILayout.MaxWidth(400));
+        _lives = GUILayout.TextField(_lives, 20, GUILayout.MinWidth(100), GUILayout.MaxWidth(400));
         
         GUILayout.EndHorizontal();
     }

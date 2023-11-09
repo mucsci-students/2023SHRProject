@@ -139,7 +139,7 @@ public class MonkeySpawner : MonoBehaviour
 
         Upgrade currentUpgrade = upgradePath[0];
 
-        gameManager.Money -= currentUpgrade.GetCost();
+        gameManager.money -= currentUpgrade.GetCost();
         currentMonkeyInUpgradesMenu.SetMonkeySellPrice(currentMonkeyInUpgradesMenu.GetMonkeySellPrice() + currentUpgrade.GetCost());
         currentUpgrade.UpgradeTower();
 
@@ -180,17 +180,17 @@ public class MonkeySpawner : MonoBehaviour
     
     public bool CanBuyUpgradePath1()
     {
-        return gameManager.Money >= currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].GetCost();
+        return gameManager.money >= currentMonkeyInUpgradesMenu.GetUpgradePath1()[0].GetCost();
     }
     
     public bool CanBuyUpgradePath2()
     {
-        return gameManager.Money >= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
+        return gameManager.money >= currentMonkeyInUpgradesMenu.GetUpgradePath2()[0].GetCost();
     }
 
     public bool CanBuyTower()
     {
-        return gameManager.Money >= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
+        return gameManager.money >= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
     }
 
     public bool PlaceMonkeyOnTile(Tile tile)
@@ -207,7 +207,7 @@ public class MonkeySpawner : MonoBehaviour
                     
         tile.SetContainsTower(true);
         currentMonkey.GetComponent<MonkeyScript>().SetTile(tile);
-        gameManager.Money -= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
+        gameManager.money -= monkeyPrefab.GetComponent<MonkeyScript>().GetMonkeyCost();
 
         currentMonkey.GetComponent<BoxCollider2D>().enabled = true;
         currentMonkey.GetComponent<MonkeyScript>().enabled = true;
@@ -235,7 +235,7 @@ public class MonkeySpawner : MonoBehaviour
 
     public void SellTower()
     {
-        gameManager.Money += (currentMonkeyInUpgradesMenu.GetMonkeySellPrice()*sellBackRate)/100;
+        gameManager.money += (currentMonkeyInUpgradesMenu.GetMonkeySellPrice()*sellBackRate)/100;
         currentMonkeyInUpgradesMenu.GetTile().SetContainsTower(false);
         Destroy(currentMonkeyInUpgradesMenu.gameObject);
         UpgradeMenuCanvas.SetActive(false);

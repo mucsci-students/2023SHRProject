@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpecialBloonScript : BloonScript
 {
     [SerializeField] private List<GameObject> bloonsToSpawn = new();
-    [SerializeField] private float SecondsBetweenBloonSpawns = 0.1f;
+    [SerializeField] private float secondsBetweenBloonSpawns = 0.1f;
 
     /// <summary>
     /// Updates the bloons health based on damage param. Destroys itself if it loses all its health
@@ -31,7 +31,7 @@ public class SpecialBloonScript : BloonScript
             var coroutine = SpawnBloons();
 
             //Disable the rigidbody
-            Rigidbody2D.simulated = false;
+            rigidbody2D.simulated = false;
             //Disable the collider
             GetComponent<Collider2D>().enabled = false;
             //Disable the sprite renderer
@@ -43,7 +43,7 @@ public class SpecialBloonScript : BloonScript
             StartCoroutine(coroutine);
         }
 
-        gameManager.Money += originalHealth - Math.Max(0, health);
+        gameManager.money += originalHealth - Math.Max(0, health);
         return originalHealth - Math.Max(0, health);
     }
     
@@ -52,7 +52,7 @@ public class SpecialBloonScript : BloonScript
         foreach (var bloon in bloonsToSpawn)
         {
             SpawnAndInitializeBloon(bloon);
-            yield return new WaitForSeconds(SecondsBetweenBloonSpawns);
+            yield return new WaitForSeconds(secondsBetweenBloonSpawns);
         }
         
         Destroy(gameObject);

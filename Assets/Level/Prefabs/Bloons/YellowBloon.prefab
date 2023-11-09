@@ -172,10 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3fdcb4071fbbd468e972b985c9b8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody2D: {fileID: 8023372576191469904}
+  rigidbody2D: {fileID: 8023372576191469904}
   speed: 5
   health: 4
   bloonLookUpScript: {fileID: 0}
+  waveManager: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &4650824212956930161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +191,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloonPath: []
+  waveManager: {fileID: 0}
+  gameManager: {fileID: 0}

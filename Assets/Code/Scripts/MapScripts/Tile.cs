@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -9,8 +6,8 @@ public class Tile : MonoBehaviour
     
     private SpriteRenderer _renderer;
     private GameObject _highlight;
-    private bool _isOffsetColor = false;
-    private bool _containsTower = false;
+    private bool _isOffsetColor;
+    private bool _containsTower;
 
     private void Start()
     {

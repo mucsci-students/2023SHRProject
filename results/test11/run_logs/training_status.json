@@ -1,0 +1,65 @@
+{
+    "NewReward": {
+        "checkpoints": [
+            {
+                "steps": 499905,
+                "file_path": "results\\test11\\NewReward\\NewReward-499905.onnx",
+                "reward": 1.8694490559817272,
+                "creation_time": 1698621634.1900814,
+                "auxillary_file_paths": [
+                    "results\\test11\\NewReward\\NewReward-499905.pt"
+                ]
+            },
+            {
+                "steps": 999968,
+                "file_path": "results\\test11\\NewReward\\NewReward-999968.onnx",
+                "reward": 1.7953400645847433,
+                "creation_time": 1698622584.712366,
+                "auxillary_file_paths": [
+                    "results\\test11\\NewReward\\NewReward-999968.pt"
+                ]
+            },
+            {
+                "steps": 1499994,
+                "file_path": "results\\test11\\NewReward\\NewReward-1499994.onnx",
+                "reward": 1.7556859436780752,
+                "creation_time": 1698623456.2427187,
+                "auxillary_file_paths": [
+                    "results\\test11\\NewReward\\NewReward-1499994.pt"
+                ]
+            },
+            {
+                "steps": 1999911,
+                "file_path": "results\\test11\\NewReward\\NewReward-1999911.onnx",
+                "reward": 1.7532051740548549,
+                "creation_time": 1698624272.0266168,
+                "auxillary_file_paths": [
+                    "results\\test11\\NewReward\\NewReward-1999911.pt"
+                ]
+            },
+            {
+                "steps": 2023244,
+                "file_path": "results\\test11\\NewReward\\NewReward-2023244.onnx",
+                "reward": 1.7326290898453143,
+                "creation_time": 1698624332.400309,
+                "auxillary_file_paths": [
+                    "results\\test11\\NewReward\\NewReward-2023244.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2023244,
+            "file_path": "results\\test11\\NewReward.onnx",
+            "reward": 1.7326290898453143,
+            "creation_time": 1698624332.400309,
+            "auxillary_file_paths": [
+                "results\\test11\\NewReward\\NewReward-2023244.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
