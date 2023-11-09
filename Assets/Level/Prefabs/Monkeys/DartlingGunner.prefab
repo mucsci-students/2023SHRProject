@@ -280,9 +280,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monkeyName: Dartling Gunner
   monkeyCost: 720
-  firingRate: 0.6
+  firingRate: 0.7
   targetingMode: 0
   rotateSpeed: 720
+  shootingVariance: 0.05
   upgradePath1:
   - cost: 255
     tier: 1
@@ -301,8 +302,8 @@ MonoBehaviour:
     tier: 2
     description: Buck Shot
     sprite: {fileID: 11520142, guid: aab4df575745c445286acf1615ad78ed, type: 3}
-  projectileSpeed: 20
-  maxProjectileDistance: 20
+  projectileSpeed: 13
+  maxProjectileDistance: 15
   layersPoppedPerHit: 1
   pierceAmount: 1
   projectilePrefab: {fileID: 4069108416899728122, guid: 57e9ec0ff5e81473d842a6199d01ff2d, type: 3}
@@ -312,4 +313,4 @@ MonoBehaviour:
   projectileContainer: {fileID: 0}
   projectilesPerBurst: 3
   burstDelay: 0.2
-  spreadAngle: 6
+  spreadAngle: 11
