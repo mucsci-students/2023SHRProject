@@ -1467,6 +1467,14 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: BlackBloonPrefab
+      value: 
+      objectReference: {fileID: 8023372576191469905, guid: 3266d18d905ac3a4a83edd5c3e23e1f4, type: 3}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: bloonGroups.Array.data[0].interval
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
       propertyPath: bloonGroups.Array.data[1].interval
       value: 1.5
       objectReference: {fileID: 0}

@@ -16,7 +16,7 @@ public class DartlingGunnerScript : MonkeyScript
 
     // Spread angle in degrees
     [SerializeField]
-    private float spreadAngle = 6.0f;
+    private float spreadAngle = 10.0f;
     
     //  protected override void Update()
     //  { 
@@ -65,7 +65,7 @@ public class DartlingGunnerScript : MonkeyScript
         //Focused Firing COST: $255
         //Description: Increases accuracy of the Dartling Gun.
         //Effect: Decreases angular deviation
-        spreadAngle = 2.5f;
+        spreadAngle = 6.5f;
     }
 
     protected override void Upgrade1_2()

@@ -280,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monkeyName: Cannon
   monkeyCost: 445
-  firingRate: 1.5
+  firingRate: 1.3
   targetingMode: 0
   rotateSpeed: 270
   shootingVariance: 0.05
@@ -288,20 +288,20 @@ MonoBehaviour:
   - cost: 500
     tier: 1
     description: Increase range+
-    sprite: {fileID: -567489108, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: -1735976362, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 1000
     tier: 2
     description: Increase range++
-    sprite: {fileID: 1024542200, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: 75446687, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
   - cost: 500
     tier: 1
     description: Faster Speed
-    sprite: {fileID: -1968170103, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: 446852513, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 1000
     tier: 2
     description: Fastest Speed
-    sprite: {fileID: -1578981424, guid: d79839b7155533240a3968074ca52c55, type: 3}
+    sprite: {fileID: -471149001, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 10
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
