@@ -11,7 +11,7 @@ public class RoundUIManager : MonoBehaviour
     {
         if(roundText == null)
         {
-            Debug.Log("RoundText is null on " + gameObject.name);
+            //Debug.Log("RoundText is null on " + gameObject.name);
             roundText = GetComponent<TextMeshProUGUI>();
         }
     }

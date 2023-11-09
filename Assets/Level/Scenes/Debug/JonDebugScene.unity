@@ -1466,6 +1466,30 @@ PrefabInstance:
       propertyPath: m_fontSizeMin
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: bloonGroups.Array.data[1].interval
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: bloonGroups.Array.data[2].interval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: bloonGroups.Array.data[3].interval
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: bloonGroups.Array.data[4].interval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: bloonGroups.Array.data[5].interval
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: bloonGroups.Array.data[6].interval
+      value: 3.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7894726612013030238, guid: 508426681d3c64f4880752b47056358d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0.71719

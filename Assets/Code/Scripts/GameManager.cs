@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     {
         if (lives <= 0)
         {
-            Debug.Log("Game Over");
+           // Debug.Log("Game Over");
             
             // TODO: Add game over screen
             
