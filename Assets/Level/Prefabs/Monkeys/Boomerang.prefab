@@ -146,10 +146,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monkeyName: Boomerang Monkey
-  monkeyCost: 280
+  monkeyCost: 275
   firingRate: 1
   targetingMode: 0
   rotateSpeed: 270
+  shootingVariance: 0.05
   upgradePath1:
   - cost: 200
     tier: 1
@@ -176,6 +177,7 @@ MonoBehaviour:
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 7956948779632064154}
   radiusCollider: {fileID: 8015144817860210258}
+  projectileContainer: {fileID: 0}
 --- !u!50 &4498199164610912599
 Rigidbody2D:
   serializedVersion: 4
