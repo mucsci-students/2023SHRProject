@@ -1390,6 +1390,10 @@ PrefabInstance:
       propertyPath: isAIEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5071731652283179000, guid: 508426681d3c64f4880752b47056358d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: JonDebugScene
+      objectReference: {fileID: 0}
     - target: {fileID: 5715187445730803491, guid: 508426681d3c64f4880752b47056358d, type: 3}
       propertyPath: xBlocks
       value: 16
