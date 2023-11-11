@@ -963,7 +963,7 @@ GameObject:
   - component: {fileID: 363508863}
   - component: {fileID: 363508862}
   m_Layer: 5
-  m_Name: exit
+  m_Name: exitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1069,14 +1069,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8301887, g: 0.27803493, b: 0.27803493, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -539340955, guid: bbd041632c13748579a9d73ec31d3eb6, type: 3}
+  m_Sprite: {fileID: -1399472833, guid: 861f899022a1f497e8485f9e65b87547, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3068,7 +3068,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1085485910, guid: 913a927fa44cb40179e12e8bef8efb1f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95a73752c61a0475bb1d7e1843aafee1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4773,14 +4773,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8301887, g: 0.27803493, b: 0.27803493, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -539340955, guid: bbd041632c13748579a9d73ec31d3eb6, type: 3}
+  m_Sprite: {fileID: -1399472833, guid: 861f899022a1f497e8485f9e65b87547, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5586,6 +5586,10 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1594449435}
+    - target: {fileID: 3443711087320684514, guid: 484e04e064d22480b9c354b8ba8b580b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4146925326922681565, guid: 484e04e064d22480b9c354b8ba8b580b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5666,10 +5670,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6934397863618026740, guid: 484e04e064d22480b9c354b8ba8b580b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8570474869914085683, guid: 484e04e064d22480b9c354b8ba8b580b, type: 3}
       propertyPath: m_Name
       value: LoadingScreenCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8570474869914085683, guid: 484e04e064d22480b9c354b8ba8b580b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8938069463428757467, guid: 484e04e064d22480b9c354b8ba8b580b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1869255858, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

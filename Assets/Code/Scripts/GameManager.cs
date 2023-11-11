@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ai;
 
     [SerializeField] private WaveManager waveManager;
+    
+    [SerializeField] private GameObject loseCanvas;
 
     /// <summary>
     /// Unity method called on object creation.
@@ -80,12 +82,10 @@ public class GameManager : MonoBehaviour
     {
         if (lives <= 0)
         {
-           // Debug.Log("Game Over");
-            
-            // TODO: Add game over screen
-            
-            //Exit game
-            Application.Quit();
+           // Deactivate other game elements?
+           
+           loseCanvas.SetActive(true);
+            //Application.Quit();
         }
     }
 
