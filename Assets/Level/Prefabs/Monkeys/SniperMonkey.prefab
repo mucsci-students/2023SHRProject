@@ -287,7 +287,7 @@ MonoBehaviour:
   upgradePath1:
   - cost: 350
     tier: 1
-    description: +4 Popping Power
+    description: Full Metal Jacket
     sprite: {fileID: 403388993, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 1200
     tier: 2

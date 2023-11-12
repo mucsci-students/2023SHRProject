@@ -7,8 +7,9 @@ public class CannonProjectile : ProjectileScript
 {
     private ExplosionProjectile explosionProjectile;
 
-    private void Start()
+    protected override IEnumerator Start()
     {
+        yield return base.Start();
         explosionProjectile = transform.GetChild(0).GetComponent <ExplosionProjectile>();
     }
 

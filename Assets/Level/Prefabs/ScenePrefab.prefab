@@ -747,7 +747,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3581eab4bf8b441f68b7d9b768c99143, type: 3}
+  m_Sprite: {fileID: 888540336, guid: ab220a2efe2e9485db2c8125171285cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2099,7 +2099,7 @@ MonoBehaviour:
   randomSeed: 123213
   spawn: {fileID: 0}
   autoPlay: 1
-  RBES: 1e0000001e0000003c0000003700000039000000550000005c0000005a000000cc0000004a00000050000000b9000000910000005b0000007000000020000000f00000006500000042000000460000005800000063000000030000007c000000cf000000210200005c000000a0000000cf000000210200005c000000a0000000cf000000e6000000ff020000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000640000006400000064000000
+  RBES: 1e0000001e0000003c0000003700000039000000550000005c0000005a000000cc0000004a00000050000000b9000000910000005b0000007000000020000000f00000006500000042000000460000005800000063000000030000007c000000cf000000210200005c000000a0000000cf000000210200005c000000a0000000cf000000e6000000ff020000
   path: []
   bloonGroups:
   - Bloon: {fileID: 8023372576191469905, guid: c50f47062489128408d98b7d6d46b916, type: 3}
@@ -3718,9 +3718,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 715284950358873904}
-        m_TargetAssemblyTypeName: SettingsManagerScript, Assembly-CSharp
-        m_MethodName: loadScene
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AsyncManagerScript, Assembly-CSharp
+        m_MethodName: LoadLevelBtn
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7137,7 +7137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3581eab4bf8b441f68b7d9b768c99143, type: 3}
+  m_Sprite: {fileID: 888540336, guid: ab220a2efe2e9485db2c8125171285cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8384,9 +8384,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 715284950358873904}
-        m_TargetAssemblyTypeName: SettingsManagerScript, Assembly-CSharp
-        m_MethodName: loadScene
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AsyncManagerScript, Assembly-CSharp
+        m_MethodName: LoadLevelBtn
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9671,13 +9671,13 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3763775289437339726}
+  m_TargetGraphic: {fileID: 3781665212585677851}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 715284950358873904}
-        m_TargetAssemblyTypeName: SettingsManagerScript, Assembly-CSharp
-        m_MethodName: loadScene
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AsyncManagerScript, Assembly-CSharp
+        m_MethodName: LoadLevelBtn
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9831,7 +9831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3581eab4bf8b441f68b7d9b768c99143, type: 3}
+  m_Sprite: {fileID: 888540336, guid: ab220a2efe2e9485db2c8125171285cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12576,9 +12576,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 715284950358873904}
-        m_TargetAssemblyTypeName: SettingsManagerScript, Assembly-CSharp
-        m_MethodName: loadScene
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AsyncManagerScript, Assembly-CSharp
+        m_MethodName: LoadLevelBtn
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12937,9 +12937,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 715284950358873904}
-        m_TargetAssemblyTypeName: SettingsManagerScript, Assembly-CSharp
-        m_MethodName: loadScene
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AsyncManagerScript, Assembly-CSharp
+        m_MethodName: LoadLevelBtn
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13998,6 +13998,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1167465089238137358}
     - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
+      propertyPath: winCanvas
+      value: 
+      objectReference: {fileID: 3847176039483733996}
+    - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
       propertyPath: loseCanvas
       value: 
       objectReference: {fileID: 7315974791617346699}
@@ -14016,6 +14020,10 @@ PrefabInstance:
     - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
       propertyPath: StartingMoney
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
+      propertyPath: startingLives
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
       propertyPath: generateMapScript

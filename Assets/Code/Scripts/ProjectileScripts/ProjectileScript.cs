@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -17,7 +18,16 @@ public class ProjectileScript : MonoBehaviour
 
     protected GameObject Target;
     public MonkeyScript parentMonkeyScript;
+    
+    protected float secondsToWaitBeforeDestroying = 3f;
 
+    
+    protected virtual IEnumerator Start()
+    {
+        yield return new WaitForSeconds(secondsToWaitBeforeDestroying);
+        Destroy(gameObject);
+    }
+    
     // Update is called once per frame
     protected virtual void Update()
     {
@@ -35,6 +45,8 @@ public class ProjectileScript : MonoBehaviour
         {
             MoveInDirection(_lastTargetDirection);
         }
+        
+        //
     }
 
     public void SetAllAttributes(float newSpeed, float maxDistance, uint layersPerHit, uint pierceAmount, GameObject target, MonkeyScript parent)

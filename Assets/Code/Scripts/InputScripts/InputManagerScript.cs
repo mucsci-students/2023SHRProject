@@ -27,7 +27,7 @@ public class InputManagerScript : MonoBehaviour
     }
     
     //should be re-named to toggleSettings, opening settings pauses the game
-    public void TogglePause()
+    public void TogglePause() 
     {
         if (Time.timeScale == 0f)
         {
