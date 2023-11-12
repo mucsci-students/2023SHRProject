@@ -154,21 +154,21 @@ MonoBehaviour:
   upgradePath1:
   - cost: 200
     tier: 1
-    description: Sharperang
-    sprite: {fileID: -1259801223, guid: 7f74d1400e93849abb98ae1702cfe0ba, type: 3}
+    description: Improved Rangs
+    sprite: {fileID: 633717537, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 300
     tier: 2
-    description: Sharperestang
-    sprite: {fileID: 1340787665, guid: 7f74d1400e93849abb98ae1702cfe0ba, type: 3}
+    description: Glaives
+    sprite: {fileID: -795846855, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
   - cost: 200
     tier: 1
-    description: More Range
-    sprite: {fileID: 1572277781, guid: 7f74d1400e93849abb98ae1702cfe0ba, type: 3}
+    description: Long Range Darts
+    sprite: {fileID: 2089191854, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 300
     tier: 2
-    description: Even more Range
-    sprite: {fileID: -1027087573, guid: 7f74d1400e93849abb98ae1702cfe0ba, type: 3}
+    description: Red Hot Rangs
+    sprite: {fileID: -1361811074, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1

@@ -287,20 +287,20 @@ MonoBehaviour:
   upgradePath1:
   - cost: 500
     tier: 1
-    description: Increase range+
+    description: Extra Range
     sprite: {fileID: -1735976362, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 1000
     tier: 2
-    description: Increase range++
+    description: Frag Bombs
     sprite: {fileID: 75446687, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
   - cost: 500
     tier: 1
-    description: Faster Speed
+    description: Faster Reload
     sprite: {fileID: 446852513, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 1000
     tier: 2
-    description: Fastest Speed
+    description: Missile Launcher
     sprite: {fileID: -471149001, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 10
   maxProjectileDistance: 10

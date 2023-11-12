@@ -283,23 +283,24 @@ MonoBehaviour:
   firingRate: 1
   targetingMode: 0
   rotateSpeed: 270
+  shootingVariance: 0.05
   upgradePath1:
   - cost: 255
     tier: 1
-    description: +Attack Speed & Range
+    description: Ninja Discipline
     sprite: {fileID: 74525518, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 295
     tier: 2
-    description: +4 Popping Power
+    description: Sharp Shurikens
     sprite: {fileID: -719769999, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
   - cost: 850
     tier: 1
-    description: +2 Shuriken
+    description: Double Shot
     sprite: {fileID: -1321970590, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 2340
     tier: 2
-    description: +5 Shuriken
+    description: Bloonjitsu
     sprite: {fileID: 502953281, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10
@@ -309,3 +310,4 @@ MonoBehaviour:
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 6425238000497879260}
   radiusCollider: {fileID: 6425238000497879258}
+  projectileContainer: {fileID: 0}

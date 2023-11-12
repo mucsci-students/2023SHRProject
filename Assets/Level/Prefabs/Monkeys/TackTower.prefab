@@ -296,11 +296,11 @@ MonoBehaviour:
   upgradePath2:
   - cost: 85
     tier: 1
-    description: More Range
+    description: Long Range Tacks
     sprite: {fileID: 444307246, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 190
     tier: 2
-    description: Even More Range
+    description: Super Range Tacks
     sprite: {fileID: -1504152534, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 5
   maxProjectileDistance: 1

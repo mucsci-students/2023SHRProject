@@ -287,20 +287,20 @@ MonoBehaviour:
   upgradePath1:
   - cost: 75
     tier: 1
-    description: Increase Range
+    description: Long Range Darts
     sprite: {fileID: -394613916, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 100
     tier: 2
-    description: Even More Range
+    description: Enhanced Eyesight
     sprite: {fileID: 374119849, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
   - cost: 120
     tier: 1
-    description: +1 Popping Power
+    description: Sharp Shots
     sprite: {fileID: -546966488, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 145
     tier: 2
-    description: +2 Popping Power
+    description: Razor Sharp Shots
     sprite: {fileID: -528201166, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10

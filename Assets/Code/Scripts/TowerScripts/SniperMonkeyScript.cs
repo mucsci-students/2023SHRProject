@@ -27,8 +27,9 @@ public class SniperMonkeyScript : MonkeyScript
 
     protected override void Upgrade2_2()
     {
-        //Night Vision Goggles 
-        //Description: Allows Sniper to detect and shoot Camo bloons.
-        //TODO: Add Camo
+        //Neven Faster Firing
+        //Description: Allows Sniper to shoot fater (60%)
+        //TODO: Add Camo eventually and update this
+        projectileSpeed = 90;
     }
 }

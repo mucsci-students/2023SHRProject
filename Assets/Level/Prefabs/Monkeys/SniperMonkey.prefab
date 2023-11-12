@@ -291,16 +291,16 @@ MonoBehaviour:
     sprite: {fileID: 403388993, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 1200
     tier: 2
-    description: +7 Popping Power
+    description: Large Calibre
     sprite: {fileID: 1496502920, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   upgradePath2:
   - cost: 340
     tier: 1
-    description: 'Shoot 40%  Faster '
+    description: Fast Firing
     sprite: {fileID: 131771419, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 255
     tier: 2
-    description: Detect Camo Bloons
+    description: Even Faster Firing
     sprite: {fileID: -727407275, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   projectileSpeed: 50
   maxProjectileDistance: 10
