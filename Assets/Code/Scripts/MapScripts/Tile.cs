@@ -23,7 +23,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        _highlight.SetActive(true);
+        if(_highlight != null) _highlight.SetActive(true);
     }
     
     private void OnMouseExit()

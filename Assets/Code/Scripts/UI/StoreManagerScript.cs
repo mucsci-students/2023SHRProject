@@ -94,6 +94,12 @@ public class MonkeySpawner : MonoBehaviour
         {
             // We clicked a monkey and we are not placing a tower so show upgrade menu
             showUpgradeCanvas(monkeyScript);
+            
+            if (currentMonkeyInUpgradesMenu != null)
+            {
+                currentMonkeyInUpgradesMenu.SetIsShowingRadius(false);
+            }
+            
             currentMonkeyInUpgradesMenu = monkeyScript;
         }
     }

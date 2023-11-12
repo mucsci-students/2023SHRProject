@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     
     [SerializeField] private GameObject loseCanvas;
+    
+    [SerializeField] private GameObject winCanvas;
 
     /// <summary>
     /// Unity method called on object creation.
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
         if (!isAIEnabled)
         {
             ExitGameOnZeroLives();
+            CheckWinGame();
         }
         
         if (waveManager.CurrentWaveNumber == _prevWaveNumb)
@@ -83,9 +86,19 @@ public class GameManager : MonoBehaviour
         if (lives <= 0)
         {
            // Deactivate other game elements?
-           
+           Time.timeScale = 0;
            loseCanvas.SetActive(true);
-            //Application.Quit();
+           
+           //Application.Quit();
+        }
+    }
+    
+    private void CheckWinGame()
+    {
+        if (waveManager.isGameOver)
+        {
+            Time.timeScale = 0;
+            winCanvas.SetActive(true);
         }
     }
 
@@ -98,6 +111,7 @@ public class GameManager : MonoBehaviour
         lives = startingLives;
         enemiesRemaining = 0;
         layersPopped = 0;
+        Time.timeScale = 1;
     }
 
     /// <summary>
