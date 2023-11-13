@@ -8,6 +8,7 @@ public class InputManagerScript : MonoBehaviour
     private float _previousSpeedUpFactor = 1f;
 
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject tutorialScreen;
     
     // Update is called once per frame
     private void Update()
@@ -42,5 +43,13 @@ public class InputManagerScript : MonoBehaviour
         }
     }
     
+    public void ShowTutorial()
+    {
+        tutorialScreen.SetActive(true);
+    }
     
+    public void HideTutorial()
+    {
+        tutorialScreen.SetActive(false);
+    }
 }
