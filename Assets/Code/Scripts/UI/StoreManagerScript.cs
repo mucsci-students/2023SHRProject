@@ -11,18 +11,29 @@ public class MonkeySpawner : MonoBehaviour
     private bool isPlacingMonkey;
     private MonkeyScript currentMonkeyInUpgradesMenu;
     private int sellBackRate = 70;
-
+    
+    [Header("General Object Links")]
+    [SerializeField] private GameManager gameManager;
+    public Transform projectileContainer;
+    
+    [Header("Upgrades Menu Object Links")]
     [SerializeField] private GameObject UpgradeMenuCanvas;
     [SerializeField] private Image MonkeyImage;
     [SerializeField] private TMP_Dropdown targetingModeDropdown;
-    [SerializeField] private TextMeshProUGUI monkeyNameText;
-    [SerializeField] private TextMeshProUGUI UpgradePath1Text;
-    [SerializeField] private TextMeshProUGUI UpgradePath2Text;
-    [SerializeField] private TextMeshProUGUI SellPriceText;
     
-    [SerializeField] private GameManager gameManager;
-    public Transform projectileContainer;
-
+    [Header("Upgrades Menu Text Links")]
+    [SerializeField] private TextMeshProUGUI monkeyNameText;
+    [SerializeField] private TextMeshProUGUI SellPriceText;
+        
+    [Header("Upgrade Path 1 Text Links")]
+    [SerializeField] private TextMeshProUGUI UpgradePath1DescriptionText;
+    [SerializeField] private TextMeshProUGUI UpgradePath1CostText;
+    
+    [Header("Upgrade Path 2 Text Links")]
+    [SerializeField] private TextMeshProUGUI UpgradePath2DescriptionText;
+    [SerializeField] private TextMeshProUGUI UpgradePath2CostText;
+    
+    
     private void Update()
     {
         if (Input.GetMouseButtonDown(1) && currentMonkey != null)
@@ -113,8 +124,11 @@ public class MonkeySpawner : MonoBehaviour
 
         var noUpgradesText = "No more upgrades";
         
-        UpgradePath1Text.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath1()[0]);
-        UpgradePath2Text.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : CreateDescriptionText(currentMonkey.GetUpgradePath2()[0]);
+        UpgradePath1DescriptionText.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : currentMonkey.GetUpgradePath1()[0].GetDescription();
+        UpgradePath1CostText.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : "$" + currentMonkey.GetUpgradePath1()[0].GetCost();
+        
+        UpgradePath2DescriptionText.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : currentMonkey.GetUpgradePath2()[0].GetDescription();
+        UpgradePath2CostText.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : "$" + currentMonkey.GetUpgradePath2()[0].GetCost();
         
         SellPriceText.text = "Sell $" + (currentMonkey.GetMonkeySellPrice() * sellBackRate)/100;
         
