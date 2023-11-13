@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,15 @@ public class MonkeySpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UpgradePath2DescriptionText;
     [SerializeField] private TextMeshProUGUI UpgradePath2CostText;
     
+     // [Header("Monkey Purchase Buttons")]
+     // [SerializeField] private List<Button> monkeyButtons = new List<Button>();
+
+     // private void Start()
+     // {
+     //     //StartCoroutine(UpdateButtonInteractabilityCoroutine());
+     //     //event for when money is updated
+     //     //GameManager.OnMoneyUpdated += UpdateMonkeyButtonsInteractability;
+     // }
     
     private void Update()
     {
@@ -62,8 +72,37 @@ public class MonkeySpawner : MonoBehaviour
             return;
 
         HandleClick(hit);
+        
+        //UpdateMonkeyButtonsInteractability();
     }
-
+    
+    // private IEnumerator UpdateButtonInteractabilityCoroutine()
+    // {
+    //     while (true)
+    //     {
+    //         //will cause an error at star/ or in middle of game if there are no monkeys on the map
+    //         yield return new WaitForSeconds(4.0f);
+    //         UpdateMonkeyButtonsInteractability();
+    //     }
+    // }
+    
+    // private void UpdateMonkeyButtonsInteractability()
+    // {
+    //     foreach (Button button in monkeyButtons)
+    //     {
+    //         if (button != null)
+    //         {
+    //             //basically: if you dont have money then turn off the button
+    //             button.interactable = CanBuyTower();
+    //         }
+    //         else
+    //         {
+    //             Debug.LogWarning("Button reference is null.");
+    //         }
+    //     }
+    // }
+    
+    //prob unnecessary since we are deactivating the button now^^
     private void HandleClick(RaycastHit2D hit)
     {
         if (isPlacingMonkey)
@@ -123,12 +162,13 @@ public class MonkeySpawner : MonoBehaviour
         MonkeyImage.sprite = currentMonkey.GetMonkeyImage();
 
         var noUpgradesText = "No more upgrades";
+        var noUpgradesCostText = "";
         
         UpgradePath1DescriptionText.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : currentMonkey.GetUpgradePath1()[0].GetDescription();
-        UpgradePath1CostText.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesText : "$" + currentMonkey.GetUpgradePath1()[0].GetCost();
+        UpgradePath1CostText.text = currentMonkey.GetUpgradePath1().Count == 0 ? noUpgradesCostText : "$" + currentMonkey.GetUpgradePath1()[0].GetCost();
         
         UpgradePath2DescriptionText.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : currentMonkey.GetUpgradePath2()[0].GetDescription();
-        UpgradePath2CostText.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesText : "$" + currentMonkey.GetUpgradePath2()[0].GetCost();
+        UpgradePath2CostText.text = currentMonkey.GetUpgradePath2().Count == 0 ? noUpgradesCostText : "$" + currentMonkey.GetUpgradePath2()[0].GetCost();
         
         SellPriceText.text = "Sell $" + (currentMonkey.GetMonkeySellPrice() * sellBackRate)/100;
         
@@ -164,6 +204,7 @@ public class MonkeySpawner : MonoBehaviour
         currentUpgrade.UpgradeTower();
 
         showUpgradeCanvas(currentMonkeyInUpgradesMenu);
+        //UpdateMonkeyButtonsInteractability(); 
     }
 
     public void purchaseUpgradePath1()
@@ -259,5 +300,6 @@ public class MonkeySpawner : MonoBehaviour
         currentMonkeyInUpgradesMenu.GetTile().SetContainsTower(false);
         Destroy(currentMonkeyInUpgradesMenu.gameObject);
         UpgradeMenuCanvas.SetActive(false);
+        //UpdateMonkeyButtonsInteractability();
     }
 }

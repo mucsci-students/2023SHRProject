@@ -38,8 +38,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     
     [SerializeField] private GameObject loseCanvas;
-    
     [SerializeField] private GameObject winCanvas;
+
+    // Test Event for when the money is updated 
+    // public delegate void MoneyUpdatedEvent();
+    // public static event MoneyUpdatedEvent OnMoneyUpdated;
 
     /// <summary>
     /// Unity method called on object creation.
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
         {
             ++_prevWaveNumb;
             money += 100 + waveManager.CurrentWaveNumber;
+            //OnMoneyUpdated?.Invoke();
         }
     }
 

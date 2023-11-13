@@ -165,12 +165,12 @@ public class WaveManager : MonoBehaviour
         // Run once when wave is first over
         if (!betweenRounds && !RunCurrentWave() && transform.childCount == 0)
         {
-            Debug.Log("Wave Ended");
+            //Debug.Log("Wave Ended");
             //give round bonus & update round number
             //GameManager.UpdateWaveNumber();
             if (CurrentWaveNumber > RBES.Count - 1)
             {
-                Debug.Log("Waves over");
+                //Debug.Log("Waves over");
                 isPlaying = false;
                 isGameOver = true;
             }
