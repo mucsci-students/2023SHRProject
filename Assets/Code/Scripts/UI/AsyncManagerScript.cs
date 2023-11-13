@@ -30,6 +30,9 @@ public class AsyncManagerScript : MonoBehaviour
             //and clamping will ensure that the progress value stays between a specified range
             float progressValue = Mathf.Clamp01(loadOperation.progress / 0.9f);
             
+            Debug.Log("Progress: " + progressValue);
+            Debug.Log("IsDone: " + loadOperation.isDone);
+            
             //just updating slider bar 
             loadingSlider.value = progressValue;
 
