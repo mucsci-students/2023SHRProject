@@ -8,7 +8,26 @@ public class InputManagerScript : MonoBehaviour
     private float _previousSpeedUpFactor = 1f;
 
     [SerializeField] private GameObject pauseMenu;
+    
+    [Header("Tutorial Settings")]
     [SerializeField] private GameObject tutorialScreen;
+    //[SerializeField] private bool alwaysShowTutorialOnStart = true;
+    
+    private bool tutorialShown;
+    
+    private void Start()
+    {
+        //PlayerPrefs.DeleteAll();
+        //Test if other can see on start up
+       // if (alwaysShowTutorialOnStart)
+       // {
+            tutorialShown = PlayerPrefs.GetInt("TutorialShown", 0) == 1;
+            if (!tutorialShown)
+            {
+                ShowTutorial();
+            }
+       // }
+    }
     
     // Update is called once per frame
     private void Update()
@@ -51,5 +70,6 @@ public class InputManagerScript : MonoBehaviour
     public void HideTutorial()
     {
         tutorialScreen.SetActive(false);
+        PlayerPrefs.SetInt("TutorialShown", 1);
     }
 }

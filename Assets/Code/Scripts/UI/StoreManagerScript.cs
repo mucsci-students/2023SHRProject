@@ -34,15 +34,15 @@ public class MonkeySpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UpgradePath2DescriptionText;
     [SerializeField] private TextMeshProUGUI UpgradePath2CostText;
     
-     // [Header("Monkey Purchase Buttons")]
-     // [SerializeField] private List<Button> monkeyButtons = new List<Button>();
+      [Header("Monkey Purchase Buttons")]
+      [SerializeField] private List<Button> monkeyButtons = new List<Button>();
 
-     // private void Start()
-     // {
-     //     //StartCoroutine(UpdateButtonInteractabilityCoroutine());
-     //     //event for when money is updated
-     //     //GameManager.OnMoneyUpdated += UpdateMonkeyButtonsInteractability;
-     // }
+     private void Start()
+     {
+         StartCoroutine(UpdateButtonInteractabilityCoroutine());
+         //event for when money is updated
+         GameManager.OnMoneyUpdated += UpdateMonkeyButtonsInteractability;
+     }
     
     private void Update()
     {
@@ -73,34 +73,36 @@ public class MonkeySpawner : MonoBehaviour
 
         HandleClick(hit);
         
-        //UpdateMonkeyButtonsInteractability();
+        UpdateMonkeyButtonsInteractability();
     }
     
-    // private IEnumerator UpdateButtonInteractabilityCoroutine()
-    // {
-    //     while (true)
-    //     {
-    //         //will cause an error at star/ or in middle of game if there are no monkeys on the map
-    //         yield return new WaitForSeconds(4.0f);
-    //         UpdateMonkeyButtonsInteractability();
-    //     }
-    // }
+    private IEnumerator UpdateButtonInteractabilityCoroutine()
+    {
+        while (true)
+        {
+            //will cause an error at star/ or in middle of game if there are no monkeys on the map
+            yield return new WaitForSeconds(0.5f);
+            UpdateMonkeyButtonsInteractability();
+        }
+    }
     
-    // private void UpdateMonkeyButtonsInteractability()
-    // {
-    //     foreach (Button button in monkeyButtons)
-    //     {
-    //         if (button != null)
-    //         {
-    //             //basically: if you dont have money then turn off the button
-    //             button.interactable = CanBuyTower();
-    //         }
-    //         else
-    //         {
-    //             Debug.LogWarning("Button reference is null.");
-    //         }
-    //     }
-    // }
+    private void UpdateMonkeyButtonsInteractability()
+    {
+        foreach (Button button in monkeyButtons)
+        {
+            if (button != null)
+            {
+                //basically: if you dont have money then turn off the button
+                button.interactable =
+                    (int.Parse(button.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text.Substring(1)) <=
+                     gameManager.money);
+            }
+            else
+            {
+                Debug.LogWarning("Button reference is null.");
+            }
+        }
+    }
     
     //prob unnecessary since we are deactivating the button now^^
     private void HandleClick(RaycastHit2D hit)
@@ -204,7 +206,7 @@ public class MonkeySpawner : MonoBehaviour
         currentUpgrade.UpgradeTower();
 
         showUpgradeCanvas(currentMonkeyInUpgradesMenu);
-        //UpdateMonkeyButtonsInteractability(); 
+        //UpdateMonkeyButtonsInteractability();
     }
 
     public void purchaseUpgradePath1()
