@@ -287,7 +287,7 @@ MonoBehaviour:
   upgradePath1:
   - cost: 350
     tier: 1
-    description: Full Metal Jacket
+    description: Sharp Shots
     sprite: {fileID: 403388993, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 1200
     tier: 2
@@ -300,7 +300,7 @@ MonoBehaviour:
     sprite: {fileID: 131771419, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 255
     tier: 2
-    description: Even Faster Firing
+    description: Fast Reload
     sprite: {fileID: -727407275, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   projectileSpeed: 50
   maxProjectileDistance: 10

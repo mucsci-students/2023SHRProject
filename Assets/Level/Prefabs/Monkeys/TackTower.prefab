@@ -291,16 +291,16 @@ MonoBehaviour:
     sprite: {fileID: -1038093394, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 255
     tier: 2
-    description: Even Faster Shooting
+    description: Faster Reload
     sprite: {fileID: -1334188628, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   upgradePath2:
   - cost: 85
     tier: 1
-    description: Long Range Tacks
+    description: Long Range
     sprite: {fileID: 444307246, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 190
     tier: 2
-    description: Super Range Tacks
+    description: Super Range
     sprite: {fileID: -1504152534, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 5
   maxProjectileDistance: 1

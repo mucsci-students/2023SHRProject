@@ -163,11 +163,11 @@ MonoBehaviour:
   upgradePath2:
   - cost: 200
     tier: 1
-    description: Long Range Darts
+    description: Long Range
     sprite: {fileID: 2089191854, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 300
     tier: 2
-    description: Red Hot Rangs
+    description: Hot Rangs
     sprite: {fileID: -1361811074, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10

@@ -291,16 +291,16 @@ MonoBehaviour:
     sprite: {fileID: -1732315797, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 500
     tier: 2
-    description: Even More Range
+    description: Extra Range
     sprite: {fileID: -1732315797, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   upgradePath2:
   - cost: 500
     tier: 1
-    description: Faster Firing Rate
+    description: Faster Firing
     sprite: {fileID: -485323826, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   - cost: 1500
     tier: 2
-    description: Even Faster Firing Rate
+    description: Faster Reload
     sprite: {fileID: -329567831, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10

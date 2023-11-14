@@ -300,7 +300,7 @@ MonoBehaviour:
     sprite: {fileID: -546966488, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 145
     tier: 2
-    description: Razor Sharp Shots
+    description: Razor Shots
     sprite: {fileID: -528201166, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10

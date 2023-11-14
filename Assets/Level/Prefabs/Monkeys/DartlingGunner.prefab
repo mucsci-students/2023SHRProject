@@ -296,7 +296,7 @@ MonoBehaviour:
   upgradePath2:
   - cost: 215
     tier: 1
-    description: Faster Barrel Spin
+    description: Faster Barrel
     sprite: {fileID: -176797148, guid: aab4df575745c445286acf1615ad78ed, type: 3}
   - cost: 1020
     tier: 2
