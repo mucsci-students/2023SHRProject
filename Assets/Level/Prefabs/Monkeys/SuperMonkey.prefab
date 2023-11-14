@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 6425238001161290764}
   - component: {fileID: 6425238001161290765}
   - component: {fileID: 1957881687489847909}
-  - component: {fileID: 8332110718181161042}
+  - component: {fileID: 6943300140449210442}
   m_Layer: 0
   m_Name: SuperMonkey
   m_TagString: Untagged
@@ -266,7 +266,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0625, y: 1.4375}
   m_EdgeRadius: 0
---- !u!114 &8332110718181161042
+--- !u!114 &6943300140449210442
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,32 +275,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 6425238001161290767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab3ec5cbbbd54554ab2b8648c356ab97, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c293aae173a94842a8457cde3375573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monkeyName: Super Monkey
-  monkeyCost: 3500
+  monkeyCost: 2500
   firingRate: 0.2
   targetingMode: 0
   rotateSpeed: 270
+  shootingVariance: 0.05
   upgradePath1:
-  - cost: 75
+  - cost: 250
     tier: 1
-    description: 
-    sprite: {fileID: -394613916, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
-  - cost: 1
+    description: More Range
+    sprite: {fileID: -1732315797, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
+  - cost: 500
     tier: 2
-    description: 
-    sprite: {fileID: 374119849, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+    description: Even More Range
+    sprite: {fileID: -1732315797, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   upgradePath2:
-  - cost: 0
+  - cost: 500
     tier: 1
-    description: 
-    sprite: {fileID: -546966488, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
-  - cost: 0
+    description: Faster Firing Rate
+    sprite: {fileID: -485323826, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
+  - cost: 1500
     tier: 2
-    description: 
-    sprite: {fileID: -528201166, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
+    description: Even Faster Firing Rate
+    sprite: {fileID: -329567831, guid: 2074cf2d9724d479ab59dc837c655cd4, type: 3}
   projectileSpeed: 15
   maxProjectileDistance: 10
   layersPoppedPerHit: 1
@@ -309,3 +310,4 @@ MonoBehaviour:
   totalLayersPopped: 0
   radiusSpriteRenderer: {fileID: 6425238000497879260}
   radiusCollider: {fileID: 6425238000497879258}
+  projectileContainer: {fileID: 0}

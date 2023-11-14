@@ -13213,10 +13213,6 @@ PrefabInstance:
       propertyPath: m_Model
       value: 
       objectReference: {fileID: 5022602860645237092, guid: d17646abdf279f9469c3ac693e0520b5, type: 3}
-    - target: {fileID: 3541334949535690879, guid: 508426681d3c64f4880752b47056358d, type: 3}
-      propertyPath: m_BehaviorType
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3683739073599860582, guid: 508426681d3c64f4880752b47056358d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
