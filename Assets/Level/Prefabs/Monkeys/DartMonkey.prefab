@@ -287,7 +287,7 @@ MonoBehaviour:
   upgradePath1:
   - cost: 75
     tier: 1
-    description: Long Range Darts
+    description: Long Range
     sprite: {fileID: -394613916, guid: 21620dcb548f24c608ef32dfa42ee6f0, type: 3}
   - cost: 100
     tier: 2

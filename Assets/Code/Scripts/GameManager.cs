@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Stores and initializes widely used variables. Resets static variables on game start or restart.
@@ -151,5 +153,10 @@ public class GameManager : MonoBehaviour
     public void AddLives(int amount)
     {
         lives += amount;
+    }
+    
+    public void ToggleAutoplay(Toggle isAutoPlay)
+    {
+        waveManager.autoPlay = isAutoPlay.isOn;
     }
 }
