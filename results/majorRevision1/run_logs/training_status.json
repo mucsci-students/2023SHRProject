@@ -1,0 +1,29 @@
+{
+    "AIWithMoney": {
+        "checkpoints": [
+            {
+                "steps": 9999684,
+                "file_path": "results\\majorRevision1\\AIWithMoney\\AIWithMoney-9999684.onnx",
+                "reward": null,
+                "creation_time": 1698998528.4629362,
+                "auxillary_file_paths": [
+                    "results\\majorRevision1\\AIWithMoney\\AIWithMoney-9999684.pt"
+                ]
+            },
+            {
+                "steps": 19999877,
+                "file_path": "results\\majorRevision1\\AIWithMoney\\AIWithMoney-19999877.onnx",
+                "reward": 2.515692344460732,
+                "creation_time": 1699013464.1728644,
+                "auxillary_file_paths": [
+                    "results\\majorRevision1\\AIWithMoney\\AIWithMoney-19999877.pt"
+                ]
+            }
+        ]
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
