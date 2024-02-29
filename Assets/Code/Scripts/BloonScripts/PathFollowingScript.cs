@@ -39,7 +39,7 @@ public class PathFollowingScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         // Takes a frame for bloon path to be set when spawning child(this) bloon.
         if (bloonPath.Count == 0)
@@ -92,7 +92,7 @@ public class PathFollowingScript : MonoBehaviour
     {
         //throw new NotImplementedException();
         var translateVector = new Vector3(0f, 0f, 0f);
-        var movementDistance = _speed * Time.deltaTime;
+        var movementDistance = _speed * Time.fixedDeltaTime;
         
         if (transform.position.x < targetPosition.x)
         {

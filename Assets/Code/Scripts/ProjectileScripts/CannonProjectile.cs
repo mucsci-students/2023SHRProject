@@ -48,10 +48,4 @@ public class CannonProjectile : ProjectileScript
             LayersPerHit = 0;
         }
     }
-
-    
-
-   
-
-  
 }

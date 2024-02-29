@@ -13,7 +13,7 @@ public class BoomerangProjectile : ProjectileScript
     public float timer;
     public float alpha = 1f;
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
         if (DistanceTraveled > MaxDistance)
         {
@@ -23,7 +23,7 @@ public class BoomerangProjectile : ProjectileScript
         {
             var position = Target.transform.position;
             LookAt(position);
-            MoveTowardsTarget(position, speed * Time.deltaTime);
+            MoveTowardsTarget(position, speed * Time.fixedDeltaTime);
         }
         else
         {
@@ -31,7 +31,7 @@ public class BoomerangProjectile : ProjectileScript
             
             if (invincible)
             {
-                timer += Time.deltaTime;
+                timer += Time.fixedDeltaTime;
                 if (timer >= noDamageTimeLimit)
                 {
                     invincible = false;
@@ -53,7 +53,7 @@ public class BoomerangProjectile : ProjectileScript
         float degreesPerSecond = 2500f; // Desired rotation speed in degrees per second
         float radius = Vector3.Distance(transform.position, _midpoint);
         float circumference = 2 * Mathf.PI * radius;
-        float anglePerFrame = (degreesPerSecond / 360f) * 360f * (Time.deltaTime / circumference);
+        float anglePerFrame = (degreesPerSecond / 360f) * 360f * (Time.fixedDeltaTime / circumference);
         //transform.position = new Vector2(midpoint.x + (1.5f * Mathf.Sin(Mathf.Deg2Rad * alpha)), midpoint.y + ( 2f * Mathf.Cos(Mathf.Deg2Rad * alpha)));
         transform.RotateAround(_midpoint, Vector3.forward, anglePerFrame);
         //alpha += 0.5f;

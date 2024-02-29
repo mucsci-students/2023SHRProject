@@ -29,7 +29,7 @@ public class ProjectileScript : MonoBehaviour
     }
     
     // Update is called once per frame
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         if (DistanceTraveled > MaxDistance)
         {
@@ -39,7 +39,7 @@ public class ProjectileScript : MonoBehaviour
         {
             var position = Target.transform.position;
             LookAt(position);
-            MoveTowardsTarget(position, speed * Time.deltaTime);
+            MoveTowardsTarget(position, speed * Time.fixedDeltaTime);
         }
         else
         {
@@ -115,7 +115,7 @@ public class ProjectileScript : MonoBehaviour
 
     protected void MoveInDirection(Vector3 direction)
     {
-        Vector3 newPosition = GetNewPosition(transform.position + direction, speed * Time.deltaTime);
+        Vector3 newPosition = GetNewPosition(transform.position + direction, speed * Time.fixedDeltaTime);
         SetPosition(newPosition);
     }
 

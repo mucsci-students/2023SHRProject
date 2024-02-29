@@ -94,9 +94,9 @@ public abstract class MonkeyScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
-        _timer += Time.deltaTime;
+        _timer += Time.fixedDeltaTime;
         if (_enemiesInRange.Count > 0)
         {
             var target = GetTarget(targetingMode);
@@ -142,7 +142,7 @@ public abstract class MonkeyScript : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedVectorToTarget);
 
         // Angular speed in degrees per sec.
-        var maxRotateSpeed = rotateSpeed * Time.deltaTime;
+        var maxRotateSpeed = rotateSpeed * Time.fixedDeltaTime;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxRotateSpeed);
     }
 
