@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HardCodedAI
 {
@@ -9,22 +10,26 @@ namespace HardCodedAI
         private int[,] _map;
         private Tile[,] _tiles;
         
+        [Header("Managers Scripts")]
         [SerializeField] private GameManager gameManager;
         [SerializeField] private MonkeySpawner storeManagerScript;
         [SerializeField] private GenerateMapScript generateMapScript;
         [SerializeField] private WaveManager waveManager;
         
+        [Header("Tower References")]
         [SerializeField] private DartMonkeyScript dartMonkeyScript;
         [SerializeField] private SniperMonkeyScript sniperMonkeyScript;
         
-        [SerializeField] private List<MonkeyScript> currentMonkeys = new();
         
-        private Metrics _metrics = new();
+        [Header("Settings")]
         
-        [SerializeField] private List<Goal> goals = new();
-        private Goal _currentGoal;
+        [SerializeField, Range(1, 1000)] private int framesBetweenDecisions = 100;
+
+        [Header("Debugging")]
+        private readonly List<Goal> goals = new();
         
-        [SerializeField] private string currentGoalName;
+        private readonly Metrics _metrics = new();
+        private Goal _currentGoal = null;
 
         // Start is called before the first frame update
         private IEnumerator Start()
@@ -44,25 +49,31 @@ namespace HardCodedAI
         // Update is called once per frame
         private void Update()
         {
-            if (Time.frameCount % 100 != 0 || _map == null) return;
+            if (Time.frameCount % framesBetweenDecisions != 0 || _map == null) return;
 
             if (_currentGoal == null)
             {
-                //TODO Add a check to see if the map is full and decide what tile to choose smartly
-                var tile = MapUtils.GetFirstAvailableTile(ref _map, ref _tiles);
-
                 //TODO come up with a better way to choose a goal
                 _currentGoal = GetNewGoal();
                 
-                _currentGoal.SetTile(tile);
-                currentGoalName = _currentGoal.GetDescription();
-
-                Debug.Log(currentGoalName);
+                if (_currentGoal.GetGoalType() == GoalType.PlaceTower)
+                {
+                    var tile = _currentGoal.GetMonkeyScript() is SniperMonkeyScript 
+                        ? MapUtils.GetFirstAvailableTile(ref _map, ref _tiles) 
+                        : MapUtils.GetRandomAvailableTile(ref _map, ref _tiles);
+                
+                    if (tile == null) {
+                        _currentGoal = null;
+                        return;
+                    }
+                    
+                    _currentGoal.SetTile(tile);
+                }
+                
             } else if (_currentGoal.CanAchieveGoal())
             {
                 _currentGoal.ExecuteGoal();
                 _currentGoal = null;
-                currentGoalName = "No Goal";
                 Debug.Log("Executed Goal");
             }
         }
@@ -86,19 +97,33 @@ namespace HardCodedAI
         
         private bool CanBuyUpgradePath1(MonkeyScript monkeyScript)
         {
+            if (monkeyScript.GetUpgradePath1().Count == 0) {
+                goals.Remove(_currentGoal);
+                _currentGoal = null;
+                return false;
+            }
+            
             return gameManager.money >= monkeyScript.GetUpgradePath1()[0].GetCost();
         }
     
         private bool CanBuyUpgradePath2(MonkeyScript monkeyScript)
         {
+            if (monkeyScript.GetUpgradePath2().Count == 0) {
+                goals.Remove(_currentGoal);
+                _currentGoal = null;
+                return false;
+            }
+            
             return gameManager.money >= monkeyScript.GetUpgradePath2()[0].GetCost();
         }
         
         private void PurchaseUpgradePath1(MonkeyScript monkeyScript, Tile tile)
         {
-            //TODO: Remove goal associated with this upgrade path on tower somehow ?
-            if (monkeyScript.GetUpgradePath1().Count == 0)
+            if (monkeyScript.GetUpgradePath1().Count == 0) {
+                goals.Remove(_currentGoal);
+                _currentGoal = null;
                 return;
+            }
 
             Upgrade currentUpgrade = monkeyScript.GetUpgradePath1()[0];
 
@@ -111,9 +136,11 @@ namespace HardCodedAI
         
         private void PurchaseUpgradePath2(MonkeyScript monkeyScript, Tile tile)
         {
-            //TODO: Remove goal associated with this upgrade path on tower somehow ?
-            if (monkeyScript.GetUpgradePath2().Count == 0)
+            if (monkeyScript.GetUpgradePath2().Count == 0) {
+                goals.Remove(_currentGoal);
+                _currentGoal = null;
                 return;
+            }
 
             Upgrade currentUpgrade = monkeyScript.GetUpgradePath2()[0];
 
@@ -139,7 +166,6 @@ namespace HardCodedAI
             var instantiatedScript = PlaceTower(monkeyScript, tile);
             
             gameManager.money -= monkeyScript.GetMonkeyCost();
-            currentMonkeys.Add(instantiatedScript);
             
             _metrics.TowerCount++;
             
