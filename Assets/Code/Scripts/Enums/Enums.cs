@@ -7,4 +7,10 @@ public static class Enums
         Strongest,
         None
     }
+    
+    public enum TileMode {
+        Open,
+        Path,
+        InUse
+    }
 }

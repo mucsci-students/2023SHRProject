@@ -1,9 +1,6 @@
-
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace HardCodedAI
 {
@@ -15,13 +12,16 @@ namespace HardCodedAI
         [SerializeField] private GameManager gameManager;
         [SerializeField] private MonkeySpawner storeManagerScript;
         [SerializeField] private GenerateMapScript generateMapScript;
+        [SerializeField] private WaveManager waveManager;
         
         [SerializeField] private DartMonkeyScript dartMonkeyScript;
         [SerializeField] private SniperMonkeyScript sniperMonkeyScript;
         
         [SerializeField] private List<MonkeyScript> currentMonkeys = new();
         
-        private readonly List<Goal> _goals = new();
+        private Metrics _metrics = new();
+        
+        [SerializeField] private List<Goal> goals = new();
         private Goal _currentGoal;
         
         [SerializeField] private string currentGoalName;
@@ -30,30 +30,29 @@ namespace HardCodedAI
         private IEnumerator Start()
         {
             Debug.Log("Loading");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(5f);
             Debug.Log("Agent Started");
+            
             // Add a new goal to the list
             _map = generateMapScript.GetMap();
             _tiles = generateMapScript.GetTileMap();
-            _goals.Add(new Goal("Buy monkey tower", GoalType.PlaceTower, dartMonkeyScript, CanBuyTower, BuyAndPlaceTower));
-            _goals.Add(new Goal("Buy sniper tower", GoalType.PlaceTower, sniperMonkeyScript, CanBuyTower, BuyAndPlaceTower));
+            
+            goals.Add(new Goal("Buy Monkey Tower", GoalType.PlaceTower, dartMonkeyScript, CanBuyTower, BuyAndPlaceTower));
+            goals.Add(new Goal("Buy Sniper Tower", GoalType.PlaceTower, sniperMonkeyScript, CanBuyTower, BuyAndPlaceTower));
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (Time.frameCount % 100 != 0 && _map == null) return;
-            
+            if (Time.frameCount % 100 != 0 || _map == null) return;
+
             if (_currentGoal == null)
             {
-                // Get Goal
-                Debug.Log(_map);
-                
                 //TODO Add a check to see if the map is full and decide what tile to choose smartly
-                var tile = GetRandomTile();
-                
+                var tile = MapUtils.GetFirstAvailableTile(ref _map, ref _tiles);
+
                 //TODO come up with a better way to choose a goal
-                _currentGoal = _goals[Random.Range(0, _goals.Count)];
+                _currentGoal = GetNewGoal();
                 
                 _currentGoal.SetTile(tile);
                 currentGoalName = _currentGoal.GetDescription();
@@ -67,22 +66,17 @@ namespace HardCodedAI
                 Debug.Log("Executed Goal");
             }
         }
-
-        private Tile GetRandomTile()
-        {
-            for (int i = 0; i < _map.GetLength(0); i++)
-            {
-                for (int j = 0; j < _map.GetLength(1); j++)
-                {
-                    if (_map[i, j] == 0)
-                    {
-                        _map[i, j] = 1;
-                        return _tiles[i, j];
-                    }
-                }
+        
+        private Goal GetNewGoal() {
+            Goal newGoal;
+            
+            if (waveManager.CurrentWaveNumber < 3) {
+                newGoal = GoalUtils.GetARandomBuyGoal(goals);
+            } else {
+                newGoal = GoalUtils.GetRandomGoal(goals);
             }
 
-            return null;
+            return newGoal;
         }
 
         private bool CanBuyTower(MonkeyScript monkeyScript)
@@ -111,6 +105,8 @@ namespace HardCodedAI
             gameManager.money -= currentUpgrade.GetCost();
             monkeyScript.SetMonkeySellPrice(monkeyScript.GetMonkeySellPrice() + currentUpgrade.GetCost());
             currentUpgrade.UpgradeTower();
+            
+            _metrics.UpgradesBought++;
         }
         
         private void PurchaseUpgradePath2(MonkeyScript monkeyScript, Tile tile)
@@ -124,21 +120,32 @@ namespace HardCodedAI
             gameManager.money -= currentUpgrade.GetCost();
             monkeyScript.SetMonkeySellPrice(monkeyScript.GetMonkeySellPrice() + currentUpgrade.GetCost());
             currentUpgrade.UpgradeTower();
+            
+            _metrics.UpgradesBought++;
+        }
+
+        private MonkeyScript PlaceTower(MonkeyScript monkeyScript, Tile tile) {
+            var instantiatedScript = Instantiate(monkeyScript, tile.transform.position, Quaternion.identity);
+            instantiatedScript.SetProjectileContainer(storeManagerScript.projectileContainer);
+            instantiatedScript.gameObject.transform.parent = gameObject.transform;
+            instantiatedScript.transform.Translate(0, 0, -1);
+            instantiatedScript.SetTile(tile);
+            instantiatedScript.SetTargetingMode(Enums.TargetingMode.First);
+            
+            return instantiatedScript;
         }
         
-        private void BuyAndPlaceTower(MonkeyScript monkeyScript, Tile tile)
-        {
-            MonkeyScript script = Instantiate(monkeyScript, tile.transform.position, Quaternion.identity);
-            script.SetProjectileContainer(storeManagerScript.projectileContainer);
-            script.gameObject.transform.parent = gameObject.transform;
-            script.SetTile(tile);
-            script.SetTargetingMode(Enums.TargetingMode.First);
+        private void BuyAndPlaceTower(MonkeyScript monkeyScript, Tile tile) {
+            var instantiatedScript = PlaceTower(monkeyScript, tile);
+            
             gameManager.money -= monkeyScript.GetMonkeyCost();
-            currentMonkeys.Add(script);
+            currentMonkeys.Add(instantiatedScript);
+            
+            _metrics.TowerCount++;
             
             // Add goals to upgrade tower it just placed for future decisions
-            _goals.Add(new Goal("Upgrade path 1 on a tower", GoalType.UpgradeTower, script, CanBuyUpgradePath1, PurchaseUpgradePath1));
-            _goals.Add(new Goal("Upgrade path 2 on a tower", GoalType.UpgradeTower, script, CanBuyUpgradePath2, PurchaseUpgradePath2));
+            goals.Add(new Goal("Upgrade path 1 on a tower", GoalType.UpgradeTower, instantiatedScript, CanBuyUpgradePath1, PurchaseUpgradePath1));
+            goals.Add(new Goal("Upgrade path 2 on a tower", GoalType.UpgradeTower, instantiatedScript, CanBuyUpgradePath2, PurchaseUpgradePath2));
             
         }
     }   
