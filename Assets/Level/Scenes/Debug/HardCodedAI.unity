@@ -439,6 +439,17 @@ PrefabInstance:
       addedObject: {fileID: 742850232}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 508426681d3c64f4880752b47056358d, type: 3}
+--- !u!114 &616149549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7724620301874222394, guid: 508426681d3c64f4880752b47056358d, type: 3}
+  m_PrefabInstance: {fileID: 273430900}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a590ff6e8980c34ca0a22961ce4de93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &742850231
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,9 +497,11 @@ MonoBehaviour:
   gameManager: {fileID: 1404486853}
   storeManagerScript: {fileID: 1547369633}
   generateMapScript: {fileID: 1565896911}
+  waveManager: {fileID: 616149549}
   dartMonkeyScript: {fileID: 8332110718181161042, guid: cc38799dddd7040488e0b25a7a465fff, type: 3}
   sniperMonkeyScript: {fileID: 7057270781938598212, guid: e13b5642812924487b50f6d09d1a684c, type: 3}
   currentMonkeys: []
+  goals: []
   currentGoalName: 
 --- !u!114 &1404486853 stripped
 MonoBehaviour:
