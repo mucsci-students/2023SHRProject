@@ -3,22 +3,22 @@ using UnityEngine.EventSystems;
 
 public class DraggableUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
-    private RectTransform dragTransform;
+    private RectTransform _dragTransform;
 
-    private Vector2 offset;
+    private Vector2 _offset;
 
-    void Start()
+    private void Start()
     {
-        dragTransform = GetComponent<RectTransform>();
+        _dragTransform = GetComponent<RectTransform>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        offset = (Vector2)dragTransform.position - eventData.position;
+        _offset = (Vector2)_dragTransform.position - eventData.position;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        dragTransform.position = eventData.position + offset;
+        _dragTransform.position = eventData.position + _offset;
     }
 }

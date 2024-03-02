@@ -11,7 +11,6 @@ public class BoomerangProjectile : ProjectileScript
     public bool invincible;
     public float noDamageTimeLimit = 0.00000001f;
     public float timer;
-    public float alpha = 1f;
 
     protected override void FixedUpdate()
     {
@@ -50,7 +49,7 @@ public class BoomerangProjectile : ProjectileScript
             _midpoint = new Vector3((position.x + position1.x) / 2f, (position.y + position1.y) / 2f);
             isReturningToTower = true;
         } 
-        float degreesPerSecond = 2500f; // Desired rotation speed in degrees per second
+        const float degreesPerSecond = 2500f; // Desired rotation speed in degrees per second
         float radius = Vector3.Distance(transform.position, _midpoint);
         float circumference = 2 * Mathf.PI * radius;
         float anglePerFrame = (degreesPerSecond / 360f) * 360f * (Time.fixedDeltaTime / circumference);

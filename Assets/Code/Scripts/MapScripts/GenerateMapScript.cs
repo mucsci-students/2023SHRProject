@@ -62,15 +62,7 @@ public class GenerateMapScript : MonoBehaviour
 
     private void CalculateMapSize()
     {
-        Vector3 bottomLeftCameraPosition;
-        if (useCameraBounds)
-        {
-            bottomLeftCameraPosition = currentSceneCamera.ViewportToWorldPoint(new Vector3(0f, 0f));
-        }
-        else
-        {
-            bottomLeftCameraPosition = transform.parent.position;
-        }
+        var bottomLeftCameraPosition = useCameraBounds ? currentSceneCamera.ViewportToWorldPoint(new Vector3(0f, 0f)) : transform.parent.position;
         
         
         if (leftCameraPosition == 0f)
@@ -111,13 +103,16 @@ public class GenerateMapScript : MonoBehaviour
         }
         DeleteMap();
         waveManager.path.Clear();
+        
         CalculateMapSize();
+        
         _visited = new bool[(int)yBlocks, (int)xBlocks];
         _map = new int[(int)yBlocks, (int)xBlocks];
         _tileMap = new Tile[(int)yBlocks, (int)xBlocks];
         _cornerCount = 0;
-        GenerateRandomMap();
-        DisplayMap(_map);
+        
+        GenerateRandomMapArray();
+        CreateMap(_map);
         DetectCorners();
     }
     
@@ -131,7 +126,7 @@ public class GenerateMapScript : MonoBehaviour
         }
     }
 
-    private void GenerateRandomMap()
+    private void GenerateRandomMapArray()
     {
         var startY = _randomNumberGenerator.Next(1, (int)yBlocks - 1);
 
@@ -163,7 +158,7 @@ public class GenerateMapScript : MonoBehaviour
         {
             if ((int)currentPosition.x == _map.GetLength(1) - 1) return MoveDirection.Right;
             currentPosition.x += 1;
-            SetMapValue(currentPosition, 1);
+            SetMapValue(currentPosition, (int)Enums.TileMode.Path);
         }
         return MoveDirection.Right;
     }
@@ -179,7 +174,7 @@ public class GenerateMapScript : MonoBehaviour
                 return MoveDirection.Down;
             }
             currentPosition.y -= 1;
-            SetMapValue(currentPosition, 1);
+            SetMapValue(currentPosition, (int)Enums.TileMode.Path);
         }
         return MoveDirection.Up;
     }
@@ -195,7 +190,7 @@ public class GenerateMapScript : MonoBehaviour
                 return MoveDirection.Up;
             }
             currentPosition.y += 1;
-            SetMapValue(currentPosition, 1);
+            SetMapValue(currentPosition, (int)Enums.TileMode.Path);
         }
         return MoveDirection.Down;
     }
@@ -225,26 +220,14 @@ public class GenerateMapScript : MonoBehaviour
 
         return nextMove;
     }
-
-    private static void Print2DArray(int[,] array)
-    {
-        for (var i = 0; i < array.GetLength(0); i++)
-        {
-            var message = "Row " + i + ": ";
-            for (var j = 0; j < array.GetLength(1); j++) {
-                message += array[i, j] + " ";
-            }
-            Debug.Log(message);
-        }
-    }
     
-    private void DisplayMap(int[,] array)
+    private void CreateMap(int[,] array)
     {
         for (int y = 0; y < array.GetLength(0); y++)
         {
             for (int x = 0; x < array.GetLength(1); x++)
             {
-                if (array[y, x] == 0)
+                if (array[y, x] == (int)Enums.TileMode.Open)
                 {
                     var spawnedTile = Instantiate(tilePrefab, new Vector3(x + leftCameraPosition + blockSize / 2, (topCameraPosition - y + blockSize / 2) - blockSize, 10), quaternion.identity);
                     spawnedTile.name = $"Tile {y} {x}";
@@ -255,7 +238,7 @@ public class GenerateMapScript : MonoBehaviour
                     
                     _tileMap[y, x] = spawnedTile;
                 }
-                else if (array[y, x] == 1)
+                else if (array[y, x] == (int)Enums.TileMode.Path)
                 {
                     var spawnedRoad = Instantiate(roadPrefab, new Vector3(x + leftCameraPosition + blockSize / 2, (topCameraPosition - y + blockSize / 2) - blockSize, 10), quaternion.identity);
                     spawnedRoad.name = $"Road {y} {x}";
@@ -266,13 +249,15 @@ public class GenerateMapScript : MonoBehaviour
 
         //camera.transform.position = new Vector3((float)width/2-0.5f,(float)height/2-0.5f,-10);
     }
-    
+
+    #region CornerCalculationForBloonPath
+
     private void DetectCorners()
     {
         // Start from each cell on the left border
         for (int y = 0; y < _map.GetLength(0); y++)
         {
-            if (_map[y, 0] == 1)
+            if (_map[y, 0] == (int)Enums.TileMode.Path)
             {
                 CornerFunction(0, y); // Consider the far-left '1' as a corner
                 FindCorners(0, y, -1);
@@ -341,6 +326,8 @@ public class GenerateMapScript : MonoBehaviour
         
         _cornerCount++;
     }
+    
+    #endregion
 
     public int[,] GetMap()
     {
