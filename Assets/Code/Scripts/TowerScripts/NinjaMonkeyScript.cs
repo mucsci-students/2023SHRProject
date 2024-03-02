@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NinjaMonkeyScript : MonkeyScript
 {
-    private int numberOfProjectiles;
+    private int _numberOfProjectiles;
 
 
     #region No Distribution For Projectiles Code
@@ -42,10 +40,10 @@ public class NinjaMonkeyScript : MonkeyScript
         originalProjectileScript.SetAllAttributes(projectileSpeed, maxProjectileDistance, layersPoppedPerHit, pierceAmount, target, this);
         
         //they bought the upgrade to throw more shurikens
-        if (numberOfProjectiles >= 3)
+        if (_numberOfProjectiles >= 3)
         {
             float spaceBetweenProjectiles = 0.2f;
-            for (int i = 0; i < numberOfProjectiles; i++)
+            for (int i = 0; i < _numberOfProjectiles; i++)
             {
                 Vector3 direction;
                 //these help to distribute the projectiles in a pattern
@@ -85,12 +83,12 @@ public class NinjaMonkeyScript : MonkeyScript
     protected override void Upgrade2_1()
     {
         //Extreme Ninja skill enables him to throw 3 shurikens at once.
-        numberOfProjectiles = 3;
+        _numberOfProjectiles = 3;
     }
 
     protected override void Upgrade2_2()
     {
        //The art of bloonjitsu allows Ninjas to throw 5 deadly shurikens at once!
-       numberOfProjectiles = 5;
+       _numberOfProjectiles = 5;
     }
 }

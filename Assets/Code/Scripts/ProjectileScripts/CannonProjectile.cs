@@ -1,21 +1,19 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonProjectile : ProjectileScript
 {
-    private ExplosionProjectile explosionProjectile;
+    private ExplosionProjectile _explosionProjectile;
 
     protected override IEnumerator Start()
     {
         yield return base.Start();
-        explosionProjectile = transform.GetChild(0).GetComponent <ExplosionProjectile>();
+        _explosionProjectile = transform.GetChild(0).GetComponent <ExplosionProjectile>();
     }
 
     private void KillAllInRange()
     {
-        var enemies = explosionProjectile.GetEnemiesInRange();
+        var enemies = _explosionProjectile.GetEnemiesInRange();
         for (int i = 0; i < enemies.Count; i++)
         {
             if (enemies[i] != null)

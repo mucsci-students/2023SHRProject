@@ -18,6 +18,12 @@ namespace HardCodedAI {
             return Shuffle(goals).FirstOrDefault(goal => goal.GetGoalType() == GoalType.UpgradeTower);
         }
 
+        /// <summary>
+        /// Shuffles a list
+        /// </summary>
+        /// <param name="list"> The list to shuffle </param>
+        /// <typeparam name="T"> The type of the list </typeparam>
+        /// <returns> The shuffled list </returns>
         private static IList<T> Shuffle<T>(this IList<T> list)  
         {
             var rng = new Random();

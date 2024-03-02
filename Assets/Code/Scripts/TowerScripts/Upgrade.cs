@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class Upgrade
@@ -11,11 +10,11 @@ public class Upgrade
     [SerializeField] private int tier;
     [SerializeField] private string description;
     [SerializeField] private Sprite sprite;
-    private Action upgrade;
+    private Action _upgrade;
 
     public void UpgradeTower()
     {
-        upgrade();
+        _upgrade();
     }
     
     public int GetCost()
@@ -38,8 +37,8 @@ public class Upgrade
         return sprite;
     }
     
-    public void SetUpgrade(Action upgrade)
+    public void SetUpgrade(Action newUpgrade)
     {
-        this.upgrade = upgrade;
+        _upgrade = newUpgrade;
     }
 }

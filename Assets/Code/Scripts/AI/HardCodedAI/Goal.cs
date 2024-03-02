@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace HardCodedAI
 {
@@ -60,14 +59,14 @@ namespace HardCodedAI
             return goalType;
         }
         
-        public void SetTile(Tile tile)
+        public void SetTile(Tile otherTile)
         {
-            this.tile = tile;
+            tile = otherTile;
         }
         
-        public void SetMonkeyScript(MonkeyScript monkeyScript)
+        public void SetMonkeyScript(MonkeyScript otherMonkeyScript)
         {
-            this.monkeyScript = monkeyScript;
+            monkeyScript = otherMonkeyScript;
         }
 
     }

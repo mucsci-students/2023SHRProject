@@ -15,7 +15,7 @@ public abstract class MonkeyScript : MonoBehaviour
 
     [SerializeField] private int monkeyCost;
 
-    private int sellPrice;
+    private int _sellPrice;
     
     [SerializeField] 
     [Tooltip("Measured as seconds between firing.")]
@@ -89,7 +89,7 @@ public abstract class MonkeyScript : MonoBehaviour
         MonkeyImage = GetComponent<SpriteRenderer>().sprite;
         SetIsShowingRadius(false);
         PopulateUpgrades();
-        sellPrice = monkeyCost;
+        _sellPrice = monkeyCost;
         actualVariance = UnityEngine.Random.Range(0, shootingVariance);
     }
 
@@ -252,9 +252,9 @@ public abstract class MonkeyScript : MonoBehaviour
 
     #region Getters and Setters
     
-    public void SetProjectileContainer(Transform transform)
+    public void SetProjectileContainer(Transform newTransform)
     {
-        projectileContainer = transform;
+        projectileContainer = newTransform;
     }
 
     public string GetMonkeyName()
@@ -315,12 +315,12 @@ public abstract class MonkeyScript : MonoBehaviour
 
     public int GetMonkeySellPrice()
     {
-        return sellPrice;
+        return _sellPrice;
     }
     
     public void SetMonkeySellPrice(int newSellPrice)
     {
-        sellPrice = newSellPrice;
+        _sellPrice = newSellPrice;
     }
     
     public List<Upgrade> GetUpgradePath1()

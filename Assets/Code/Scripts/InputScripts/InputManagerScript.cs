@@ -13,7 +13,7 @@ public class InputManagerScript : MonoBehaviour
     [SerializeField] private GameObject tutorialScreen;
     //[SerializeField] private bool alwaysShowTutorialOnStart = true;
     
-    private bool tutorialShown;
+    private bool _tutorialShown;
     
     private void Start()
     {
@@ -21,8 +21,8 @@ public class InputManagerScript : MonoBehaviour
         //Test if other can see on start up
        // if (alwaysShowTutorialOnStart)
        // {
-            tutorialShown = PlayerPrefs.GetInt("TutorialShown", 0) == 1;
-            if (!tutorialShown)
+            _tutorialShown = PlayerPrefs.GetInt("TutorialShown", 0) == 1;
+            if (!_tutorialShown)
             {
                 ShowTutorial();
             }
