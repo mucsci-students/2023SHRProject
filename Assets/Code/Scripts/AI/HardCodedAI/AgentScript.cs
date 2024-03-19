@@ -61,7 +61,7 @@ namespace HardCodedAI
                     var tile = _currentGoal.GetMonkeyScript() is SniperMonkeyScript 
                         ? MapUtils.GetFirstAvailableTile(ref _map, ref _tiles) 
                         : MapUtils.GetRandomAvailableTile(ref _map, ref _tiles);
-                
+                 
                     if (tile == null) {
                         _currentGoal = null;
                         return;
