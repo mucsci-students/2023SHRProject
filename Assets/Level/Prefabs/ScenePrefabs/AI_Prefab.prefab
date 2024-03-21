@@ -11884,19 +11884,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 62
+    VectorObservationSize: 63
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 02000000030000003c00000003000000
-    VectorActionSize: 02000000030000003c00000003000000
+      BranchSizes: 02000000030000003d00000003000000
+    VectorActionSize: 02000000030000003d00000003000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: AIWithMoney
+  m_BehaviorName: testing_from_home
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -15269,7 +15269,7 @@ MonoBehaviour:
   randomSeed: 123213
   spawn: {fileID: 0}
   autoPlay: 1
-  RBES: 1e0000001e0000003c0000003700000039000000550000005c0000005a000000cc0000004a00000050000000b9000000910000005b0000007000000020000000f00000006500000042000000460000005800000063000000030000007c000000cf000000210200005c000000a0000000cf000000210200005c000000a0000000cf000000e6000000ff020000
+  RBES: 1e0000001e0000002d0000003700000039000000550000005c0000005a000000cc0000004a00000050000000b9000000910000005b0000007000000020000000f00000006500000042000000460000005800000063000000030000007c000000cf000000210200005c000000a0000000cf000000210200005c000000a0000000cf000000e6000000ff020000
   path: []
   bloonGroups:
   - Bloon: {fileID: 8023372576191469905, guid: c50f47062489128408d98b7d6d46b916, type: 3}
@@ -16981,10 +16981,6 @@ PrefabInstance:
     - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
       propertyPath: StartingMoney
       value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
-      propertyPath: startingLives
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5296961201409120753, guid: 459a5151ad82a294f8855089bf2be7da, type: 3}
       propertyPath: generateMapScript

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
     /// <summary> Stores the users current lives </summary>
     public int lives;
 
-    private int _prevWaveNumb = 2;
+    public int _prevWaveNumb = 2;
     
     /// <summary> Stores the number of enemies remaining in the current wave. 0 if wave is over </summary>
     public int enemiesRemaining;
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
             CheckWinGame();
         }
         
-        if (waveManager.CurrentWaveNumber == _prevWaveNumb)
+        if (waveManager.CurrentWaveNumber >= _prevWaveNumb)
         {
             ++_prevWaveNumb;
             money += 100 + waveManager.CurrentWaveNumber;
@@ -113,6 +114,7 @@ public class GameManager : MonoBehaviour
     {
         money = startingMoney;
         lives = startingLives;
+        _prevWaveNumb = 2;
         enemiesRemaining = 0;
         layersPopped = 0;
         Time.timeScale = 1;

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   lives: 0
+  _prevWaveNumb: 2
   enemiesRemaining: 0
   layersPopped: 0
   startingMoney: 500
@@ -53,3 +54,5 @@ MonoBehaviour:
   isAIEnabled: 1
   ai: {fileID: 0}
   waveManager: {fileID: 0}
+  loseCanvas: {fileID: 0}
+  winCanvas: {fileID: 0}

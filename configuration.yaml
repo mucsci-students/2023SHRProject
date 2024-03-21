@@ -1,6 +1,6 @@
 default_settings: null
 behaviors:
-  AIWithMoney:
+  testing_from_home:
     trainer_type: ppo
     hyperparameters:    
       batch_size:  4000
@@ -35,10 +35,10 @@ behaviors:
           deterministic: false
     init_path: null
     keep_checkpoints: 5
-    checkpoint_interval: 10000000
-    max_steps: 40000000
+    checkpoint_interval: 1000000
+    max_steps: 5000000
     time_horizon: 1000
-    summary_freq: 10000
+    summary_freq: 1000
     threaded: false
     self_play: null
     behavioral_cloning: null
@@ -56,7 +56,7 @@ engine_settings:
   width: 84
   height: 84
   quality_level: 5
-  time_scale: 1
+  time_scale: 2
   target_frame_rate: -1
   capture_frame_rate: 60
   no_graphics: true

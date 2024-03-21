@@ -13,4 +13,12 @@ public static class Enums
         Path,
         InUse
     }
+    
+    public enum TileData
+    {
+        Open,
+        Path,
+        DartMonkey,
+        SniperMonkey,  
+    }
 }
