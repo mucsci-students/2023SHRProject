@@ -30,8 +30,9 @@ public class GenerateMapScript : MonoBehaviour
     [SerializeField] private float topCameraPosition;
     [SerializeField] private float bottomCameraPosition;
     [SerializeField] private float blockSize;
-    [SerializeField] private float yBlocks;
-    [SerializeField] private float xBlocks;
+    public float yBlocks;
+    public float xBlocks;
+    
     private int[,] _map;
     private Tile[,] _tileMap;
     

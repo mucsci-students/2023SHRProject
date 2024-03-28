@@ -4,314 +4,296 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 
-/// <summary>
-/// Used to control and communicate with the agent.
-/// </summary>
-public class AgentScript : Agent
+namespace AI
 {
-    private int[,] _map;
-    private Tile[,] _tiles;
 
-    [SerializeField] private GenerateMapScript generateMapScript;
-    [SerializeField] private WaveManager waveManager;
-    [SerializeField] private GameManager gameManager;
-    [SerializeField] private MonkeySpawner storeManagerScript;
-    [SerializeField] private DartMonkeyScript dartMonkeyScript;
-    [SerializeField] private SniperMonkeyScript sniperMonkeyScript;
-
-    public int previousWave = 1;
-
-    private int _dartMonkeysPlaced;
-    private int _sniperMonkeysPlaced;
-    private int _placeMonkeyCorrectly;
-    private int _placeMonkeyIncorrectly;
-    private int _doNothingCount;
-    private int _placeTowerCount;
-    private int _totalEpisodes;
-    private int _totalRounds;
-
-    //[SerializeField] private float negativeReward = -0.1f;
-    //[SerializeField] private float perDecisionReward = 0.001f;
-    //[SerializeField] private float goodReward = 0.5f;
-    //[SerializeField] private float greatReward = 1f;
-
-    public void Start()
+    /// <summary>
+    /// Used to control and communicate with the agent.
+    /// </summary>
+    public class AgentScript : Agent
     {
-        Debug.Log("AI starting");
-    }
+        private int[,] _map;
+        private Tile[,] _tiles;
 
-    public override void OnEpisodeBegin()
-    {
-        // Destroy all monkeys
-        foreach (Transform child in transform)
+        [SerializeField] private GenerateMapScript generateMapScript;
+        [SerializeField] private WaveManager waveManager;
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private MonkeySpawner storeManagerScript;
+        [SerializeField] private DartMonkeyScript dartMonkeyScript;
+        [SerializeField] private SniperMonkeyScript sniperMonkeyScript;
+
+        public int previousWave = 1;
+
+        private int _dartMonkeysPlaced;
+        private int _sniperMonkeysPlaced;
+        private int _doNothingCount;
+        private int _placeTowerCount;
+        private int _totalEpisodes;
+        private int _totalRounds;
+        
+        private bool _dartMonkeyRequested = false;
+
+        public void Start()
         {
-            Destroy(child.gameObject);
+            Debug.Log("AI starting");
+
+            RequestDecision();
         }
-        waveManager.DestroyAllBloons();
-        storeManagerScript.DestroyAllProjectiles();
 
-        previousWave = 1;
-        generateMapScript.GenerateMap();
-        _map = generateMapScript.GetMap();
-        _tiles = generateMapScript.GetTileMap();
-        waveManager.ResetAll();
-        gameManager.ResetAll();
-        waveManager.StartWave();
-        
-        _dartMonkeysPlaced = 0;
-        _sniperMonkeysPlaced = 0;
-        _placeMonkeyCorrectly = 0;
-        _placeMonkeyIncorrectly = 0;
-        _doNothingCount = 0;
-        _placeTowerCount = 0;
-        _totalEpisodes++;
-        _totalRounds++;
-    }
-
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        // Normalize all values between [-1, 1] for better learning
-        
-        float maxMoney = 10000;
-        float maxWaveNumber = 50;
-        float maxBoardValue = 10;
-            
-        sensor.AddObservation(((float) gameManager.money) / maxMoney);
-        sensor.AddObservation(waveManager.CurrentWaveNumber / maxWaveNumber);
-        
-        for (int i = 0; i < _map.GetLength(0); ++i)
+        public void FixedUpdate()
         {
-            for (int j = 0; j < _map.GetLength(1); ++j)
+            // Ask AI if it wants to place a sniper monkey when it has enough money
+            if (gameManager.money >= sniperMonkeyScript.GetMonkeyCost()) {
+                RequestDecision();
+            }
+            
+            // Ask AI if it wants to place a dart monkey once and only once when it has enough money
+            if (gameManager.money >= dartMonkeyScript.GetMonkeyCost() && !_dartMonkeyRequested) {
+                _dartMonkeyRequested = true;
+                RequestDecision();
+            }
+            
+            // Force AI to use all of its money on the first wave
+            if (waveManager.CurrentWaveNumber == 1 && gameManager.money >= dartMonkeyScript.GetMonkeyCost())
             {
-                sensor.AddObservation(_map[i, j] / maxBoardValue);
+                RequestDecision();
+            }
+            
+            if (gameManager.GetLives() <= 0)
+            {
+                Academy.Instance.StatsRecorder.Add("Wave", previousWave, StatAggregationMethod.Histogram);
+                EndEpisode();
             }
         }
-        
-        sensor.AddObservation(0);
-    }
-    
-    public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
-    {
-        int mainDecisionBranch = 0;
-        int monkeyBranch = 1;
-        int mapBranch = 2;
 
-        // If AI can not buy cheapest tower (dart monkey) prevent them from placing any tower
-        actionMask.SetActionEnabled(mainDecisionBranch, (int) Decision.PlaceTower, CanBuyTower(dartMonkeyScript));
-        
-        actionMask.SetActionEnabled(monkeyBranch, (int) TowerType.DartMonkey, CanBuyTower(dartMonkeyScript));
-        actionMask.SetActionEnabled(monkeyBranch, (int) TowerType.SniperMonkey, CanBuyTower(sniperMonkeyScript));
-
-        // Prevent AI from placing tower anywhere that is not an open tile
-        for (int i = 0; i < _map.GetLength(0); ++i)
+        public override void OnEpisodeBegin()
         {
-            for (int j = 0; j < _map.GetLength(1); ++j)
+            // Destroy all monkeys
+            foreach (Transform child in transform)
             {
-                if (_map[i, j] != (int)Enums.TileData.Open)
+                Destroy(child.gameObject);
+            }
+
+            waveManager.DestroyAllBloons();
+            storeManagerScript.DestroyAllProjectiles();
+
+            previousWave = 1;
+            generateMapScript.GenerateMap();
+            _map = generateMapScript.GetMap();
+            _tiles = generateMapScript.GetTileMap();
+            waveManager.ResetAll();
+            gameManager.ResetAll();
+            waveManager.StartWave();
+
+            _dartMonkeysPlaced = 0;
+            _sniperMonkeysPlaced = 0;
+            _doNothingCount = 0;
+            _placeTowerCount = 0;
+            _totalEpisodes++;
+            _totalRounds++;
+        }
+
+        public override void CollectObservations(VectorSensor sensor)
+        {
+            // Normalize all values between [-1, 1] for better learning
+
+            const float maxMoney = 10000;
+            const float maxWaveNumber = 50;
+            const float maxBoardValue = 10;
+
+            sensor.AddObservation(gameManager.money / maxMoney);
+            sensor.AddObservation(waveManager.CurrentWaveNumber / maxWaveNumber);
+
+            for (int i = 0; i < _map.GetLength(0); ++i)
+            {
+                for (int j = 0; j < _map.GetLength(1); ++j)
                 {
-                    actionMask.SetActionEnabled(mapBranch, 10 * i + j, false);
+                    sensor.AddObservation(_map[i, j] / maxBoardValue);
+                }
+            }
+
+            sensor.AddObservation(0);
+        }
+
+        public override void WriteDiscreteActionMask(IDiscreteActionMask actionMask)
+        {
+            const int mainDecisionBranch = 0;
+            const int monkeyBranch = 1;
+            const int mapBranch = 2;
+
+            // If AI can not buy cheapest tower (dart monkey) prevent them from placing any tower
+            actionMask.SetActionEnabled(mainDecisionBranch, (int)Decision.PlaceTower, CanBuyTower(dartMonkeyScript));
+
+            actionMask.SetActionEnabled(monkeyBranch, (int)TowerType.DartMonkey, CanBuyTower(dartMonkeyScript));
+            actionMask.SetActionEnabled(monkeyBranch, (int)TowerType.SniperMonkey, CanBuyTower(dartMonkeyScript));
+
+            
+            // Prevent AI from placing tower anywhere that is not an open tile
+            for (int i = 0; i < _map.GetLength(0); ++i)
+            {
+                for (int j = 0; j < _map.GetLength(1); ++j)
+                {
+                    if (_map[i, j] != (int)Enums.TileData.Open)
+                    {
+                        actionMask.SetActionEnabled(mapBranch, (int)generateMapScript.xBlocks * i + j, false);
+                    }
                 }
             }
         }
-    }
-    
-    // 1. Can do nothing
-    // 2. Place tower
-    // 3. Upgrade tower
-    // 4. Sell tower
-    
-    // 0. Do not place tower
-    // 1. Place Dart Monkey
-    // 2. Place Tack Shooter
-    // 3. Place Sniper Monkey
-    // 4. Place Boomerang Monkey
-    // 5. Place Ninja Monkey
-    // 6. Place Bomb Shooter
-    // 7. Spike Factory
-    // 8. Super Monkey
-    
-    // Get X position (0, 14)
-    
-    // Get Y position (0, 9)
-    
-    private enum Decision
-    {
-        DoNothing,
-        PlaceTower,
-        //UpgradeTower
-    }
-    
-    private enum TowerType
-    {
-        DoNothing,
-        DartMonkey,
-        //BoomerangMonkey,
-        //TackShooter,
-        SniperMonkey,
-        //BoomerangMonkey,
-        //NinjaMonkey,
-        //BombShooter,
-        //SpikeFactory,
-        //SuperMonkey
-    }
 
-    public override void OnActionReceived(ActionBuffers actions)
-    {
-        var statsRecorder = Academy.Instance.StatsRecorder;
-        
-        if (waveManager.isGameOver)
+        public override void OnActionReceived(ActionBuffers actions)
         {
-            AddReward(1f);
-            EndEpisode();
-            return;
-        }
-        
-        if (gameManager.GetLives() <= 0)
-        {
-            //AddReward(-1f);
-            EndEpisode();
-            return;
-        }
-        
-        //AddReward(0.005f);
-        
-        if (waveManager.CurrentWaveNumber > previousWave)
-        {
-            _totalRounds++;
-            previousWave = waveManager.CurrentWaveNumber;
-            AddReward(0.5f);
-        }
-        
-
-        Decision choice = (Decision) actions.DiscreteActions[0];
-        TowerType towerType = (TowerType) actions.DiscreteActions[1];
-        int xPos = actions.DiscreteActions[2] % 10;
-        int yPos = actions.DiscreteActions[2] / 10;
-
-        if (yPos == 6)
-        {
-            Debug.Log("Choose a dummy tile");
-            return;
-        }
-        
-        statsRecorder.Add("TowerType", (int) towerType);
-        statsRecorder.Add("X Placement", xPos);
-        statsRecorder.Add("Y Placement", yPos);
-        
-        Enums.TargetingMode targetingMode = (Enums.TargetingMode) actions.DiscreteActions[3];
-
-        if (choice == Decision.PlaceTower)
-        {
-            _placeTowerCount++;
-            Tile tile = _tiles[yPos, xPos];
+            var statsRecorder = Academy.Instance.StatsRecorder;
             
-            if (tile == null || tile.ContainsTowers())
+            AddReward(0.001f);
+
+            if (waveManager.isGameOver)
             {
-                AddReward(-0.001f);
-                Debug.Log("Failed to place tower");
-                _placeMonkeyIncorrectly++;
+                AddReward(1f);
+                statsRecorder.Add("Wave", previousWave, StatAggregationMethod.Histogram);
+                EndEpisode();
+                return;
             }
-            else
+
+            if (gameManager.GetLives() <= 0)
             {
+                statsRecorder.Add("Wave", previousWave, StatAggregationMethod.Histogram);
+                EndEpisode();
+                return;
+            }
+
+            if (waveManager.CurrentWaveNumber > previousWave)
+            {
+                _totalRounds++;
+                previousWave = waveManager.CurrentWaveNumber;
+                AddReward(0.5f);
+                RequestDecision();
+            }
+
+            Decision choice = (Decision)actions.DiscreteActions[0];
+            TowerType towerType = (TowerType)actions.DiscreteActions[1];
+            int xPos = actions.DiscreteActions[2] % (int)generateMapScript.xBlocks;
+            int yPos = actions.DiscreteActions[2] / (int)generateMapScript.xBlocks;
+
+            if (yPos == (int)generateMapScript.yBlocks)
+            {
+                Debug.Log("Choose a dummy tile");
+                return;
+            }
+
+            statsRecorder.Add("TowerType", (int)towerType, StatAggregationMethod.Histogram);
+            statsRecorder.Add("/Map Placement/X Placement", xPos, StatAggregationMethod.Histogram);
+            statsRecorder.Add("/Map Placement/Y Placement", yPos, StatAggregationMethod.Histogram);
+
+            var targetingMode = (Enums.TargetingMode)actions.DiscreteActions[3];
+
+            if (choice == Decision.PlaceTower)
+            {
+                _placeTowerCount++;
+                Tile tile = _tiles[yPos, xPos];
+
+                if (tile == null || tile.ContainsTowers())
+                {
+                    AddReward(-0.001f);
+                    Debug.Log("Failed to place tower: chose to place tower but tile was null or contained tower");
+                    UpdateStats(statsRecorder);
+                    
+                    return;
+                }
+                
                 switch (towerType)
                 {
                     case TowerType.DartMonkey when CanBuyTower(dartMonkeyScript):
                     {
-                        tile.SetContainsTower(true);
                         Vector3 tilePos = tile.transform.position;
                         tilePos.z = 0;
-                        
+
                         Debug.Log("Placed Dart Monkey");
                         DartMonkeyScript script = Instantiate(dartMonkeyScript, tilePos, Quaternion.identity);
                         PlaceTower(script, tile, targetingMode);
-                        
+
                         // Update map for AI to see
                         _map[yPos, xPos] = (int)Enums.TileData.DartMonkey;
-                        
+
                         // Update stats for tensorboard
-                        statsRecorder.Add("TargetingMode", (int) targetingMode, StatAggregationMethod.Histogram);
+                        statsRecorder.Add("TargetingMode", (int)targetingMode, StatAggregationMethod.Histogram);
                         _dartMonkeysPlaced++;
-                        _placeMonkeyCorrectly++;
                         break;
                     }
                     case TowerType.DartMonkey:
                         AddReward(-0.001f);
-                        _placeMonkeyIncorrectly++;
                         break;
                     case TowerType.SniperMonkey when CanBuyTower(sniperMonkeyScript):
                     {
-                        tile.SetContainsTower(true);
                         Vector3 tilePos = tile.transform.position;
                         tilePos.z = 0;
                         
                         Debug.Log("Placed Sniper Monkey");
                         SniperMonkeyScript script = Instantiate(sniperMonkeyScript, tilePos, Quaternion.identity);
                         PlaceTower(script, tile, targetingMode);
-                        
+
                         // Update map for AI to see
                         _map[yPos, xPos] = (int)Enums.TileData.SniperMonkey;
-                        
+
                         // Update stats for tensorboard
-                        statsRecorder.Add("TargetingMode", (int) targetingMode, StatAggregationMethod.Histogram);
+                        statsRecorder.Add("TargetingMode", (int)targetingMode, StatAggregationMethod.Histogram);
                         _sniperMonkeysPlaced++;
-                        _placeMonkeyCorrectly++;
                         break;
                     }
                     case TowerType.SniperMonkey:
                         AddReward(-0.001f);
-                        _placeMonkeyIncorrectly++;
                         break;
                     case TowerType.DoNothing:
-                        Debug.Log("Failed to place tower");
-                        //AddReward(-0.005f);
-                        //PlaceMonkeyIncorrectly++;
+                        Debug.Log("Failed to place tower: chose to place tower but tower type was do nothing");
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
-        }
-        else
-        {
-            _doNothingCount++;
-            if (towerType != TowerType.DoNothing)
-            {
-                //AddReward(-0.005f);
-                Debug.Log("Failed to place tower");
-                //PlaceMonkeyIncorrectly++;
-            }
             else
             {
-                Debug.Log("Do nothing");
+                _doNothingCount++;
+                if (towerType != TowerType.DoNothing)
+                {
+                    Debug.Log("Failed to place tower: chose to do nothing but tower type was not do nothing");
+                }
+                else
+                {
+                    Debug.Log("Do nothing");
+                }
             }
-        }
-        
-        // Update stats for tensorboard
-        statsRecorder.Add("DartMonkeysPlaced", _dartMonkeysPlaced);
-        statsRecorder.Add("SniperMonkeysPlaced", _sniperMonkeysPlaced);
-        statsRecorder.Add("PlaceMonkeyCorrectly", _placeMonkeyCorrectly);
-        statsRecorder.Add("PlaceMonkeyIncorrectly", _placeMonkeyIncorrectly);
-        statsRecorder.Add("DoNothingCount", _doNothingCount);
-        statsRecorder.Add("PlaceTowerCount", _placeTowerCount);
-        if (_placeMonkeyIncorrectly != 0)
-            statsRecorder.Add("PlacedTowerCorrectlyRatio", (float) _placeMonkeyCorrectly / (float) (_placeMonkeyIncorrectly + _placeMonkeyCorrectly));
-        statsRecorder.Add("Wave", previousWave);
-        statsRecorder.Add("Wave Histogram", previousWave, StatAggregationMethod.Histogram);
-        statsRecorder.Add("Total Rounds", _totalRounds);
-        statsRecorder.Add("Total Episodes", _totalEpisodes);
-    }
 
-    private void PlaceTower(MonkeyScript monkeyScript, Tile tile, Enums.TargetingMode targetingMode)
-    {
-        monkeyScript.SetProjectileContainer(storeManagerScript.projectileContainer);
-        monkeyScript.gameObject.transform.parent = gameObject.transform;
-        monkeyScript.SetTile(tile);
-        monkeyScript.SetTargetingMode(targetingMode);
-        gameManager.money -= monkeyScript.GetMonkeyCost();
-    }
-    
-    private bool CanBuyTower(MonkeyScript monkeyScript)
-    {
-        return gameManager.money >= monkeyScript.GetMonkeyCost();
+            UpdateStats(statsRecorder);
+        }
+
+        private void UpdateStats(StatsRecorder statsRecorder)
+        {
+            // Update stats for tensorboard
+            statsRecorder.Add("DartMonkeysPlaced", _dartMonkeysPlaced);
+            statsRecorder.Add("SniperMonkeysPlaced", _sniperMonkeysPlaced);
+            statsRecorder.Add("DoNothingCount", _doNothingCount);
+            statsRecorder.Add("PlaceTowerCount", _placeTowerCount);
+            statsRecorder.Add("Total Rounds", _totalRounds);
+            statsRecorder.Add("Total Episodes", _totalEpisodes);
+        }
+
+        private void PlaceTower(MonkeyScript monkeyScript, Tile tile, Enums.TargetingMode targetingMode)
+        {
+            _dartMonkeyRequested = false;
+            
+            tile.SetContainsTower(true);
+            
+            monkeyScript.SetProjectileContainer(storeManagerScript.projectileContainer);
+            monkeyScript.gameObject.transform.parent = gameObject.transform;
+            monkeyScript.SetTile(tile);
+            monkeyScript.SetTargetingMode(targetingMode);
+            
+            gameManager.money -= monkeyScript.GetMonkeyCost();
+        }
+
+        private bool CanBuyTower(MonkeyScript monkeyScript)
+        {
+            return gameManager.money >= monkeyScript.GetMonkeyCost();
+        }
     }
 }

@@ -1,0 +1,29 @@
+{
+    "testing_from_home": {
+        "checkpoints": [
+            {
+                "steps": 4146,
+                "file_path": "results\\testing_from_home_3\\testing_from_home\\testing_from_home-4146.onnx",
+                "reward": 0.35188261323222686,
+                "creation_time": 1711133490.5558877,
+                "auxillary_file_paths": [
+                    "results\\testing_from_home_3\\testing_from_home\\testing_from_home-4146.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4146,
+            "file_path": "results\\testing_from_home_3\\testing_from_home.onnx",
+            "reward": 0.35188261323222686,
+            "creation_time": 1711133490.5558877,
+            "auxillary_file_paths": [
+                "results\\testing_from_home_3\\testing_from_home\\testing_from_home-4146.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
