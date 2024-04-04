@@ -4526,6 +4526,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6086480934391464386, guid: 4a0f733454f1646d7bd761f8982aae73, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[2]
+      value: 161
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617712815884280294, guid: 4a0f733454f1646d7bd761f8982aae73, type: 3}
+      propertyPath: DecisionPeriod
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617712815884280294, guid: 4a0f733454f1646d7bd761f8982aae73, type: 3}
+      propertyPath: TakeActionsBetweenDecisions
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

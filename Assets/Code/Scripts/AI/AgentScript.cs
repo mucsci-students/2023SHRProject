@@ -109,7 +109,7 @@ public class AgentScript : Agent
             {
                 if (_map[i, j] != (int)Enums.TileData.Open)
                 {
-                    actionMask.SetActionEnabled(mapBranch, 10 * i + j, false);
+                    actionMask.SetActionEnabled(mapBranch, 16 * i + j, false);
                 }
             }
         }
@@ -185,10 +185,10 @@ public class AgentScript : Agent
 
         Decision choice = (Decision) actions.DiscreteActions[0];
         TowerType towerType = (TowerType) actions.DiscreteActions[1];
-        int xPos = actions.DiscreteActions[2] % 10;
-        int yPos = actions.DiscreteActions[2] / 10;
+        int xPos = actions.DiscreteActions[2] % 16;
+        int yPos = actions.DiscreteActions[2] / 16;
 
-        if (yPos == 6)
+        if (yPos == 10)
         {
             Debug.Log("Choose a dummy tile");
             return;
