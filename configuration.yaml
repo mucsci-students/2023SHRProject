@@ -16,7 +16,7 @@ behaviors:
     network_settings:
       normalize: true
       hidden_units: 256
-      num_layers: 2
+      num_layers: 3
       vis_encode_type: simple
       memory: null
       goal_conditioning_type: hyper
@@ -36,7 +36,7 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     checkpoint_interval: 1000000
-    max_steps: 50000000
+    max_steps: 5000000
     time_horizon: 1000
     summary_freq: 1000
     threaded: false
@@ -56,7 +56,7 @@ engine_settings:
   width: 84
   height: 84
   quality_level: 5
-  time_scale: 2
+  time_scale: 100
   target_frame_rate: -1
   capture_frame_rate: 60
   no_graphics: true
