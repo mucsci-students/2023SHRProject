@@ -6,7 +6,9 @@
 - [2023SHRProject](#2023shrproject)
   - [Table of Contents](#table-of-contents)
   - [Unity Version](#unity-version)
-  - [Authors](#authors)
+  - [Authors](#Authors)
+  - [Introduction](#Introduction)
+  - [Acknowledgements](#Acknowledgements)
   - [ML Agents Setup and Installation](#ml-agents-setup-and-installation)
     - [Install Unity Version 2022.3.10f1](#install-unity-version-2022310f1)
     - [Install Python 3.8.8](#install-python-388)
@@ -33,12 +35,12 @@
 ### Opening remarks/What the project is
 This is the work of us (the three authors above) over the course of two semesters at  Millersville University. What this project is all about is we trainned AI Agents to Play a Tower Defense Game Using Reinforcement Learning. With that in mind the core of the project is two fold. One is the game itself. We based our game off the game series bloons tower defense. We made the game ourselves from scratch and on its own is a fully working game. Second is the AI component that plays our game. Using the resources below the AI can learn over time to play the game with the parameters you set. For further a explanation here are our published poster and papers on our research.
 ### Resources
-[MIM Poster](Link to the PDF):
+[MIM Poster](/MUPapers/Made-In-Millersville-Poster.pdf):
 This is our poster submitted for the made in millersville conference that goes over a brief snippet of each section of our paper. 
 		
-[PACISE Paper](Link to the PDF): This is our full indepth detailed research paper on what we did for this project. It goes over the game, research process, developing the game, developing the AI, results and future enhancements we would make in the future. 
+[PACISE Paper](/MUPapers/PACISE-PAPER.pdf): This is our full indepth detailed research paper on what we did for this project. It goes over the game, research process, developing the game, developing the AI, results and future enhancements we would make in the future. 
 
-[MIM Paper](Link to the PDF): This is a summarized more simplified version of what goes on in our project on a surface level. 
+[MIM Paper](/MUPapers/Harrison-Final.pdf): This is a summarized more simplified version of what goes on in our project on a surface level. 
 
 ### Acknowledgements
 We  would like to personally thank Dr. Chadd Hogg for getting us this far. Meeting with us weekly and being always avaible to guide us to the right path. If it weren't for him we would of not been able to gotten so far. So again thank you for all you did for us Dr. Hogg!!
