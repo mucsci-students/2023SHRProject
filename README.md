@@ -33,20 +33,20 @@
 ## Introduction
 
 ### Opening remarks/What the project is
-This is the work of us (the three authors above) over the course of two semesters at  Millersville University. What this project is all about is we trainned AI Agents to Play a Tower Defense Game Using Reinforcement Learning. With that in mind the core of the project is two fold. One is the game itself. We based our game off the game series bloons tower defense. We made the game ourselves from scratch and on its own is a fully working game. Second is the AI component that plays our game. Using the resources below the AI can learn over time to play the game with the parameters you set. For further a explanation here are our published poster and papers on our research.
+This is the work of us (the three authors above) over the course of two semesters at  Millersville University. What this project is all about is we trained AI Agents to Play a Tower Defense Game Using Reinforcement Learning. With that in mind the core of the project is two fold. One is the game itself. We based our game off the game series Bloons Tower Defense. We made the game ourselves from scratch and on its own is a fully working game. Second is the AI component that plays our game. Using the resources below the AI can learn over time to play the game with the parameters you set. For further a explanation here are our published poster and papers on our research.
 ### Resources
 [MIM Poster](/MUPapers/Made-In-Millersville-Poster.pdf):
 This is our poster submitted for the made in millersville conference that goes over a brief snippet of each section of our paper. 
 		
-[PACISE Paper](/MUPapers/PACISE-PAPER.pdf): This is our full indepth detailed research paper on what we did for this project. It goes over the game, research process, developing the game, developing the AI, results and future enhancements we would make in the future. 
+[PACISE Paper](/MUPapers/PACISE-PAPER.pdf): This is our full in-depth detailed research paper on what we did for this project. It goes over the game, research process, developing the game, developing the AI, results and future enhancements we would make in the future. 
 
 [MIM Paper](/MUPapers/Harrison-Final.pdf): This is a summarized more simplified version of what goes on in our project on a surface level. 
 
 ### Acknowledgements
-We  would like to personally thank Dr. Chadd Hogg for getting us this far. Meeting with us weekly and being always avaible to guide us to the right path. If it weren't for him we would of not been able to gotten so far. So again thank you for all you did for us Dr. Hogg!!
+We  would like to personally thank Dr. Chadd Hogg for getting us this far. Meeting with us weekly and being always avaible to guide us to the right path. If it weren't for him we would have not been able to gotten so far. So again thank you for all you did for us Dr. Hogg!!
 
 ## Author Notes && future featutes
-This section goes into a little more detail on the end result of this project such as where the AI is currently at, additonal features we would of implemented, and certian bugs found in the project we would fix if we had more time. 
+This section goes into a little more detail on the end result of this project such as where the AI is currently at, additonal features we would of implemented, and certain bugs found in the project we would fix if we had more time. 
 
 - **Add camo balloons and detection to towers:** Currently in our game we only have basic bloons types (red, blue, yellow, etc) and adding camo bloons would make the game and AI more interesting.
 - **Fix Projectile collision/bug with certain tower types:** Durring gameplay, projectiles may stay longer than expected and glitch out when trying to pop a bloon that another tower is targeting or popped already. This issue can affect the overall performance. We have a temporary fix in place, where we delete the projectile after a few seconds, however a more permanent solution is probably needed. This bug can be found with the boomerang monkey, bomb shooter, and sometimes the sniper monkey.
@@ -55,10 +55,10 @@ This section goes into a little more detail on the end result of this project su
 - **Sizing issues on larger resolutions:** When switching the games resolution you may notice some UI components do not scale properly. This can be fixed by adjusting the rect transform, specifically the anchor and pivot points. Most components are fixed but there may be some minor elements that still need adjustment (upgrade menu text, upgrade menu buttons, settings menu, main menu text..etc)
 - **Upgrade system for the AI**: Currently for our AI we do not have a system set up in place for allowing the AI to choose its own upgrades based on gameplay. This could be a valuable addition to improve the AI's decision-making process and overall performance in the game.
 - **More tower types for the AI:** Currently for our AI we are only giving it access to 2 tower types (dart monkey and sniper monkey). We ideally would like to give it more options to choose from but we need to ensure that the additional tower types are balanced and complement each other well. This would provide the AI with more strategic options and enhance its ability to adapt to different gameplay scenarios.
-- **Balance tower types:** Most of the towers in the game are unbalanced and either cost to little or provide too much power for their cost. Adjusting the stats and costs of each tower would ensure a more fair and challenging gameplay experience for both players and the AI.
+- **Balance tower types:** Most of the towers in the game are unbalanced and either cost too little or provide too much power for their cost. Adjusting the stats and costs of each tower would ensure a more fair and challenging gameplay experience for both players and the AI.
 - **Clean up/delete unnecessary game files:** There are a number of files and game assets that can be deleted.
 - **Upgrade menu functionality:** When pulling up the upgrade menu you may notice that you have to close it by clicking on the same monkey you opened it for, this can be a hassle for new users. Maybe adding a close button could improve the user experience. Or you could add a way for the user to click on the game scene to close the menu (kinda similar to the mobile game)
-- **The AI Status:** The AI currently at a state of placing two towers: The Dart Monkey and The Sniper Monkey in realtively good spots. The AI if towers are placed well can get to the high 30s of the waves and usually fails by end. The average wave it would get to was around 20 with average placement of sniper and dart monkeys. 
+- **The AI Status:** The AI is currently at a state of placing two towers: The Dart Monkey and The Sniper Monkey in relatively good spots. The AI if towers are placed well can get to the high 30s of the waves and usually fails by end. The average wave it would get to was around 20 with average placement of sniper and dart monkeys. 
 
 
 
@@ -168,13 +168,13 @@ Verify that there are no errors and that it begins listening on port 5004.
 ## [Tensorflow](https://www.tensorflow.org/learn) Setup and Installation
 
 ### Install Tensorflow
-Once ML agents and the game is working, its time for tensor flow to see the ongoing results. First install tensorflow in your enviorment using this command:
+Once ML agents and the game is working, its time for tensor flow to see the ongoing results. First install tensorflow in your environment using this command:
 ```
 pip install tensorflow
 ```
 
 ### Yaml Configure
-Once installed you will then go to your config yaml file to update the hyper paramters to your liking. Try testing around different configuration to get the AI to your liking to learn more such as the beta and epslon. For more information on the different parameters read the documentation. 
+Once installed you will then go to your config yaml file to update the hyper paramters to your liking. Try testing around different configurations to get the AI to your liking to learn more such as the beta and epsilon. For more information on the different parameters read the documentation. 
 
 ### Running the new Hyper Params
 Once the hyper parameters are to your liking run the command
